@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   
+  
   mount_devise_token_auth_for 'User', at: '/auth'
   scope '/api' do
     resources :organizations, except: [:new, :edit]
     resources :specs, except: [:new, :edit]
+    resources :tag_type_groups, except: [:new, :edit]
+    resources :tickets, except: [:new, :edit]
+    resources :tags, except: [:new, :edit]
+    resources :tag_types, except: [:new, :edit]
+    resources :projects, except: [:new, :edit]
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

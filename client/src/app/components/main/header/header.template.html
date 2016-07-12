@@ -1,0 +1,48 @@
+<md-toolbar md-whiteframe="5">
+    <div class="md-toolbar-tools">
+        <md-button 
+            class="md-icon-button">
+            <md-icon class="material-icons">
+                menu
+            </md-icon>
+        </md-button>
+        <h2>
+            <span>jessdocs 3.0</span>
+        </h2>
+        <span flex></span>
+        <md-button 
+            class="md-icon-button"
+            ng-click="$ctrl.toggleBookmarks()">
+            <md-icon class="material-icons">
+                bookmark
+            </md-icon>
+        </md-button>
+            
+        <md-menu
+            md-position-mode="target-right target">
+            <md-button 
+                aria-label="user menu" 
+                ng-click="$ctrl.openUserMenu($mdOpenMenu, $event)">
+                <span 
+                    ng-bind="$ctrl.user.name"
+                    class="md-body-1"></span>
+                <md-icon 
+                    md-menu-origin 
+                    class="material-icons">person</md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ng-click="$ctrl.logout()">
+                        <div layout="row" flex>
+                            <p flex>log out</p>
+                            <md-icon 
+                                md-menu-align-target
+                                class="material-icons">person_outline</md-icon>
+                        </div>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    
+    </div>
+</md-toolbar>

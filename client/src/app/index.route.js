@@ -7,11 +7,16 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     })
     .state('signUp', {
       url: '/sign_up',
-      template: '<login-page></login-page>'
+      template: '<signup></signup>'
     })
     .state('home', {
       url: '/',
-      template: '<p>hey</p>'
+      template: '<main></main>',
+      resolve: {
+        auth: ['$auth', function($auth) {
+          return $auth.validateUser();
+        }]
+      }
     });
 
   $urlRouterProvider.otherwise('/');

@@ -20,7 +20,7 @@ angular.module('jessdocs', [
   .config(function($authProvider) {
       $authProvider.configure({
           apiUrl: 'https://jessdocs-jrobins.c9users.io:8082',
-          omniauthWindowType: 'sameWindow',
+          omniauthWindowType: 'newWindow',
           authProviderPaths: {
             google:   '/auth/google_oauth2'
           }
