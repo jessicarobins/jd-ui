@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$projects', ['$http', '$q', function($http, $q) {
+module.service('$projects', ['$api', '$q', function($api, $q) {
     var self = this;
     
     self.projects;
@@ -10,7 +10,7 @@ module.service('$projects', ['$http', '$q', function($http, $q) {
         if(self.projects){
             return $q.when(self.projects);
         }
-        var promise = $http({
+        var promise = $api.request({
           url: '/projects', 
           method: 'GET'
         }).then(function(response) {

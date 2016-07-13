@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$specs', ['$http', '$q', function($http, $q) {
+module.service('$specs', ['$api', '$q', function($api, $q) {
     var self = this;
     var callbacks = [];
     
@@ -9,8 +9,8 @@ module.service('$specs', ['$http', '$q', function($http, $q) {
     };
     
     self.setSpecList = function(filterParams) {
-        var promise = $http({
-            url: 'api/specs/filter_tag', 
+        var promise = $api.request({
+            url: '/specs/filter_tag', 
             method: "GET",
             params: filterParams
         }).

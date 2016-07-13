@@ -11,7 +11,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     })
     .state('home', {
       url: '/',
-      template: '<main></main>',
+      template: '<main layout="column" layout-fill></main>',
       resolve: {
         auth: ['$auth', function($auth) {
           return $auth.validateUser();

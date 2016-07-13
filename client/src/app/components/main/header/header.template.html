@@ -22,15 +22,19 @@
             md-position-mode="target-right target">
             <md-button 
                 aria-label="user menu" 
+                class="md-icon-button"
                 ng-click="$ctrl.openUserMenu($mdOpenMenu, $event)">
-                <span 
-                    ng-bind="$ctrl.user.name"
-                    class="md-body-1"></span>
+
                 <md-icon 
                     md-menu-origin 
                     class="material-icons">person</md-icon>
             </md-button>
             <md-menu-content width="4">
+                <md-menu-item>
+                    <span 
+                        ng-bind="$ctrl.user.name"
+                        class="md-body-1"></span>
+                </md-menu-item>
                 <md-menu-item>
                     <md-button ng-click="$ctrl.logout()">
                         <div layout="row" flex>

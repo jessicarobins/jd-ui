@@ -12,8 +12,7 @@ angular.module('jessdocs', [
   'ngResource', 
   'ui.router', 
   'ngMaterial',
-  'ng-token-auth',
-  'toastr'])
+  'ng-token-auth'])
   .constant('moment', moment)
   .config(config)
   .config(routerConfig)

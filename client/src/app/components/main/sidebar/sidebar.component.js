@@ -19,8 +19,10 @@ module.
       self.$onInit = function() {
         
         $projects.getProjects().then( function(response) {
-            self.projects = response.data;
-            self.formData.project = self.projects[0].id;
+            self.projects = response;
+            if(self.projects.length){
+                self.formData.project = self.projects[0].id;
+            }
         });
         
         $tagtypes.getTagTypesByGroup().then( function(response){
@@ -28,7 +30,6 @@ module.
         });
         
         $tagtypes.addCallback( function(){
-            console.log('groups = ', $tagtypes.tagTypesByGroup)
             self.tag_type_groups = $tagtypes.tagTypesByGroup;
         });
         

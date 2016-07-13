@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$tagtypes', ['$http', '$q', function($http, $q) {
+module.service('$tagtypes', ['$api', '$q', function($api, $q) {
     var self = this;
     var callbacks = [];
     
@@ -27,7 +27,7 @@ module.service('$tagtypes', ['$http', '$q', function($http, $q) {
         if(self.tagTypes){
             return $q.when(self.tagTypes);
         }
-        var promise = $http({
+        var promise = $api.request({
           url: '/tags/new', 
           method: 'GET'
         }).then(function(response) {
@@ -46,10 +46,12 @@ module.service('$tagtypes', ['$http', '$q', function($http, $q) {
     };
     
     self.updateTagTypesByGroup = function() {
-        var promise = $http.get('tag_types.json')
-        .then(function(response) {
-            self.tagTypesByGroup = response.data.tag_types.tag_types;
-            self.tagTypes = response.data.all_types;
+        var promise = $api.request({
+            url: '/tag_types',
+            method: 'GET'
+        }).then(function(response) {
+            self.tagTypesByGroup = response.tag_types_by_group;
+            self.tagTypes = response.all_types;
             return self.tagTypesByGroup;
         });
         return promise;
