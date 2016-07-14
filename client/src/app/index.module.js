@@ -11,6 +11,7 @@ angular.module('jessdocs', [
   'ngAria', 
   'ngResource', 
   'ui.router', 
+  'ui.tree',
   'ngMaterial',
   'ng-token-auth'])
   .constant('moment', moment)

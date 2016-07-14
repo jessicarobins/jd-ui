@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   
   before_create :set_up_user
   
+  after_create :add_user_project
+  
   private
     def set_up_user
       #devise stuff
@@ -23,5 +25,9 @@ class User < ActiveRecord::Base
       org = Organization.find_by(:domain => domain)
       #todo: set this with has_and_belongs_to_many
       # self.organization_id = org ? org.id : nil
+    end
+    
+    def add_user_project
+      Project.create!(:name => 'First Project', :created_by_id => self.id)
     end
 end

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: '/auth'
   scope '/api' do
     resources :organizations, except: [:new, :edit]
-    resources :specs, except: [:new, :edit]
+    resources :specs, except: [:new, :edit] do
+      collection do
+        post 'create_many'
+      end
+    end
     resources :tag_type_groups, except: [:new, :edit]
     resources :tickets, except: [:new, :edit]
     resources :tags, except: [:new, :edit]

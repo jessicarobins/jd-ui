@@ -9,7 +9,8 @@ module.service('$api', ['$http', function($http) {
         var promise = $http({
             url: baseUrl + req.url, 
             method: req.method || 'GET',
-            params: req.params
+            params: req.params,
+            data: req.data
         }).
         then(function (response) {
             return response.data;

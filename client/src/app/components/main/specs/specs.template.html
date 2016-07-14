@@ -1,0 +1,35 @@
+<section 
+    flex
+    layout="row" 
+    layout-padding
+    ng-if="$ctrl.spec.length">
+    <a id="top"></a>
+    <div ui-tree
+       id="tree-root"
+       flex>
+    <ol ui-tree-nodes ng-model="$ctrl.spec">
+      <li ng-repeat="spec in $ctrl.spec track by spec.id" ui-tree-node>
+        <spec 
+            spec="::spec" 
+            ui-tree-callbacks="::$callbacks"
+            tag="::$ctrl.getTags(spec)"
+            ticket="::$ctrl.getTickets(spec)"></spec>
+      </li>
+      <li
+          ng-if="$ctrl.addChildren"
+          id="addChildren">
+          <add-spec></add-spec>
+      </li>
+    </ol>
+    <a id="bottom"></a>
+</section>
+<section
+    layout="row"
+    flex
+    layout-align="center start"
+    ng-if="!$ctrl.spec.length"
+    layout-padding>
+    <p>
+        There are no specs that meet the filter criteria.
+    </p> 
+</section>

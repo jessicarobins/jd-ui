@@ -1,0 +1,29 @@
+<jd-modal>
+    <jd-modal-title>add top-level specs</jd-modal-title>
+    <jd-modal-body layout="column">
+        <md-button 
+          class="md-icon-button" 
+          aria-label="indent"
+          ng-click="$ctrl.indent()">
+          <md-icon class="material-icons">format_indent_increase</md-icon>
+        </md-button>
+        <md-input-container
+            class="edit-input md-block">
+            <textarea
+                aria-label="mass add specs"
+                rows="5"
+                ng-model="$ctrl.text"></textarea>
+        </md-input-container>
+    </jd-modal-body>
+    <jd-modal-buttons>
+        
+        <span flex></span>
+        <md-button
+            ng-click="$ctrl.add()"
+            class="md-raised md-accent">
+            <md-icon
+                class="material-icons">add</md-icon>
+            add specs
+        </md-button>
+    </jd-modal-buttons>
+</jd-modal>

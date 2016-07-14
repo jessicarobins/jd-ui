@@ -1,9 +1,10 @@
  <md-sidenav
+    layout-padding
     class="md-sidenav-left"
     md-component-id="left"
     md-is-locked-open="true"
     md-disable-backdrop
-    md-colors="{background: 'default-primary-900-0.43'}">
+    md-colors="{background: 'default-primary-900-0.2'}">
      
     <div class="filter">
         <form id="tag-form">
@@ -12,6 +13,7 @@
                 
                 <md-list-item>
                     <md-select 
+                        ng-cloak
                         ng-if="$ctrl.projects.length"
                         class="project-select"
                         ng-change="$ctrl.changeProject()" 

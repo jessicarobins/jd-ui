@@ -15,9 +15,14 @@ module.service('$projects', ['$api', '$q', function($api, $q) {
           method: 'GET'
         }).then(function(response) {
             self.projects = response;
+            self.currentProject = self.projects[0];
             return self.projects;
         });
         return promise;
+    };
+    
+    self.project = function(){
+        return self.currentProject;
     };
     
 }]);

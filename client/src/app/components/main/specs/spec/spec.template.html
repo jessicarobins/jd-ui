@@ -1,0 +1,86 @@
+<div id="{{$ctrl.spec.id}}">
+  <div 
+    ng-if="!$ctrl.spec.showEditButtons"
+    ng-mouseenter="$ctrl.spec.userMouseover=true"
+    ng-mouseleave="$ctrl.spec.userMouseover=false"
+    class="spec">
+    
+    <md-checkbox
+        ng-if="$ctrl.parent.export"
+        class="export"
+        aria-label="export spec"
+        ng-model="$ctrl.spec.exported"
+        ng-change="$ctrl.toggleExport()">
+    </md-checkbox>
+    
+    <span
+      class="menu"
+      ng-if="!$ctrl.parent.export"
+      ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}">
+        
+        <md-menu md-position-mode="target-right target">
+          <a 
+            aria-label="spec menu" 
+            class="md-icon-button btn-flat btn-square" 
+            ng-click="$ctrl.openSpecMenu($mdOpenMenu, $event)">
+            <md-icon md-menu-origin class="material-icons tiny-icon">more_vert</md-icon>
+          </a>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="$ctrl.setBreadCrumbs($ctrl.spec)">
+                <md-icon class='material-icons'>fullscreen</md-icon>
+                expand
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="$ctrl.toggleEditButtons($ctrl.spec)">
+                <md-icon class='material-icons'>mode_edit</md-icon>
+                edit
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="$ctrl.toggleAddChildren($ctrl.spec)">
+                <md-icon class='material-icons'>add</md-icon>
+                add children
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        
+    </span>
+     <span ui-tree-handle>
+        {{::$ctrl.spec.description}}
+        <tickets 
+          tickets="$ctrl.ticket" 
+          spec="$ctrl.spec"
+          class="read-only-tags"></tickets>
+        <tags 
+          class="read-only-tags"
+          tags="$ctrl.tag" 
+          spec="$ctrl.spec"></tags>
+    </span>
+  </div>
+  <div 
+    ng-if="$ctrl.spec.showEditButtons">
+      <edit-spec 
+        spec="$ctrl.spec"
+        tag="$ctrl.tag"
+        ticket="$ctrl.ticket"></edit-spec>      
+  </div>
+    
+    <ol ui-tree-nodes="" ng-model="$ctrl.spec.children">
+        <li ng-repeat="child in $ctrl.spec.children track by child.id" ui-tree-node>
+            <spec 
+                spec='::child' 
+                ui-tree-callbacks="::$callbacks"
+                tag="::$ctrl.parent.getTags(child)"
+                ticket="::$ctrl.parent.getTickets(child)"></spec>
+        </li>
+        <li
+          ng-if="$ctrl.spec.addChildren"
+          id="addChildren">
+          <add-spec
+            spec="$ctrl.spec"></add-spec>
+        </li>
+    </ol>
+</div>

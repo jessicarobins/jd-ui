@@ -1,6 +1,4 @@
-var module = angular.module('jessdocs');
-
-module.service('$specs', ['$api', '$q', function($api, $q) {
+module.service('BreadcrumbsService', function($api) {
     var self = this;
     var callbacks = [];
     
@@ -8,19 +6,23 @@ module.service('$specs', ['$api', '$q', function($api, $q) {
         callbacks.push(callback);
     };
     
-    self.setSpecList = function(filterParams) {
+    self.setBreadcrumbs = function(id) {
         var promise = $api.request({
-            url: '/specs', 
+            url: '/specs/'+id+'/breadcrumbs', 
             method: "GET",
-            params: filterParams
+            params: {id: id}
         }).
         then(function (response) {
-            self.specs = response;
-            // self.bookmarks = response.data.bookmarks;
+            self.breadcrumbs = response.data;
             updateAll();
-            return self.specs;
+            return self.breadcrumbs;
         });
         return promise;
+    };
+    
+    self.clearBreadcrumbs = function() {
+        self.breadcrumbs = null;  
+        updateAll();
     };
     
     function updateAll() {
@@ -29,4 +31,4 @@ module.service('$specs', ['$api', '$q', function($api, $q) {
         });
     }
     
-}]);
+});

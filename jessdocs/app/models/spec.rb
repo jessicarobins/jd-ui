@@ -8,20 +8,20 @@ class Spec < ActiveRecord::Base
     
     validates_presence_of :description
     validates_presence_of :project_id
-    validates_presence_of :bookmarked
+    # validates_presence_of :bookmarked
     validates_presence_of :spec_order
     
     belongs_to :project
-    # has_many :tags, dependent: :destroy
-    # has_many :tickets, dependent: :destroy
+    has_many :tags, dependent: :destroy
+    has_many :tickets, dependent: :destroy
     # has_many :comments, dependent: :destroy
-    # has_many :tag_types, through: :tags
+    has_many :tag_types, through: :tags
     
     alias_attribute :name, :description
     
-    # scope :with_tag_type, ->(type_id) { joins(:tags).where(tags: {tag_type_id: type_id})  }
-    # scope :for_project, ->(project_id) { where(:project_id => project_id) }
-    # scope :has_ticket, -> { joins(:tickets) }
+    scope :with_tag_type, ->(type_id) { joins(:tags).where(tags: {tag_type_id: type_id})  }
+    scope :for_project, ->(project_id) { where(:project_id => project_id) }
+    scope :has_ticket, -> { joins(:tickets) }
     scope :full_ancestry_of_spec, -> (spec) {spec.path.union(spec.descendants)}
     
     def full_ancestry_ids
@@ -55,14 +55,16 @@ class Spec < ActiveRecord::Base
         query
     end
 
-    def self.parse_block(text, project_id, parent_id=nil, next_top_order)
-        self.parse_alternate(   :text_array => text.split("\n"), 
-                                :project_id => project_id, 
-                                :parent_id => parent_id,
-                                :next_top_order => next_top_order)
+    def self.parse_block(text, project_id, parent_id=nil, next_top_order, created_by_id:)
+        self.parse_alternate(   
+            :text_array => text.split("\n"), 
+            :project_id => project_id, 
+            :parent_id => parent_id,
+            :next_top_order => next_top_order,
+            :created_by_id => created_by_id)
     end
     
-    def self.parse_alternate(text_array:, project_id:, parent_id:nil, depth:0, previous:nil, error_count:0, next_top_order:)
+    def self.parse_alternate(text_array:, project_id:, parent_id:nil, depth:0, previous:nil, error_count:0, next_top_order:, created_by_id:)
         #regex = /(\t*|-*)\s?(\w+)\s?(.*)/
         #instead of looking for s{2}* we should replace s{2}* with \t
         # not sure if this needs to be just the leading whitespace only?
@@ -83,44 +85,51 @@ class Spec < ActiveRecord::Base
         
         begin
             # spec_order = previous ? (previous.spec_order + 1): 1
-            spec = Spec.create!(:description => spec_description,
-                                :spec_type_id => 1,
-                                :project_id => project_id)
-            
+            spec = Spec.new(
+                :description => spec_description,
+                :project_id => project_id,
+                :bookmarked => false,
+                :created_by_id => created_by_id,
+                :updated_by_id => created_by_id)
+            # require 'byebug'; byebug
             if(spec_depth == 0)
-                spec.update_attributes!(:parent_id => parent_id,
-                                        :spec_order => next_top_order)
+                spec.parent_id = parent_id
+                spec.spec_order = next_top_order
                 puts "next_top_order = #{next_top_order}"
                 next_top_order= next_top_order + 1
             else
                 if(depth == spec_depth)
                     parent = previous.nil? ? nil : previous.parent
-                    spec.update!(:parent => parent,
-                                 :spec_order => previous.spec_order + 1)
+                    spec.parent = parent
+                    spec.spec_order = previous.spec_order + 1
                 elsif (spec_depth > depth) #deeper in, set the parent
-                    spec.update!(:parent => previous, 
-                                 :spec_order => 1)
+                    spec.parent = previous
+                    spec.spec_order = 1
                 else #spec_depth < depth. farther out... no idea
                     
                     (depth-spec_depth).times do #this is how far back we need to go
                         previous = previous.parent
                     end
-                    spec.update!(:parent => previous.parent,
-                                 :spec_order => previous.spec_order + 1)
+                    spec.parent = previous.parent
+                    spec.spec_order = previous.spec_order + 1
                 end
             end
+            
+            spec.save!
         rescue => error
             puts error.inspect
         end
         
         text_array.delete(line)
-        self.parse_alternate(   :text_array => text_array, 
-                                :project_id => project_id, 
-                                :depth => spec_depth, 
-                                :previous => spec, 
-                                :error_count => error_count,
-                                :parent_id => parent_id,
-                                :next_top_order => next_top_order)
+        self.parse_alternate(   
+            :text_array => text_array, 
+            :project_id => project_id, 
+            :depth => spec_depth, 
+            :previous => spec, 
+            :error_count => error_count,
+            :parent_id => parent_id,
+            :next_top_order => next_top_order,
+            :created_by_id => created_by_id)
     end
     
     def self.export_spec_to_protractor(spec:, protractor_html: "", depth: 0)
