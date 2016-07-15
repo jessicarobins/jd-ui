@@ -2,8 +2,10 @@
     <div class="md-toolbar-tools">
         <md-button 
             class="md-icon-button">
-            <md-icon class="material-icons">
-                menu
+            <md-icon 
+                class="material-icons"
+                ng-click="$ctrl.home()">
+                home
             </md-icon>
         </md-button>
         <h2>
@@ -17,7 +19,13 @@
                 bookmark
             </md-icon>
         </md-button>
-            
+        <md-button 
+            class="md-icon-button"
+            ng-click="$ctrl.manage()">
+            <md-icon class="material-icons">
+                build
+            </md-icon>
+        </md-button>
         <md-menu
             md-position-mode="target-right target">
             <md-button 
@@ -27,7 +35,7 @@
 
                 <md-icon 
                     md-menu-origin 
-                    class="material-icons">person</md-icon>
+                    class="material-icons">account_circle</md-icon>
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item>

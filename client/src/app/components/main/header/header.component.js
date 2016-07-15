@@ -2,7 +2,7 @@ var module = angular.module('jessdocs');
 module.component('headerMenu', {
     
     templateUrl: 'app/components/main/header/header.template.html',
-    controller: ['$user', function($user) {
+    controller: function($state, $user) {
        var self = this;
        
        self.user;
@@ -17,6 +17,13 @@ module.component('headerMenu', {
         self.logout = function() {
             $user.logout();
         };
-       
-    }]
+        
+        self.home = function() {
+            $state.go('home');
+        };
+        
+        self.manage = function() {
+            $state.go('manage');
+        }
+    }
 });
