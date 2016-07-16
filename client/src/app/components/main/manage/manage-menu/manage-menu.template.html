@@ -1,0 +1,25 @@
+<md-toolbar 
+    md-colors="{background: 'default-primary-300'}"
+    layout="column">
+    <md-button
+        ng-click="$ctrl.manageTags()"
+        class="md-icon-button">
+        <md-icon class="material-icons">
+            label
+        </md-icon>
+    </md-button>
+    <md-button
+        ng-click="$ctrl.manageGroups()"
+        class="md-icon-button">
+        <md-icon class="material-icons">
+            group_work
+        </md-icon>
+    </md-button>
+    <md-button
+        ng-click="$ctrl.manageProjects($mdOpenMenu, ev)"
+        class="md-icon-button">
+        <md-icon class="material-icons">
+            folder
+        </md-icon>
+    </md-button>
+</md-toolbar>

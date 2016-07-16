@@ -30,12 +30,14 @@
             md-position-mode="target-right target">
             <md-button 
                 aria-label="user menu" 
-                class="md-icon-button"
                 ng-click="$ctrl.openUserMenu($mdOpenMenu, $event)">
 
                 <md-icon 
                     md-menu-origin 
                     class="material-icons">account_circle</md-icon>
+                <md-icon class="material-icons">
+                arrow_drop_down
+            </md-icon>
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item>

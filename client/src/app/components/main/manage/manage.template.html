@@ -4,42 +4,43 @@
     class="md-sidenav-right" 
     md-component-id="manage">
     
-    <md-content layout="row">
-        <md-toolbar 
-            flex='15'
-            layout="column">
-            <md-button
-                class="md-icon-button">
-                <md-icon class="material-icons">
-                    label
-                </md-icon>
-            </md-button>
-            <md-button
-                class="md-icon-button">
-                <md-icon class="material-icons">
-                    group_work
-                </md-icon>
-            </md-button>
-            <md-button
-                class="md-icon-button">
-                <md-icon class="material-icons">
-                    folder
-                </md-icon>
-            </md-button>
-        </md-toolbar>
-        <md-tabs
-            flex-direction="vertical">
-            <md-tab label="tags">
-                <p>tags</p>
+    <md-content 
+        layout="row" flex>
+        
+        <md-tabs 
+            md-colors="{background: 'default-primary-100'}"
+            md-selected="$ctrl.selectedTab"
+            flex>
+            <md-tab>
+                <md-tab-label>
+                    tags
+                </md-tab-label>
+                <md-tab-body>
+                    <p>tags</p>
+                </md-tab-body>
             </md-tab>
-            <md-tab label="groups">
-                <p>tag groups</p>
+            <md-tab>
+                <md-tab-label>
+                    groups
+                </md-tab-label>
+                <md-tab-body label="groups">
+                    <p>tag groups</p>
+                </md-tab-body>
             </md-tab>
-            <md-tab label="projects">
-                <projects></projects>
+            <md-tab>
+                <md-tab-label>
+                    projects
+                </md-tab-label>
+                <md-tab-body label="projects">
+                    <projects></projects>
+                </md-tab-body>
             </md-tab>
         </md-tabs>
+        
     </md-content>
     
     
 </md-sidenav>
+<manage-menu
+    style="z-index: 100"
+    layout="row"></manage-menu>
