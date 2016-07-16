@@ -1,7 +1,10 @@
 <md-list layout-padding flex>
   <md-list-item>
-      Projects
-      <md-button aria-label="add project" class="md-secondary md-icon-button">
+      <h5 class="tab-title">Projects</h5>
+      <md-button 
+        aria-label="add project" 
+        class="md-secondary md-icon-button"
+        ng-click="$ctrl.addProject($event)">
         <md-icon class="material-icons">add</md-icon>
       </md-button>
   </md-list-item>
@@ -11,7 +14,7 @@
     <p ng-bind="project.name"></p>
     <md-button 
         class="md-secondary md-icon-button" 
-        ng-click="$ctrl.editProject(project)">
+        ng-click="$ctrl.editProject(project, $event)">
         <md-icon class="material-icons">
             edit
         </md-icon>

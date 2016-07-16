@@ -25,6 +25,10 @@ module.
             }
         });
         
+        $projects.addCallback( function(){
+            self.projects = $projects.projects;
+        });
+        
         $tagtypes.getTagTypesByGroup().then( function(response){
             self.tag_type_groups = response;
         });

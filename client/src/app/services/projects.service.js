@@ -1,7 +1,9 @@
 var module = angular.module('jessdocs');
 
-module.service('$projects', ['$api', '$q', function($api, $q) {
+module.service('$projects', function($api, $q, $user) {
     var self = this;
+    
+    var callbacks = [];
     
     self.projects;
     self.currentProject;
@@ -25,4 +27,35 @@ module.service('$projects', ['$api', '$q', function($api, $q) {
         return self.currentProject;
     };
     
-}]);
+    self.addProject = function(projectName) {
+        $api.request({
+            url: '/projects',
+            method: 'POST',
+            data: {
+                project: {
+                    name: projectName,
+                    created_by_id: $user.user().id
+                }
+            }
+        }).then( function(response){
+            self.projects.push(response);
+        });
+        
+        notifyWatchers();
+    };
+    
+    self.editProject = function(project, name) {
+        
+    };
+    
+    self.addCallback = function(callback) {
+        callbacks.push(callback);
+    };
+    
+    function notifyWatchers() {
+        callbacks.forEach(function(callback) {
+            callback();
+        });
+    }
+    
+});

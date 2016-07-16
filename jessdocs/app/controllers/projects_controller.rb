@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(create_params)
 
     if @project.save
       render json: @project, status: :created, location: @project
@@ -55,5 +55,9 @@ class ProjectsController < ApplicationController
 
     def project_params
       params[:project]
+    end
+    
+    def create_params
+      params.require(:project).permit(:name, :created_by_id)
     end
 end
