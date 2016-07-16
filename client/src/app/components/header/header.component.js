@@ -1,13 +1,16 @@
 var module = angular.module('jessdocs');
 module.component('headerMenu', {
     
-    templateUrl: 'app/components/main/header/header.template.html',
-    controller: function($state, $user) {
+    templateUrl: 'app/components/header/header.template.html',
+    controller: function($state, $mdSidenav, $user) {
        var self = this;
        
        self.user;
+       self.manage;
+       
        self.$onInit = function(){
            self.user = $user.user();
+           self.manage = false;
        };
        
        self.openUserMenu = function($mdOpenMenu, ev) {
@@ -22,8 +25,12 @@ module.component('headerMenu', {
             $state.go('home');
         };
         
-        self.manage = function() {
-            $state.go('manage');
-        }
+        self.toggleManage = function() {
+            $mdSidenav('manage')
+              .toggle()
+              .then(function () {
+                  
+              });
+        };
     }
 });

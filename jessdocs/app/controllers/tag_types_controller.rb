@@ -6,7 +6,7 @@ class TagTypesController < ApplicationController
   def index
     @tag_types = TagType.all
 
-    render json: @tag_types
+    render json: {by_group: TagType.by_group, all_types: @tag_types}
   end
 
   # GET /tag_types/1

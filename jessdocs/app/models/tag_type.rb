@@ -17,6 +17,29 @@ class TagType < ActiveRecord::Base
     
     before_create :downcase
     
+    def tag_hash
+      results = {tag_types: []}
+      TagType.includes(:tag_type_group).all.group_by(&:tag_type_group).each do |group, tag_types|
+        if group
+          results[:tag_types] << {
+            id: group.id,
+            name: group.name,
+            color: group.color,
+            tag_types: tag_types
+          } 
+        else
+          results[:tag_types] << {
+            id: nil,
+            name: nil,
+            color: nil,
+            tag_types: tag_types
+          } 
+        end
+      end
+      
+      results
+    end
+    
     private
         def downcase
             self.name.downcase!

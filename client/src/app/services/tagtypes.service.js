@@ -7,6 +7,8 @@ module.service('$tagtypes', ['$api', '$q', function($api, $q) {
     self.tagTypes;
     self.tagTypesByGroup;
     
+    var groups;
+    
     self.addCallback = function(callback) {
         callbacks.push(callback);
     };
@@ -50,10 +52,29 @@ module.service('$tagtypes', ['$api', '$q', function($api, $q) {
             url: '/tag_types',
             method: 'GET'
         }).then(function(response) {
-            self.tagTypesByGroup = response.tag_types_by_group;
+            self.tagTypesByGroup = response.by_group;
             self.tagTypes = response.all_types;
             return self.tagTypesByGroup;
         });
         return promise;
     };
+    
+    self.groups = function() {
+        if(groups){
+            return $q.when(groups);
+        }
+        
+        return self.updateGroups();
+    };
+    
+    self.updateGroups = function() {
+        var promise = $api.request({
+            url: '/tag_type_groups',
+            method: 'GET'
+        }).then(function(response) {
+            groups = response;
+            return groups;
+        });
+        return promise;
+    }
 }]);

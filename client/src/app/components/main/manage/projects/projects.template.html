@@ -1,0 +1,20 @@
+<md-list layout-padding flex>
+  <md-list-item 
+    ng-repeat="project in $ctrl.projects"
+    class="secondary-button-padding">
+    <p ng-bind="project.name"></p>
+    <md-button 
+        class="md-secondary md-icon-button" 
+        ng-click="$ctrl.editProject(project)">
+        <md-icon class="material-icons">
+            edit
+        </md-icon>
+    </md-button>
+  </md-list-item>
+  <span flex></span>
+  <md-list-item>
+      <md-button aria-label="menu" class="md-fab">
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+  </md-list-item>
+</md-list>

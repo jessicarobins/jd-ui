@@ -1,11 +1,8 @@
-var module = angular.module('jessdocs');
 module.component('main', {
     
     templateUrl: 'app/components/main/main.template.html',
     controller: function(
-        $anchorScroll,
         $auth,
-        $location,
         $q,
         $api,
         $projects,

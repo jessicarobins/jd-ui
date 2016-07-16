@@ -17,15 +17,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
           return $auth.validateUser();
         }]
       }
-    })
-    .state('manage', {
-      url: '/manage',
-      template: '<p>manage stuff here</p>',
-      resolve: {
-        auth: ['$auth', function($auth) {
-          return $auth.validateUser();
-        }]
-      }
     });
 
   $urlRouterProvider.otherwise('/');
