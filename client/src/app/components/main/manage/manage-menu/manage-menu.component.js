@@ -13,7 +13,24 @@ module.component('manageMenu', {
               .then(function () {
                   
               });
-           
+       };
+       
+       self.manageTags = function() {
+           self.parent.selectedTab = 0;
+           $mdSidenav('manage')
+              .toggle()
+              .then(function () {
+                  
+              });
+       };
+       
+       self.manageGroups = function() {
+           self.parent.selectedTab = 1;
+           $mdSidenav('manage')
+              .toggle()
+              .then(function () {
+                  
+              });
        };
        
     }

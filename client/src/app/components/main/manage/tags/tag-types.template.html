@@ -1,0 +1,33 @@
+<md-list layout-padding flex>
+  <md-list-item>
+      <h5 class="tab-title">tag types</h5>
+      <md-button 
+        aria-label="add tag type" 
+        class="md-secondary md-icon-button"
+        ng-click="$ctrl.add($event)">
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+  </md-list-item>
+  <md-list-item 
+    ng-repeat="tagType in $ctrl.tagTypes">
+    <p 
+        class="truncate"
+        ng-bind="tagType.name"></p>
+    <md-icon 
+        aria-label="edit tag type"
+        class="material-icons md-secondary"
+        ng-click="$ctrl.edit(tagType, $event)">
+        edit
+    </md-icon>
+    <md-icon 
+        aria-label="delete tag type"
+        class="material-icons md-secondary"
+        ng-click="$ctrl.delete(tagType, $event)">
+        delete
+    </md-icon>
+  </md-list-item>
+  <md-list-item
+    ng-if="!$ctrl.tagTypes.byGroup">
+      You have no tag types
+  </md-list-item>
+</md-list>

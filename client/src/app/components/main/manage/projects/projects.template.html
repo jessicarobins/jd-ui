@@ -9,15 +9,21 @@
       </md-button>
   </md-list-item>
   <md-list-item 
-    ng-repeat="project in $ctrl.projects"
-    class="secondary-button-padding">
-    <p ng-bind="project.name"></p>
-    <md-button 
-        class="md-secondary md-icon-button" 
+    ng-repeat="project in $ctrl.projects">
+    <p 
+        class="truncate"
+        ng-bind="project.name"></p>
+    <md-icon 
+        aria-label="edit project"
+        class="material-icons md-secondary"
         ng-click="$ctrl.editProject(project, $event)">
-        <md-icon class="material-icons">
-            edit
-        </md-icon>
-    </md-button>
+        edit
+    </md-icon>
+    <md-icon 
+        aria-label="delete project"
+        class="material-icons md-secondary"
+        ng-click="$ctrl.deleteProject(project, $event)">
+        delete
+    </md-icon>
   </md-list-item>
 </md-list>

@@ -30,9 +30,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    @project = Project.find(params[:id])
-
-    if @project.update(project_params)
+    if @project.update(update_params)
       head :no_content
     else
       render json: @project.errors, status: :unprocessable_entity
@@ -59,5 +57,9 @@ class ProjectsController < ApplicationController
     
     def create_params
       params.require(:project).permit(:name, :created_by_id)
+    end
+    
+    def update_params
+      params.require(:project).permit(:name)
     end
 end

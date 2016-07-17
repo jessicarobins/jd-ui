@@ -41,5 +41,22 @@ module.component('projects', {
             }, function() {
             });
         };
+        
+        self.deleteProject = function(project, ev) {
+            var confText = 'Are you sure you want to delete ' 
+                + project.name + 
+                '? All specs in the project will be deleted.';
+            var confirm = $mdDialog.confirm()
+                .title('delete project')
+                .textContent(confText)
+                .ariaLabel('delete project')
+                .targetEvent(ev)
+                .ok('delete')
+                .cancel('cancel');
+            $mdDialog.show(confirm).then(function() {
+                $projects.deleteProject(project);
+            }, function() {
+            });
+        };
     }
 });

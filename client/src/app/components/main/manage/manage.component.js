@@ -6,7 +6,6 @@ module.component('manage', {
        self.$onInit = function(){
            
            
-            $tagtypes.getTagTypesByGroup();
        };
        
        

@@ -2,4 +2,9 @@ main {
     md-content {
         overflow-x: hidden;
     }
+    
+    .truncate {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }

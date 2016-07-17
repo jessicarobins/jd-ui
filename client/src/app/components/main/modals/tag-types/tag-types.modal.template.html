@@ -1,0 +1,50 @@
+<jd-modal>
+    <jd-modal-title>tag type</jd-modal-title>
+    <jd-modal-body layout="column">
+        <md-input-container>
+            <label>tag type name</label>
+                <input
+                    required
+                    ng-model="editingCopy.name"
+                    aria-label="name"/>
+            </md-input-container>
+        <md-input-container>
+            <label>tag type group</label>
+            <md-select 
+                ng-model="editingCopy.tag_type_group_id"
+                aria-label="tag type groups"
+                md-on-close="changeTagGroup(editingCopy)">
+                  <md-option value="">no group</md-option>
+                  <md-option 
+                    ng-repeat="group in tagGroups" 
+                    value="{{group.id}}">
+                        {{group.name}}
+                  </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <color-picker
+                ng-model="editingCopy.color"
+                color-picker-disabled="disableColorField(editingCopy.tag_type_group_id)"
+                color-picker-format="hex"
+                color-picker-alpha="false"
+                color-picker-swatch="true"
+                color-picker-swatch-bootstrap="true"
+                color-picker-swatch-only="true"
+                color-picker-inline="false"
+                aria-label="tag type color"
+            ></color-picker>
+        </md-input-container>
+    </jd-modal-body>
+    <jd-modal-buttons>
+        
+        <span flex></span>
+        <md-button
+            ng-click="$ctrl.add()"
+            class="md-raised md-accent">
+            <md-icon
+                class="material-icons">add</md-icon>
+            add specs
+        </md-button>
+    </jd-modal-buttons>
+</jd-modal>

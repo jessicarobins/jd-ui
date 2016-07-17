@@ -25,12 +25,5 @@ module.component('headerMenu', {
             $state.go('home');
         };
         
-        self.toggleManage = function() {
-            $mdSidenav('manage')
-              .toggle()
-              .then(function () {
-                  
-              });
-        };
     }
 });

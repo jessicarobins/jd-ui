@@ -1,13 +1,12 @@
 var module = angular.module('jessdocs');
 
-module.service('$tagtypes', ['$api', '$q', function($api, $q) {
+module.service('$tagtypes', function($api, $q) {
     var self = this;
     var callbacks = [];
     
-    self.tagTypes;
-    self.tagTypesByGroup;
-    
     var groups;
+    
+    self.tagTypes = {};
     
     self.addCallback = function(callback) {
         callbacks.push(callback);
@@ -20,7 +19,7 @@ module.service('$tagtypes', ['$api', '$q', function($api, $q) {
     }
     
     self.update = function() {
-        self.updateTagTypesByGroup().then( function(){
+        self.updateTagTypes().then( function(){
             notifyWatchers();
         });
     };
@@ -30,31 +29,24 @@ module.service('$tagtypes', ['$api', '$q', function($api, $q) {
             return $q.when(self.tagTypes);
         }
         var promise = $api.request({
-          url: '/tags/new', 
+          url: '/tag_types', 
           method: 'GET'
         }).then(function(response) {
-            self.tagTypes = response;
+            self.tagTypes.allTypes = response.all_types;
+            self.tagTypes.byGroup = response.by_group;
             return self.tagTypes;
         });
         return promise;
     };
     
-    self.getTagTypesByGroup = function() {
-        if(self.tagTypesByGroup){
-            return $q.when(self.tagTypesByGroup);
-        }
-        
-        return self.updateTagTypesByGroup();
-    };
-    
-    self.updateTagTypesByGroup = function() {
+    self.updateTagTypes = function() {
         var promise = $api.request({
             url: '/tag_types',
             method: 'GET'
         }).then(function(response) {
-            self.tagTypesByGroup = response.by_group;
-            self.tagTypes = response.all_types;
-            return self.tagTypesByGroup;
+            self.tagTypes.allTypes = response.all_types;
+            self.tagTypes.byGroup = response.by_group;
+            return self.tagTypes;
         });
         return promise;
     };
@@ -77,4 +69,4 @@ module.service('$tagtypes', ['$api', '$q', function($api, $q) {
         });
         return promise;
     }
-}]);
+});

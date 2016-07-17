@@ -29,12 +29,12 @@ module.
             self.projects = $projects.projects;
         });
         
-        $tagtypes.getTagTypesByGroup().then( function(response){
-            self.tag_type_groups = response;
+        $tagtypes.getTagTypes().then( function(response){
+            self.tag_type_groups = response.byGroup;
         });
         
         $tagtypes.addCallback( function(){
-            self.tag_type_groups = $tagtypes.tagTypesByGroup;
+            self.tag_type_groups = $tagtypes.tagTypes.byGroup;
         });
         
       }; 
