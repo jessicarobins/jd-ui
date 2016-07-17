@@ -1,37 +1,15 @@
 <jd-modal>
-    <jd-modal-title>tag type</jd-modal-title>
+    <jd-modal-title>tag group</jd-modal-title>
     <jd-modal-body layout="column" layout-padding>
         <md-input-container>
-            <label>tag type name</label>
+            <label>tag group name</label>
                 <input
                     required
                     ng-model="$ctrl.editingCopy.name"
                     aria-label="name"/>
             </md-input-container>
         
-        <div layout="row">
-        <md-input-container
-            flex='90'>
-            <label>tag type group</label>
-            <md-select 
-                ng-model="$ctrl.editingCopy.tag_type_group_id"
-                aria-label="tag type groups"
-                md-on-close="$ctrl.changeGroup()">
-                  <md-option value="">no group</md-option>
-                  <md-option 
-                    ng-repeat="group in $ctrl.tagGroups" 
-                    value="{{group.id}}">
-                        {{group.name}}
-                  </md-option>
-            </md-select>
-        </md-input-container>
-        <span
-            class="color-swatch"
-            ng-if="$ctrl.disableColorPicker"
-            style="background-color: {{$ctrl.editingCopy.color}}"></span>
-        </div>
         <div
-            ng-if="!$ctrl.disableColorPicker"
             md-color-picker
             ng-model="$ctrl.editingCopy.color"
             label="tag color"
@@ -46,18 +24,17 @@
             md-color-rgb="false"
         ></div>
         
-        
     </jd-modal-body>
     <jd-modal-buttons>
         
         <span flex></span>
         <md-button
-            aria-label="add tag type"
+            aria-label="add tag group"
             ng-click="$ctrl.add()"
             class="md-raised md-accent">
             <md-icon
                 class="material-icons">add</md-icon>
-            add tag
+            add tag group
         </md-button>
     </jd-modal-buttons>
 </jd-modal>

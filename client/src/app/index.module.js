@@ -15,6 +15,17 @@ angular.module('jessdocs', [
   'ngMaterial',
   'mdColorPicker',
   'ng-token-auth'])
+  .filter('getById', function() {
+    return function(input, id) {
+      var i=0, len=input.length;
+      for (; i<len; i++) {
+        if (+input[i].id == +id) {
+          return input[i];
+        }
+      }
+      return null;
+    }
+  })
   .constant('moment', moment)
   .config(config)
   .config(routerConfig)

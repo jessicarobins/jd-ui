@@ -4,7 +4,7 @@ module.service('$tagtypes', function($api, $q, $user) {
     var self = this;
     var callbacks = [];
     
-    var groups;
+    self.tagGroups;
     
     self.tagTypes = {};
     
@@ -39,7 +39,7 @@ module.service('$tagtypes', function($api, $q, $user) {
     };
     
     self.getTagTypes = function() {
-        if(self.tagTypes){
+        if(self.tagTypes.byGroup && self.tagTypes.allTypes){
             return $q.when(self.tagTypes);
         }
         var promise = $api.request({
@@ -47,7 +47,7 @@ module.service('$tagtypes', function($api, $q, $user) {
           method: 'GET'
         }).then(function(response) {
             self.tagTypes.allTypes = response.all_types;
-            self.tagTypes.byGroup = response.by_group;
+            self.tagTypes.byGroup = response.by_group.tag_types;
             return self.tagTypes;
         });
         return promise;
@@ -59,18 +59,36 @@ module.service('$tagtypes', function($api, $q, $user) {
             method: 'GET'
         }).then(function(response) {
             self.tagTypes.allTypes = response.all_types;
-            self.tagTypes.byGroup = response.by_group;
+            self.tagTypes.byGroup = response.by_group.tag_types;
             return self.tagTypes;
         });
         return promise;
     };
     
     self.groups = function() {
-        if(groups){
-            return $q.when(groups);
+        if(self.tagGroups){
+            return $q.when(self.tagGroups);
         }
         
         return self.updateGroups();
+    };
+    
+    self.addGroup = function(group){
+        $api.request({
+            url: '/tag_type_groups',
+            method: 'POST',
+            data: {
+                tag_type_group: {
+                    name: group.name,
+                    color: group.color,
+                    created_by_id: $user.user().id
+                }
+            }
+        }).then( function(response){
+            self.updateGroups().then( function(){
+                notifyWatchers();
+            });
+        });
     };
     
     self.updateGroups = function() {
@@ -78,8 +96,8 @@ module.service('$tagtypes', function($api, $q, $user) {
             url: '/tag_type_groups',
             method: 'GET'
         }).then(function(response) {
-            groups = response;
-            return groups;
+            self.tagGroups = response;
+            return self.tagGroups;
         });
         return promise;
     }

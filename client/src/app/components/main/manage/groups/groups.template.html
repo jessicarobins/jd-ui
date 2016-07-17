@@ -1,0 +1,34 @@
+<md-list layout-padding flex>
+  <md-list-item>
+      <h5 class="tab-title">Tag Groups</h5>
+      <md-button 
+        aria-label="add tag group" 
+        class="md-secondary md-icon-button"
+        ng-click="$ctrl.add($event)">
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+  </md-list-item>
+  <md-list-item 
+    ng-repeat="group in $ctrl.groups">
+    <p 
+        class="truncate"
+        ng-bind="group.name"
+        style="color: {{group.color}}"></p>
+    <md-icon 
+        aria-label="edit group"
+        class="material-icons md-secondary"
+        ng-click="$ctrl.edit(group, $event)">
+        edit
+    </md-icon>
+    <md-icon 
+        aria-label="delete project"
+        class="material-icons md-secondary"
+        ng-click="$ctrl.delete(group, $event)">
+        delete
+    </md-icon>
+  </md-list-item>
+  <md-list-item
+      ng-if="!$ctrl.groups.length">
+      You have no tag groups.
+  </md-list-item>
+</md-list>

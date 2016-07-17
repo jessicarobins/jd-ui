@@ -17,7 +17,7 @@ class TagType < ActiveRecord::Base
     
     before_create :downcase
     
-    def tag_hash
+    def self.tag_hash
       results = {tag_types: []}
       TagType.includes(:tag_type_group).all.group_by(&:tag_type_group).each do |group, tag_types|
         if group
