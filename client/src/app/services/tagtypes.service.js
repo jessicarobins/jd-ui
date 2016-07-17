@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$tagtypes', function($api, $q) {
+module.service('$tagtypes', function($api, $q, $user) {
     var self = this;
     var callbacks = [];
     
@@ -18,10 +18,24 @@ module.service('$tagtypes', function($api, $q) {
         });
     }
     
-    self.update = function() {
-        self.updateTagTypes().then( function(){
-            notifyWatchers();
+    self.add = function(tagType) {
+        $api.request({
+            url: '/tag_types',
+            method: 'POST',
+            data: {
+                tag_type: {
+                    name: tagType.name,
+                    color: tagType.color,
+                    tag_type_group_id: tagType.tag_type_group_id,
+                    created_by_id: $user.user().id
+                }
+            }
+        }).then( function(response){
+            self.updateTagTypes().then( function(){
+                notifyWatchers();
+            });
         });
+        
     };
     
     self.getTagTypes = function() {

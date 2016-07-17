@@ -13,6 +13,7 @@ angular.module('jessdocs', [
   'ui.router', 
   'ui.tree',
   'ngMaterial',
+  'mdColorPicker',
   'ng-token-auth'])
   .constant('moment', moment)
   .config(config)

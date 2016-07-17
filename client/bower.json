@@ -15,7 +15,9 @@
     "animate.css": "~3.4.0",
     "angular": "~1.5.5",
     "ng-token-auth": "^0.0.29",
-    "angular-ui-tree": "^2.17.0"
+    "angular-ui-tree": "^2.17.0",
+    "tinycolor": "^1.4.1",
+    "md-color-picker": "^0.2.6"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

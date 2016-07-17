@@ -18,7 +18,7 @@ class TagTypesController < ApplicationController
   # POST /tag_types
   # POST /tag_types.json
   def create
-    @tag_type = TagType.new(tag_type_params)
+    @tag_type = TagType.new(create_params)
 
     if @tag_type.save
       render json: @tag_type, status: :created, location: @tag_type
@@ -55,5 +55,9 @@ class TagTypesController < ApplicationController
 
     def tag_type_params
       params[:tag_type]
+    end
+    
+    def create_params
+      params.require(:tag_type).permit(:name, :color, :created_by_id, :tag_type_group_id)
     end
 end

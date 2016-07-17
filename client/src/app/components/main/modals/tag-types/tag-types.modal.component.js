@@ -4,9 +4,27 @@ module.component('tagTypesModal', {
              
         var self = this;
         
-        self.add = function(ev) {
-            
+        self.editingCopy = {};
+        
+        
+        self.$onInit = function() {
+            self.editingCopy.color = '#f00000';
+            self.disableColorPicker = false;
         };
+        
+        self.add = function(ev) {
+            $tagtypes.add(self.editingCopy);
+            $mdDialog.hide();
+        };
+        
+        self.changeGroup = function(){
+            if (self.editingCopy.tag_type_group_id) {
+                self.disableColorPicker = true;
+            }
+            else {
+                self.disableColorPicker = false;
+            }
+        }
         
     }
     
