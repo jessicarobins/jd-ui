@@ -1,6 +1,6 @@
 class SpecsController < ApplicationController
   # before_filter :authenticate_user!
-  before_action :set_spec, only: [:show, :update, :destroy]
+  before_action :set_spec, only: [:show, :update, :destroy, :breadcrumbs]
 
   # GET /specs
   # GET /specs.json
@@ -9,11 +9,26 @@ class SpecsController < ApplicationController
 
     render json: @specs.arrange_serializable
   end
+  
+  def filter
+    @specs = Spec.filter(params)
+    render json: @specs.arrange_serializable
+  end
 
   # GET /specs/1
   # GET /specs/1.json
   def show
     render json: @spec
+  end
+  
+  def bookmarks
+    @specs = Spec.where(:bookmarked => true)
+    render json: @specs
+  end
+  
+  def breadcrumbs
+    @breadcrumbs = @spec.path
+    render json: @breadcrumbs
   end
 
   # POST /specs
@@ -53,9 +68,8 @@ class SpecsController < ApplicationController
   # PATCH/PUT /specs/1
   # PATCH/PUT /specs/1.json
   def update
-    @spec = Spec.find(params[:id])
-
-    if @spec.update(spec_params)
+    update_params.merge(:updated_by => current_user)
+    if @spec.update(update_params)
       head :no_content
     else
       render json: @spec.errors, status: :unprocessable_entity
@@ -78,5 +92,9 @@ class SpecsController < ApplicationController
 
     def spec_params
       params[:spec]
+    end
+    
+    def update_params
+      params.require(:spec).permit(:bookmarked, :description)
     end
 end

@@ -9,11 +9,10 @@ module.service('BreadcrumbsService', function($api) {
     self.setBreadcrumbs = function(id) {
         var promise = $api.request({
             url: '/specs/'+id+'/breadcrumbs', 
-            method: "GET",
-            params: {id: id}
+            method: "GET"
         }).
         then(function (response) {
-            self.breadcrumbs = response.data;
+            self.breadcrumbs = response;
             updateAll();
             return self.breadcrumbs;
         });

@@ -1,0 +1,20 @@
+<md-list ng-if="$ctrl.breadcrumbs">
+    <md-list-item>
+        <md-button 
+            class="md-icon-button md-secondary"
+            ng-click="$ctrl.clearBreadcrumbs()">
+            <md-icon class="material-icons">cancel</md-icon>
+        </md-button>
+        <span 
+            ng-repeat-start="breadcrumb in $ctrl.breadcrumbs" 
+            class="truncate">
+            <a 
+                ng-click="$ctrl.setBreadcrumbs(breadcrumb)"
+                ng-bind="breadcrumb.description">
+            </a>
+        </span>
+        <span ng-if="!$last" ng-repeat-end>
+            <md-icon class="material-icons">chevron_right</md-icon>
+        </span>
+    </md-list-item>
+</md-list>

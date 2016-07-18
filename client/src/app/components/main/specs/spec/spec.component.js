@@ -90,11 +90,16 @@ module.component('spec', {
             });
         };
         
-        self.setBreadCrumbs = function(spec) {
-            BreadcrumbsService.setBreadcrumbs(spec.id);
-            var params = {spec_id: spec.id};
+        self.setBreadCrumbs = function() {
+            BreadcrumbsService.setBreadcrumbs(self.spec.id);
+            var params = {id: self.spec.id};
             
             $specs.setSpecList(params);
+        };
+        
+        self.bookmark = function(){
+            self.spec.bookmarked = !self.spec.bookmarked;
+            $specs.bookmark(self.spec);
         };
         
     }

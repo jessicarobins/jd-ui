@@ -5,8 +5,13 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :organizations, except: [:new, :edit]
     resources :specs, except: [:new, :edit] do
+      member do
+        get 'breadcrumbs'
+      end
       collection do
+        get 'filter'
         post 'create_many'
+        get 'bookmarks'
       end
     end
     resources :tag_type_groups, except: [:new, :edit]

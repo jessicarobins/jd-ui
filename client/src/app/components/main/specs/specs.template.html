@@ -1,9 +1,11 @@
 <section 
     flex
-    layout="row" 
+    layout="column" 
     layout-padding
     ng-if="$ctrl.spec.length">
     <a id="top"></a>
+    <breadcrumbs></breadcrumbs>
+    
     <div ui-tree
        id="tree-root"
        flex>

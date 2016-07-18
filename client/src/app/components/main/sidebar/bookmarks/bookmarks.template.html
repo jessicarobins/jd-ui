@@ -1,0 +1,15 @@
+<md-list layout-padding flex>
+  <md-list-item>
+      <h5 class="tab-title">Bookmarks</h5>
+  </md-list-item>
+  <md-list-item 
+    ng-repeat="bookmark in $ctrl.bookmarks">
+    <span 
+        class="truncate"
+        ng-bind="bookmark.description"></span>
+  </md-list-item>
+  <md-list-item
+      ng-if="!$ctrl.bookmarks.length">
+      You have no bookmarks.
+  </md-list-item>
+</md-list>

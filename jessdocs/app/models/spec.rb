@@ -37,6 +37,16 @@ class Spec < ActiveRecord::Base
         }
     end
     
+    def self.filter(filter_params)
+        if filter_params[:id]
+            specs = Spec.find(filter_params[:id]).subtree
+        else
+            specs = Spec.all
+        end
+        
+        specs
+    end
+    
     def self.all_ancestry_ids(specs)
         query = specs
         specs.map do |spec|

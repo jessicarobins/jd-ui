@@ -61,4 +61,20 @@
             projects
         </md-tooltip>
     </md-button>
+    
+    <md-icon 
+        class="icon-header material-icons">
+        
+    </md-icon>
+    <md-button
+        ng-click="$ctrl.setTab($ctrl.index.projects)"
+        class="md-icon-button"
+        ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.projects)}">
+        <md-icon class="material-icons">
+            settings
+        </md-icon>
+        <md-tooltip md-direction="right">
+            settings
+        </md-tooltip>
+    </md-button>
 </md-toolbar>
