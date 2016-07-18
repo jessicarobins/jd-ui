@@ -12,14 +12,14 @@
   </md-list-item>
   
   <section ng-repeat="tag_type_group in $ctrl.tagTypes">
-    <md-divider 
-      ng-if="tag_type_group.name"></md-divider>
+    
     <md-subheader 
       layout="row"
       layout-align="end center"
+      class="tab-title"
       ng-if="tag_type_group.name"
-      md-colors="{background: 'default-primary-100'}">
-        <strong>{{tag_type_group.name}}</strong>
+      md-colors="{background: 'default-primary-100'}"
+      ng-bind="tag_type_group.name">
     </md-subheader>
     <md-list-item ng-repeat="tag_type in tag_type_group.tag_types">
         <p ng-bind="tag_type.name"

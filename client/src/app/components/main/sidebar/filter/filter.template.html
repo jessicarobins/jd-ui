@@ -1,0 +1,58 @@
+<form id="tag-form">
+    
+    <md-list class="md-dense">
+        
+        <md-list-item>
+            <md-select 
+                ng-cloak
+                ng-if="$ctrl.projects.length"
+                class="project-select"
+                ng-change="$ctrl.changeProject()" 
+                ng-model="$ctrl.formData.project"
+                aria-label="projects">
+                <md-option ng-repeat="project in $ctrl.projects" value={{project.id}}>
+                    {{project.name}}
+                </md-option>
+            </md-select>
+        </md-list-item>
+        
+        <md-list-item
+            class="very-dense ticket">
+            <i class="material-icons tag-icon">label</i>
+            <p>ticketed</p>
+            <md-checkbox 
+                class="md-secondary"
+                ng-click="$ctrl.toggleTicketed()" 
+                ng-model="$ctrl.formData.ticketed"
+                aria-label="ticketed">
+            </md-checkbox>
+        </md-list-item>  
+        
+        <div ng-repeat="tag_type_group in $ctrl.tag_type_groups">
+            <md-subheader 
+                layout-align="end center"
+                class="tag-group-name tab-title truncate" 
+                ng-if="tag_type_group.name"
+                ng-bind="tag_type_group.name"
+                md-colors="{background: 'default-primary-100'}"></md-subheader>
+                
+            <md-list-item 
+                class="very-dense" 
+                ng-repeat="tag_type in tag_type_group.tag_types" 
+                style="color: {{tag_type.color}}">
+                <i class="material-icons tag-icon">label</i> 
+                <p class="tag-name truncate" ng-bind="tag_type.name"></p>
+                <md-checkbox 
+                    class="md-secondary"
+                    ng-click="$ctrl.toggle(tag_type.id, $ctrl.selected)" 
+                    ng-model="$ctrl.formData.tag_types[tag_type.id]" 
+                    aria-label="select tag"
+                    ng-true-value="true"
+                    ng-false-value=""></md-checkbox>
+            </md-list-item>
+        </div>
+        
+    </md-list>
+    
+</form>
+    

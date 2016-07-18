@@ -1,9 +1,14 @@
 <md-toolbar 
     md-colors="{background: 'default-primary-300'}"
-    layout="column">
+    layout="column"
+    class="md-whiteframe-5dp">
+    <md-icon class="material-icons">
+        build
+    </md-icon>
     <md-button
         ng-click="$ctrl.manageTags()"
-        class="md-icon-button">
+        class="md-icon-button"
+        ng-class="{'md-accent': $ctrl.currentTab(0)}">
         <md-icon class="material-icons">
             label
         </md-icon>
@@ -13,7 +18,8 @@
     </md-button>
     <md-button
         ng-click="$ctrl.manageGroups()"
-        class="md-icon-button">
+        class="md-icon-button"
+        ng-class="{'md-accent': $ctrl.currentTab(1)}">
         <md-icon class="material-icons">
             folder
         </md-icon>
@@ -23,7 +29,8 @@
     </md-button>
     <md-button
         ng-click="$ctrl.manageProjects()"
-        class="md-icon-button">
+        class="md-icon-button"
+        ng-class="{'md-accent': $ctrl.currentTab(2)}">
         <md-icon class="material-icons">
             description
         </md-icon>

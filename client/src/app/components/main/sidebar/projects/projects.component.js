@@ -1,6 +1,6 @@
 module.component('projects', {
     
-    templateUrl: 'app/components/main/manage/projects/projects.template.html',
+    templateUrl: 'app/components/main/sidebar/projects/projects.template.html',
     controller: function($mdDialog, $projects) {
        var self = this;
        self.$onInit = function(){

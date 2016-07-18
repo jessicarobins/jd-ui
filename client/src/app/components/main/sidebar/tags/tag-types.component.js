@@ -1,25 +1,26 @@
-module.component('groups', {
+module.component('tagTypes', {
     
-    templateUrl: 'app/components/main/manage/groups/groups.template.html',
+    templateUrl: 'app/components/main/sidebar/tags/tag-types.template.html',
     controller: function($mdDialog, $tagtypes) {
        var self = this;
        self.$onInit = function(){
-            $tagtypes.groups().then( function(response){
-               self.groups = response;
+            
+            $tagtypes.getTagTypes().then ( function(){
+                self.tagTypes = $tagtypes.tagTypes.byGroup;
             });
             
             $tagtypes.addCallback( function(){
-                self.groups = $tagtypes.tagGroups;
+                self.tagTypes = $tagtypes.tagTypes.byGroup;
             });
        };
        
-        self.edit = function(group, ev) {
+        self.edit = function(tagType, ev) {
             
         };
         
         self.add = function(ev) {
             $mdDialog.show({
-                template: '<tag-groups-modal></tag-groups-modal>',
+                template: '<tag-types-modal></tag-types-modal>',
                 targetEvent: ev,
                 clickOutsideToClose:true,
             })
@@ -28,7 +29,7 @@ module.component('groups', {
             });
         };
         
-        self.delete = function(group, ev) {
+        self.delete = function(tagType, ev) {
             
         };
     }

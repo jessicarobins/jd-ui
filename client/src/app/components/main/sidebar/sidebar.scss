@@ -1,0 +1,54 @@
+sidebar {
+    overflow: hidden;;
+}
+
+sidebar:hover { 
+    overflow-y: auto;
+}
+
+sidebar {
+    
+    md-tabs-wrapper {
+        display: none;
+    }
+    
+    md-tabs-content-wrapper {
+        top: 0px;
+    }
+    
+    .material-icons {
+        font-size: 20px;
+    }
+
+    .very-dense {
+        margin: 0px;
+        height: 30px;
+    }
+    
+    md-list.md-dense md-list-item, md-list.md-dense md-list-item ._md-list-item-inner {
+        min-height: 0px;
+    }
+    
+    .tag-icon {
+        margin-right: 20px;
+    }
+    
+    .ticket {
+        color: midnightblue;
+    }
+    
+    .tag-group-name {
+        padding-top: 10px;
+        max-width: 275px !important;
+        text-align: right;
+    }
+    
+    .tag-name {
+        max-width: 165px !important;
+    }
+    
+    .project-select {
+        width: 100%;
+    }
+
+}
