@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$projects', function($api, $q, $user) {
+module.service('$projects', function($api, $q, $user, $location) {
     var self = this;
     
     var callbacks = [];
@@ -17,15 +17,40 @@ module.service('$projects', function($api, $q, $user) {
           method: 'GET'
         }).then(function(response) {
             self.projects = response;
-            self.currentProject = self.projects[0];
-            return self.projects;
+            // self.currentProject = self.projects[0];
+            initProject().then( function(response){
+                self.currentProject = response;
+                return self.projects;
+            });
         });
         return promise;
     };
     
     self.project = function(){
         return self.currentProject;
+        // if(self.currentProject){
+        //     return self.currentProject;
+        // }
+        // initProject().then( function(response){
+        //     return response;
+        // });
+        
     };
+    
+    self.setCurrentProject = function(project){
+        self.currentProject = project;  
+    };
+    
+    function initProject() {
+        if($location.search().project_id){
+            self.currentProject = $location.search().project_id;
+        }
+        else {
+            self.currentProject = self.projects[0];
+        }
+        
+        return $q.when(self.currentProject);
+    }
     
     self.addProject = function(projectName) {
         $api.request({

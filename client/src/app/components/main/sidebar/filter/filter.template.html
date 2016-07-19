@@ -5,9 +5,9 @@
         <md-list-item>
             <md-select 
                 ng-cloak
-                ng-if="$ctrl.projects.length"
+                ng-if="$ctrl.formData.project"
                 class="project-select"
-                ng-change="$ctrl.changeProject()" 
+                ng-change="$ctrl.changeProject(project)" 
                 ng-model="$ctrl.formData.project"
                 aria-label="projects">
                 <md-option ng-repeat="project in $ctrl.projects" value={{project.id}}>

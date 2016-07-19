@@ -1,6 +1,15 @@
 <jd-modal>
     <jd-modal-title>add top-level specs</jd-modal-title>
-    <jd-modal-body layout="column">
+    <jd-modal-body layout="column" layout-padding>
+        <md-select 
+            ng-cloak
+            class="project-select"
+            ng-model="$ctrl.formData.project"
+            aria-label="projects">
+            <md-option ng-repeat="project in $ctrl.projects" value={{project.id}}>
+                {{project.name}}
+            </md-option>
+        </md-select>
         <md-button 
           class="md-icon-button" 
           aria-label="indent"

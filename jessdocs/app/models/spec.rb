@@ -40,6 +40,8 @@ class Spec < ActiveRecord::Base
     def self.filter(filter_params)
         if filter_params[:id]
             specs = Spec.find(filter_params[:id]).subtree
+        elsif filter_params[:project_id]
+            specs = Spec.for_project(filter_params[:project_id])
         else
             specs = Spec.all
         end

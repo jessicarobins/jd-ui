@@ -5,13 +5,23 @@ module.component('addSpecsModal', {
         var self = this;
         self.text = '';
         
+        self.projects;
+        self.formData = {};
+        
+        self.$onInit = function() {
+            $projects.getProjects().then( function(response) {
+                self.projects = response;
+                self.formData.project = $projects.project().id;
+            });
+        };
+        
         self.add = function() {
             $api.request({
                 url: '/specs/create_many',
                 method: 'POST',
                 data: {
                     text: self.text,
-                    project_id: $projects.project().id,
+                    project_id: self.formData.project,
                     created_by_id: $user.user().id
                 }
             }).then( function(response){

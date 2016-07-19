@@ -12,7 +12,8 @@ module.component('main', {
            
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
-                tags: $api.request({url: '/tags'})
+                tags: $api.request({url: '/tags'}),
+                projects: $projects.getProjects()
             };
             
             $q.all(promises).then( function(response) {
@@ -22,8 +23,6 @@ module.component('main', {
                 $specs.setSpecList();
                 
             });
-            
-            $projects.getProjects();
        };
        
        

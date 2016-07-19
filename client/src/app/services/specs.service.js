@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$specs', function($api, $q, $user) {
+module.service('$specs', function($api, $q, $user, $projects) {
     var self = this;
     var callbacks = [];
     var bookmarkCallbacks = [];
@@ -14,10 +14,11 @@ module.service('$specs', function($api, $q, $user) {
     };
     
     self.setSpecList = function(filterParams) {
+        var params = filterParams || getFilterParams();
         var promise = $api.request({
             url: '/specs/filter', 
             method: "GET",
-            params: filterParams
+            params: params
         }).
         then(function (response) {
             self.specs = response;
@@ -57,6 +58,14 @@ module.service('$specs', function($api, $q, $user) {
         });
         return promise;
     };
+    
+    function getFilterParams() {
+        var params = {
+            project_id: $projects.project().id
+        };
+        
+        return params;
+    }
     
     function updateBookmarks() {
         bookmarkCallbacks.forEach(function(callback) {

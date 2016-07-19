@@ -2,6 +2,7 @@ module.
   component('filter', {
     templateUrl: 'app/components/main/sidebar/filter/filter.template.html',
     controller: function (
+      $filter,
       $projects, 
       $specs, 
       $tagtypes) {
@@ -16,9 +17,11 @@ module.
         
         $projects.getProjects().then( function(response) {
             self.projects = response;
-            if(self.projects.length){
-                self.formData.project = self.projects[0].id;
-            }
+            // if(self.projects.length){
+            //     self.formData.project = self.projects[0].id;
+                
+            // }
+            self.formData.project = $projects.project().id;
         });
         
         $projects.addCallback( function(){
@@ -53,8 +56,9 @@ module.
       };
       
       self.changeProject = function() {
-        $projects.currentProject = self.formData.project;
-        console.log('current project = ', $projects.currentProject);
+        var project = $filter('getById')(self.projects, self.formData.project);
+        $projects.setCurrentProject(project);
+        console.log('current project = ', $projects.project());
         self.submit();
       };
         
