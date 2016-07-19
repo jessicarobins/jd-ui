@@ -1,4 +1,4 @@
-module.service('BreadcrumbsService', function($api) {
+module.service('BreadcrumbsService', function($api, $specs) {
     var self = this;
     var callbacks = [];
     
@@ -14,6 +14,9 @@ module.service('BreadcrumbsService', function($api) {
         then(function (response) {
             self.breadcrumbs = response;
             updateAll();
+            var params = {id: id};
+            $specs.setSpecList(params);
+            
             return self.breadcrumbs;
         });
         return promise;

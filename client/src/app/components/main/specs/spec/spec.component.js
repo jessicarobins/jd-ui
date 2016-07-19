@@ -92,9 +92,6 @@ module.component('spec', {
         
         self.setBreadCrumbs = function() {
             BreadcrumbsService.setBreadcrumbs(self.spec.id);
-            var params = {id: self.spec.id};
-            
-            $specs.setSpecList(params);
         };
         
         self.bookmark = function(){

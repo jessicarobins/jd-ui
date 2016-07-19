@@ -27,9 +27,9 @@
           </a>
           <md-menu-content>
             <md-menu-item>
-              <md-button ng-click="$ctrl.setBreadCrumbs()">
-                <md-icon class='material-icons'>fullscreen</md-icon>
-                expand
+              <md-button ng-click="$ctrl.toggleAddChildren($ctrl.spec)">
+                <md-icon class='material-icons'>add</md-icon>
+                add children
               </md-button>
             </md-menu-item>
             <md-menu-item>
@@ -39,9 +39,9 @@
               </md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="$ctrl.toggleAddChildren($ctrl.spec)">
-                <md-icon class='material-icons'>add</md-icon>
-                add children
+              <md-button ng-click="$ctrl.setBreadCrumbs()">
+                <md-icon class='material-icons'>fullscreen</md-icon>
+                expand
               </md-button>
             </md-menu-item>
             <md-menu-item>

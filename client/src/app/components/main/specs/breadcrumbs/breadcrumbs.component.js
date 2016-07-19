@@ -14,9 +14,6 @@ module.component('breadcrumbs', {
         
         self.setBreadcrumbs = function(spec){
             BreadcrumbsService.setBreadcrumbs(spec.id);
-            var params = {spec_id: spec.id};
-            
-            $specs.setSpecList(params);
         };
         
         self.clearBreadcrumbs = function() {
