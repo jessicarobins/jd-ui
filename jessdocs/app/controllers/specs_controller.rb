@@ -12,7 +12,10 @@ class SpecsController < ApplicationController
   
   def filter
     @specs = Spec.filter(params)
-    render json: @specs.arrange_serializable
+    @bookmarks = @specs.where(:bookmarked => true)
+    render json: {
+      specs: @specs.arrange_serializable, 
+      bookmarks: @bookmarks }
   end
 
   # GET /specs/1
@@ -22,7 +25,7 @@ class SpecsController < ApplicationController
   end
   
   def bookmarks
-    @specs = Spec.where(:bookmarked => true)
+    @specs = Spec.filter(params).where(:bookmarked => true)
     render json: @specs
   end
   

@@ -28,13 +28,6 @@ module.service('$projects', function($api, $q, $user, $location) {
     
     self.project = function(){
         return self.currentProject;
-        // if(self.currentProject){
-        //     return self.currentProject;
-        // }
-        // initProject().then( function(response){
-        //     return response;
-        // });
-        
     };
     
     self.setCurrentProject = function(project){

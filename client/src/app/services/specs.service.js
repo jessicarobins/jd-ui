@@ -21,8 +21,8 @@ module.service('$specs', function($api, $q, $user, $projects) {
             params: params
         }).
         then(function (response) {
-            self.specs = response;
-            // self.bookmarks = response.data.bookmarks;
+            self.specs = response.specs;
+            self.bookmarks = response.bookmarks;
             updateAll();
             return self.specs;
         });
@@ -50,7 +50,8 @@ module.service('$specs', function($api, $q, $user, $projects) {
     self.getBookmarks = function(){
         var promise = $api.request({
             url: '/specs/bookmarks', 
-            method: "GET"
+            method: "GET",
+            params: getFilterParams()
         }).
         then(function (response) {
             self.bookmarks = response;
@@ -67,13 +68,18 @@ module.service('$specs', function($api, $q, $user, $projects) {
         return params;
     }
     
+    function updateAll(){
+        updateBookmarks();
+        updateSpecs();
+    }
+    
     function updateBookmarks() {
         bookmarkCallbacks.forEach(function(callback) {
             callback();
         });
     }
     
-    function updateAll() {
+    function updateSpecs() {
         callbacks.forEach(function(callback) {
             callback();
         });
