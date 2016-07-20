@@ -12,7 +12,7 @@ module.component('spec', {
     controller: function(
         $scope, 
         $http,
-        $anchorScroll,
+        $mdDialog,
         $location,
         $tagtypes, 
         BreadcrumbsService, 
@@ -44,12 +44,13 @@ module.component('spec', {
         
         };
         
-        self.toggleAddChildren = function(spec) {
-            spec.addChildren = true;
-            spec.showEditButtons = false;
-            
-            $location.hash('addChildren');
-            $anchorScroll();
+        self.addChildren = function(ev) {
+            $specs.addManyParent = self.spec;
+            $mdDialog.show({
+              template: '<add-specs-modal></add-specs-modal>',
+              targetEvent: ev,
+              clickOutsideToClose: false
+            });
         };
         
         self.toggleExport = function() {

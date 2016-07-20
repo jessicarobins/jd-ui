@@ -3,17 +3,19 @@
     <md-list class="md-dense">
         
         <md-list-item>
-            <md-select 
-                ng-cloak
-                ng-if="$ctrl.formData.project"
-                class="project-select"
-                ng-change="$ctrl.changeProject(project)" 
-                ng-model="$ctrl.formData.project"
-                aria-label="projects">
-                <md-option ng-repeat="project in $ctrl.projects" value={{project.id}}>
-                    {{project.name}}
-                </md-option>
-            </md-select>
+            <md-input-container
+                class="md-block project-select" ng-cloak>
+                <label>Project</label>
+                <md-select 
+                    ng-if="$ctrl.formData.project"
+                    ng-change="$ctrl.changeProject(project)" 
+                    ng-model="$ctrl.formData.project"
+                    aria-label="projects">
+                    <md-option ng-repeat="project in $ctrl.projects" value={{project.id}}>
+                        {{project.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
         </md-list-item>
         
         <md-list-item

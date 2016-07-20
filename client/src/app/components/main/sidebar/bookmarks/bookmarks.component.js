@@ -4,9 +4,6 @@ module.component('bookmarks', {
     controller: function($specs, BreadcrumbsService) {
        var self = this;
        self.$onInit = function(){
-            $specs.getBookmarks().then( function(response){
-               self.bookmarks = response;
-            });
             
             $specs.addBookmarksCallback( function(){
                 self.bookmarks = $specs.bookmarks;

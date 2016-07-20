@@ -5,6 +5,7 @@ module.component('fab', {
          $location, 
          $mdDialog, 
          $http, 
+         $specs,
          $tagtypes,
          MenuService) {
              
@@ -59,26 +60,11 @@ module.component('fab', {
         };
         
         self.showAddSpecsModal = function(ev) {
+            $specs.addManyParent = null;
             $mdDialog.show({
               template: '<add-specs-modal></add-specs-modal>',
               targetEvent: ev,
               clickOutsideToClose: false
-            });
-        };
-        
-        self.showTagTypesModal = function(ev){
-            $mdDialog.show({
-              controller: 'TagTypesController',
-              templateUrl: 'tagtypes/tag-types.template.html',
-              targetEvent: ev,
-              clickOutsideToClose:true
-            }).then(function(refresh) {
-                console.log('notify = ', refresh)
-                if (refresh) {
-                    $tagtypes.update();
-                }
-            }, function() {
-                
             });
         };
         

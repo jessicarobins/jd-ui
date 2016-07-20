@@ -1,6 +1,6 @@
 module.component('addSpecsModal', {
      templateUrl: 'app/components/main/modals/add-specs/add-specs.template.html',
-     controller: function($mdDialog, $api, $projects, $specs, $user) {
+     controller: function($scope, $mdDialog, $api, $projects, $specs, $user) {
              
         var self = this;
         self.text = '';
@@ -9,6 +9,7 @@ module.component('addSpecsModal', {
         self.formData = {};
         
         self.$onInit = function() {
+            self.spec = $specs.addManyParent;
             $projects.getProjects().then( function(response) {
                 self.projects = response;
                 self.formData.project = $projects.project().id;

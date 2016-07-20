@@ -8,6 +8,14 @@ sidebar:hover {
 
 sidebar {
     
+    md-list-item {
+        padding: 0px !important;
+    }
+    
+    p.truncate {
+        max-height: 20px;
+    }
+    
     md-tabs-wrapper {
         display: none;
     }
@@ -43,12 +51,12 @@ sidebar {
         text-align: right;
     }
     
-    .tag-name {
-        max-width: 165px !important;
+    md-sidenav {
+        width: 400px;
     }
     
-    .project-select {
-        width: 100%;
+    sidebar-menu {
+        width: 70px;
     }
 
 }

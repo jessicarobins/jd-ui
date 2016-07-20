@@ -5,6 +5,8 @@ module.service('$specs', function($api, $q, $user, $projects) {
     var callbacks = [];
     var bookmarkCallbacks = [];
     
+    self.addManyParent;
+    
     self.addCallback = function(callback) {
         callbacks.push(callback);
     };
