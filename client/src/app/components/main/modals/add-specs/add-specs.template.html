@@ -1,5 +1,5 @@
-<jd-modal>
-    <jd-modal-title>add top-level specs</jd-modal-title>
+<jd-modal layout="column">
+    <jd-modal-title>add specs</jd-modal-title>
     <jd-modal-body layout="column" layout-padding>
         <md-input-container
             ng-if="!$ctrl.spec"
@@ -15,9 +15,12 @@
                 </md-option>
             </md-select>
         </md-input-container>
-        <p 
-            ng-if="$ctrl.spec"
-            ng-bind="$ctrl.spec.description"></p>
+        <md-input-container 
+            class="md-block"
+             ng-if="$ctrl.spec">
+            <label>Parent</label>
+            <input ng-model="$ctrl.spec.description" disabled>
+        </md-input-container>
         <md-button 
           class="md-icon-button" 
           aria-label="indent"

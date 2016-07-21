@@ -17,11 +17,13 @@ module.component('addSpecsModal', {
         };
         
         self.add = function() {
+            var parentId = self.spec ? self.spec.id : null;
             $api.request({
                 url: '/specs/create_many',
                 method: 'POST',
                 data: {
                     text: self.text,
+                    parent_id: parentId,
                     project_id: self.formData.project,
                     created_by_id: $user.user().id
                 }

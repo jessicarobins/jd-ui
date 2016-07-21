@@ -62,7 +62,7 @@ module.component('fab', {
         self.showAddSpecsModal = function(ev) {
             $specs.addManyParent = null;
             $mdDialog.show({
-              template: '<add-specs-modal></add-specs-modal>',
+              template: '<add-specs-modal layout="column"></add-specs-modal>',
               targetEvent: ev,
               clickOutsideToClose: false
             });
