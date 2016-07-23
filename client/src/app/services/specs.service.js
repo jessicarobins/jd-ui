@@ -88,6 +88,20 @@ module.service('$specs', function($api, $q, $user, $projects) {
         return promise;
     };
     
+    self.editDescription = function(spec){
+        return $api.request({
+            url: '/specs/' + spec.id, 
+            method: "PUT",
+            data: {
+                spec: {
+                    description: spec.description
+                }}
+        }).
+        then(function (response) {
+            return response;
+        });
+    };
+    
     function getFilterParams() {
         var params = {
             project_id: $projects.project().id

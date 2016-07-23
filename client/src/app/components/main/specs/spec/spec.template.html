@@ -43,6 +43,7 @@
             <input
               aria-label="edit spec description"
               ng-model="$ctrl.editingCopy.description"
+              ng-keypress="$ctrl.enter($event)"
               required>
           </md-input-container>
           <md-button 

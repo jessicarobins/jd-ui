@@ -37,6 +37,20 @@ module.component('spec', {
             self.spec.editing = false; 
         };
         
+        self.save = function(){
+            self.spec.editing = false;
+            if(!angular.equals(self.editingCopy.description, self.spec.description)){
+                self.spec.description = self.editingCopy.description;
+                $specs.editDescription(self.spec);
+            }
+        };
+        
+        self.enter = function(ev){
+            if (ev.which === 13){
+                self.save();
+            }
+        };
+        
         self.toggleEditButtons = function(spec) {
             spec.userMouseover=false;
             //previously edited spec
