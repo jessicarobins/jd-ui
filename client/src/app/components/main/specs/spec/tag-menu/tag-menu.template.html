@@ -25,9 +25,9 @@
       <md-menu-item
         ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
         <md-button
+          layout="row"
           md-prevent-menu-close="md-prevent-menu-close">
-          <div class="tag" layout="row">
-            <span class="truncate">{{tagType.name}}</span>
+            <tag tag="tagType"></tag>
             <span flex></span>
             <md-checkbox 
               md-prevent-menu-close="md-prevent-menu-close"
@@ -37,7 +37,6 @@
               ng-true-value="true"
               ng-false-value="">
             </md-checkbox>
-          </div>
         </md-button>
       </md-menu-item>
     </div>

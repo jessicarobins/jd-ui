@@ -1,5 +1,6 @@
-<div id="{{$ctrl.spec.id}}">
+<div id="{{$ctrl.spec.id}}" layout="column">
   <div 
+    layout="row"
     ng-if="!$ctrl.spec.showEditButtons"
     ng-mouseenter="$ctrl.spec.userMouseover=true"
     ng-mouseleave="$ctrl.spec.userMouseover=false"
@@ -13,7 +14,7 @@
         ng-change="$ctrl.toggleExport()">
     </md-checkbox>
     
-    <span
+    <div
       class="menu"
       ng-if="!$ctrl.parent.export"
       ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}">
@@ -64,24 +65,20 @@
         <tag-menu 
           spec="$ctrl.spec"
           tags="$ctrl.tag"></tag-menu>
-    </span>
-     <span ui-tree-handle>
+    </div>
+     <div
+      layout="row"
+      ui-tree-handle>
         {{::$ctrl.spec.description}}
         <tickets 
           tickets="$ctrl.ticket" 
           spec="$ctrl.spec"
           class="read-only-tags"></tickets>
         <tag
+          layout="row"
           ng-repeat="tag in $ctrl.tag"
-          tag="tag"></tag>
-    </span>
-  </div>
-  <div 
-    ng-if="$ctrl.spec.showEditButtons">
-      <edit-spec 
-        spec="$ctrl.spec"
-        tag="$ctrl.tag"
-        ticket="$ctrl.ticket"></edit-spec>      
+          tag="tag.tag_type"></tag>
+    </div>
   </div>
     
     <ol ui-tree-nodes="" ng-model="$ctrl.spec.children">
