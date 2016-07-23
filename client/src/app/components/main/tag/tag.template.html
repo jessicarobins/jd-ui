@@ -5,7 +5,7 @@
     <div class="name" ng-bind="$ctrl.tag.name"></div> 
     <a
         ng-click="$ctrl.removeTag()"
-        ng-if="$ctrl.editing">
-        <i class="close-button material-icons">close</i>
+        ng-if="$ctrl.spec && $ctrl.spec.editing">
+        <i class="close-button material-icons">cancel</i>
     </a>
 </div>

@@ -27,9 +27,19 @@
           tags="$ctrl.tag"></tag-menu>
     </div>
      <div
+      ng-dblClick="$ctrl.edit()"
       layout="row"
       ui-tree-handle>
-        {{::$ctrl.spec.description}}
+        <div
+          ng-if="!$ctrl.spec.editing"
+          ng-bind="::$ctrl.spec.description"></div>
+        <md-input-container 
+          ng-if="$ctrl.spec.editing"
+          class="edit-input md-block">
+          <input
+            ng-model="$ctrl.spec.description"
+            required>
+        </md-input-container>
         <tickets 
           tickets="$ctrl.ticket" 
           spec="$ctrl.spec"
@@ -37,6 +47,7 @@
         <tag
           layout="row"
           ng-repeat="tag in $ctrl.tag"
+          spec="$ctrl.spec"
           tag="tag.tag_type"></tag>
     </div>
   </div>

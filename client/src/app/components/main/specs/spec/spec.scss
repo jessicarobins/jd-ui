@@ -2,9 +2,22 @@ spec {
     .angular-ui-tree-handle {
         cursor: default;
         font-weight: normal;
+        
+        &:focus {
+            outline: none;
+        }
     }
     
     .menu {
         padding-right: 20px;
+    }
+    
+    .edit-input {
+        padding: 0px;
+        margin: 0px;
+        
+        .md-errors-spacer {
+            display: none;
+        }
     }
 }

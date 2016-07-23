@@ -1,7 +1,8 @@
 module.component('tag', {
     
     bindings: {
-        tag: '<'
+        tag: '<',
+        spec: '<?'
     },
     templateUrl: 'app/components/main/tag/tag.template.html',
     controller: function() {

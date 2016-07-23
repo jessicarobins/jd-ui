@@ -29,7 +29,7 @@ module.component('spec', {
        };
         
         self.edit = function(){
-            self.editing = true;
+            self.spec.editing = true;
             editingCopy = angular.copy(self.spec);
         }
         
