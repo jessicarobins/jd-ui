@@ -1,0 +1,42 @@
+<md-menu md-position-mode="target-right target">
+  <a 
+    aria-label="spec menu" 
+    class="md-icon-button btn-flat btn-square" 
+    ng-click="$ctrl.openSpecMenu($mdOpenMenu, $event)">
+    <md-icon md-menu-origin class="material-icons tiny-icon">more_vert</md-icon>
+  </a>
+  <md-menu-content>
+    <md-menu-item>
+      <md-button ng-click="$ctrl.addChildren($event)">
+        <md-icon class='material-icons'>add</md-icon>
+        add children
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="$ctrl.toggleEditButtons($ctrl.spec)">
+        <md-icon class='material-icons'>mode_edit</md-icon>
+        edit
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="$ctrl.setBreadCrumbs()">
+        <md-icon class='material-icons'>fullscreen</md-icon>
+        expand
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button 
+        ng-if="!$ctrl.spec.bookmarked"
+        ng-click="$ctrl.bookmark()">
+        <md-icon class='material-icons'>bookmark_border</md-icon>
+          bookmark
+      </md-button>
+      <md-button 
+        ng-if="$ctrl.spec.bookmarked"
+        ng-click="$ctrl.bookmark()">
+        <md-icon class='material-icons'>bookmark</md-icon>
+          unbookmark
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

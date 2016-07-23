@@ -12,23 +12,26 @@ module.component('spec', {
     controller: function(
         $scope, 
         $http,
-        $mdDialog,
         $location,
         $tagtypes, 
-        BreadcrumbsService, 
         $specs) {
             
        var self = this;
+       
+       //editing
+       var editingCopy;
+       self.editing = false;
        
        $scope.$callbacks = self.uiTreeCallbacks;
        
        self.$onInit = function(){
             self.tag = self.tag || [];  
        };
-       
-        self.openSpecMenu = function($mdOpenMenu, ev) {
-            $mdOpenMenu(ev);
-        };
+        
+        self.edit = function(){
+            self.editing = true;
+            editingCopy = angular.copy(self.spec);
+        }
         
         self.toggleEditButtons = function(spec) {
             spec.userMouseover=false;
@@ -46,15 +49,6 @@ module.component('spec', {
                 self.parent.setEditingSpec(null);
             }
         
-        };
-        
-        self.addChildren = function(ev) {
-            $specs.addManyParent = self.spec;
-            $mdDialog.show({
-              template: '<add-specs-modal layout="column"></add-specs-modal>',
-              targetEvent: ev,
-              clickOutsideToClose: false
-            });
         };
         
         self.toggleExport = function() {
@@ -88,21 +82,6 @@ module.component('spec', {
                 });
             }
         }
-        
-        self.getAvailableTagTypes = function(spec){
-            $tagtypes.getTagTypes().then( function(response){
-              spec.tagtypes = response.data;  
-            });
-        };
-        
-        self.setBreadCrumbs = function() {
-            BreadcrumbsService.setBreadcrumbs(self.spec.id);
-        };
-        
-        self.bookmark = function(){
-            self.spec.bookmarked = !self.spec.bookmarked;
-            $specs.bookmark(self.spec);
-        };
         
     }
 });

@@ -14,7 +14,7 @@ module.component('specs', {
         var self = this;
         
         var editingSpec;
-        var editingCopy;
+        // var editingCopy;
         self.exportSpecs = [];
         self.addChildren = false;
         self.export = false;
@@ -51,7 +51,7 @@ module.component('specs', {
         
         self.setEditingSpec = function(spec){
             editingSpec = spec;
-            editingCopy = angular.copy(spec);
+            
         };
         
         self.getEditingSpec = function(){

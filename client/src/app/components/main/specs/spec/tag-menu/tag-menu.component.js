@@ -5,9 +5,12 @@ module.component('tagMenu', {
         tags: '<'
     },
     templateUrl: 'app/components/main/specs/spec/tag-menu/tag-menu.template.html',
-    controller: function($specs, $tagtypes) {
-            
-       var self = this;
+    controller: function(
+        $filter,
+        $specs, 
+        $tagtypes) {
+        
+        var self = this;
        self.formData = {};
        self.formData.tagTypes = [];
   
@@ -29,6 +32,22 @@ module.component('tagMenu', {
             }
         };
         
+        self.hasTag = function(tagTypeId){
+            var i=0, len=self.tags.length;
+            for (; i<len; i++) {
+                if (+self.tags[i].tag_type.id == +tagTypeId) {
+                  return self.tags[i];
+                }
+            }
+            return null;  
+        };
+        
+        self.showGroupName = function(group){
+            var name = group.name; 
+            var any = $filter('filter')(group.tag_types, self.search);
+            return name && any.length;
+        };
+        
         function addTag(tagTypeId){
             $specs.addTag(self.spec, tagTypeId).then(function (tag){
                self.tags.push(tag); 
@@ -44,20 +63,11 @@ module.component('tagMenu', {
             }); 
         }
         
-        self.hasTag = function(tagTypeId){
-            var i=0, len=self.tags.length;
-            for (; i<len; i++) {
-                if (+self.tags[i].tag_type.id == +tagTypeId) {
-                  return self.tags[i];
-                }
-            }
-            return null;  
-        };
-        
         function formatTagData(){
             self.tags.forEach( function(tag){
                 self.formData.tagTypes[tag.tag_type_id] = true;
             });
-        }
+        }   
+       
     }
 });

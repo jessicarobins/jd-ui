@@ -19,7 +19,7 @@
     <div ng-repeat="group in $ctrl.tagTypesByGroup">
       <md-subheader
         class="tag-group"
-        ng-if="group.name"
+        ng-if="$ctrl.showGroupName(group)"
         ng-bind="group.name">
       </md-subheader>
       <md-menu-item
