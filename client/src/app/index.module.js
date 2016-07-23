@@ -12,6 +12,7 @@ angular.module('jessdocs', [
   'ngResource', 
   'angular-click-outside',
   'focus-if',
+  'puElasticInput',
   'ui.router', 
   'ui.tree',
   'ngMaterial',

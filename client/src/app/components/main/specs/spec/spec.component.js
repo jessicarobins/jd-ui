@@ -25,6 +25,7 @@ module.component('spec', {
        
        self.$onInit = function(){
             self.tag = self.tag || [];  
+            self.ticket = self.ticket || [];
        };
         
         self.edit = function(){

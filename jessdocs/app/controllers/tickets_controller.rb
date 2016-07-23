@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
   def index
     @tickets = Ticket.all
 
-    render json: @tickets
+    render json: @tickets.group_by(&:spec_id).to_json(:methods => :url)
   end
 
   # GET /tickets/1
@@ -18,7 +18,8 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    @ticket = Ticket.new(ticket_params)
+    
+    @ticket = Ticket.new(create_params)
 
     if @ticket.save
       render json: @ticket, status: :created, location: @ticket
@@ -55,5 +56,9 @@ class TicketsController < ApplicationController
 
     def ticket_params
       params[:ticket]
+    end
+    
+    def create_params
+      params.require(:ticket).permit(:name, :spec_id)
     end
 end

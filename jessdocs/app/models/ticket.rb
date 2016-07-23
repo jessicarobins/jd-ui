@@ -14,15 +14,6 @@ class Ticket < ActiveRecord::Base
         tracker_url = "https://www.pivotaltracker.com/story/show/"
         tracker_url + self.tracker_id
     end
-    
-    def to_hash
-    {
-        :id => self.id,
-        :tracker_id => self.tracker_id,
-        :url => self.url,
-        :name => self.name
-    }
-    end
 
     def self.get_url(str_id)
         "https://www.pivotaltracker.com/story/show/" + str_id

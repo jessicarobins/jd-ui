@@ -85,14 +85,20 @@ module.component('specs', {
        };
        
        self.getTickets = function(spec){
-           if(self.tickets){
-            return self.tickets[spec.id];
+           if(self.parent.tickets){
+            return self.parent.tickets[spec.id];
+           }
+           else {
+               return [];
            }
        };
        
        self.getTags = function(spec){
            if(self.parent.tags) {
             return self.parent.tags[spec.id];
+           }
+           else {
+               return [];
            }
        };
        

@@ -1,6 +1,18 @@
 <div 
     class="tag"
     layout="row"
+    ng-style="{'background-color': $ctrl.tag.color ? '$ctrl.tag.color':'midnightblue'}"
     style="background-color: {{$ctrl.tag.color}}">
-    <div class="name" ng-bind="$ctrl.tag.name"></div> 
+    <a 
+        class="name"
+        style="text-decoration: none; color: white"
+        ng-bind="$ctrl.tag.name"
+        ng-if="$ctrl.tag.url"
+        ng-href="{{$ctrl.tag.url}}"
+        target="_blank">
+    </a>
+    <div 
+        ng-if="!$ctrl.tag.url"
+        class="name" 
+        ng-bind="$ctrl.tag.name"></div> 
 </div>

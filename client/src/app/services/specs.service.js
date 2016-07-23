@@ -88,6 +88,32 @@ module.service('$specs', function($api, $q, $user, $projects) {
         return promise;
     };
     
+    self.addTicket = function(spec, name){
+        var promise = $api.request({
+            url: '/tickets',
+            method: 'POST',
+            data: {
+                ticket: {
+                    spec_id: spec.id,
+                    name: name
+                }
+            }
+        }).then(function (response){
+            return response;
+        });
+        return promise;
+    };
+    
+    self.removeTicket = function(ticket){
+        var promise = $api.request({
+            url: '/tickets/' + ticket.id,
+            method: 'DELETE'
+        }).then(function (response){
+            return response;
+        });
+        return promise;
+    };
+    
     self.editDescription = function(spec){
         return $api.request({
             url: '/specs/' + spec.id, 
@@ -99,6 +125,19 @@ module.service('$specs', function($api, $q, $user, $projects) {
         }).
         then(function (response) {
             return response;
+        });
+    };
+    
+    self.delete = function(spec){
+        return $api.request({
+            url: '/specs/' + spec.id, 
+            method: "DELETE"
+        }).
+        then(function (response) {
+            self.setSpecList().then(function(){
+                updateAll();
+                return response;
+            });
         });
     };
     

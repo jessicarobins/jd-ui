@@ -16,6 +16,7 @@
     
     <div
       class="menu"
+      flex='none'
       ng-if="!$ctrl.parent.export"
       ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}">
         
@@ -27,6 +28,7 @@
           tags="$ctrl.tag"></tag-menu>
     </div>
      <div
+      layout-wrap
       id="edit_{{$ctrl.spec.id}}"
       click-outside="$ctrl.clickOutside()"
       ng-dblClick="$ctrl.edit()"
@@ -40,15 +42,15 @@
         <div 
           layout="row"
           ng-if="$ctrl.spec.editing">
-          <md-input-container 
-            class="edit-input md-block">
-            <input
-              focus-if="$ctrl.spec.editing"
-              aria-label="edit spec description"
-              ng-model="$ctrl.editingCopy.description"
-              ng-keypress="$ctrl.enter($event)"
-              required>
-          </md-input-container>
+          <input
+            type="text"
+            pu-elastic-input
+            pu-elastic-input-maxwidth="none"
+            focus-if="$ctrl.spec.editing"
+            aria-label="edit spec description"
+            ng-model="$ctrl.editingCopy.description"
+            ng-keypress="$ctrl.enter($event)"
+            required />
           <md-button 
             ng-click="$ctrl.undoEdit()"
             class="md-icon-button">
@@ -57,10 +59,10 @@
             </md-icon>
           </md-button>
         </div>
-        <tickets 
-          tickets="$ctrl.ticket" 
-          spec="$ctrl.spec"
-          class="read-only-tags"></tickets>
+        <tag 
+          layout="row"
+          ng-repeat="ticket in $ctrl.ticket"
+          tag="ticket"></tag>
         <tag
           layout="row"
           ng-repeat="tag in $ctrl.tag"

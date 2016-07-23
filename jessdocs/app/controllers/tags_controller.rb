@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   def index
     @tags = Tag.all
 
-    render json:  Tag.all.includes(:tag_type).group_by(&:spec_id).to_json(:include => :tag_type)
+    render json:  @tags.includes(:tag_type).group_by(&:spec_id).to_json(:include => :tag_type)
   end
 
   # GET /tags/1
