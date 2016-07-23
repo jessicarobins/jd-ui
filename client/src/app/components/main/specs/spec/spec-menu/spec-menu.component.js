@@ -46,7 +46,7 @@ module.component('specMenu', {
                 .cancel('cancel');
             $mdDialog.show(confirm).then(function(result) {
                 $specs.addTicket(self.spec, result).then(function(ticket){
-                    self.parent.ticket.push(ticket);
+                    self.parent.tags.unshift(ticket);
                 });
             }, function() {
             });

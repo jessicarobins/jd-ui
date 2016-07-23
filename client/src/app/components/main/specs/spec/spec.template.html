@@ -25,7 +25,7 @@
        
         <tag-menu 
           spec="$ctrl.spec"
-          tags="$ctrl.tag"></tag-menu>
+          tags="$ctrl.tags"></tag-menu>
     </div>
      <div
       layout-wrap
@@ -45,7 +45,7 @@
           <input
             type="text"
             pu-elastic-input
-            pu-elastic-input-maxwidth="none"
+            pu-elastic-input-maxwidth="1300px"
             focus-if="$ctrl.spec.editing"
             aria-label="edit spec description"
             ng-model="$ctrl.editingCopy.description"
@@ -59,14 +59,11 @@
             </md-icon>
           </md-button>
         </div>
-        <tag 
-          layout="row"
-          ng-repeat="ticket in $ctrl.ticket"
-          tag="ticket"></tag>
         <tag
           layout="row"
-          ng-repeat="tag in $ctrl.tag"
-          tag="tag.tag_type"></tag>
+          ng-repeat="tag in $ctrl.tags"
+          spec="$ctrl.spec"
+          tag="$ctrl.getTagObject(tag)"></tag>
     </div>
   </div>
     

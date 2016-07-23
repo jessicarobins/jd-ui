@@ -13,10 +13,6 @@ module.component('specs', {
         MenuService) {
         var self = this;
         
-        var editingSpec;
-        // var editingCopy;
-        self.exportSpecs = [];
-        self.addChildren = false;
         self.export = false;
         
         self.toggleExport = function(spec){
@@ -48,18 +44,6 @@ module.component('specs', {
             });
             
         }
-        
-        self.setEditingSpec = function(spec){
-            editingSpec = spec;
-            
-        };
-        
-        self.getEditingSpec = function(){
-            return {
-                spec: editingSpec,
-                copy: editingCopy
-            };
-        };
         
        self.$onInit = function(){
            
@@ -101,16 +85,6 @@ module.component('specs', {
                return [];
            }
        };
-       
-       self.cancelAdd = function(spec) {
-           if(spec){
-               spec.addChildren = false;
-           }
-           else {
-               self.addChildren = false;
-           }
-              
-        };
     
      }
 });

@@ -1,5 +1,7 @@
 module.component('tagMenu', {
-    
+    require: {
+        parent: '^^spec'
+    },
     bindings: {
         spec: '<',
         tags: '<'
@@ -33,13 +35,7 @@ module.component('tagMenu', {
         };
         
         self.hasTag = function(tagTypeId){
-            var i=0, len=self.tags.length;
-            for (; i<len; i++) {
-                if (+self.tags[i].tag_type.id == +tagTypeId) {
-                  return self.tags[i];
-                }
-            }
-            return null;  
+            return self.parent.hasTag(tagTypeId);
         };
         
         self.showGroupName = function(group){
@@ -56,16 +52,15 @@ module.component('tagMenu', {
         }
         
         function removeTag(tag){
-            $specs.removeTag(tag).then(function (){
-                var idx = self.tags.indexOf(tag);
-                self.tags.splice(idx, 1);
-                self.formData.tagTypes[tag.tag_type.id] = false;
-            }); 
+            self.parent.removeTag(tag);
+            self.formData.tagTypes[tag.tag_type.id] = false;
         }
         
         function formatTagData(){
             self.tags.forEach( function(tag){
-                self.formData.tagTypes[tag.tag_type_id] = true;
+                if(tag.tag_type_id){
+                    self.formData.tagTypes[tag.tag_type_id] = true;
+                }
             });
         }   
        
