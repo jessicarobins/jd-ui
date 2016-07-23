@@ -1,5 +1,7 @@
 module.component('specMenu', {
-    
+    require: {
+        parent: '^^spec'
+    },
     bindings: {
         spec: '<'
     },

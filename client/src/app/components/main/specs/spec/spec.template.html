@@ -27,6 +27,8 @@
           tags="$ctrl.tag"></tag-menu>
     </div>
      <div
+      id="edit_{{$ctrl.spec.id}}"
+      click-outside="$ctrl.clickOutside()"
       ng-dblClick="$ctrl.edit()"
       layout="row"
       layout-align="start center"
@@ -41,6 +43,7 @@
           <md-input-container 
             class="edit-input md-block">
             <input
+              focus-if="$ctrl.spec.editing"
               aria-label="edit spec description"
               ng-model="$ctrl.editingCopy.description"
               ng-keypress="$ctrl.enter($event)"

@@ -10,6 +10,8 @@ angular.module('jessdocs', [
   'ngMessages', 
   'ngAria', 
   'ngResource', 
+  'angular-click-outside',
+  'focus-if',
   'ui.router', 
   'ui.tree',
   'ngMaterial',
