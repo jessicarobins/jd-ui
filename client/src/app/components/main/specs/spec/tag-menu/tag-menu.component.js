@@ -8,11 +8,7 @@ module.component('tagMenu', {
     controller: function($specs, $tagtypes) {
             
        var self = this;
-       
-       self.$onInit = function(){
-            console.log('tags', self.tags)    
-       };
-       
+  
        self.openTagMenu = function($mdOpenMenu, ev) {
             $tagtypes.getTagTypes().then( function(response){
                 self.tagTypesByGroup = response.byGroup;

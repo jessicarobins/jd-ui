@@ -1,4 +1,7 @@
 module.component('specs', {
+    require: {
+        parent: '^^main'
+    },
      templateUrl: 'app/components/main/specs/specs.template.html',
      controller: function(
         $anchorScroll,
@@ -88,8 +91,8 @@ module.component('specs', {
        };
        
        self.getTags = function(spec){
-           if(self.tags) {
-            return self.tags[spec.id];
+           if(self.parent.tags) {
+            return self.parent.tags[spec.id];
            }
        };
        

@@ -31,7 +31,7 @@
             <span flex></span>
             <md-checkbox 
               md-prevent-menu-close="md-prevent-menu-close"
-              ng-click="$ctrl.toggleTag(tagType.id)" 
+              ng-change="$ctrl.toggleTag(tagType.id)" 
               ng-model="$ctrl.tag_types[tagType.id]"
               aria-label="select tag"
               ng-true-value="true"

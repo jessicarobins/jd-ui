@@ -63,7 +63,7 @@
        
         <tag-menu 
           spec="$ctrl.spec"
-          tags="$ctrl.spec.tag"></tag-menu>
+          tags="$ctrl.tag"></tag-menu>
     </span>
      <span ui-tree-handle>
         {{::$ctrl.spec.description}}
@@ -71,10 +71,9 @@
           tickets="$ctrl.ticket" 
           spec="$ctrl.spec"
           class="read-only-tags"></tickets>
-        <tags 
-          class="read-only-tags"
-          tags="$ctrl.tag" 
-          spec="$ctrl.spec"></tags>
+        <tag
+          ng-repeat="tag in $ctrl.tag"
+          tag="tag"></tag>
     </span>
   </div>
   <div 

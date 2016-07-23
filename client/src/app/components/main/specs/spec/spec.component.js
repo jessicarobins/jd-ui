@@ -22,6 +22,10 @@ module.component('spec', {
        
        $scope.$callbacks = self.uiTreeCallbacks;
        
+       self.$onInit = function(){
+            self.tag = self.tag || [];  
+       };
+       
         self.openSpecMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };

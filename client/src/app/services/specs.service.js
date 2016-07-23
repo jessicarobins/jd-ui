@@ -63,7 +63,7 @@ module.service('$specs', function($api, $q, $user, $projects) {
     };
     
     self.addTag = function(spec, tagTypeId){
-        $api.request({
+        var promise = $api.request({
             url: '/tags',
             method: 'POST',
             data: {
@@ -75,6 +75,7 @@ module.service('$specs', function($api, $q, $user, $projects) {
         }).then(function (response){
             return response;
         });
+        return promise;
     };
     
     function getFilterParams() {

@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   def index
     @tags = Tag.all
 
-    render json: @tags
+    render json:  Tag.all.includes(:tag_type).group_by(&:spec_id).to_json(:include => :tag_type)
   end
 
   # GET /tags/1
@@ -21,7 +21,7 @@ class TagsController < ApplicationController
     @tag = Tag.new(create_params)
 
     if @tag.save
-      render json: @tag, status: :created, location: @tag
+      render json: @tag.to_json(:include => :tag_type), status: :created, location: @tag
     else
       render json: @tag.errors, status: :unprocessable_entity
     end
