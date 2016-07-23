@@ -25,7 +25,7 @@ module.component('spec', {
         self.openSpecMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
-       
+        
         self.toggleEditButtons = function(spec) {
             spec.userMouseover=false;
             //previously edited spec

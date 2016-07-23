@@ -60,7 +60,10 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        
+       
+        <tag-menu 
+          spec="$ctrl.spec"
+          tags="$ctrl.spec.tag"></tag-menu>
     </span>
      <span ui-tree-handle>
         {{::$ctrl.spec.description}}

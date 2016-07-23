@@ -18,7 +18,7 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    @tag = Tag.new(tag_params)
+    @tag = Tag.new(create_params)
 
     if @tag.save
       render json: @tag, status: :created, location: @tag
@@ -30,8 +30,6 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
-    @tag = Tag.find(params[:id])
-
     if @tag.update(tag_params)
       head :no_content
     else
@@ -55,5 +53,9 @@ class TagsController < ApplicationController
 
     def tag_params
       params[:tag]
+    end
+    
+    def create_params
+      params.require(:tag).permit(:tag_type_id, :spec_id)
     end
 end

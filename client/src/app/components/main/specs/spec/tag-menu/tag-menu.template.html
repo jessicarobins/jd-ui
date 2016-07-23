@@ -1,0 +1,45 @@
+<md-menu 
+  md-position-mode="target-right target">
+  <a 
+    aria-label="add tags" 
+    class="md-icon-button btn-flat btn-square" 
+    ng-click="$ctrl.openTagMenu($mdOpenMenu, $event)">
+    <md-icon md-menu-origin class="material-icons tiny-icon">label</md-icon>
+  </a>
+  <md-menu-content 
+    class="tag-menu"
+    width="2">
+    <md-menu-item>
+      <input 
+        ng-model="$ctrl.search"
+        type="search"
+        placeholder="Search.."
+        class="tag-search">
+    </md-menu-item>
+    <div ng-repeat="group in $ctrl.tagTypesByGroup">
+      <md-subheader
+        class="tag-group"
+        ng-if="group.name"
+        ng-bind="group.name">
+      </md-subheader>
+      <md-menu-item
+        ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
+        <md-button
+          md-prevent-menu-close="md-prevent-menu-close">
+          <div class="tag" layout="row">
+            <span class="truncate">{{tagType.name}}</span>
+            <span flex></span>
+            <md-checkbox 
+              md-prevent-menu-close="md-prevent-menu-close"
+              ng-click="$ctrl.toggleTag(tagType.id)" 
+              ng-model="$ctrl.tag_types[tagType.id]"
+              aria-label="select tag"
+              ng-true-value="true"
+              ng-false-value="">
+            </md-checkbox>
+          </div>
+        </md-button>
+      </md-menu-item>
+    </div>
+  </md-menu-content>
+</md-menu>
