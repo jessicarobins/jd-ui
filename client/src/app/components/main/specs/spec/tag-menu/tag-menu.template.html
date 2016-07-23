@@ -32,11 +32,10 @@
             <span flex></span>
             <md-checkbox 
               md-prevent-menu-close="md-prevent-menu-close"
-              ng-change="$ctrl.toggleTag(tagType.id)" 
               ng-model="$ctrl.formData.tagTypes[tagType.id]"
               aria-label="select tag"
               ng-true-value="true"
-              ng-false-value="">
+              ng-false-value="false">
             </md-checkbox>
         </md-button>
       </md-menu-item>

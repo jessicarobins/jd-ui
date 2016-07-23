@@ -40,6 +40,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
+    @tag.update!(:deleted_by_id => current_user.id)
     @tag.destroy
 
     head :no_content

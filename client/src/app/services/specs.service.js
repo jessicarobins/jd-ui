@@ -78,6 +78,16 @@ module.service('$specs', function($api, $q, $user, $projects) {
         return promise;
     };
     
+    self.removeTag = function(tag){
+        var promise = $api.request({
+            url: '/tags/' + tag.id,
+            method: 'DELETE'
+        }).then(function (response){
+            return response;
+        });
+        return promise;
+    };
+    
     function getFilterParams() {
         var params = {
             project_id: $projects.project().id

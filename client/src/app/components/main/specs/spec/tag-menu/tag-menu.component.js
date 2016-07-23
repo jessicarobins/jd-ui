@@ -20,8 +20,9 @@ module.component('tagMenu', {
         };
        
         self.toggleTag = function(tagTypeId){
-            if(self.hasTag(tagTypeId)){
-                
+            var tag;
+            if( (tag = self.hasTag(tagTypeId)) ){
+                removeTag(tag);
             }
             else {
                 addTag(tagTypeId);
@@ -31,14 +32,22 @@ module.component('tagMenu', {
         function addTag(tagTypeId){
             $specs.addTag(self.spec, tagTypeId).then(function (tag){
                self.tags.push(tag); 
+               self.formData.tagTypes[tagTypeId] = true;
             });
+        }
+        
+        function removeTag(tag){
+            $specs.removeTag(tag).then(function (){
+                var idx = self.tags.indexOf(tag);
+                self.tags.splice(idx, 1);
+                self.formData.tagTypes[tag.tag_type.id] = false;
+            }); 
         }
         
         self.hasTag = function(tagTypeId){
             var i=0, len=self.tags.length;
             for (; i<len; i++) {
                 if (+self.tags[i].tag_type.id == +tagTypeId) {
-                  self.formData.tagTypes[tagTypeId] = true;
                   return self.tags[i];
                 }
             }
