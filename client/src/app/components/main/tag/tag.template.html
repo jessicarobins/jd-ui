@@ -1,4 +1,11 @@
 <div 
     class="tag"
-    style="background-color: {{$ctrl.tag.color}}"
-    ng-bind="$ctrl.tag.name"></div>
+    layout="row"
+    style="background-color: {{$ctrl.tag.color}}">
+    <div class="name" ng-bind="$ctrl.tag.name"></div> 
+    <a
+        ng-click="$ctrl.removeTag()"
+        ng-if="$ctrl.editing">
+        <i class="close-button material-icons">close</i>
+    </a>
+</div>
