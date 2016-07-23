@@ -3,9 +3,4 @@
     layout="row"
     style="background-color: {{$ctrl.tag.color}}">
     <div class="name" ng-bind="$ctrl.tag.name"></div> 
-    <a
-        ng-click="$ctrl.removeTag()"
-        ng-if="$ctrl.spec && $ctrl.spec.editing">
-        <i class="close-button material-icons">cancel</i>
-    </a>
 </div>

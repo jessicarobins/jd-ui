@@ -11,7 +11,7 @@ module.component('spec', {
     templateUrl: 'app/components/main/specs/spec/spec.template.html',
     controller: function(
         $scope, 
-        $http,
+        $api,
         $location,
         $tagtypes, 
         $specs) {
@@ -19,8 +19,7 @@ module.component('spec', {
        var self = this;
        
        //editing
-       var editingCopy;
-       self.editing = false;
+       self.editingCopy;
        
        $scope.$callbacks = self.uiTreeCallbacks;
        
@@ -29,9 +28,14 @@ module.component('spec', {
        };
         
         self.edit = function(){
+            self.editingCopy = angular.copy(self.spec);
             self.spec.editing = true;
-            editingCopy = angular.copy(self.spec);
-        }
+        };
+        
+        self.undoEdit = function(){
+            self.editingCopy = angular.copy(self.spec);
+            self.spec.editing = false; 
+        };
         
         self.toggleEditButtons = function(spec) {
             spec.userMouseover=false;
@@ -68,7 +72,7 @@ module.component('spec', {
         function toggleEditOff(spec, copy){
             //if spec has changed, change in db
             if(!angular.equals(spec.description, copy.description)){
-                $http({
+                $api({
                     url: '/specs/' + spec.id, 
                     method: "PUT",
                     data: {

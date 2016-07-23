@@ -29,17 +29,30 @@
      <div
       ng-dblClick="$ctrl.edit()"
       layout="row"
+      layout-align="start center"
       ui-tree-handle>
         <div
+          class="spec-description"
           ng-if="!$ctrl.spec.editing"
           ng-bind="::$ctrl.spec.description"></div>
-        <md-input-container 
-          ng-if="$ctrl.spec.editing"
-          class="edit-input md-block">
-          <input
-            ng-model="$ctrl.spec.description"
-            required>
-        </md-input-container>
+        <div 
+          layout="row"
+          ng-if="$ctrl.spec.editing">
+          <md-input-container 
+            class="edit-input md-block">
+            <input
+              aria-label="edit spec description"
+              ng-model="$ctrl.editingCopy.description"
+              required>
+          </md-input-container>
+          <md-button 
+            ng-click="$ctrl.undoEdit()"
+            class="md-icon-button">
+            <md-icon class="material-icons">
+              undo
+            </md-icon>
+          </md-button>
+        </div>
         <tickets 
           tickets="$ctrl.ticket" 
           spec="$ctrl.spec"
@@ -47,7 +60,6 @@
         <tag
           layout="row"
           ng-repeat="tag in $ctrl.tag"
-          spec="$ctrl.spec"
           tag="tag.tag_type"></tag>
     </div>
   </div>

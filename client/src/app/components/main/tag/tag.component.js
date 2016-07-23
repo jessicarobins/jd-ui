@@ -1,11 +1,9 @@
 module.component('tag', {
-    
     bindings: {
-        tag: '<',
-        spec: '<?'
+        tag: '<'
     },
     templateUrl: 'app/components/main/tag/tag.template.html',
-    controller: function() {
+    controller: function($specs) {
             
        var self = this;
        
