@@ -9,10 +9,13 @@
             layout-padding
             flex='90'>
             <md-input-container
+                style="width: 100%"
+                layout="column"
                 flex
                 class="md-block project-select" ng-cloak>
                 <label>Project</label>
-                <md-select 
+                <md-select
+                    flex
                     ng-if="$ctrl.formData.project"
                     ng-change="$ctrl.changeProject(project)" 
                     ng-model="$ctrl.formData.project"
@@ -25,11 +28,12 @@
         </md-list-item>
         
         <md-list-item
+            ng-click="::$ctrl.toggleTicketed()"
             class="very-dense ticket">
             <tag tag="{name: 'ticketed'}"></tag>
             <md-checkbox 
                 class="md-secondary"
-                ng-click="$ctrl.toggleTicketed()" 
+                ng-change="::$ctrl.toggleTicketed(true)" 
                 ng-model="$ctrl.formData.ticketed"
                 aria-label="ticketed">
             </md-checkbox>
@@ -45,16 +49,17 @@
                 
             <md-list-item 
                 class="very-dense" 
+                ng-click="$ctrl.toggle(tag_type.id)"
                 ng-repeat="tag_type in tag_type_group.tag_types" 
                 style="color: {{tag_type.color}}">
                 <tag tag="tag_type"></tag>
                 <md-checkbox 
                     class="md-secondary"
-                    ng-click="$ctrl.toggle(tag_type.id, $ctrl.selected)" 
+                    ng-change="$ctrl.toggle(tag_type.id)" 
                     ng-model="$ctrl.formData.tag_types[tag_type.id]" 
                     aria-label="select tag"
                     ng-true-value="true"
-                    ng-false-value=""></md-checkbox>
+                    ng-false-value="false"></md-checkbox>
             </md-list-item>
         </div>
         

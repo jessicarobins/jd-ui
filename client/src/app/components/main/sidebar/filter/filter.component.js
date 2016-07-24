@@ -13,6 +13,7 @@ module.
       self.formData = {};
       self.selected = [];
       self.ticketed = false;
+      self.formData.tag_types = [];
       
       self.$onInit = function() {
         
@@ -41,18 +42,23 @@ module.
       }; 
       
       
-      self.toggle = function (item, list) {
-        var idx = list.indexOf(item);
+      self.toggle = function (item) {
+        var idx = self.selected.indexOf(item);
         if (idx > -1) {
-          list.splice(idx, 1);
+          self.selected.splice(idx, 1);
+          self.formData.tag_types[item] = false;
         }
         else {
-          list.push(item);
+          self.selected.push(item);
+          self.formData.tag_types[item] = true;
         }
         self.submit();
       };
       
-      self.toggleTicketed = function() {
+      self.toggleTicketed = function(checkbox) {
+        if(!checkbox){
+          self.formData.ticketed = !self.formData.ticketed;
+        }
         self.ticketed = !self.ticketed;
         self.submit();
       };

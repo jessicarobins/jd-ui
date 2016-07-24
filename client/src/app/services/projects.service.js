@@ -14,7 +14,7 @@ module.service('$projects', function(
     self.currentProject;
     
     self.getProjects = function() {
-        if(self.projects){
+        if(self.projects && self.projects.length){
             return $q.when(self.projects);
         }
         var promise = $api.request({
@@ -27,6 +27,7 @@ module.service('$projects', function(
                 self.currentProject = response;
                 return self.projects;
             });
+            notifyWatchers();
         });
         return promise;
     };
