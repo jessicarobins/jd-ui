@@ -5,7 +5,8 @@ module.
       $filter,
       $projects, 
       $specs, 
-      $tagtypes) {
+      $tagtypes,
+      $state) {
         
       var self = this;
       
@@ -26,6 +27,7 @@ module.
         
         $projects.addCallback( function(){
             self.projects = $projects.projects;
+            self.formData.project = $projects.project().id;
         });
         
         $tagtypes.getTagTypes().then( function(response){
@@ -58,14 +60,11 @@ module.
       self.changeProject = function() {
         var project = $filter('getById')(self.projects, self.formData.project);
         $projects.setCurrentProject(project);
-        console.log('current project = ', $projects.project());
+        $state.transitionTo('home', {projectId: project.id}, { notify: false });
         self.submit();
       };
         
       self.submit = function() {
-        // var formParams = "?" + $httpParamSerializerJQLike($scope.formData);
-        // $location.search($scope.formData);
-        // console.log(self.formData)
         var params = {
           project_id: self.formData.project,
           "tag_types[]": self.selected,

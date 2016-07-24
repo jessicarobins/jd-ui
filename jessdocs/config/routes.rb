@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get 'breadcrumbs'
       end
       collection do
+        get 'export'
         get 'filter'
         post 'create_many'
         get 'bookmarks'

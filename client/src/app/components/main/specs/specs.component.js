@@ -14,6 +14,7 @@ module.component('specs', {
         var self = this;
         
         self.export = false;
+        self.exportSpecs = [];
         
         self.toggleExport = function(spec){
             var id = spec.id;

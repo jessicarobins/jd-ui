@@ -13,7 +13,7 @@ module.component('tag', {
        
        self.removeTag = function(){
            var potentialTag = self.parent.hasTag(self.tag.id);
-           if(potentialTag){
+           if(potentialTag && potentialTag.tag_type_id){
                 self.parent.removeTag(potentialTag);
            }
            else {

@@ -1,15 +1,18 @@
 module.component('main', {
-    
+    bindings: {
+        projectId: '<'
+    },
     templateUrl: 'app/components/main/main.template.html',
     controller: function(
         $auth,
         $q,
         $api,
         $projects,
-        $specs) {
+        $specs,
+        $state) {
        var self = this;
        self.$onInit = function(){
-           
+           console.log('state params', $state.current.params)
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),

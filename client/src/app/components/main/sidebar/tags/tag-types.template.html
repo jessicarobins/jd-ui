@@ -22,10 +22,7 @@
       ng-bind="tag_type_group.name">
     </md-subheader>
     <md-list-item ng-repeat="tag_type in tag_type_group.tag_types">
-        <p ng-bind="tag_type.name"
-          class="truncate"
-          style="color: {{tag_type.color}}">
-        </p>
+        <tag tag="tag_type"></tag>
         <span flex></span>
         <md-icon 
           aria-label="edit tag type"

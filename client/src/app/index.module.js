@@ -12,12 +12,15 @@ angular.module('jessdocs', [
   'ngResource', 
   'angular-click-outside',
   'focus-if',
+  'ngclipboard',
   'puElasticInput',
   'ui.router', 
   'ui.tree',
   'ngMaterial',
   'mdColorPicker',
-  'ng-token-auth'])
+  'ng-token-auth'], function($rootScopeProvider) {
+  $rootScopeProvider.digestTtl(100);
+})
   .filter('getById', function() {
     return function(input, id) {
       var i=0, len=input.length;
@@ -27,7 +30,7 @@ angular.module('jessdocs', [
         }
       }
       return null;
-    }
+    };
   })
   .constant('moment', moment)
   .config(config)

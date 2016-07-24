@@ -1,14 +1,13 @@
 <div id="{{$ctrl.spec.id}}" layout="column">
   <div 
     layout="row"
-    ng-if="!$ctrl.spec.showEditButtons"
     ng-mouseenter="$ctrl.spec.userMouseover=true"
     ng-mouseleave="$ctrl.spec.userMouseover=false"
     class="spec">
     
     <md-checkbox
         ng-if="$ctrl.parent.export"
-        class="export"
+        class="export-checkbox menu"
         aria-label="export spec"
         ng-model="$ctrl.spec.exported"
         ng-change="$ctrl.toggleExport()">
@@ -21,17 +20,17 @@
       ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}">
         
         <spec-menu
-          spec="$ctrl.spec"></spec-menu>
+          spec="::$ctrl.spec"></spec-menu>
        
         <tag-menu 
-          spec="$ctrl.spec"
-          tags="$ctrl.tags"></tag-menu>
+          spec="::$ctrl.spec"
+          tags="::$ctrl.tags"></tag-menu>
     </div>
      <div
       layout-wrap
-      id="edit_{{$ctrl.spec.id}}"
-      click-outside="$ctrl.clickOutside()"
-      ng-dblClick="$ctrl.edit()"
+      id="edit_{{::$ctrl.spec.id}}"
+      click-outside="::$ctrl.clickOutside()"
+      ng-dblClick="::$ctrl.edit()"
       layout="row"
       layout-align="start center"
       ui-tree-handle>
@@ -52,7 +51,7 @@
             ng-keypress="$ctrl.enter($event)"
             required />
           <md-button 
-            ng-click="$ctrl.undoEdit()"
+            ng-click="::$ctrl.undoEdit()"
             class="md-icon-button">
             <md-icon class="material-icons">
               undo
@@ -74,12 +73,6 @@
                 ui-tree-callbacks="::$callbacks"
                 tag="::$ctrl.parent.getTags(child)"
                 ticket="::$ctrl.parent.getTickets(child)"></spec>
-        </li>
-        <li
-          ng-if="$ctrl.spec.addChildren"
-          id="addChildren">
-          <add-spec
-            spec="$ctrl.spec"></add-spec>
         </li>
     </ol>
 </div>

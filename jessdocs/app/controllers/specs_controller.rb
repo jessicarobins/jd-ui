@@ -33,6 +33,17 @@ class SpecsController < ApplicationController
     @breadcrumbs = @spec.path
     render json: @breadcrumbs
   end
+  
+  def export
+    if params[:spec_ids]
+      @specs = Spec.where(:id => params[:spec_ids]).arrange_serializable
+      @spec_data = Spec.export_specs_to_protractor(:specs => @specs)
+    else
+      @spec_data = nil
+    end
+    
+    render json: {export: @spec_data}
+  end
 
   # POST /specs
   # POST /specs.json

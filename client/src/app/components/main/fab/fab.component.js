@@ -4,7 +4,6 @@ module.component('fab', {
          $anchorScroll, 
          $location, 
          $mdDialog, 
-         $http, 
          $specs,
          $tagtypes,
          MenuService) {
@@ -37,24 +36,8 @@ module.component('fab', {
         self.toggleExportModal = function(ev) {
             MenuService.exporting(false);
             $mdDialog.show({
-                controller: 'ExportController',
-                templateUrl: 'modals/export.template.html',
+                template: '<export></export>',
                 targetEvent: ev,
-                resolve: {
-                    exportHtml: function($http){
-                        var promise = $http({
-                            url: '/specs/export', 
-                            method: "GET",
-                            params: {
-                                "spec_ids[]": MenuService.exportSpecs
-                            }
-                        }).then (function (response){
-                            return response.data.export;
-                        });
-                        
-                        return promise;
-                    }
-                },
                 clickOutsideToClose:true
             });
         };

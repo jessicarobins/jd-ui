@@ -1,11 +1,16 @@
 var module = angular.module('jessdocs');
 
-module.service('$projects', function($api, $q, $user, $location) {
+module.service('$projects', function(
+    $filter,
+    $state,
+    $api, 
+    $q, 
+    $user, 
+    $location) {
     var self = this;
     
     var callbacks = [];
     
-    self.projects;
     self.currentProject;
     
     self.getProjects = function() {
@@ -18,7 +23,7 @@ module.service('$projects', function($api, $q, $user, $location) {
         }).then(function(response) {
             self.projects = response;
             // self.currentProject = self.projects[0];
-            initProject().then( function(response){
+            self.initProject().then( function(response){
                 self.currentProject = response;
                 return self.projects;
             });
@@ -34,16 +39,17 @@ module.service('$projects', function($api, $q, $user, $location) {
         self.currentProject = project;  
     };
     
-    function initProject() {
-        if($location.search().project_id){
-            self.currentProject = $location.search().project_id;
+    self.initProject = function() {
+        if($state.current.params){
+            self.currentProject = $filter('getById')(self.projects, $state.current.params);
         }
         else {
             self.currentProject = self.projects[0];
+            $state.transitionTo('home', {projectId: self.currentProject.id}, { notify: false });
         }
         
         return $q.when(self.currentProject);
-    }
+    };
     
     self.addProject = function(projectName) {
         $api.request({

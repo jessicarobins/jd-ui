@@ -1,0 +1,18 @@
+<jd-modal>
+    <jd-modal-title>export to jasmine</jd-modal-title>
+    <jd-modal-body layout="column" layout-padding>
+        <pre ng-bind="$ctrl.exportData" id="exportPre"></pre>
+    </jd-modal-body>
+    <jd-modal-buttons>
+        <span flex></span>
+        <md-button
+            class="md-raised md-accent"
+            ngclipboard 
+            ngclipboard-success="$ctrl.onSuccess(e);"
+            data-clipboard-target="#exportPre">
+            <md-icon 
+              class="material-icons">content_copy</md-icon>
+            copy to clipboard
+        </md-button>
+    </jd-modal-buttons>
+</jd-modal>

@@ -28,15 +28,6 @@ class Spec < ActiveRecord::Base
         self.path.union(self.descendants).pluck(:id)
     end
     
-    def to_hash
-        {   :id => self.id,
-            :description => self.description,
-            :project_id => self.project_id,
-            :root => self.root?,
-            :bookmarked => self.bookmarked?
-        }
-    end
-    
     def self.filter(filter_params)
         if filter_params[:id]
             specs = Spec.find(filter_params[:id]).subtree
@@ -44,6 +35,27 @@ class Spec < ActiveRecord::Base
             specs = Spec.for_project(filter_params[:project_id])
         else
             specs = Spec.all
+        end
+        
+        @filtered_spec_ids_array = []
+        
+        @ticketed = filter_params[:ticketed]
+        if @ticketed == true.to_s
+            @filtered_spec_ids_array << Spec.all_ancestry_ids(specs.has_ticket)
+        end
+        
+        @tag_type_ids = filter_params[:tag_types]
+        if @tag_type_ids
+            @tag_type_ids.each do |tag_type_id|
+              @filtered_spec_ids_array << Spec.all_ancestry_ids(specs.with_tag_type(tag_type_id))
+            end
+        end
+        
+        @filtered_spec_ids = @filtered_spec_ids_array.inject(:&)
+      
+        if @filtered_spec_ids
+            @filtered_spec_ids.uniq!
+            specs = Spec.where(:id => @filtered_spec_ids)
         end
         
         specs
