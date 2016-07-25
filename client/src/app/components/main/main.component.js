@@ -9,14 +9,14 @@ module.component('main', {
         $api,
         $projects,
         $specs,
-        $state) {
+        $stateParams) {
        var self = this;
        self.$onInit = function(){
-           console.log('state params', $state.current.params)
+           console.log('state params', $stateParams)
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),
-                projects: $projects.getProjects()
+                projects: $projects.getProjects($stateParams.projectId)
             };
             
             $q.all(promises).then( function(response) {

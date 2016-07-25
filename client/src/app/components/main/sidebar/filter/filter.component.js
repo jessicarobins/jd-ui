@@ -6,7 +6,8 @@ module.
       $projects, 
       $specs, 
       $tagtypes,
-      $state) {
+      $state,
+      BreadcrumbsService) {
         
       var self = this;
       
@@ -67,6 +68,7 @@ module.
         var project = $filter('getById')(self.projects, self.formData.project);
         $projects.setCurrentProject(project);
         $state.transitionTo('home', {projectId: project.id}, { notify: false });
+        BreadcrumbsService.clearBreadcrumbs();
         self.submit();
       };
         
@@ -78,7 +80,6 @@ module.
         };
         
         $specs.setSpecList(params).then( function(result) {
-          console.log(result);
         });
         
         

@@ -15,7 +15,7 @@ module.component('projects', {
        
         self.editProject = function(project, ev) {
             var confirm = $mdDialog.prompt()
-                .title('Add project')
+                .title('Edit project')
                 .placeholder('project name')
                 .ariaLabel('project name')
                 .initialValue(project.name)
@@ -23,7 +23,9 @@ module.component('projects', {
                 .ok('save')
                 .cancel('cancel');
             $mdDialog.show(confirm).then(function(name) {
-                $projects.editProject(project, name);
+                if(name && name.length){
+                    $projects.editProject(project, name);
+                }
             }, function() {
             });
         };
@@ -37,7 +39,9 @@ module.component('projects', {
                 .ok('save')
                 .cancel('cancel');
             $mdDialog.show(confirm).then(function(name) {
-                $projects.addProject(name);
+                if(name && name.length){
+                    $projects.addProject(name);
+                }
             }, function() {
             });
         };

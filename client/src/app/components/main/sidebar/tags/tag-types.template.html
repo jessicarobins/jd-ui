@@ -21,15 +21,10 @@
       md-colors="{background: 'default-primary-100'}"
       ng-bind="tag_type_group.name">
     </md-subheader>
-    <md-list-item ng-repeat="tag_type in tag_type_group.tag_types">
-        <tag tag="tag_type"></tag>
-        <span flex></span>
-        <md-icon 
-          aria-label="edit tag type"
-          class="material-icons md-secondary"
-          ng-click="$ctrl.edit(tagType, $event)">
-          edit
-      </md-icon>
+    <md-list-item 
+      ng-repeat="tag_type in tag_type_group.tag_types"
+      ng-click="$ctrl.edit(tagType, $event)">
+      <tag tag="tag_type"></tag>
       <md-icon 
           aria-label="delete tag type"
           class="material-icons md-secondary"

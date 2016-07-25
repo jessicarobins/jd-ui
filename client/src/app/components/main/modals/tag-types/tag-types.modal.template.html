@@ -1,4 +1,4 @@
-<jd-modal>
+<jd-modal layout="column">
     <jd-modal-title>tag type</jd-modal-title>
     <jd-modal-body layout="column" layout-padding>
         <md-input-container>
@@ -10,41 +10,42 @@
             </md-input-container>
         
         <div layout="row">
-        <md-input-container
-            flex='90'>
-            <label>tag type group</label>
-            <md-select 
-                ng-model="$ctrl.editingCopy.tag_type_group_id"
-                aria-label="tag type groups"
-                md-on-close="$ctrl.changeGroup()">
-                  <md-option value="">no group</md-option>
-                  <md-option 
-                    ng-repeat="group in $ctrl.tagGroups" 
-                    value="{{group.id}}">
-                        {{group.name}}
-                  </md-option>
-            </md-select>
-        </md-input-container>
-        <span
-            class="color-swatch"
-            ng-if="$ctrl.disableColorPicker"
-            style="background-color: {{$ctrl.editingCopy.color}}"></span>
+            <md-input-container
+                flex='90'>
+                <label>tag type group</label>
+                <md-select 
+                    ng-model="$ctrl.editingCopy.tag_type_group_id"
+                    aria-label="tag type groups"
+                    md-on-close="$ctrl.changeGroup()">
+                      <md-option value="">no group</md-option>
+                      <md-option 
+                        ng-repeat="group in $ctrl.tagGroups" 
+                        value="{{group.id}}">
+                            {{group.name}}
+                      </md-option>
+                </md-select>
+            </md-input-container>
+            <span
+                class="color-swatch"
+                ng-if="$ctrl.disableColorPicker"
+                style="background-color: {{$ctrl.editingCopy.color}}"></span>
+            <div
+                ng-if="!$ctrl.disableColorPicker"
+                md-color-picker
+                ng-model="$ctrl.editingCopy.color"
+                label="tag color"
+                default="#000000"
+                md-color-generic-palette="true"
+                md-color-history="false"
+                md-color-clear-button="false"
+                open-on-input="true"
+                md-color-alpha-channel="false"
+                md-color-sliders="false"
+                md-color-hsl="false"
+                md-color-rgb="false"
+            ></div>
         </div>
-        <div
-            ng-if="!$ctrl.disableColorPicker"
-            md-color-picker
-            ng-model="$ctrl.editingCopy.color"
-            label="tag color"
-            default="#000000"
-            md-color-generic-palette="true"
-            md-color-history="false"
-            md-color-clear-button="false"
-            open-on-input="true"
-            md-color-alpha-channel="false"
-            md-color-sliders="false"
-            md-color-hsl="false"
-            md-color-rgb="false"
-        ></div>
+        
         
         
     </jd-modal-body>
@@ -52,6 +53,7 @@
         
         <span flex></span>
         <md-button
+            ng-disabled="$ctrl.disableSave()"
             aria-label="add tag type"
             ng-click="$ctrl.add()"
             class="md-raised md-accent">

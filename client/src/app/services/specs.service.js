@@ -6,6 +6,8 @@ module.service('$specs', function($api, $q, $user, $projects) {
     var bookmarkCallbacks = [];
     
     self.addManyParent;
+    self.filterParams;
+    self.specId;
     
     self.addCallback = function(callback) {
         callbacks.push(callback);
@@ -16,11 +18,11 @@ module.service('$specs', function($api, $q, $user, $projects) {
     };
     
     self.setSpecList = function(filterParams) {
-        var params = filterParams || getFilterParams();
+        self.filterParams = filterParams || self.filterParams;
         var promise = $api.request({
             url: '/specs/filter', 
             method: "GET",
-            params: params
+            params: getFilterParams()
         }).
         then(function (response) {
             self.specs = response.specs;
@@ -141,12 +143,24 @@ module.service('$specs', function($api, $q, $user, $projects) {
         });
     };
     
+    self.setSpecId = function(id){
+        self.filterParams.id = id;
+    };
+    
+    self.clearSpecId = function(){
+        self.filterParams.id = null;
+    };
+    
     function getFilterParams() {
         var params = {
             project_id: $projects.project().id
         };
         
-        return params;
+        self.filterParams = self.filterParams || params;
+        // if(self.specId){
+        //     angular.extend(self.filterParams, self.filterParams, {id: self.specId});
+        // }
+        return self.filterParams;
     }
     
     function updateAll(){

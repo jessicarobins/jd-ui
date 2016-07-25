@@ -40,6 +40,12 @@ module.component('tagTypesModal', {
             }
         };
         
+        
+        self.disableSave = function(){
+            return !self.editingCopy.name || (self.editingCopy.name.length < 1)
+                || !self.editingCopy.color
+                || self.editingCopy.color.length < 3;
+        };
     }
     
 });

@@ -13,7 +13,7 @@ module.service('$projects', function(
     
     self.currentProject;
     
-    self.getProjects = function() {
+    self.getProjects = function(projectId) {
         if(self.projects && self.projects.length){
             return $q.when(self.projects);
         }
@@ -22,8 +22,7 @@ module.service('$projects', function(
           method: 'GET'
         }).then(function(response) {
             self.projects = response;
-            // self.currentProject = self.projects[0];
-            self.initProject().then( function(response){
+            self.initProject(projectId).then( function(response){
                 self.currentProject = response;
                 return self.projects;
             });
@@ -40,13 +39,13 @@ module.service('$projects', function(
         self.currentProject = project;  
     };
     
-    self.initProject = function() {
-        if($state.current.params){
-            self.currentProject = $filter('getById')(self.projects, $state.current.params);
+    self.initProject = function(projectId) {
+        if(projectId){
+            self.currentProject = $filter('getById')(self.projects, projectId);
         }
         else {
             self.currentProject = self.projects[0];
-            $state.transitionTo('home', {projectId: self.currentProject.id}, { notify: false });
+            $state.go('home', {projectId: self.currentProject.id}, { notify: false });
         }
         
         return $q.when(self.currentProject);

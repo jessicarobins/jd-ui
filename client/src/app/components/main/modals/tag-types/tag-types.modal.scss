@@ -4,5 +4,19 @@ tag-types-modal {
     .color-swatch {
         height: 40px;
         width: 40px;
+        border-radius: 50px;
+        border: 2px solid gray;
+    }
+    
+    .md-color-picker-input-container {
+        md-input-container {
+            display: none;
+        }
+    }
+    
+    .md-color-picker-preview {
+        height: 40px !important;
+        width: 40px !important;
+        top: 0px !important;
     }
 }

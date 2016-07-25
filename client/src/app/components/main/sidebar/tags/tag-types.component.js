@@ -20,7 +20,7 @@ module.component('tagTypes', {
         
         self.add = function(ev) {
             $mdDialog.show({
-                template: '<tag-types-modal></tag-types-modal>',
+                template: '<tag-types-modal layout="column"></tag-types-modal>',
                 targetEvent: ev,
                 clickOutsideToClose:true,
             })

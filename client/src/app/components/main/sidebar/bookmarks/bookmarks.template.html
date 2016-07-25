@@ -6,9 +6,9 @@
     ng-repeat="bookmark in $ctrl.bookmarks"
     ng-click="$ctrl.setBreadcrumbs(bookmark)"
     aria-label="set breadcrumbs">
-    <span 
-        class="truncate"
-        ng-bind="bookmark.description"></span>
+    <md-icon class="material-icons">bookmark</md-icon>
+    <p 
+        ng-bind="bookmark.description"></p>
   </md-list-item>
   <md-list-item
       ng-if="!$ctrl.bookmarks.length">

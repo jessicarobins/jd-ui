@@ -10,17 +10,14 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       template: '<signup></signup>'
     })
     .state('home', {
-      url: '/project/:projectId',
-      template: '<main layout="column" projectId="projectId" layout-fill></main>',
+      url: '/project/{projectId:int}',
+      template: '<main layout="column" layout-fill></main>',
       resolve: {
         auth: ['$auth', function($auth) {
           return $auth.validateUser();
-        }],
-        projectId: ['$state', function($state){
-          return $state.current.params;
         }]
       }
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/project');
 }

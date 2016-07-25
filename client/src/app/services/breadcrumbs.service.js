@@ -14,8 +14,8 @@ module.service('BreadcrumbsService', function($api, $specs) {
         then(function (response) {
             self.breadcrumbs = response;
             updateAll();
-            var params = {id: id};
-            $specs.setSpecList(params);
+            $specs.setSpecId(id);
+            $specs.setSpecList();
             
             return self.breadcrumbs;
         });
@@ -23,7 +23,8 @@ module.service('BreadcrumbsService', function($api, $specs) {
     };
     
     self.clearBreadcrumbs = function() {
-        self.breadcrumbs = null;  
+        self.breadcrumbs = null;
+        $specs.clearSpecId();
         updateAll();
     };
     
