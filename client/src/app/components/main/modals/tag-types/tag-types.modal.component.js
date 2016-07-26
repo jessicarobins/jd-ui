@@ -8,8 +8,16 @@ module.component('tagTypesModal', {
         
         
         self.$onInit = function() {
-            self.editingCopy.color = '#f00000';
-            self.disableColorPicker = false;
+            if($tagtypes.editingTagType){
+                self.editingCopy = angular.copy($tagtypes.editingTagType);
+                if(self.editingCopy.tag_type_group_id){
+                    self.disableColorPicker = true;
+                }
+            }
+            else {
+                self.editingCopy.color = '#f00000';
+                self.disableColorPicker = false;
+            }
             
             $tagtypes.groups().then( function(response){
                self.tagGroups = response;
@@ -21,8 +29,7 @@ module.component('tagTypesModal', {
         };
         
         self.add = function(ev) {
-            $tagtypes.add(self.editingCopy);
-            $mdDialog.hide();
+            $mdDialog.hide(self.editingCopy);
         };
         
         self.changeGroup = function(){

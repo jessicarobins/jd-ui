@@ -11,7 +11,7 @@ module.component('jdModal', {
         
         
         self.close = function() {
-            $mdDialog.hide();
+            $mdDialog.cancel();
         };
     }
     

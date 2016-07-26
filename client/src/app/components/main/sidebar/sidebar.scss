@@ -1,12 +1,12 @@
 sidebar {
-    overflow: hidden;;
-}
-
-sidebar:hover { 
-    overflow-y: auto;
-}
-
-sidebar {
+    
+    md-tab-content {
+        overflow: hidden;
+        
+        &:hover {
+            overflow-y: auto;
+        }
+    }
     
     md-list-item {
         padding: 0px !important;

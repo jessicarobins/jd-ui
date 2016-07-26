@@ -1,7 +1,4 @@
 module.component('main', {
-    bindings: {
-        projectId: '<'
-    },
     templateUrl: 'app/components/main/main.template.html',
     controller: function(
         $auth,
@@ -12,7 +9,6 @@ module.component('main', {
         $stateParams) {
        var self = this;
        self.$onInit = function(){
-           console.log('state params', $stateParams)
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),

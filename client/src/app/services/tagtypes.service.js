@@ -8,6 +8,8 @@ module.service('$tagtypes', function($api, $q, $user) {
     
     self.tagTypes = {};
     
+    self.editingTagType;
+    
     self.addCallback = function(callback) {
         callbacks.push(callback);
     };
@@ -38,19 +40,54 @@ module.service('$tagtypes', function($api, $q, $user) {
         
     };
     
+    self.update = function(tagType) {
+        $api.request({
+            url: '/tag_types/' + tagType.id,
+            method: 'PUT',
+            data: {
+                tag_type: {
+                    name: tagType.name,
+                    color: tagType.color,
+                    tag_type_group_id: tagType.tag_type_group_id
+                }
+            }
+        }).then( function(response){
+            self.updateTagTypes().then( function(){
+                notifyWatchers();
+            });
+        });
+        
+    };
+    
+    self.destroy = function(tagType) {
+        $api.request({
+            url: '/tag_types/' + tagType.id,
+            method: 'DELETE'
+        }).then( function(response){
+            self.updateTagTypes().then( function(){
+                notifyWatchers();
+            });
+        });
+        
+    };
+    
+    self.restore = function(tagType) {
+        $api.request({
+            url: '/tag_types/' + tagType.id + '/restore',
+            method: 'POST'
+        }).then( function(response){
+            self.updateTagTypes().then( function(){
+                notifyWatchers();
+            });
+        });
+        
+    };
+    
     self.getTagTypes = function() {
         if(self.tagTypes.byGroup && self.tagTypes.allTypes){
             return $q.when(self.tagTypes);
         }
-        var promise = $api.request({
-          url: '/tag_types', 
-          method: 'GET'
-        }).then(function(response) {
-            self.tagTypes.allTypes = response.all_types;
-            self.tagTypes.byGroup = response.by_group.tag_types;
-            return self.tagTypes;
-        });
-        return promise;
+        return self.updateTagTypes();
     };
     
     self.updateTagTypes = function() {
@@ -60,6 +97,7 @@ module.service('$tagtypes', function($api, $q, $user) {
         }).then(function(response) {
             self.tagTypes.allTypes = response.all_types;
             self.tagTypes.byGroup = response.by_group.tag_types;
+            self.tagTypes.deleted = response.deleted;
             return self.tagTypes;
         });
         return promise;
