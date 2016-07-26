@@ -30,9 +30,7 @@ class TagTypeGroupsController < ApplicationController
   # PATCH/PUT /tag_type_groups/1
   # PATCH/PUT /tag_type_groups/1.json
   def update
-    @tag_type_group = TagTypeGroup.find(params[:id])
-
-    if @tag_type_group.update(tag_type_group_params)
+    if @tag_type_group.update(update_params)
       head :no_content
     else
       render json: @tag_type_group.errors, status: :unprocessable_entity
@@ -42,8 +40,9 @@ class TagTypeGroupsController < ApplicationController
   # DELETE /tag_type_groups/1
   # DELETE /tag_type_groups/1.json
   def destroy
+    TagType.where(:tag_type_group => @tag_type_group).update_all(:tag_type_group_id => nil)
     @tag_type_group.destroy
-
+    
     head :no_content
   end
 
@@ -59,5 +58,9 @@ class TagTypeGroupsController < ApplicationController
     
     def create_params
       params.require(:tag_type_group).permit(:color, :name, :created_by_id)
+    end
+    
+    def update_params
+      params.require(:tag_type_group).permit(:name, :color)
     end
 end

@@ -8,12 +8,21 @@ module.component('tagGroupsModal', {
         
         
         self.$onInit = function() {
-            self.editingCopy.color = '#f00000';
+            if($tagtypes.editingTagType){
+                self.editingCopy = angular.copy($tagtypes.editingTagType);
+            }
+            else {
+                self.editingCopy.color = '#f00000';
+            }
         };
         
         self.add = function() {
-            $tagtypes.addGroup(self.editingCopy);
-            $mdDialog.hide();
+            $mdDialog.hide(self.editingCopy);
+        };
+        
+        self.disableSave = function(){
+            return !self.editingCopy.name 
+                || (self.editingCopy.name.length < 1);
         };
         
     }

@@ -1,0 +1,13 @@
+jd-modal {
+    .md-color-picker-input-container {
+        md-input-container {
+            display: none;
+        }
+    }
+    
+    .md-color-picker-preview {
+        height: 40px !important;
+        width: 40px !important;
+        top: 0px !important;
+    }
+}

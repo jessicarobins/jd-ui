@@ -1,13 +1,13 @@
-<jd-modal>
+<jd-modal layout="column">
     <jd-modal-title>tag group</jd-modal-title>
-    <jd-modal-body layout="column" layout-padding>
+    <jd-modal-body layout="row" layout-padding>
         <md-input-container>
             <label>tag group name</label>
-                <input
-                    required
-                    ng-model="$ctrl.editingCopy.name"
-                    aria-label="name"/>
-            </md-input-container>
+            <input
+                required
+                ng-model="$ctrl.editingCopy.name"
+                aria-label="name"/>
+        </md-input-container>
         
         <div
             md-color-picker
@@ -29,12 +29,13 @@
         
         <span flex></span>
         <md-button
+            ng-disabled="$ctrl.disableSave()"
             aria-label="add tag group"
             ng-click="$ctrl.add()"
             class="md-raised md-accent">
             <md-icon
                 class="material-icons">add</md-icon>
-            add tag group
+            save
         </md-button>
     </jd-modal-buttons>
 </jd-modal>

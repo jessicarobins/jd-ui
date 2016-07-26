@@ -34,6 +34,7 @@ module.service('$tagtypes', function($api, $q, $user) {
             }
         }).then( function(response){
             self.updateTagTypes().then( function(){
+                self.editingTagType = null;
                 notifyWatchers();
             });
         });
@@ -53,6 +54,7 @@ module.service('$tagtypes', function($api, $q, $user) {
             }
         }).then( function(response){
             self.updateTagTypes().then( function(){
+                self.editingTagType = null;
                 notifyWatchers();
             });
         });
@@ -65,6 +67,7 @@ module.service('$tagtypes', function($api, $q, $user) {
             method: 'DELETE'
         }).then( function(response){
             self.updateTagTypes().then( function(){
+                self.editingTagType = null;
                 notifyWatchers();
             });
         });
@@ -77,6 +80,7 @@ module.service('$tagtypes', function($api, $q, $user) {
             method: 'POST'
         }).then( function(response){
             self.updateTagTypes().then( function(){
+                self.editingTagType = null;
                 notifyWatchers();
             });
         });
@@ -124,7 +128,42 @@ module.service('$tagtypes', function($api, $q, $user) {
             }
         }).then( function(response){
             self.updateGroups().then( function(){
+                self.editingTagType = null;
                 notifyWatchers();
+            });
+        });
+    };
+    
+    self.editGroup = function(group){
+        $api.request({
+            url: '/tag_type_groups/' + group.id,
+            method: 'PUT',
+            data: {
+                tag_type_group: {
+                    name: group.name,
+                    color: group.color
+                }
+            }
+        }).then( function(response){
+            self.updateGroups().then( function(){
+                self.updateTagTypes().then( function(){
+                    self.editingTagType = null;
+                    notifyWatchers();
+                });
+            });
+        });
+    };
+    
+    self.deleteGroup = function(group){
+        $api.request({
+            url: '/tag_type_groups/' + group.id,
+            method: 'DELETE'
+        }).then( function(response){
+            self.updateGroups().then( function(){
+                self.updateTagTypes().then( function(){
+                    self.editingTagType = null;
+                    notifyWatchers();
+                });
             });
         });
     };

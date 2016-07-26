@@ -12,24 +12,38 @@ module.component('groups', {
                 self.groups = $tagtypes.tagGroups;
             });
        };
-       
-        self.edit = function(group, ev) {
-            
-        };
         
         self.add = function(ev) {
             $mdDialog.show({
-                template: '<tag-groups-modal></tag-groups-modal>',
+                template: '<tag-groups-modal layout="column"></tag-groups-modal>',
                 targetEvent: ev,
                 clickOutsideToClose:true,
             })
-            .then(function(answer) {
+            .then(function(group) {
+                $tagtypes.addGroup(group);
             }, function() {
             });
         };
         
-        self.delete = function(group, ev) {
-            
+        self.edit = function(group, ev) {
+            $tagtypes.editingTagType = group;
+            $mdDialog.show({
+                template: '<tag-groups-modal layout="column"></tag-groups-modal>',
+                targetEvent: ev,
+                clickOutsideToClose:true,
+            })
+            .then(function(editedGroup) {
+                $tagtypes.editingTagType = null;
+                if(editedGroup.name != group.name 
+                    || editedGroup.color != group.color){
+                    $tagtypes.editGroup(editedGroup);   
+                }
+            }, function() {
+            });
+        };
+        
+        self.delete = function(group) {
+            $tagtypes.deleteGroup(group);
         };
     }
 });

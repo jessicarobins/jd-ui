@@ -8,6 +8,8 @@ class TagTypeGroup < ActiveRecord::Base
     
     before_create :downcase
     
+    default_scope { order('lower(name)') }
+    
     private
         def downcase
             self.name.downcase!

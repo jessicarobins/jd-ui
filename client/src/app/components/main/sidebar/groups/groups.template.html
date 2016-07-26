@@ -9,21 +9,16 @@
       </md-button>
   </md-list-item>
   <md-list-item 
-    ng-repeat="group in $ctrl.groups">
+    ng-repeat="group in $ctrl.groups"
+    ng-click="$ctrl.edit(group, $event)">
     <p 
         class="truncate"
         ng-bind="group.name"
         style="color: {{group.color}}"></p>
     <md-icon 
-        aria-label="edit group"
+        aria-label="delete tag group"
         class="material-icons md-secondary"
-        ng-click="$ctrl.edit(group, $event)">
-        edit
-    </md-icon>
-    <md-icon 
-        aria-label="delete project"
-        class="material-icons md-secondary"
-        ng-click="$ctrl.delete(group, $event)">
+        ng-click="$ctrl.delete(group)">
         delete
     </md-icon>
   </md-list-item>
