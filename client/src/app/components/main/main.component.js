@@ -9,17 +9,19 @@ module.component('main', {
         $stateParams) {
        var self = this;
        self.$onInit = function(){
+          
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),
-                projects: $projects.getProjects($stateParams.projectId)
+                projects: $api.request({url: '/projects'})
             };
             
             $q.all(promises).then( function(response) {
                 self.tickets = response.tickets;
                 self.tags = response.tags;
-                
-                $specs.setSpecList();
+                $projects.projects = response.projects;
+                var project = $projects.initCurrentProject($stateParams.projectId);
+                $specs.setSpecList({project_id: project.id});
                 
             });
        };

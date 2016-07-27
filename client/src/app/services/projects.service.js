@@ -13,22 +13,11 @@ module.service('$projects', function(
     
     self.currentProject;
     
-    self.getProjects = function(projectId) {
+    self.getProjects = function() {
         if(self.projects && self.projects.length){
             return $q.when(self.projects);
         }
-        var promise = $api.request({
-          url: '/projects', 
-          method: 'GET'
-        }).then(function(response) {
-            self.projects = response;
-            self.initProject(projectId).then( function(response){
-                self.currentProject = response;
-                return self.projects;
-            });
-            notifyWatchers();
-        });
-        return promise;
+        return updateProjects();
     };
     
     self.project = function(){
@@ -39,7 +28,7 @@ module.service('$projects', function(
         self.currentProject = project;  
     };
     
-    self.initProject = function(projectId) {
+    self.initCurrentProject = function(projectId) {
         if(projectId){
             self.currentProject = $filter('getById')(self.projects, projectId);
         }
@@ -48,7 +37,7 @@ module.service('$projects', function(
             $state.go('home', {projectId: self.currentProject.id}, { notify: false });
         }
         
-        return $q.when(self.currentProject);
+        return self.currentProject;
     };
     
     self.addProject = function(projectName) {
@@ -113,8 +102,7 @@ module.service('$projects', function(
           method: 'GET'
         }).then(function(response) {
             self.projects = response;
-            self.currentProject = self.projects[0];
-            return self.projects;
+            return response;
         });
         return promise;
     }
