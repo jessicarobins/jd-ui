@@ -31,6 +31,13 @@ module.component('spec', {
             self.tags = self.ticket.concat(self.tag);
        };
         
+        self.toggleMouseover = function(){
+            //if we aren't dragging
+            if(self.parent.dragging == false){
+                self.spec.userMouseover = true;
+            }
+        };
+        
         self.edit = function(){
             self.editingCopy = angular.copy(self.spec);
             self.spec.editing = true;

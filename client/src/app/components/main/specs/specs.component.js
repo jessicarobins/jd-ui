@@ -16,6 +16,22 @@ module.component('specs', {
         self.export = false;
         self.exportSpecs = [];
         
+        self.dragging = false;
+        
+        self.tree = {
+            beforeDrop : function (e) {
+                return true;
+            },
+            beforeDrag: function(sourceNodeScope){
+                self.dragging = true;
+                return true;
+            },
+            dropped: function(e){
+                self.dragging = false;
+                return true;
+            }
+        };
+        
         self.toggleExport = function(spec){
             var id = spec.id;
             var idx = self.exportSpecs.indexOf(id);

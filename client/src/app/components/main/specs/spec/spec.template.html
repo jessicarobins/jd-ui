@@ -1,7 +1,7 @@
 <div id="{{$ctrl.spec.id}}" layout="column">
   <div 
     layout="row"
-    ng-mouseenter="$ctrl.spec.userMouseover=true"
+    ng-mouseenter="$ctrl.toggleMouseover()"
     ng-mouseleave="$ctrl.spec.userMouseover=false"
     class="spec">
     
@@ -66,7 +66,7 @@
     </div>
   </div>
     
-    <ol ui-tree-nodes="" ng-model="$ctrl.spec.children">
+    <ol ui-tree-nodes ng-model="$ctrl.spec.children">
         <li ng-repeat="child in $ctrl.spec.children track by child.id" ui-tree-node>
             <spec 
                 spec='::child' 
