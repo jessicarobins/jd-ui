@@ -19,7 +19,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'acts_as_paranoid', '~> 0.5.0.beta2'
 gem 'active_record_union'
 gem 'ancestry', :github => "stefankroes/ancestry", :branch => "2-1-stable"
-
+gem 'acts_as_list'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

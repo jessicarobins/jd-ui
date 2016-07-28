@@ -1,15 +1,14 @@
 class Spec < ActiveRecord::Base
-    
     before_save :format
     
     has_ancestry
+    
+    acts_as_list scope: :project_id, column: :spec_order
     
     alias_attribute :name, :description
     
     validates_presence_of :description
     validates_presence_of :project_id
-    # validates_presence_of :bookmarked
-    validates_presence_of :spec_order
     
     belongs_to :project
     has_many :tags, dependent: :destroy
@@ -78,22 +77,25 @@ class Spec < ActiveRecord::Base
         query
     end
 
-    def self.parse_block(text, project_id, parent_id=nil, next_top_order, created_by_id:)
-        self.parse_alternate(   
+    def self.parse_block(text:, project_id:, parent_id: nil, created_by_id:)
+        if parent_id
+            insert_at = Spec.find(parent_id).pluck(:spec_order)
+        end
+        return self.parse_alternate(   
             :text_array => text.split("\n"), 
             :project_id => project_id, 
             :parent_id => parent_id,
-            :next_top_order => next_top_order,
-            :created_by_id => created_by_id)
+            :created_by_id => created_by_id,
+            :insert_at => insert_at)
     end
     
-    def self.parse_alternate(text_array:, project_id:, parent_id:nil, depth:0, previous:nil, error_count:0, next_top_order:, created_by_id:)
+    def self.parse_alternate(text_array:, project_id:, parent_id:nil, depth:0, previous:nil, error_count:0, created_by_id:, insert_at:nil, spec_count:0)
         #regex = /(\t*|-*)\s?(\w+)\s?(.*)/
         #instead of looking for s{2}* we should replace s{2}* with \t
         # not sure if this needs to be just the leading whitespace only?
         regex = /(-*)\s?(\w+)\s?(.*)/
         unless text_array.any?
-            return error_count
+            return {:specs_created => spec_count, :errors => error_count}
         end
         
         line = text_array.first
@@ -107,39 +109,36 @@ class Spec < ActiveRecord::Base
         spec_description = "#{spec_type_indicator} #{spec_description_rest}"
         
         begin
-            # spec_order = previous ? (previous.spec_order + 1): 1
             spec = Spec.new(
                 :description => spec_description,
                 :project_id => project_id,
                 :bookmarked => false,
                 :created_by_id => created_by_id,
                 :updated_by_id => created_by_id)
-            # require 'byebug'; byebug
             if(spec_depth == 0)
                 spec.parent_id = parent_id
-                spec.spec_order = next_top_order
-                puts "next_top_order = #{next_top_order}"
-                next_top_order= next_top_order + 1
             else
                 if(depth == spec_depth)
                     parent = previous.nil? ? nil : previous.parent
                     spec.parent = parent
-                    spec.spec_order = previous.spec_order + 1
                 elsif (spec_depth > depth) #deeper in, set the parent
                     spec.parent = previous
-                    spec.spec_order = 1
                 else #spec_depth < depth. farther out... no idea
-                    
                     (depth-spec_depth).times do #this is how far back we need to go
                         previous = previous.parent
                     end
                     spec.parent = previous.parent
-                    spec.spec_order = previous.spec_order + 1
                 end
             end
             
             spec.save!
+            if insert_at
+                spec.insert_at(insert_at)
+                insert_at = insert_at + 1
+            end
+            spec_count = spec_count + 1
         rescue => error
+            error_count = error_count + 1
             puts error.inspect
         end
         
@@ -151,8 +150,9 @@ class Spec < ActiveRecord::Base
             :previous => spec, 
             :error_count => error_count,
             :parent_id => parent_id,
-            :next_top_order => next_top_order,
-            :created_by_id => created_by_id)
+            :insert_at => insert_at,
+            :created_by_id => created_by_id,
+            :spec_count => spec_count)
     end
     
     def self.export_spec_to_protractor(spec:, protractor_html: "", depth: 0)
