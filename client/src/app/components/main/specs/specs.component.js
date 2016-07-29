@@ -18,7 +18,7 @@ module.component('specs', {
         
         self.dragging = false;
         
-        self.tree = {
+        self.treeOpts = {
             beforeDrop : function (e) {
                 return true;
             },
@@ -28,6 +28,15 @@ module.component('specs', {
             },
             dropped: function(e){
                 self.dragging = false;
+                console.log('drag event', e)
+                //spec id: e.source.nodeScope.$modelValue.id
+                //need parent
+                //parent spec id: e.dest.nodeScope.$parent.$ctrl.spec.id)
+                //need prev sibling
+                //dropped index (relative to parent):
+                //e.dest.index
+                //value of previous sibling
+                //e.dest.nodeScope.$modelValue[index-1].id
                 return true;
             }
         };

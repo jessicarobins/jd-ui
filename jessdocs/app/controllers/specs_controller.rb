@@ -1,7 +1,7 @@
 class SpecsController < ApplicationController
   # before_filter :authenticate_user!
   before_action :authenticate_user!
-  before_action :set_spec, only: [:show, :update, :destroy, :breadcrumbs]
+  before_action :set_spec, only: [:show, :update, :destroy, :breadcrumbs, :move]
 
   # GET /specs
   # GET /specs.json
@@ -81,7 +81,11 @@ class SpecsController < ApplicationController
       render json: @spec.errors, status: :unprocessable_entity
     end
   end
-
+  
+  def move
+    Spec.move({:spec => @spec}.merge(move_params))
+  end
+  
   # DELETE /specs/1
   # DELETE /specs/1.json
   def destroy
@@ -102,5 +106,9 @@ class SpecsController < ApplicationController
     
     def update_params
       params.require(:spec).permit(:bookmarked, :description)
+    end
+    
+    def move_params
+      params.require(:spec).permit(:parent_id, :sibling_id)
     end
 end

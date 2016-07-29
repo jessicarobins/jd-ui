@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :specs, except: [:new, :edit] do
       member do
         get 'breadcrumbs'
+        put 'move'
       end
       collection do
         get 'export'

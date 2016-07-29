@@ -126,7 +126,10 @@ module.service('$specs', function($mdToast, $api, $q, $user, $projects) {
                 }}
         }).
         then(function (response) {
-            return response;
+            self.getBookmarks().then( function(){
+                updateBookmarks();
+                return response;
+            });
         });
     };
     

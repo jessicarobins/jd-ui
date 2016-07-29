@@ -77,6 +77,24 @@ class Spec < ActiveRecord::Base
         
         query
     end
+    
+    def self.move(spec:, parent_id:nil, sibling_id:nil)
+        if sibling_id
+            sibling = Spec.find(sibling_id)
+            new_pos = sibling.spec_order + 1
+            spec.insert_at(new_pos)
+            spec.update!(:parent => sibling.parent)
+        elsif parent_id
+            parent = Spec.find(parent_id)
+            new_pos = parent.spec_order + 1
+            spec.insert_at(new_pos)
+            spec.update!(:parent => parent)
+        else
+            spec.move_to_top
+            spec.update!(:parent => nil)
+        end
+        
+    end
 
     def self.parse_block(text:, project_id:, parent_id: nil, created_by_id:)
         if parent_id
