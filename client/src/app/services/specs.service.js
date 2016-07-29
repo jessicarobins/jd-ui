@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$specs', function($api, $q, $user, $projects) {
+module.service('$specs', function($mdToast, $api, $q, $user, $projects) {
     var self = this;
     var callbacks = [];
     var bookmarkCallbacks = [];
@@ -139,6 +139,29 @@ module.service('$specs', function($api, $q, $user, $projects) {
             self.setSpecList().then(function(){
                 updateAll();
                 return response;
+            });
+        });
+    };
+    
+    self.add = function(parentId, projectId, text) {
+        $api.request({
+            url: '/specs/create_many',
+            method: 'POST',
+            data: {
+                text: text,
+                parent_id: parentId,
+                project_id: projectId
+            }
+        }).then( function(response){
+            var message = response.specs_created + ' specs created, ' 
+                + response.errors + ' errors';
+            $mdToast.show(
+                $mdToast.simple()
+                .textContent(message)
+                .position('top right')
+            );
+            self.setSpecList().then( function(){
+               updateAll();
             });
         });
     };

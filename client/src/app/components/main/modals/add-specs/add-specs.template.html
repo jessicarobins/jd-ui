@@ -30,6 +30,7 @@
         <md-input-container
             class="edit-input md-block">
             <textarea
+                md-autofocus
                 aria-label="mass add specs"
                 rows="5"
                 ng-model="$ctrl.text"></textarea>
@@ -40,6 +41,7 @@
         <span flex></span>
         <md-button
             ng-click="$ctrl.add()"
+            ng-disabled="!$ctrl.text.length"
             class="md-raised md-accent">
             <md-icon
                 class="material-icons">add</md-icon>
