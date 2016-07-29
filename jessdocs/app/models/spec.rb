@@ -18,6 +18,7 @@ class Spec < ActiveRecord::Base
     
     alias_attribute :name, :description
     
+    default_scope { order('spec_order ASC') }
     scope :with_tag_type, ->(type_id) { joins(:tags).where(tags: {tag_type_id: type_id})  }
     scope :for_project, ->(project_id) { where(:project_id => project_id) }
     scope :has_ticket, -> { joins(:tickets) }
@@ -79,7 +80,7 @@ class Spec < ActiveRecord::Base
 
     def self.parse_block(text:, project_id:, parent_id: nil, created_by_id:)
         if parent_id
-            insert_at = Spec.find(parent_id).pluck(:spec_order)
+            insert_at = Spec.find(parent_id).spec_order + 1
         end
         return self.parse_alternate(   
             :text_array => text.split("\n"), 
