@@ -169,6 +169,25 @@ module.service('$specs', function($mdToast, $api, $q, $user, $projects) {
         });
     };
     
+    self.move = function(specId, parent_id, sibling_id){
+        return $api.request({
+            url: '/specs/' + specId + '/move', 
+            method: "PUT",
+            data: {
+                spec: {
+                    parent_id: parent_id || null,
+                    sibling_id: sibling_id || null
+                }
+            }
+        }).
+        then(function (response) {
+            self.getBookmarks().then(function(){
+                updateBookmarks();
+                return response;
+            });
+        });
+    };
+    
     self.setSpecId = function(id){
         self.filterParams.id = id;
     };

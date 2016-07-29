@@ -27,8 +27,8 @@ module.component('specs', {
                 return true;
             },
             dropped: function(e){
-                self.dragging = false;
                 console.log('drag event', e)
+                parseMove(e);
                 //spec id: e.source.nodeScope.$modelValue.id
                 //need parent
                 //parent spec id: e.dest.nodeScope.$parent.$ctrl.spec.id)
@@ -40,6 +40,19 @@ module.component('specs', {
                 return true;
             }
         };
+        
+        function parseMove(e){
+            self.dragging = false;  
+            var specId = e.source.nodeScope.$modelValue.id;
+            var newIndex = e.dest.index;
+            var siblingId;
+            if(newIndex > 0){
+                siblingId = e.dest.nodesScope.$modelValue[newIndex-1].id;
+            }
+            var parentId = e.dest.nodesScope.$parent.$ctrl.spec.id;
+            
+            $specs.move(specId, parentId, siblingId);
+        }
         
         self.toggleExport = function(spec){
             var id = spec.id;

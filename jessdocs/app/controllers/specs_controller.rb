@@ -83,7 +83,10 @@ class SpecsController < ApplicationController
   end
   
   def move
-    Spec.move({:spec => @spec}.merge(move_params))
+    Spec.move(
+      :spec => @spec, 
+      :parent_id => move_params[:parent_id],
+      :sibling_id => move_params[:sibling_id])
   end
   
   # DELETE /specs/1
