@@ -69,7 +69,7 @@
     <ol ui-tree-nodes ng-model="$ctrl.spec.children">
         <li ng-repeat="child in $ctrl.spec.children track by child.id" ui-tree-node>
             <spec 
-                spec='::child' 
+                spec='child' 
                 ui-tree-callbacks="::$callbacks"
                 tag="::$ctrl.parent.getTags(child)"
                 ticket="::$ctrl.parent.getTickets(child)"></spec>
