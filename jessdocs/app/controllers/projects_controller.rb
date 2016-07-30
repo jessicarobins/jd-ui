@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
-
+    @projects = Project.for_user(current_user)
     render json: @projects
   end
 

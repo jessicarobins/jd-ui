@@ -5,10 +5,10 @@ class TagTypesController < ApplicationController
   # GET /tag_types
   # GET /tag_types.json
   def index
-    @tag_types = TagType.all
-    @deleted_tag_types = TagType.only_deleted
+    @tag_types = TagType.for_user(current_user)
+    @deleted_tag_types = TagType.only_deleted.for_user(current_user)
 
-    render json: {by_group: TagType.tag_hash, all_types: @tag_types, deleted: @deleted_tag_types}
+    render json: {by_group: TagType.tag_hash(:user => current_user), all_types: @tag_types, deleted: @deleted_tag_types}
   end
 
   # GET /tag_types/1

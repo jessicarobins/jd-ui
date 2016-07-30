@@ -12,14 +12,14 @@ class TagType < ActiveRecord::Base
     validates_presence_of :color
     
     default_scope { order("tag_type_group_id nulls first, LOWER(name)")}
-    
+    scope :for_user, -> (user) { where(:created_by => user) }
     scope :by_group, -> { includes(:tag_type_group).all.group_by(&:tag_type_group) }
     
     before_create :downcase
     
-    def self.tag_hash
+    def self.tag_hash(user:)
       results = {tag_types: []}
-      TagType.includes(:tag_type_group).all.group_by(&:tag_type_group).each do |group, tag_types|
+      TagType.includes(:tag_type_group).for_user(user).group_by(&:tag_type_group).each do |group, tag_types|
         if group
           results[:tag_types] << {
             id: group.id,

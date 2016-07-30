@@ -11,6 +11,8 @@ class Spec < ActiveRecord::Base
     validates_presence_of :project_id
     
     belongs_to :project
+    belongs_to :created_by, class_name: "User"
+    belongs_to :updated_by, class_name: "User"
     has_many :tags, dependent: :destroy
     has_many :tickets, dependent: :destroy
     # has_many :comments, dependent: :destroy

@@ -1,11 +1,11 @@
 class TagTypeGroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_tag_type_group, only: [:show, :update, :destroy]
 
   # GET /tag_type_groups
   # GET /tag_type_groups.json
   def index
-    @tag_type_groups = TagTypeGroup.all
-
+    @tag_type_groups = TagTypeGroup.for_user(current_user)
     render json: @tag_type_groups
   end
 

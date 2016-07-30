@@ -28,6 +28,6 @@ class User < ActiveRecord::Base
     end
     
     def add_user_project
-      Project.create!(:name => 'First Project', :created_by_id => self.id)
+      Project.create!(:name => 'Demo Project', :created_by_id => self.id)
     end
 end

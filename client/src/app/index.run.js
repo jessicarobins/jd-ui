@@ -24,6 +24,11 @@ export function runBlock ($log, $rootScope, $user, $state) {
         $log.debug('auth failed because', reason.errors[0]);
   }));
   $rootScope.$on('$destroy', 
+    $rootScope.$on('auth:validation-error', function(ev, reason) {
+        $state.go('login');
+        $log.debug('auth failed because', reason);
+  }));
+  $rootScope.$on('$destroy', 
     $rootScope.$on('auth:invalid', function(ev, reason) {
         $state.go('login');
         $log.debug('auth failed because', reason);
