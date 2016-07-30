@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   
+  mount_devise_token_auth_for 'User', at: '/auth', controllers: {
+    token_validations:  'overrides/token_validations'
+  }
   
-  resources :user_organizations, except: [:new, :edit]
-  mount_devise_token_auth_for 'User', at: '/auth'
   scope '/api' do
+    resources :user_organizations, except: [:new, :edit]
     resources :organizations, except: [:new, :edit]
     resources :specs, except: [:new, :edit] do
       member do
