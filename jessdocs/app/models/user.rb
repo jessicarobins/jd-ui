@@ -9,25 +9,42 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   
-  belongs_to :organization
+  has_many :user_organizations
+  has_many :organizations, through: :user_organizations
   
   before_create :set_up_user
+  after_create :add_user_defaults
   
-  after_create :add_user_project
+  def personal_org
+    self.organizations.where(:name => 'Personal').first
+  end
   
   private
     def set_up_user
       #devise stuff
       skip_confirmation!
-    
-      #set org
-      domain = self.email.split('@')
-      org = Organization.find_by(:domain => domain)
-      #todo: set this with has_and_belongs_to_many
-      # self.organization_id = org ? org.id : nil
     end
     
-    def add_user_project
+    def add_user_defaults
+      create_default_project
+      create_personal_org
+      add_domain_org
+    end
+    
+    def create_default_project
       Project.create!(:name => 'Demo Project', :created_by_id => self.id)
+    end
+    
+    def create_personal_org
+      org = Organization.create!(:name => 'Personal')
+      self.organizations << org
+    end
+    
+    def add_domain_org
+      domain = self.email.split('@')
+      org = Organization.find_by(:domain => domain)
+      if org
+        self.organizations << org
+      end
     end
 end

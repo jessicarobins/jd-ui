@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  resources :user_organizations, except: [:new, :edit]
   mount_devise_token_auth_for 'User', at: '/auth'
   scope '/api' do
     resources :organizations, except: [:new, :edit]
