@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.for_user(current_user)
+    @projects = Project.for_org(params[:organization_id])
     render json: @projects
   end
 

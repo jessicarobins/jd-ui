@@ -8,18 +8,20 @@ class TagType < ActiveRecord::Base
     acts_as_paranoid
     
     validates_presence_of :name
-    # validates_uniqueness_of :name, :scope => :tag_type_group_id, :allow_nil => true, :allow_blank => true
     validates_presence_of :color
+    validates_presence_of :organization_id
+    validates_uniqueness_of_without_deleted :name, :scope => :organization_id
     
     default_scope { order("tag_type_group_id nulls first, LOWER(name)")}
     scope :for_user, -> (user) { where(:created_by => user) }
+    scope :for_org, -> (org_id) { where(:organization_id => org_id) }
     scope :by_group, -> { includes(:tag_type_group).all.group_by(&:tag_type_group) }
     
     before_create :downcase
     
-    def self.tag_hash(user:)
+    def self.tag_hash(organization_id:)
       results = {tag_types: []}
-      TagType.includes(:tag_type_group).for_user(user).group_by(&:tag_type_group).each do |group, tag_types|
+      TagType.includes(:tag_type_group).for_org(organization_id).group_by(&:tag_type_group).each do |group, tag_types|
         if group
           results[:tag_types] << {
             id: group.id,

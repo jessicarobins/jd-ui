@@ -35,7 +35,7 @@ module.service('$tagtypes', function($api, $q, $user) {
         }).then( function(response){
             self.updateTagTypes().then( function(){
                 self.editingTagType = null;
-                notifyWatchers();
+                // notifyWatchers();
             });
         });
         
@@ -55,7 +55,7 @@ module.service('$tagtypes', function($api, $q, $user) {
         }).then( function(response){
             self.updateTagTypes().then( function(){
                 self.editingTagType = null;
-                notifyWatchers();
+                // notifyWatchers();
             });
         });
         
@@ -68,7 +68,7 @@ module.service('$tagtypes', function($api, $q, $user) {
         }).then( function(response){
             self.updateTagTypes().then( function(){
                 self.editingTagType = null;
-                notifyWatchers();
+                // notifyWatchers();
             });
         });
         
@@ -81,7 +81,7 @@ module.service('$tagtypes', function($api, $q, $user) {
         }).then( function(response){
             self.updateTagTypes().then( function(){
                 self.editingTagType = null;
-                notifyWatchers();
+                // notifyWatchers();
             });
         });
         
@@ -97,11 +97,15 @@ module.service('$tagtypes', function($api, $q, $user) {
     self.updateTagTypes = function() {
         var promise = $api.request({
             url: '/tag_types',
-            method: 'GET'
+            method: 'GET',
+            params: {
+                organization_id: $user.currentOrg().id
+            }
         }).then(function(response) {
             self.tagTypes.allTypes = response.all_types;
             self.tagTypes.byGroup = response.by_group.tag_types;
             self.tagTypes.deleted = response.deleted;
+            notifyWatchers();
             return self.tagTypes;
         });
         return promise;
@@ -129,7 +133,7 @@ module.service('$tagtypes', function($api, $q, $user) {
         }).then( function(response){
             self.updateGroups().then( function(){
                 self.editingTagType = null;
-                notifyWatchers();
+                // notifyWatchers();
             });
         });
     };
@@ -148,7 +152,7 @@ module.service('$tagtypes', function($api, $q, $user) {
             self.updateGroups().then( function(){
                 self.updateTagTypes().then( function(){
                     self.editingTagType = null;
-                    notifyWatchers();
+                    // notifyWatchers();
                 });
             });
         });
@@ -162,7 +166,7 @@ module.service('$tagtypes', function($api, $q, $user) {
             self.updateGroups().then( function(){
                 self.updateTagTypes().then( function(){
                     self.editingTagType = null;
-                    notifyWatchers();
+                    // notifyWatchers();
                 });
             });
         });
@@ -171,11 +175,15 @@ module.service('$tagtypes', function($api, $q, $user) {
     self.updateGroups = function() {
         var promise = $api.request({
             url: '/tag_type_groups',
-            method: 'GET'
+            method: 'GET',
+            params: {
+                organization_id: $user.currentOrg().id
+            }
         }).then(function(response) {
             self.tagGroups = response;
+            notifyWatchers();
             return self.tagGroups;
         });
         return promise;
-    }
+    };
 });

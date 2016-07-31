@@ -6,6 +6,7 @@ module.
       $projects, 
       $specs, 
       $tagtypes,
+      $user,
       $state,
       BreadcrumbsService) {
         
@@ -24,12 +25,16 @@ module.
             //     self.formData.project = self.projects[0].id;
                 
             // }
-            self.formData.project = $projects.project().id;
+            self.formData.project = $projects.project();
         });
         
         $projects.addCallback( function(){
             self.projects = $projects.projects;
-            self.formData.project = $projects.project().id;
+            self.formData.project = $projects.project();
+        });
+        
+        $projects.addCurrentProjectCallback( function(){
+            self.formData.project = $projects.project();
         });
         
         $tagtypes.getTagTypes().then( function(response){
@@ -65,7 +70,7 @@ module.
       };
       
       self.changeProject = function() {
-        var project = $filter('getById')(self.projects, self.formData.project);
+        var project = self.formData.project;
         $projects.setCurrentProject(project);
         $state.transitionTo('home', {projectId: project.id}, { notify: false });
         BreadcrumbsService.clearBreadcrumbs();
@@ -74,13 +79,12 @@ module.
         
       self.submit = function() {
         var params = {
-          project_id: self.formData.project,
+          project_id: self.formData.project.id,
           "tag_types[]": self.selected,
           ticketed: self.ticketed
         };
         
-        $specs.setSpecList(params).then( function(result) {
-        });
+        $specs.setSpecList(params);
         
         
       };

@@ -1,8 +1,16 @@
 var module = angular.module('jessdocs');
 
-module.service('$user', ['$auth', function($auth) {
+module.service('$user', function($auth) {
     
     var self = this;
+    
+    var orgCallbacks = [];
+    
+    var currentOrganization;
+    
+    self.addOrgCallback = function(callback) {
+        orgCallbacks.push(callback);
+    };
 
     self.setCurrentUser = function(user){
         currentUser = user;
@@ -12,10 +20,22 @@ module.service('$user', ['$auth', function($auth) {
         return currentUser;  
     };
     
+    self.currentOrg = function(){
+        return currentOrganization || self.organizations()[0];
+    };
+    
+    self.setCurrentOrg = function(org){
+        currentOrganization = org;
+        notifyWatchers();
+    };
+    
+    self.organizations = function(){
+        return currentUser.organizations;
+    };
+    
     self.logout = function() {
         $auth.signOut()
             .then(function(resp) {
-                console.log(resp);
             })
             .catch(function(resp) {
               // handle error response
@@ -23,4 +43,10 @@ module.service('$user', ['$auth', function($auth) {
             });
     };
     
-}]);
+    function notifyWatchers() {
+        orgCallbacks.forEach(function(callback) {
+            callback();
+        });
+    }
+    
+});

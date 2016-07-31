@@ -5,10 +5,11 @@ class TagTypesController < ApplicationController
   # GET /tag_types
   # GET /tag_types.json
   def index
-    @tag_types = TagType.for_user(current_user)
-    @deleted_tag_types = TagType.only_deleted.for_user(current_user)
+    org_id = params[:organization_id]
+    @tag_types = TagType.for_org(org_id)
+    @deleted_tag_types = TagType.only_deleted.for_org(org_id)
 
-    render json: {by_group: TagType.tag_hash(:user => current_user), all_types: @tag_types, deleted: @deleted_tag_types}
+    render json: {by_group: TagType.tag_hash(:organization_id => org_id), all_types: @tag_types, deleted: @deleted_tag_types}
   end
 
   # GET /tag_types/1
@@ -63,8 +64,12 @@ class TagTypesController < ApplicationController
       params[:tag_type]
     end
     
+    def index_params
+      params.require(:tag_types).permit(:organization_id)
+    end
+    
     def create_params
-      params.require(:tag_type).permit(:name, :color, :created_by_id, :tag_type_group_id)
+      params.require(:tag_type).permit(:name, :color, :created_by_id, :tag_type_group_id, :organization_id)
     end
     
     def update_params

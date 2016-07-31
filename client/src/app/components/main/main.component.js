@@ -6,6 +6,8 @@ module.component('main', {
         $api,
         $projects,
         $specs,
+        $user,
+        $tagtypes,
         $stateParams) {
        var self = this;
        self.$onInit = function(){
@@ -13,7 +15,12 @@ module.component('main', {
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),
-                projects: $api.request({url: '/projects'})
+                projects: $api.request({
+                    url: '/projects', 
+                    params:{
+                        organization_id: $user.currentOrg().id
+                    }
+                })
             };
             
             $q.all(promises).then( function(response) {
@@ -22,7 +29,18 @@ module.component('main', {
                 $projects.projects = response.projects;
                 var project = $projects.initCurrentProject($stateParams.projectId);
                 $specs.setSpecList({project_id: project.id});
-                
+            });
+            
+            $user.addOrgCallback( function(){
+                $tagtypes.updateGroups();
+                $tagtypes.updateTagTypes();
+               $projects.updateProjects().then( function(response){
+                   $projects.setCurrentProject(response[0]);
+                   return response;
+               }).then( function(projects){
+                   $specs.setSpecList({project_id: $projects.project().id});
+               });
+               
             });
        };
        

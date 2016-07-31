@@ -12,7 +12,22 @@
             <span>jessdocs 3.0</span>
         </h2>
         <span flex></span>
-        
+        <md-icon class="material-icons">business</md-icon>
+        <md-input-container>
+            <md-select
+                class="all-caps org-select"
+                ng-model-options="{trackBy: '$value.id'}"
+                ng-if="$ctrl.showOrgMenu()"
+                ng-change="$ctrl.changeOrg()" 
+                ng-model="$ctrl.org"
+                aria-label="orgs">
+                <md-option 
+                    ng-value="org"
+                    ng-repeat="org in $ctrl.organizations">
+                    {{org.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
         <md-menu
             md-position-mode="target-right target">
             <md-button 

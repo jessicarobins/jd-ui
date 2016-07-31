@@ -11,13 +11,15 @@ module.service('$projects', function(
     
     var callbacks = [];
     
+    var currentProjectCallbacks = [];
+    
     self.currentProject;
     
     self.getProjects = function() {
         if(self.projects && self.projects.length){
             return $q.when(self.projects);
         }
-        return updateProjects();
+        return self.updateProjects();
     };
     
     self.project = function(){
@@ -26,6 +28,7 @@ module.service('$projects', function(
     
     self.setCurrentProject = function(project){
         self.currentProject = project;  
+        notifyCurrentProjectWatchers();
     };
     
     self.initCurrentProject = function(projectId) {
@@ -52,7 +55,7 @@ module.service('$projects', function(
             }
         }).then( function(response){
             self.projects.push(response);
-            notifyWatchers();
+            // notifyWatchers();
         });
     };
     
@@ -67,8 +70,8 @@ module.service('$projects', function(
                     }
                 }
             }).then( function(response){
-                updateProjects().then( function(){
-                    notifyWatchers();
+                self.updateProjects().then( function(){
+                    // notifyWatchers();
                 });
             });
         }
@@ -79,8 +82,8 @@ module.service('$projects', function(
             url: '/projects/' + project.id,
             method: 'DELETE'
         }).then( function(response){
-            updateProjects().then( function(){
-                notifyWatchers();
+            self.updateProjects().then( function(){
+                // notifyWatchers();
             });
         });
     };
@@ -89,6 +92,16 @@ module.service('$projects', function(
         callbacks.push(callback);
     };
     
+    self.addCurrentProjectCallback = function(callback) {
+        currentProjectCallbacks.push(callback);
+    };
+    
+    function notifyCurrentProjectWatchers() {
+        currentProjectCallbacks.forEach(function(callback) {
+            callback();
+        });
+    }
+    
     function notifyWatchers() {
         callbacks.forEach(function(callback) {
             callback();
@@ -96,14 +109,18 @@ module.service('$projects', function(
     }
     
     
-    function updateProjects() {
+    self.updateProjects = function() {
         var promise = $api.request({
           url: '/projects', 
-          method: 'GET'
+          method: 'GET',
+          params: {
+              organization_id: $user.currentOrg().id
+          }
         }).then(function(response) {
             self.projects = response;
+            notifyWatchers();
             return response;
         });
         return promise;
-    }
+    };
 });

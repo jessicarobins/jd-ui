@@ -10,6 +10,8 @@ module.component('headerMenu', {
        
        self.$onInit = function(){
            self.user = $user.user();
+           self.organizations = $user.organizations();
+           self.org = $user.currentOrg();
            self.manage = false;
        };
        
@@ -25,5 +27,12 @@ module.component('headerMenu', {
             $state.go('home');
         };
         
+        self.showOrgMenu = function(){
+            return (self.organizations.length > 1);
+        };
+        
+        self.changeOrg = function(){
+            $user.setCurrentOrg(self.org);
+        };
     }
 });

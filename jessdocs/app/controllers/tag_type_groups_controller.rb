@@ -5,7 +5,7 @@ class TagTypeGroupsController < ApplicationController
   # GET /tag_type_groups
   # GET /tag_type_groups.json
   def index
-    @tag_type_groups = TagTypeGroup.for_user(current_user)
+    @tag_type_groups = TagTypeGroup.for_org(params[:organization_id])
     render json: @tag_type_groups
   end
 
@@ -57,7 +57,7 @@ class TagTypeGroupsController < ApplicationController
     end
     
     def create_params
-      params.require(:tag_type_group).permit(:color, :name, :created_by_id)
+      params.require(:tag_type_group).permit(:color, :name, :created_by_id, :organization_id)
     end
     
     def update_params
