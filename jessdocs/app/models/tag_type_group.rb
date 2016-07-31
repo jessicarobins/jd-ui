@@ -7,7 +7,7 @@ class TagTypeGroup < ActiveRecord::Base
     validates_presence_of :name
     validates_presence_of :color
     validates_presence_of :organization_id
-    validates_uniqueness_of :name, scope: organization_id
+    validates_uniqueness_of :name, scope: :organization_id
     
     before_create :downcase
     

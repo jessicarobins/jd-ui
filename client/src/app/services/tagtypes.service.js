@@ -29,7 +29,8 @@ module.service('$tagtypes', function($api, $q, $user) {
                     name: tagType.name,
                     color: tagType.color,
                     tag_type_group_id: tagType.tag_type_group_id,
-                    created_by_id: $user.user().id
+                    created_by_id: $user.user().id,
+                    organization_id: $user.currentOrg().id
                 }
             }
         }).then( function(response){
@@ -127,7 +128,8 @@ module.service('$tagtypes', function($api, $q, $user) {
                 tag_type_group: {
                     name: group.name,
                     color: group.color,
-                    created_by_id: $user.user().id
+                    created_by_id: $user.user().id,
+                    organization_id: $user.currentOrg().id
                 }
             }
         }).then( function(response){
