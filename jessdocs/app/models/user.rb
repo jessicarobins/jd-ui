@@ -26,13 +26,8 @@ class User < ActiveRecord::Base
     end
     
     def add_user_defaults
-      create_default_project
       create_personal_org
       add_domain_org
-    end
-    
-    def create_default_project
-      Project.create!(:name => 'Demo Project', :created_by_id => self.id)
     end
     
     def create_personal_org
