@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   
   scope '/api' do
     resources :user_organizations, except: [:new, :edit]
-    resources :organizations, except: [:new, :edit]
+    resources :organizations, except: [:new, :edit] do
+      member do
+        get 'current_user_role'
+      end
+    end
     resources :specs, except: [:new, :edit] do
       member do
         get 'breadcrumbs'

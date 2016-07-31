@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
@@ -33,6 +34,8 @@ class User < ActiveRecord::Base
     def create_personal_org
       org = Organization.create!(:name => 'Personal')
       self.organizations << org
+      
+      user.add_role :write, org
     end
     
     def add_domain_org
@@ -40,6 +43,8 @@ class User < ActiveRecord::Base
       org = Organization.find_by(:domain => domain)
       if org
         self.organizations << org
+        
+        user.add_role :read, org
       end
     end
 end

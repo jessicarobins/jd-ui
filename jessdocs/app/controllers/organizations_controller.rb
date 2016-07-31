@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :update, :destroy]
+  before_action :set_organization, only: [:show, :current_user_role, :update, :destroy]
 
   # GET /organizations
   # GET /organizations.json
@@ -13,6 +13,12 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     render json: @organization
+  end
+  
+  def current_user_role
+    roles = current_user.roles.where(:resource_id => @organization.id).first
+    
+    render json: roles
   end
 
   # POST /organizations

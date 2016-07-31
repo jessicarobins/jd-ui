@@ -11,7 +11,7 @@ module.component('main', {
         $stateParams) {
        var self = this;
        self.$onInit = function(){
-          
+            $user.setCurrentOrg($stateParams.orgId);
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),
@@ -42,6 +42,7 @@ module.component('main', {
                });
                
             });
+            
        };
        
        

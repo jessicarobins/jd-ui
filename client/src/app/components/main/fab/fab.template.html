@@ -49,6 +49,7 @@
     </md-button>
     
     <md-button 
+        ng-if="$ctrl.canWrite"
         class="md-fab md-raised md-mini md-accent"
         aria-label="mass add specs"
         ng-click="$ctrl.showAddSpecsModal($event)">

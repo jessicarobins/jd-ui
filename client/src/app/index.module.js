@@ -1,4 +1,6 @@
 /* global moment:false */
+/* global _:true */
+var _ = require('lodash');
 
 import { config } from './index.config';
 import { routerConfig } from './index.route';
@@ -33,6 +35,7 @@ angular.module('jessdocs', [
     };
   })
   .constant('moment', moment)
+  .constant('_', _)
   .config(config)
   .config(routerConfig)
   .config(function($authProvider) {

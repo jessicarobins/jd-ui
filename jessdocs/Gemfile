@@ -16,6 +16,9 @@ gem "omniauth-google-oauth2"
 gem 'omniauth'
 gem 'rack-cors', :require => 'rack/cors'
 
+#roles
+gem "rolify"
+
 gem 'acts_as_paranoid', '~> 0.5.0.rc1'
 gem 'active_record_union'
 gem 'ancestry', :github => "stefankroes/ancestry", :branch => "2-1-stable"

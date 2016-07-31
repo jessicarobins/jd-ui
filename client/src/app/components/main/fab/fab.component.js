@@ -6,6 +6,7 @@ module.component('fab', {
          $mdDialog, 
          $specs,
          $tagtypes,
+         $user,
          MenuService) {
              
         var self = this;
@@ -16,6 +17,16 @@ module.component('fab', {
         self.$onInit = function(){
             MenuService.addExportCallback( function(){
                 self.exporting = MenuService.export;
+            });
+            
+            $user.write().then(function(response){
+               self.canWrite = response; 
+            });
+            
+            $user.addOrgCallback( function(){
+                $user.write().then(function(response){
+                   self.canWrite = response; 
+                });
             });
         };
         
