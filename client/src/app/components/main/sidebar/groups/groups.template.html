@@ -10,6 +10,8 @@
       </md-button>
   </md-list-item>
   <md-list-item 
+    ng-mouseenter="group.userMouseover=true"
+    ng-mouseleave="group.userMouseover=false"
     ng-repeat="group in $ctrl.groups"
     ng-click="$ctrl.edit(group, $event)">
     <p 
@@ -18,6 +20,7 @@
         style="color: {{group.color}}"></p>
     <md-icon 
         ng-if="$ctrl.parent.canWrite"
+        ng-style="{'visibility': group.userMouseover?'visible':'hidden'}"
         aria-label="delete tag group"
         class="material-icons md-secondary"
         ng-click="$ctrl.delete(group)">

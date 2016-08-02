@@ -9,6 +9,9 @@
       </md-button>
   </md-list-item>
   <md-list-item 
+    ng-mouseenter="user.userMouseover=true"
+    ng-mouseleave="user.userMouseover=false"
+    ng-click="$ctrl.viewUserInfo()"
     ng-repeat="user in $ctrl.users">
     <p 
       class="truncate"
@@ -16,6 +19,7 @@
     
     <md-icon 
       ng-if="$ctrl.showDeleteUser(user)"
+      ng-style="{'visibility': user.userMouseover?'visible':'hidden'}"
       aria-label="delete user"
       class="material-icons md-secondary"
       ng-click="$ctrl.deleteUser(user, $event)">

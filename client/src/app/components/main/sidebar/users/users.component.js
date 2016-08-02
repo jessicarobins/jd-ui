@@ -18,6 +18,10 @@ module.component('users', {
            return self.parent.admin && (user.id != $user.user().id);
        };
        
+       self.viewUserInfo = function(){
+           
+       };
+       
        function getUsers(){
            $api.request({
                 url: '/organizations/' + $user.currentOrg().id + '/users'
