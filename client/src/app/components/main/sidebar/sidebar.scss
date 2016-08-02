@@ -1,5 +1,9 @@
 sidebar {
     
+    .sidebar-tabs {
+        font-size: small;
+    }
+    
     md-tab-content {
         overflow: hidden;
         
@@ -52,11 +56,16 @@ sidebar {
     }
     
     md-sidenav {
-        width: 400px;
+        width: 320px;
+        margin-left: 18px;
     }
     
     sidebar-menu {
         width: 70px;
     }
-
+    
+    .tab-title {
+        padding-left: 16px;
+        font-weight: normal;
+    }
 }
