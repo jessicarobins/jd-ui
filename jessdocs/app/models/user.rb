@@ -36,6 +36,11 @@ class User < ActiveRecord::Base
       self.organizations << org
       
       user.add_role :write, org
+      
+      Project.create!(
+        :name => 'Demo Project', 
+        :organization_id => org.id,
+        :created_by_id => self.id)
     end
     
     def add_domain_org

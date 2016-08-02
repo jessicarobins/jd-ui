@@ -61,6 +61,23 @@
             projects
         </md-tooltip>
     </md-button>
+    <md-icon 
+        ng-if="$ctrl.showOrgMenus()"
+        class="icon-header material-icons">
+        business
+    </md-icon>
+    <md-button
+        ng-if="$ctrl.showOrgMenus()"
+        ng-click="$ctrl.setTab($ctrl.index.users)"
+        class="md-icon-button"
+        ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.users)}">
+        <md-icon class="big-icon material-icons">
+            supervisor_account
+        </md-icon>
+        <md-tooltip md-direction="right">
+            users
+        </md-tooltip>
+    </md-button>
     
     <span flex></span>
         

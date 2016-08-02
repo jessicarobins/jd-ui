@@ -8,6 +8,7 @@ module.service('$user', function($q, $auth, $api) {
     
     var currentOrganization;
     
+    var adminRoles = ['admin'];
     var writeRoles = ['admin', 'write'];
     var currentRole;
     
@@ -39,6 +40,12 @@ module.service('$user', function($q, $auth, $api) {
         });
     };
     
+    self.admin = function(){
+        return self.currentRole().then (function(response){
+            return _.contains(adminRoles, response.name); 
+        });
+    };
+    
     self.setCurrentOrg = function(org){
         org = org || self.organizations()[0];
         currentOrganization = org;
@@ -50,7 +57,7 @@ module.service('$user', function($q, $auth, $api) {
     
     self.currentRole = function(){
         if(currentRole && currentRole.name){
-            return $q.when(currentRole)
+            return $q.when(currentRole);
         }
         else {
             return $api.request({

@@ -14,11 +14,4 @@ class Organization < ActiveRecord::Base
   has_many :projects
   
   validates_uniqueness_of :domain, allow_nil: true, allow_blank: true
-  
-  after_create :create_default_project
-  
-  private
-    def create_default_project
-      Project.create!(:name => 'Demo Project', :organization_id => self.id)
-    end
 end

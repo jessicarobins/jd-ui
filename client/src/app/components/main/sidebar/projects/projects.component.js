@@ -1,5 +1,7 @@
 module.component('projects', {
-    
+    require: {
+        parent: '^^sidebar'
+    },
     templateUrl: 'app/components/main/sidebar/projects/projects.template.html',
     controller: function($mdDialog, $projects) {
        var self = this;
@@ -14,20 +16,22 @@ module.component('projects', {
        };
        
         self.editProject = function(project, ev) {
-            var confirm = $mdDialog.prompt()
-                .title('Edit project')
-                .placeholder('project name')
-                .ariaLabel('project name')
-                .initialValue(project.name)
-                .targetEvent(ev)
-                .ok('save')
-                .cancel('cancel');
-            $mdDialog.show(confirm).then(function(name) {
-                if(name && name.length){
-                    $projects.editProject(project, name);
-                }
-            }, function() {
-            });
+            if(self.parent.canWrite){
+                var confirm = $mdDialog.prompt()
+                    .title('Edit project')
+                    .placeholder('project name')
+                    .ariaLabel('project name')
+                    .initialValue(project.name)
+                    .targetEvent(ev)
+                    .ok('save')
+                    .cancel('cancel');
+                $mdDialog.show(confirm).then(function(name) {
+                    if(name && name.length){
+                        $projects.editProject(project, name);
+                    }
+                }, function() {
+                });
+            }
         };
         
         self.addProject = function(ev) {

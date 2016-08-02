@@ -1,5 +1,7 @@
 module.component('tagTypes', {
-    
+    require: {
+        parent: '^^sidebar'
+    },
     templateUrl: 'app/components/main/sidebar/tags/tag-types.template.html',
     controller: function($mdDialog, $mdToast, $tagtypes) {
        var self = this;
@@ -17,21 +19,23 @@ module.component('tagTypes', {
        };
        
         self.edit = function(tagType, ev) {
-            $tagtypes.editingTagType = tagType;
-            $mdDialog.show({
-                template: '<tag-types-modal tag="tagType" layout="column"></tag-types-modal>',
-                targetEvent: ev,
-                clickOutsideToClose:true,
-            })
-            .then(function(editedTag) {
-                $tagtypes.editingTagType = null;
-                if(editedTag.name != tagType.name 
-                    || editedTag.color != tagType.color
-                    || editedTag.tag_type_group_id != tagType.tag_type_group_id){
-                    $tagtypes.update(editedTag);   
-                }
-            }, function() {
-            });
+            if(self.parent.canWrite){
+                $tagtypes.editingTagType = tagType;
+                $mdDialog.show({
+                    template: '<tag-types-modal tag="tagType" layout="column"></tag-types-modal>',
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                })
+                .then(function(editedTag) {
+                    $tagtypes.editingTagType = null;
+                    if(editedTag.name != tagType.name 
+                        || editedTag.color != tagType.color
+                        || editedTag.tag_type_group_id != tagType.tag_type_group_id){
+                        $tagtypes.update(editedTag);   
+                    }
+                }, function() {
+                });
+            }
         };
         
         self.add = function(ev) {

@@ -2,6 +2,7 @@
   <md-list-item>
       <h5 class="tab-title">Tag Groups</h5>
       <md-button 
+        ng-if="$ctrl.parent.canWrite"
         aria-label="add tag group" 
         class="md-secondary md-icon-button"
         ng-click="$ctrl.add($event)">
@@ -16,6 +17,7 @@
         ng-bind="group.name"
         style="color: {{group.color}}"></p>
     <md-icon 
+        ng-if="$ctrl.parent.canWrite"
         aria-label="delete tag group"
         class="material-icons md-secondary"
         ng-click="$ctrl.delete(group)">

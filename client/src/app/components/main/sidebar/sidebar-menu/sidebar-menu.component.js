@@ -3,7 +3,7 @@ module.component('sidebarMenu', {
         parent: '^^sidebar'
     },
     templateUrl: 'app/components/main/sidebar/sidebar-menu/sidebar-menu.template.html',
-    controller: function($mdSidenav) {
+    controller: function($mdSidenav, $user) {
        var self = this;
        
        self.index = {
@@ -11,10 +11,17 @@ module.component('sidebarMenu', {
            bookmarks: 1,
            tags: 2,
            groups: 3,
-           projects: 4
+           projects: 4,
+           users: 5
        };
        
        var navName = 'left';
+       
+       self.$onInit = function(){
+           $user.admin().then( function(response){
+                self.admin = response;    
+           });
+       };
        
        self.setTab = function(index){
            if(self.currentTab(index)){
@@ -30,6 +37,11 @@ module.component('sidebarMenu', {
            var open = $mdSidenav('left').isOpen();
            var selected = (index === self.parent.selectedTab);
             return open && selected;  
+       };
+       
+       self.showOrgMenus = function(){
+           var personal = $user.currentOrg().name === 'Personal';
+           return !personal;  
        };
        
     }

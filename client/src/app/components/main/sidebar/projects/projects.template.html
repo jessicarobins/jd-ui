@@ -2,6 +2,7 @@
   <md-list-item>
       <h5 class="tab-title">Projects</h5>
       <md-button 
+        ng-if="$ctrl.parent.canWrite"
         aria-label="add project" 
         class="md-secondary md-icon-button"
         ng-click="$ctrl.addProject($event)">
@@ -16,7 +17,7 @@
       ng-bind="project.name"></p>
     
     <md-icon 
-      ng-if="$ctrl.projects.length > 1"
+      ng-if="$ctrl.projects.length > 1 && $ctrl.parent.canWrite"
       aria-label="delete project"
       class="material-icons md-secondary"
       ng-click="$ctrl.deleteProject(project, $event)">

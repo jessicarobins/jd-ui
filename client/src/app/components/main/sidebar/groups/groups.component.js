@@ -1,5 +1,7 @@
 module.component('groups', {
-    
+    require: {
+        parent: '^^sidebar'
+    },
     templateUrl: 'app/components/main/sidebar/groups/groups.template.html',
     controller: function($mdDialog, $tagtypes) {
        var self = this;
@@ -26,20 +28,22 @@ module.component('groups', {
         };
         
         self.edit = function(group, ev) {
-            $tagtypes.editingTagType = group;
-            $mdDialog.show({
-                template: '<tag-groups-modal layout="column"></tag-groups-modal>',
-                targetEvent: ev,
-                clickOutsideToClose:true,
-            })
-            .then(function(editedGroup) {
-                $tagtypes.editingTagType = null;
-                if(editedGroup.name != group.name 
-                    || editedGroup.color != group.color){
-                    $tagtypes.editGroup(editedGroup);   
-                }
-            }, function() {
-            });
+            if(self.parent.canWrite){
+                $tagtypes.editingTagType = group;
+                $mdDialog.show({
+                    template: '<tag-groups-modal layout="column"></tag-groups-modal>',
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                })
+                .then(function(editedGroup) {
+                    $tagtypes.editingTagType = null;
+                    if(editedGroup.name != group.name 
+                        || editedGroup.color != group.color){
+                        $tagtypes.editGroup(editedGroup);   
+                    }
+                }, function() {
+                });
+            }
         };
         
         self.delete = function(group) {

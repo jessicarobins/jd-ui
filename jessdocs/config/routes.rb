@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :organizations, except: [:new, :edit] do
       member do
         get 'current_user_role'
+        get 'users'
       end
     end
     resources :specs, except: [:new, :edit] do

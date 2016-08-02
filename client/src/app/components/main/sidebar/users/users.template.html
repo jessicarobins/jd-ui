@@ -1,0 +1,25 @@
+<md-list layout-padding flex>
+  <md-list-item>
+      <h5 class="tab-title">Users</h5>
+      <md-button 
+        aria-label="invite user" 
+        class="md-secondary md-icon-button"
+        ng-click="$ctrl.inviteUser($event)">
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+  </md-list-item>
+  <md-list-item 
+    ng-repeat="user in $ctrl.users">
+    <p 
+      class="truncate"
+      ng-bind="user.name"></p>
+    
+    <md-icon 
+      ng-if="$ctrl.showDeleteUser(user)"
+      aria-label="delete user"
+      class="material-icons md-secondary"
+      ng-click="$ctrl.deleteUser(user, $event)">
+      delete
+    </md-icon>
+  </md-list-item>
+</md-list>
