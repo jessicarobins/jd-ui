@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       member do
         get 'current_user_role'
         get 'users'
+        put 'add_user'
       end
     end
     resources :specs, except: [:new, :edit] do

@@ -56,7 +56,7 @@ module.service('$user', function($q, $auth, $api) {
     };
     
     self.currentRole = function(){
-        if(currentRole && currentRole.name){
+        if(currentRole){
             return $q.when(currentRole);
         }
         else {

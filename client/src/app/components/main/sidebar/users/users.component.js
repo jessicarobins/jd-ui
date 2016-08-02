@@ -28,15 +28,25 @@ module.component('users', {
        
         self.inviteUser = function(ev) {
             var confirm = $mdDialog.prompt()
-                .title('Add project')
-                .placeholder('project name')
-                .ariaLabel('project name')
+                .title('Add user')
+                .placeholder('email address')
+                .ariaLabel('email address')
                 .targetEvent(ev)
-                .ok('save')
+                .ok('invite')
                 .cancel('cancel');
-            $mdDialog.show(confirm).then(function(name) {
-                if(name && name.length){
-                    $projects.addProject(name);
+            $mdDialog.show(confirm).then(function(email) {
+                if(email && email.length){
+                    $api.request({
+                        url: '/organizations/' + $user.currentOrg().id + '/add_user',
+                        method: 'PUT',
+                        data: {
+                            org: {
+                                email: email
+                            }
+                        }
+                    }).then( function(){
+                       getUsers(); 
+                    });
                 }
             }, function() {
             });
@@ -45,16 +55,26 @@ module.component('users', {
         self.deleteUser = function(user, ev) {
             var confText = 'Are you sure you want to remove ' 
                 + user.name + 
-                'from ' + $user.currentOrg().name;
+                ' from ' + $user.currentOrg().name;
             var confirm = $mdDialog.confirm()
                 .title('remove user')
                 .textContent(confText)
-                .ariaLabel('delete project')
+                .ariaLabel('remove user')
                 .targetEvent(ev)
-                .ok('delete')
+                .ok('remove')
                 .cancel('cancel');
             $mdDialog.show(confirm).then(function() {
-                $projects.deleteProject(project);
+                $api.request({
+                    url: '/organizations/' + $user.currentOrg().id,
+                    method: 'PUT',
+                    data: {
+                        org: {
+                            user_id: user.id
+                        }
+                    }
+                }).then(function(){
+                    getUsers();
+                });
             }, function() {
             });
         };

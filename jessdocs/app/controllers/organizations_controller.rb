@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :current_user_role, :users, :update, :destroy]
+  before_action :set_organization, only: [:show, :add_user, :current_user_role, :users, :update, :destroy]
 
   # GET /organizations
   # GET /organizations.json
@@ -42,13 +42,23 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1
   # PATCH/PUT /organizations/1.json
   def update
-    @organization = Organization.find(params[:id])
-
-    if @organization.update(organization_params)
-      head :no_content
-    else
-      render json: @organization.errors, status: :unprocessable_entity
+    user = User.find(update_params[:user_id])
+    
+    if user
+      @organization.users.delete(user)
     end
+    
+    head :no_content
+  end
+  
+  def add_user
+    user = User.where(:email => add_user_params[:email]).first
+    
+    if user
+      user.organizations << @organization
+    end
+    
+    head :no_content
   end
 
   # DELETE /organizations/1
@@ -67,5 +77,13 @@ class OrganizationsController < ApplicationController
 
     def organization_params
       params[:organization]
+    end
+    
+    def update_params
+      params.require(:org).permit(:user_id)
+    end
+    
+    def add_user_params
+      params.require(:org).permit(:email)
     end
 end
