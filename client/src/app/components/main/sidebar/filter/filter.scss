@@ -5,6 +5,10 @@ filter {
    }
     
     .tag-name {
-        max-width: 200px !important;
+        max-width: 175px !important;
+    }
+    
+    md-checkbox {
+        margin-right: 10px !important;
     }
 }

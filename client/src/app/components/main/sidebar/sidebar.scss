@@ -17,7 +17,7 @@ sidebar {
     }
     
     p.truncate {
-        max-width: 200px;
+        max-width: 175px;
     }
     
     md-tabs-wrapper {
@@ -51,6 +51,7 @@ sidebar {
     
     .tag-group-name {
         padding-top: 10px;
+        padding-right: 22px;
         max-width: 275px !important;
         text-align: right;
     }
@@ -67,5 +68,9 @@ sidebar {
     .tab-title {
         padding-left: 16px;
         font-weight: normal;
+    }
+    
+    .no-items {
+        padding-left: 16px;
     }
 }
