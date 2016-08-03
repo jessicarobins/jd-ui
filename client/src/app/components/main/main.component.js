@@ -11,7 +11,8 @@ module.component('main', {
         $stateParams) {
        var self = this;
        self.$onInit = function(){
-            $user.setCurrentOrg($stateParams.orgId);
+            var org = _.find($user.organizations(), {id: $stateParams.orgId});
+            $user.setCurrentOrg(org);
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),

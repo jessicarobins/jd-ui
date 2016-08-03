@@ -29,9 +29,8 @@ module.service('$user', function($q, $auth, $api) {
             return currentOrganization;
         }
         
-        self.setCurrentOrg(self.organizations()[0]).then(function(response){
-           return currentOrganization; 
-        });
+        self.setCurrentOrg(self.organizations()[0]);
+        return currentOrganization; 
     };
     
     self.write = function(){

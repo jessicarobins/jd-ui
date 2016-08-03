@@ -3,14 +3,29 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('login', {
       url: '/login',
-      template: '<login-page></login-page>'
+      component: 'loginPage'
     })
     .state('signUp', {
       url: '/sign_up',
-      template: '<signup></signup>'
+      component: 'signup'
     })
     .state('home', {
-      url: '/project/{projectId:int}',
+      url: '/',
+      redirectTo: function (trans) {
+        console.log('transition???', trans)
+        var svc = trans.injector().get('$projects');
+        var promise = svc.paramsPromise();
+        return promise;
+        
+      },
+      resolve: {
+        auth: ['$auth', function($auth) {
+          return $auth.validateUser();
+        }]
+      }
+    })
+    .state('filter', {
+      url: '/org/{orgId:int}/project/{projectId:int}',
       template: '<main layout="column" layout-fill></main>',
       resolve: {
         auth: ['$auth', function($auth) {

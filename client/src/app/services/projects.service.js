@@ -32,14 +32,7 @@ module.service('$projects', function(
     };
     
     self.initCurrentProject = function(projectId) {
-        if(projectId){
-            self.currentProject = $filter('getById')(self.projects, projectId);
-        }
-        else {
-            self.currentProject = self.projects[0];
-            $state.go('home', {projectId: self.currentProject.id}, { notify: false });
-        }
-        
+        self.currentProject = _.find(self.projects, {id: projectId});
         return self.currentProject;
     };
     
@@ -111,7 +104,7 @@ module.service('$projects', function(
     
     
     self.updateProjects = function() {
-        var promise = $api.request({
+        return $api.request({
           url: '/projects', 
           method: 'GET',
           params: {
@@ -122,6 +115,14 @@ module.service('$projects', function(
             notifyWatchers();
             return response;
         });
-        return promise;
+    };
+    
+    self.paramsPromise = function(){
+        return self.updateProjects().then( function(projects){
+            var orgId = $user.organizations()[0].id;
+            var projectId = projects.first;
+            console.log('orgId projectId', orgId, projectId)
+           return  { state: 'filter', params: { orgId: orgId, projectId: projectId} };
+        });
     };
 });
