@@ -9,7 +9,7 @@ export function runBlock ($log, $rootScope, $user, $state) {
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:validation-success', function(ev, user) {
         $user.setCurrentUser(user);
-        $state.go('home');
+        // $state.go('home');
   }));  
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:oauth-registration', function(ev, user) {

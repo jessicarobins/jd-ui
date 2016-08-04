@@ -10,9 +10,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       component: 'signup'
     })
     .state('home', {
-      url: '/',
       redirectTo: function (trans) {
-        console.log('transition???', trans)
         var svc = trans.injector().get('$projects');
         var promise = svc.paramsPromise();
         return promise;
@@ -34,5 +32,5 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       }
     });
 
-  $urlRouterProvider.otherwise('/project');
+  $urlRouterProvider.otherwise('/');
 }

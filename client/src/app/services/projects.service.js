@@ -120,7 +120,7 @@ module.service('$projects', function(
     self.paramsPromise = function(){
         return self.updateProjects().then( function(projects){
             var orgId = $user.organizations()[0].id;
-            var projectId = projects.first;
+            var projectId = projects[0].id;
             console.log('orgId projectId', orgId, projectId)
            return  { state: 'filter', params: { orgId: orgId, projectId: projectId} };
         });
