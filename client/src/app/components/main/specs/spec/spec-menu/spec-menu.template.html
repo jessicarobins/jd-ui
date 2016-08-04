@@ -6,16 +6,22 @@
     <md-icon md-menu-origin class="material-icons tiny-icon">more_vert</md-icon>
   </a>
   <md-menu-content>
-    <md-menu-item>
+    <md-menu-item ng-if="$ctrl.canWrite">
       <md-button ng-click="$ctrl.addChildren($event)">
         <md-icon class='material-icons'>add</md-icon>
         add children
       </md-button>
     </md-menu-item>
-    <md-menu-item>
+    <md-menu-item ng-if="$ctrl.canWrite">
       <md-button ng-click="$ctrl.addTicket($event)">
         <md-icon class='material-icons'>link</md-icon>
         add link
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="$ctrl.comment($event)">
+        <md-icon class='material-icons'>comment</md-icon>
+        comment
       </md-button>
     </md-menu-item>
     <md-menu-item>
@@ -24,7 +30,7 @@
         expand
       </md-button>
     </md-menu-item>
-    <md-menu-item>
+    <md-menu-item ng-if="$ctrl.canWrite">
       <md-button 
         ng-if="!$ctrl.spec.bookmarked"
         ng-click="$ctrl.bookmark()">
@@ -38,7 +44,7 @@
           unbookmark
       </md-button>
     </md-menu-item>
-    <md-menu-item>
+    <md-menu-item ng-if="$ctrl.canWrite">
       <md-button ng-click="$ctrl.delete($event)">
         <md-icon class='material-icons'>delete</md-icon>
         delete

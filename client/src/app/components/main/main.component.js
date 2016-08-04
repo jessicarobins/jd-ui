@@ -23,6 +23,16 @@ module.component('main', {
                 $projects.currentProject = project;
             });
             
+            $user.write().then(function(response){
+               self.canWrite = response; 
+            });
+            
+            $user.addOrgCallback( function(){
+                $user.write().then(function(response){
+                   self.canWrite = response; 
+                });
+            });
+            
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'})

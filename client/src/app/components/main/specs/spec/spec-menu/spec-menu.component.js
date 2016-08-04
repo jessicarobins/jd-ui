@@ -1,17 +1,22 @@
 module.component('specMenu', {
     require: {
-        parent: '^^spec'
+        parent: '^^spec',
+        main: '^^main'
     },
     bindings: {
         spec: '<'
     },
     templateUrl: 'app/components/main/specs/spec/spec-menu/spec-menu.template.html',
     controller: function(
-        $specs, 
+        $specs,
         $mdDialog,
         BreadcrumbsService) {
             
        var self = this;
+       
+       self.$onInit = function(){
+           self.canWrite = self.main.canWrite;
+       };
        
        self.openSpecMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
@@ -64,6 +69,14 @@ module.component('specMenu', {
             $mdDialog.show(confirm).then(function() {
                 $specs.delete(self.spec)
             }, function() {
+            });
+        };
+        
+        self.comment = function(ev){
+            $mdDialog.show({
+                template: '<comments-modal layout="column"></comments-modal>',
+                targetEvent: ev,
+                clickOutsideToClose:true,
             });
         };
     }

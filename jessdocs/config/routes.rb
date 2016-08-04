@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
   
   scope '/api' do
+    resources :comments, except: [:new, :edit]
     resources :user_organizations, except: [:new, :edit]
     resources :organizations, except: [:new, :edit] do
       member do
