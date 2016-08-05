@@ -6,6 +6,7 @@ module.service('$projects', function(
     $api, 
     $q, 
     $user, 
+    $stateParams,
     $location) {
     var self = this;
     
@@ -27,14 +28,16 @@ module.service('$projects', function(
     };
     
     self.setCurrentProject = function(project){
-        self.currentProject = project;  
+        self.currentProject = project;
         notifyCurrentProjectWatchers();
+        console.log('setting the current project')
+        $state.go('.', {orgId: $user.currentOrg().id, projectId: project.id});
     };
     
-    self.initCurrentProject = function(projectId) {
-        self.currentProject = _.find(self.projects, {id: projectId});
-        return self.currentProject;
-    };
+    // self.initCurrentProject = function(projectId) {
+    //     self.currentProject = _.find(self.projects, {id: projectId});
+    //     return self.currentProject;
+    // };
     
     self.addProject = function(projectName) {
         $api.request({

@@ -72,7 +72,6 @@ module.
       self.changeProject = function() {
         var project = self.formData.project;
         $projects.setCurrentProject(project);
-        $state.transitionTo('home', {projectId: project.id}, { notify: false });
         BreadcrumbsService.clearBreadcrumbs();
         self.submit();
       };

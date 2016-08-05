@@ -1,4 +1,4 @@
-export function runBlock ($log, $rootScope, $user, $state) {
+export function runBlock ($log, $rootScope, $user, $state, $stateParams) {
   'ngInject';
   
   $rootScope.$on('$destroy', 
@@ -9,7 +9,9 @@ export function runBlock ($log, $rootScope, $user, $state) {
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:validation-success', function(ev, user) {
         $user.setCurrentUser(user);
-        // $state.go('home');
+        console.log('state?', $state)
+        console.log('stateparams?', $stateParams)
+        //if params are blank, set them?
   }));  
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:oauth-registration', function(ev, user) {

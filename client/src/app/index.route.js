@@ -10,6 +10,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       component: 'signup'
     })
     .state('home', {
+      url: '/',
       redirectTo: function (trans) {
         var svc = trans.injector().get('$projects');
         var promise = svc.paramsPromise();
@@ -24,6 +25,10 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     })
     .state('filter', {
       url: '/org/{orgId:int}/project/{projectId:int}',
+      params: {
+        projectId: {dynamic: true},
+        orgId: {dynamic: true}
+      },
       template: '<main layout="column" layout-fill></main>',
       resolve: {
         auth: ['$auth', function($auth) {

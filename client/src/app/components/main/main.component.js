@@ -11,24 +11,24 @@ module.component('main', {
         $stateParams) {
        var self = this;
        self.$onInit = function(){
+           
             var org = _.find($user.organizations(), {id: $stateParams.orgId});
-            $user.setCurrentOrg(org);
+            $user.initOrg(org);
+            
+            var project;
+            $projects.getProjects().then( function(projects){
+                project = _.find($projects.projects, {id: $stateParams.projectId});
+                $projects.setCurrentProject(project);
+            });
+            
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
-                tags: $api.request({url: '/tags'}),
-                projects: $api.request({
-                    url: '/projects', 
-                    params:{
-                        organization_id: $user.currentOrg().id
-                    }
-                })
+                tags: $api.request({url: '/tags'})
             };
             
             $q.all(promises).then( function(response) {
                 self.tickets = response.tickets;
                 self.tags = response.tags;
-                $projects.projects = response.projects;
-                var project = $projects.initCurrentProject($stateParams.projectId);
                 $specs.setSpecList({project_id: project.id});
             });
             

@@ -54,6 +54,11 @@ module.service('$user', function($q, $auth, $api) {
         });
     };
     
+    self.initOrg = function(org){
+        currentOrganization = org;
+        self.currentRole();
+    };
+    
     self.currentRole = function(){
         if(currentRole){
             return $q.when(currentRole);
