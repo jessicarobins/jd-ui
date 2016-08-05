@@ -11,12 +11,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     })
     .state('home', {
       url: '/',
-      redirectTo: function (trans) {
-        var svc = trans.injector().get('$projects');
-        var promise = svc.paramsPromise();
-        return promise;
-        
-      },
+      
       resolve: {
         auth: ['$auth', function($auth) {
           return $auth.validateUser();

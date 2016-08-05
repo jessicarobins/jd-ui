@@ -1,4 +1,4 @@
-export function runBlock ($log, $rootScope, $user, $state, $stateParams) {
+export function runBlock ($log, $rootScope, $user, $projects, $state, $stateParams) {
   'ngInject';
   
   $rootScope.$on('$destroy', 
@@ -9,7 +9,12 @@ export function runBlock ($log, $rootScope, $user, $state, $stateParams) {
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:validation-success', function(ev, user) {
         $user.setCurrentUser(user);
-        console.log('state?', $state)
+        if(!$stateParams.projectId ||
+          !$stateParams.orgId){
+            $projects.paramsPromise().then( function(response){
+                $state.go('filter', response);
+            });
+        }
         console.log('stateparams?', $stateParams)
         //if params are blank, set them?
   }));  

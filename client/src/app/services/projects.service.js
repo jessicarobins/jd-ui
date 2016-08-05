@@ -30,7 +30,6 @@ module.service('$projects', function(
     self.setCurrentProject = function(project){
         self.currentProject = project;
         notifyCurrentProjectWatchers();
-        console.log('setting the current project')
         $state.go('.', {orgId: $user.currentOrg().id, projectId: project.id});
     };
     
@@ -125,7 +124,7 @@ module.service('$projects', function(
             var orgId = $user.organizations()[0].id;
             var projectId = projects[0].id;
             console.log('orgId projectId', orgId, projectId)
-           return  { state: 'filter', params: { orgId: orgId, projectId: projectId} };
+           return  { orgId: orgId, projectId: projectId};
         });
     };
 });
