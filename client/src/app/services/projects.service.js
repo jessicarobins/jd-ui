@@ -123,6 +123,7 @@ module.service('$projects', function(
     self.paramsPromise = function(){
         return $auth.validateUser().then(function(response){
             $user.setCurrentUser(response);
+            $user.initOrg($user.organizations()[0]);
         }).then(function(){
             return self.updateProjects()
         }).then( function(projects){
