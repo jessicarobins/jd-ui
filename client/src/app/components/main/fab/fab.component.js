@@ -10,11 +10,14 @@ module.component('fab', {
          MenuService) {
              
         var self = this;
-        self.isOpen = false;
+        self.isOpen;
         self.pageUp = false;
         self.exporting = false;
         
         self.$onInit = function(){
+            
+            self.isOpen = false;
+            
             MenuService.addExportCallback( function(){
                 self.exporting = MenuService.export;
             });
