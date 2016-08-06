@@ -1,6 +1,7 @@
 var module = angular.module('jessdocs');
 
 module.service('$projects', function(
+    $auth,
     $filter,
     $state,
     $api, 
@@ -30,7 +31,7 @@ module.service('$projects', function(
     self.setCurrentProject = function(project){
         self.currentProject = project;
         notifyCurrentProjectWatchers();
-        $state.go('.', {orgId: $user.currentOrg().id, projectId: project.id});
+        $state.go('.', {projectId: project.id});
     };
     
     // self.initCurrentProject = function(projectId) {
@@ -120,11 +121,16 @@ module.service('$projects', function(
     };
     
     self.paramsPromise = function(){
-        return self.updateProjects().then( function(projects){
+        return $auth.validateUser().then(function(response){
+            $user.setCurrentUser(response);
+        }).then(function(){
+            return self.updateProjects()
+        }).then( function(projects){
             var orgId = $user.organizations()[0].id;
             var projectId = projects[0].id;
             console.log('orgId projectId', orgId, projectId)
-           return  { orgId: orgId, projectId: projectId};
+            // $state.go('filter', {orgId: orgId, projectId: projectId})
+          return  { state: 'filter', params: {orgId: orgId, projectId: projectId}};
         });
     };
 });

@@ -8,10 +8,17 @@ module.component('main', {
         $specs,
         $user,
         $tagtypes,
+        $state,
         $stateParams) {
        var self = this;
        self.$onInit = function(){
-           
+           console.log('stateparams', $stateParams)
+        //   if(!$stateParams.projectId ||
+        //       !$stateParams.orgId){
+        //         $projects.paramsPromise().then( function(response){
+        //             $state.go('filter', response);
+        //         });
+        //     }
             var org = _.find($user.organizations(), {id: $stateParams.orgId});
             $user.initOrg(org);
             

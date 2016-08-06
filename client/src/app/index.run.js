@@ -9,14 +9,7 @@ export function runBlock ($log, $rootScope, $user, $projects, $state, $statePara
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:validation-success', function(ev, user) {
         $user.setCurrentUser(user);
-        if(!$stateParams.projectId ||
-          !$stateParams.orgId){
-            $projects.paramsPromise().then( function(response){
-                $state.go('filter', response);
-            });
-        }
-        console.log('stateparams?', $stateParams)
-        //if params are blank, set them?
+        
   }));  
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:oauth-registration', function(ev, user) {
