@@ -1,6 +1,6 @@
 var module = angular.module('jessdocs');
 
-module.service('$user', function($q, $auth, $api) {
+module.service('$user', function($q, $state, $auth, $api) {
     
     var self = this;
     
@@ -48,6 +48,7 @@ module.service('$user', function($q, $auth, $api) {
     self.setCurrentOrg = function(org){
         org = org || self.organizations()[0];
         currentOrganization = org;
+        $state.go('.', {orgId: currentOrganization.id})
         currentRole = null;
         self.currentRole().then( function(role){
             notifyWatchers();

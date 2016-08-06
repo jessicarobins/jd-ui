@@ -12,20 +12,15 @@ module.component('main', {
         $stateParams) {
        var self = this;
        self.$onInit = function(){
-           console.log('stateparams', $stateParams)
-        //   if(!$stateParams.projectId ||
-        //       !$stateParams.orgId){
-        //         $projects.paramsPromise().then( function(response){
-        //             $state.go('filter', response);
-        //         });
-        //     }
+        
             var org = _.find($user.organizations(), {id: $stateParams.orgId});
             $user.initOrg(org);
             
             var project;
             $projects.getProjects().then( function(projects){
                 project = _.find($projects.projects, {id: $stateParams.projectId});
-                $projects.setCurrentProject(project);
+                // $projects.setCurrentProject(project);
+                $projects.currentProject = project;
             });
             
             var promises = {

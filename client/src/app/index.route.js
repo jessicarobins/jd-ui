@@ -15,11 +15,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
         var svc = trans.injector().get('$projects');
         var promise = svc.paramsPromise();
         return promise;
-      },
-      resolve: {
-        auth: function($auth) {
-          return $auth.validateUser();
-        }
       }
     })
     .state('filter', {

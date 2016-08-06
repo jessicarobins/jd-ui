@@ -129,7 +129,6 @@ module.service('$projects', function(
             var orgId = $user.organizations()[0].id;
             var projectId = projects[0].id;
             console.log('orgId projectId', orgId, projectId)
-            // $state.go('filter', {orgId: orgId, projectId: projectId})
           return  { state: 'filter', params: {orgId: orgId, projectId: projectId}};
         });
     };
