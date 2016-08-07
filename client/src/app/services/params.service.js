@@ -6,10 +6,10 @@ module.service('ParamService', function(
         $state.go('.', params);
     };
     
-    self.parseParamsFromURL = function(projectId, validTypes){
-        console.log('valid types = ', validTypes)
+    self.parseParamsFromURL = function(projectId, typeIds){
+        console.log('valid types = ', typeIds)
         var params = {
-            "tag_types[]": $stateParams.tag_type,
+            "tag_types[]": typeIds,
             ticketed: $stateParams.ticketed,
             commented: $stateParams.commented,
             spec_id: $stateParams.spec_id,

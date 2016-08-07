@@ -17,14 +17,10 @@ module.component('main', {
        
        self.$onInit = function(){
             
-            // var org = _.find($user.organizations(), {id: $stateParams.orgId});
-            // $user.initOrg(org);
+            
             sanitizeOrgParam($stateParams.orgId);
             var project;
-            // $projects.getProjects().then( function(projects){
-            //     project = _.find($projects.projects, {id: $stateParams.projectId});
-            //     $projects.currentProject = project;
-            // });
+            
             
             $user.write().then(function(response){
                self.canWrite = response; 
@@ -41,9 +37,10 @@ module.component('main', {
                 self.tickets = response.tickets;
                 self.tags = response.tags;
                 project = sanitizeProjectParam($stateParams.projectId);
-                return response;
+                var tagTypes = sanitizeTagTypes(response.tagTypes.allTypes, $stateParams.tag_type);
+                return tagTypes;
             }).then( function(response){
-                var params = ParamService.parseParamsFromURL(project.id, response.tagTypes.allTypes);
+                var params = ParamService.parseParamsFromURL(project.id, response);
                 $specs.setSpecList(params);
             });
             
@@ -72,7 +69,7 @@ module.component('main', {
            }
            $projects.currentProject = project;
            return project;
-       };
+       }
        
        function sanitizeOrgParam(id){
            var org = _.find($user.organizations(), {id: id});
@@ -81,6 +78,15 @@ module.component('main', {
                ParamService.updateURL({orgId: org.id});
            }
            $user.initOrg(org);
+       }
+       
+       function sanitizeTagTypes(validTypes, typeParams){
+           var validIds = _.map(validTypes, 'id');
+           var intersection = _.intersection(typeParams, validIds);
+           if(intersection.length < typeParams.length){
+               ParamService.updateURL({tag_type: intersection});
+           }
+           return intersection;
        }
     }
 });
