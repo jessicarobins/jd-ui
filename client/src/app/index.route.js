@@ -18,10 +18,16 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('filter', {
-      url: '/org/{orgId:int}/project/{projectId:int}?tag_type&ticketed&commented',
+      url: '/org/{orgId:int}/project/{projectId:int}?spec_id&tag_type&ticketed&commented',
       params: {
         projectId: {dynamic: true},
         orgId: {dynamic: true},
+        spec_id: {
+          dynamic: true,
+          type: "int",
+          squash: true,
+          value: null
+        },
         tag_type: {
           dynamic: true,
           type: "int",
