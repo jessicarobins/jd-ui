@@ -1,4 +1,4 @@
-export function runBlock ($log, $rootScope, $user, $projects, $state, $stateParams) {
+export function runBlock ($log, $rootScope, $user, $projects, $state) {
   'ngInject';
   
   $rootScope.$on('$destroy', 
