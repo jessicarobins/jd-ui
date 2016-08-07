@@ -15,16 +15,13 @@ module.
       self.formData = {};
       self.selected = [];
       self.ticketed = false;
+      self.commented = false;
       self.formData.tag_types = [];
       
       self.$onInit = function() {
         
         $projects.getProjects().then( function(response) {
             self.projects = response;
-            // if(self.projects.length){
-            //     self.formData.project = self.projects[0].id;
-                
-            // }
             self.formData.project = $projects.project();
         });
         
@@ -69,6 +66,14 @@ module.
         self.submit();
       };
       
+      self.toggleCommented = function(checkbox) {
+        if(!checkbox){
+          self.formData.commented = !self.formData.commented;
+        }
+        self.commented = !self.commented;
+        self.submit();
+      };
+      
       self.changeProject = function() {
         var project = self.formData.project;
         $projects.setCurrentProject(project);
@@ -80,7 +85,8 @@ module.
         var params = {
           project_id: self.formData.project.id,
           "tag_types[]": self.selected,
-          ticketed: self.ticketed
+          ticketed: self.ticketed,
+          commented: self.commented
         };
         
         $specs.setSpecList(params);

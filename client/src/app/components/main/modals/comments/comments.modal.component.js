@@ -8,7 +8,6 @@ module.component('commentsModal', {
         var self = this;
         
         self.$onInit = function() {
-            console.log(self.spec)
             self.spec.grouped_comments_json.false = self.spec.grouped_comments_json.false || [];
             self.spec.grouped_comments_json.true = self.spec.grouped_comments_json.true || [];
         };

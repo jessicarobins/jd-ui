@@ -31,6 +31,19 @@
         </md-list-item>
         
         <md-list-item
+            aria-label="select comments"
+            ng-click="::$ctrl.toggleCommented()"
+            class="very-dense">
+            <tag tag="{name: 'open comments', color: 'rgb(0,184,212)'}"></tag>
+            <md-checkbox 
+                class="md-secondary"
+                ng-change="::$ctrl.toggleCommented(true)" 
+                ng-model="$ctrl.formData.commented"
+                aria-label="commented">
+            </md-checkbox>
+        </md-list-item>
+        
+        <md-list-item
             aria-label="select ticketed"
             ng-click="::$ctrl.toggleTicketed()"
             class="very-dense ticket">

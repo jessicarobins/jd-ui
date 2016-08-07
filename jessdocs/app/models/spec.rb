@@ -25,6 +25,7 @@ class Spec < ActiveRecord::Base
     scope :for_project, ->(project_id) { where(:project_id => project_id) }
     scope :has_ticket, -> { joins(:tickets) }
     scope :full_ancestry_of_spec, -> (spec) {spec.path.union(spec.descendants)}
+    scope :has_open_comments, -> { joins(:comments).merge(Comment.open) }
     
     def full_ancestry_ids
         self.path.union(self.descendants).pluck(:id)
@@ -54,6 +55,11 @@ class Spec < ActiveRecord::Base
         @ticketed = filter_params[:ticketed]
         if @ticketed == true.to_s
             @filtered_spec_ids_array << Spec.all_ancestry_ids(specs.has_ticket)
+        end
+        
+        @commented = filter_params[:commented]
+        if @commented == true.to_s
+            @filtered_spec_ids_array << Spec.all_ancestry_ids(specs.has_open_comments)
         end
         
         @tag_type_ids = filter_params[:tag_types]
