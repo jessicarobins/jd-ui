@@ -1,4 +1,4 @@
-<div id="{{$ctrl.spec.id}}" layout="column">
+<div id="{{$ctrl.spec.data.id}}" layout="column">
   <div 
     layout="row"
     ng-mouseenter="$ctrl.toggleMouseover()"
@@ -20,15 +20,15 @@
       ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}">
         
         <spec-menu
-          spec="::$ctrl.spec"></spec-menu>
+          spec="::$ctrl.spec.data"></spec-menu>
        
         <tag-menu 
-          spec="::$ctrl.spec"
+          spec="::$ctrl.spec.data"
           tags="::$ctrl.tags"></tag-menu>
     </div>
      <div
       layout-wrap
-      id="edit_{{::$ctrl.spec.id}}"
+      id="edit_{{::$ctrl.spec.data.id}}"
       click-outside="::$ctrl.clickOutside()"
       ng-dblClick="::$ctrl.edit()"
       layout="row"
@@ -37,7 +37,7 @@
         <div
           class="spec-description"
           ng-if="!$ctrl.spec.editing"
-          ng-bind="::$ctrl.spec.description"></div>
+          ng-bind="::$ctrl.spec.data.description"></div>
         <div 
           layout="row"
           ng-if="$ctrl.spec.editing">
@@ -47,7 +47,7 @@
             pu-elastic-input-maxwidth="1300px"
             focus-if="$ctrl.spec.editing"
             aria-label="edit spec description"
-            ng-model="$ctrl.editingCopy.description"
+            ng-model="$ctrl.editingCopy.data.description"
             ng-keypress="$ctrl.enter($event)"
             required />
           <md-button 
@@ -61,18 +61,18 @@
         <tag
           layout="row"
           ng-repeat="tag in $ctrl.tags"
-          spec="$ctrl.spec"
+          spec="$ctrl.spec.data"
           tag="$ctrl.getTagObject(tag)"></tag>
     </div>
   </div>
     
     <ol ui-tree-nodes ng-model="$ctrl.spec.children">
-        <li ng-repeat="child in $ctrl.spec.children track by child.id" ui-tree-node>
+        <li ng-repeat="child in $ctrl.spec.children track by child.data.id" ui-tree-node>
             <spec 
                 spec='child' 
                 ui-tree-callbacks="::$callbacks"
-                tag="::$ctrl.parent.getTags(child)"
-                ticket="::$ctrl.parent.getTickets(child)"></spec>
+                tag="::$ctrl.parent.getTags(child.data)"
+                ticket="::$ctrl.parent.getTickets(child.data)"></spec>
         </li>
     </ol>
 </div>

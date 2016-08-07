@@ -1,11 +1,17 @@
-<jd-modal layout="column">
+<jd-modal layout="column" class="comments">
     <jd-modal-title>comments</jd-modal-title>
     <jd-modal-body layout="row" layout-padding>
-       
         
+       <p ng-if="!$ctrl.comments">
+           This spec has no comments.
+       </p>
     </jd-modal-body>
     <jd-modal-buttons>
-        
+        <md-input-container>
+            <input 
+                class="add-comment-input"
+                ng-model="$ctrl.text"/>
+        </md-input-container>
         <span flex></span>
         <md-button
             ng-disabled="$ctrl.disableSave()"

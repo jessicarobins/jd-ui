@@ -74,9 +74,13 @@ module.component('specMenu', {
         
         self.comment = function(ev){
             $mdDialog.show({
-                template: '<comments-modal layout="column"></comments-modal>',
+                template: '<comments-modal spec="spec" layout="column"></comments-modal>',
                 targetEvent: ev,
                 clickOutsideToClose:true,
+                locals: {spec: self.spec },
+                controller: function($scope, spec) {
+                  $scope.spec = spec;
+                }
             });
         };
     }

@@ -15,7 +15,7 @@ class Spec < ActiveRecord::Base
     belongs_to :updated_by, class_name: "User"
     has_many :tags, dependent: :destroy
     has_many :tickets, dependent: :destroy
-    # has_many :comments, dependent: :destroy
+    has_many :comments, dependent: :destroy
     has_many :tag_types, through: :tags
     
     alias_attribute :name, :description

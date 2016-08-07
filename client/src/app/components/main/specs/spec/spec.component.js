@@ -96,9 +96,9 @@ module.component('spec', {
         function save(){
             self.spec.editing = false;
             self.spec.userMouseover = false;
-            if(!angular.equals(self.editingCopy.description, self.spec.description)){
-                self.spec.description = self.editingCopy.description;
-                $specs.editDescription(self.spec);
+            if(!angular.equals(self.editingCopy.data.description, self.spec.data.description)){
+                self.spec.data.description = self.editingCopy.data.description;
+                $specs.editDescription(self.spec.data);
             }
             self.editingCopy = null;
         };

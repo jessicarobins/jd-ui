@@ -6,15 +6,23 @@ class SpecsController < ApplicationController
   # GET /specs.json
   def index
     @specs = Spec.all
-
+    
     render json: @specs.arrange_serializable(:order => 'spec_order ASC')
   end
   
   def filter
     @specs = Spec.filter(params)
+    
+    json = @specs.includes(:comments).arrange_serializable(:order => 'spec_order ASC') do |parent, children|
+    {
+         data: parent.as_json(:include => :comments),
+         children: children
+    }
+    end
+    
     @bookmarks = @specs.where(:bookmarked => true)
     render json: {
-      specs: @specs.arrange_serializable(:order => 'spec_order ASC'), 
+      specs: json, 
       bookmarks: @bookmarks }
   end
 

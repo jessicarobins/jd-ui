@@ -11,8 +11,11 @@ module.component('main', {
         $state,
         $stateParams) {
        var self = this;
+       
+       self.canWrite = false;
+       
        self.$onInit = function(){
-        
+            
             var org = _.find($user.organizations(), {id: $stateParams.orgId});
             $user.initOrg(org);
             
@@ -27,12 +30,6 @@ module.component('main', {
                self.canWrite = response; 
             });
             
-            $user.addOrgCallback( function(){
-                $user.write().then(function(response){
-                   self.canWrite = response; 
-                });
-            });
-            
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'})
@@ -45,6 +42,9 @@ module.component('main', {
             });
             
             $user.addOrgCallback( function(){
+                $user.write().then(function(response){
+                   self.canWrite = response; 
+                });
                 $tagtypes.updateGroups();
                 $tagtypes.updateTagTypes();
                $projects.updateProjects().then( function(response){
