@@ -31,7 +31,6 @@ module.service('$projects', function(
     self.setCurrentProject = function(project){
         self.currentProject = project;
         notifyCurrentProjectWatchers();
-        ParamService.updateURL({projectId: project.id});
     };
     
     // self.initCurrentProject = function(projectId) {

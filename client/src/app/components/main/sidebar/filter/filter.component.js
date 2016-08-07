@@ -56,7 +56,6 @@ module.
           self.selected.push(item);
           self.formData.tag_types[item] = true;
         }
-        ParamService.updateURL({tag_type: self.selected});
         self.submit();
       };
       
@@ -65,7 +64,6 @@ module.
           self.formData.ticketed = !self.formData.ticketed;
         }
         self.ticketed = !self.ticketed;
-        ParamService.updateURL({ticketed: self.ticketed});
         self.submit();
       };
       
@@ -74,7 +72,6 @@ module.
           self.formData.commented = !self.formData.commented;
         }
         self.commented = !self.commented;
-        ParamService.updateURL({commented: self.commented});
         self.submit();
       };
       
@@ -86,7 +83,12 @@ module.
       };
         
       self.submit = function() {
-        
+        ParamService.updateURL({
+          projectId: self.formData.project.id,
+          ticketed: self.ticketed,
+          commented: self.commented,
+          tag_type: self.selected
+        });
         var params = {
           project_id: self.formData.project.id,
           "tag_types[]": self.selected,

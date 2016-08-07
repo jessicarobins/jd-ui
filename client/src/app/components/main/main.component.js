@@ -5,6 +5,7 @@ module.component('main', {
         $q,
         $api,
         $projects,
+        ParamService,
         $specs,
         $user,
         $tagtypes,
@@ -38,7 +39,8 @@ module.component('main', {
             $q.all(promises).then( function(response) {
                 self.tickets = response.tickets;
                 self.tags = response.tags;
-                $specs.setSpecList({project_id: project.id});
+                var params = ParamService.parseParamsFromURL();
+                $specs.setSpecList(params);
             });
             
             $user.addOrgCallback( function(){
