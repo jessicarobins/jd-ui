@@ -52,6 +52,7 @@ class Spec < ActiveRecord::Base
             @filtered_spec_ids_array << Spec.find(@spec_id).subtree.pluck(:id)
         end
         
+        
         @ticketed = filter_params[:ticketed]
         if @ticketed == true.to_s
             @filtered_spec_ids_array << Spec.all_ancestry_ids(specs.has_ticket)

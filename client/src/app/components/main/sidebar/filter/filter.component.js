@@ -7,7 +7,8 @@ module.
       $specs, 
       $tagtypes,
       $user,
-      $state,
+      ParamService,
+      $stateParams,
       BreadcrumbsService) {
         
       var self = this;
@@ -55,9 +56,7 @@ module.
           self.selected.push(item);
           self.formData.tag_types[item] = true;
         }
-        $state.go('.', {
-          tag_type: self.selected, 
-        });
+        ParamService.updateURL({tag_type: self.selected});
         self.submit();
       };
       
@@ -66,9 +65,7 @@ module.
           self.formData.ticketed = !self.formData.ticketed;
         }
         self.ticketed = !self.ticketed;
-        $state.go('.', {
-          ticketed: self.ticketed,
-        });
+        ParamService.updateURL({ticketed: self.ticketed});
         self.submit();
       };
       
@@ -77,9 +74,7 @@ module.
           self.formData.commented = !self.formData.commented;
         }
         self.commented = !self.commented;
-        $state.go('.', {
-          commented: self.commented
-        });
+        ParamService.updateURL({commented: self.commented});
         self.submit();
       };
       
@@ -96,7 +91,8 @@ module.
           project_id: self.formData.project.id,
           "tag_types[]": self.selected,
           ticketed: self.ticketed,
-          commented: self.commented
+          commented: self.commented,
+          spec_id: $specs.filterParams.id
         };
         
         $specs.setSpecList(params);

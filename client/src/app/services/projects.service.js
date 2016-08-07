@@ -3,7 +3,7 @@ var module = angular.module('jessdocs');
 module.service('$projects', function(
     $auth,
     $filter,
-    $state,
+    ParamService,
     $api, 
     $q, 
     $user, 
@@ -31,7 +31,7 @@ module.service('$projects', function(
     self.setCurrentProject = function(project){
         self.currentProject = project;
         notifyCurrentProjectWatchers();
-        $state.go('.', {projectId: project.id});
+        ParamService.updateURL({projectId: project.id});
     };
     
     // self.initCurrentProject = function(projectId) {

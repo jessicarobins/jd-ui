@@ -33,7 +33,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
           type: "int",
           array: true,
           squash: true,
-          value: []
+          value: null
         },
         ticketed: {
           value: false,

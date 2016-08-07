@@ -1,13 +1,12 @@
 var module = angular.module('jessdocs');
 
-module.service('$specs', function($mdToast, $state, $api, $q, $user, $projects) {
+module.service('$specs', function($mdToast, ParamService, $api, $q, $user, $projects) {
     var self = this;
     var callbacks = [];
     var bookmarkCallbacks = [];
     
     self.addManyParent;
     self.filterParams = {};
-    self.specId;
     
     self.addCallback = function(callback) {
         callbacks.push(callback);
@@ -190,12 +189,12 @@ module.service('$specs', function($mdToast, $state, $api, $q, $user, $projects) 
     
     self.setSpecId = function(id){
         self.filterParams.id = id;
-        $state.go('.', {spec_id: id});
+        ParamService.updateURL({spec_id: id});
     };
     
     self.clearSpecId = function(){
         self.filterParams.id = null;
-        $state.go('.', {spec_id: null});
+        ParamService.updateURL({spec_id: null});
     };
     
     function getFilterParams() {
