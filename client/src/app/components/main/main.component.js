@@ -17,9 +17,9 @@ module.component('main', {
        
        self.$onInit = function(){
             
-            var org = _.find($user.organizations(), {id: $stateParams.orgId});
-            $user.initOrg(org);
-            
+            // var org = _.find($user.organizations(), {id: $stateParams.orgId});
+            // $user.initOrg(org);
+            sanitizeOrgParam($stateParams.orgId);
             var project;
             // $projects.getProjects().then( function(projects){
             //     project = _.find($projects.projects, {id: $stateParams.projectId});
@@ -74,6 +74,13 @@ module.component('main', {
            return project;
        };
        
-       
+       function sanitizeOrgParam(id){
+           var org = _.find($user.organizations(), {id: id});
+           if(!org){
+               org = $user.organizations()[0];
+               ParamService.updateURL({orgId: org.id});
+           }
+           $user.initOrg(org);
+       }
     }
 });
