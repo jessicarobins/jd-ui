@@ -2,12 +2,12 @@
     <jd-modal-title>comments</jd-modal-title>
     <jd-modal-body layout="column">
         <md-list
-            ng-if="$ctrl.spec.comments.length">
+            ng-if="$ctrl.hasComments()">
             <md-subheader
-                ng-if="$ctrl.groupedComments.false">
+                ng-if="$ctrl.spec.grouped_comments_json.false.length">
                 Unresolved</md-subheader>
             <md-list-item 
-                ng-repeat="comment in $ctrl.groupedComments.false"
+                ng-repeat="comment in $ctrl.spec.grouped_comments_json.false"
                 class="md-2-line md-long-text">
                 <md-icon 
                     ng-if="!comment.user.image"
@@ -28,9 +28,9 @@
                 </div>
             </md-list-item>
             <md-subheader
-                ng-if="$ctrl.groupedComments.true">Resolved</md-subheader>
+                ng-if="$ctrl.spec.grouped_comments_json.true.length">Resolved</md-subheader>
             <md-list-item 
-                ng-repeat="comment in $ctrl.groupedComments.true"
+                ng-repeat="comment in $ctrl.spec.grouped_comments_json.true"
                 class="md-2-line md-long-text">
                 <md-icon 
                     ng-if="!comment.user.image"
@@ -45,7 +45,7 @@
                 </div>
             </md-list-item>
         </md-list>
-       <p ng-if="!$ctrl.spec.comments.length">
+       <p ng-if="!$ctrl.hasComments()">
            This spec has no comments.
        </p>
     </jd-modal-body>

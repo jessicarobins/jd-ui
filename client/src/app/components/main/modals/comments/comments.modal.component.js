@@ -6,13 +6,16 @@ module.component('commentsModal', {
      controller: function($mdDialog, $api) {
              
         var self = this;
-        self.groupedComments = {
-            true: [],
-            false: []
-        }
+        
         self.$onInit = function() {
             console.log(self.spec)
-            self.groupedComments = _.groupBy(self.spec.comments, 'resolved');
+            self.spec.grouped_comments_json.false = self.spec.grouped_comments_json.false || [];
+            self.spec.grouped_comments_json.true = self.spec.grouped_comments_json.true || [];
+        };
+        
+        self.hasComments = function(){
+            return self.spec.grouped_comments_json.false.length ||
+                self.spec.grouped_comments_json.true.length;
         };
         
         self.add = function(){
@@ -26,9 +29,7 @@ module.component('commentsModal', {
                     }
                 }
             }).then( function(response){
-               self.spec.comments.push(response);
-               self.groupedComments.false.push(response);
-               
+               self.spec.grouped_comments_json.false.push(response);
                self.text = '';
             });
         };
@@ -38,8 +39,8 @@ module.component('commentsModal', {
                 url: '/comments/' + comment.id + '/resolve',
                 method: 'PUT'
             }).then(function(){
-                self.groupedComments.true.push(comment);
-                _.pull(self.groupedComments.false, comment);
+                self.spec.grouped_comments_json.true.push(comment);
+                _.pull(self.spec.grouped_comments_json.false, comment);
             });
         };
         
