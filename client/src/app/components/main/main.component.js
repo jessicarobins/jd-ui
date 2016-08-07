@@ -17,10 +17,8 @@ module.component('main', {
        
        self.$onInit = function(){
             
-            
             sanitizeOrgParam($stateParams.orgId);
             var project;
-            
             
             $user.write().then(function(response){
                self.canWrite = response; 
@@ -54,6 +52,7 @@ module.component('main', {
                    $projects.setCurrentProject(response[0]);
                    return response;
                }).then( function(projects){
+                   ParamService.changeOrg($user.currentOrg().id, $projects.project().id);
                    $specs.setSpecList({project_id: $projects.project().id});
                });
                
@@ -81,9 +80,9 @@ module.component('main', {
        }
        
        function sanitizeTagTypes(validTypes, typeParams){
-           var validIds = _.map(validTypes, 'id');
-           var intersection = _.intersection(typeParams, validIds);
-           if(intersection.length < typeParams.length){
+           var validIds = _.map(validTypes, 'id') || [];
+           var intersection = _.intersection(typeParams, validIds) || [];
+           if(intersection.length < validIds.length){
                ParamService.updateURL({tag_type: intersection});
            }
            return intersection;

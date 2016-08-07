@@ -43,19 +43,22 @@ module.component('specs', {
         
         function parseMove(e){
             self.dragging = false;  
-            var specId = e.source.nodeScope.$modelValue.id;
+            var specId = e.source.nodeScope.$modelValue.data.id;
             var newIndex = e.dest.index;
             var siblingId;
             if(newIndex > 0){
-                siblingId = e.dest.nodesScope.$modelValue[newIndex-1].id;
+                siblingId = e.dest.nodesScope.$modelValue[newIndex-1].data.id;
             }
-            var parentId = e.dest.nodesScope.$parent.$ctrl.spec.id;
+            var parentId = null;
+            if(e.dest.nodesScope.$parent.$ctrl.spec.data){
+                parentId = e.dest.nodesScope.$parent.$ctrl.spec.data.id;
+            }
             
             $specs.move(specId, parentId, siblingId);
         }
         
         self.toggleExport = function(spec){
-            var id = spec.id;
+            var id = spec.data.id;
             var idx = self.exportSpecs.indexOf(id);
             
             if (idx > -1) {
@@ -68,7 +71,7 @@ module.component('specs', {
         
         function recursiveCheck(spec, checked){
             spec.exported = checked;
-            var id = spec.id;
+            var id = spec.data.id;
             var idx = self.exportSpecs.indexOf(id);
             if (idx <= -1 && checked) {
                 //if already in array, don't add twice

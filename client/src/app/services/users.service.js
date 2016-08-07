@@ -48,7 +48,7 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
     self.setCurrentOrg = function(org){
         org = org || self.organizations()[0];
         currentOrganization = org;
-        ParamService.changeOrg(org.id);
+        
         // $state.go('.', {orgId: currentOrganization.id})
         currentRole = null;
         self.currentRole().then( function(role){

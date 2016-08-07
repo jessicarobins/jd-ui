@@ -19,9 +19,10 @@ module.service('ParamService', function(
         return params;
     };
     
-    self.changeOrg = function(orgId){
+    self.changeOrg = function(orgId, projectId){
         var params = {
             orgId: orgId,
+            projectId: projectId,
             tag_type: null,
             ticketed: false,
             commented: false,
