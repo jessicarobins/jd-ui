@@ -30,18 +30,4 @@ module.service('ParamService', function(
         $state.go('.', params);
     };
     
-    self.paramsPromise = function(){
-        return $auth.validateUser().then(function(response){
-            $user.setCurrentUser(response);
-            $user.initOrg($user.organizations()[0]);
-        }).then(function(){
-            return self.updateProjects()
-        }).then( function(projects){
-            var orgId = $user.organizations()[0].id;
-            var projectId = projects[0].id;
-            console.log('orgId projectId', orgId, projectId)
-          return  { state: 'filter', params: {orgId: orgId, projectId: projectId}};
-        });
-    };
-    
 });
