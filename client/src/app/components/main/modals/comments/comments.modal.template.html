@@ -1,8 +1,18 @@
 <jd-modal layout="column" class="comments">
     <jd-modal-title>comments</jd-modal-title>
-    <jd-modal-body layout="row" layout-padding>
-        
-       <p ng-if="!$ctrl.comments">
+    <jd-modal-body layout="column" layout-padding>
+        <md-list>
+            <md-list-item 
+                ng-repeat="comment in $ctrl.spec.comments"
+                class="md-2-line md-long-text">
+                <img ng-src="{{comment.user.image}}" class="md-avatar"/>
+                <div class="md-list-item-text">
+                    <h3>{{ comment.user.name }}</h3>
+                    <p ng-bind="comment.text"></p>
+                </div>
+            </md-list-item>
+        </md-list>
+       <p ng-if="!$ctrl.spec.comments.length">
            This spec has no comments.
        </p>
     </jd-modal-body>

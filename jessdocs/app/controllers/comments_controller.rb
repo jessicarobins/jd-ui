@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(add_params.merge(:user_id => current_user.id))
 
     if @comment.save
-      render json: @comment, status: :created, location: @comment
+      render json: @comment.as_json(:include => {:user => {:only => [:image, :name]}}), status: :created, location: @comment
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

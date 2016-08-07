@@ -21,6 +21,9 @@ module.component('commentsModal', {
                         spec_id: self.spec.id
                     }
                 }
+            }).then( function(response){
+               self.spec.comments.push(response);
+               self.text = '';
             });
         };
         
