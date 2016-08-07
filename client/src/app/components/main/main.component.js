@@ -21,11 +21,10 @@ module.component('main', {
             $user.initOrg(org);
             
             var project;
-            $projects.getProjects().then( function(projects){
-                project = _.find($projects.projects, {id: $stateParams.projectId});
-                // $projects.setCurrentProject(project);
-                $projects.currentProject = project;
-            });
+            // $projects.getProjects().then( function(projects){
+            //     project = _.find($projects.projects, {id: $stateParams.projectId});
+            //     $projects.currentProject = project;
+            // });
             
             $user.write().then(function(response){
                self.canWrite = response; 
@@ -33,13 +32,18 @@ module.component('main', {
             
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
-                tags: $api.request({url: '/tags'})
+                tags: $api.request({url: '/tags'}),
+                projects: $projects.getProjects(),
+                tagTypes: $tagtypes.getTagTypes()
             };
             
             $q.all(promises).then( function(response) {
                 self.tickets = response.tickets;
                 self.tags = response.tags;
-                var params = ParamService.parseParamsFromURL();
+                project = sanitizeProjectParam($stateParams.projectId);
+                return response;
+            }).then( function(response){
+                var params = ParamService.parseParamsFromURL(project.id, response.tagTypes.allTypes);
                 $specs.setSpecList(params);
             });
             
@@ -58,6 +62,16 @@ module.component('main', {
                
             });
             
+       };
+       
+       function sanitizeProjectParam(id){
+           var project = _.find($projects.projects, {id: id});
+           if(!project){
+               project = $projects.projects[0];
+               ParamService.updateURL({projectId: project.id});
+           }
+           $projects.currentProject = project;
+           return project;
        };
        
        

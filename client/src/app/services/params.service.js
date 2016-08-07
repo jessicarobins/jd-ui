@@ -6,13 +6,14 @@ module.service('ParamService', function(
         $state.go('.', params);
     };
     
-    self.parseParamsFromURL = function(){
+    self.parseParamsFromURL = function(projectId, validTypes){
+        console.log('valid types = ', validTypes)
         var params = {
             "tag_types[]": $stateParams.tag_type,
             ticketed: $stateParams.ticketed,
             commented: $stateParams.commented,
             spec_id: $stateParams.spec_id,
-            project_id: $stateParams.projectId
+            project_id: projectId
         };
         
         return params;
