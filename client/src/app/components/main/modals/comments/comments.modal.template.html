@@ -1,9 +1,30 @@
 <jd-modal layout="column" class="comments">
     <jd-modal-title>comments</jd-modal-title>
-    <jd-modal-body layout="column" layout-padding>
-        <md-list>
+    <jd-modal-body layout="column">
+        <md-list
+            ng-if="$ctrl.spec.comments.length">
+            <md-subheader
+                ng-if="$ctrl.groupedComments.false">
+                Unresolved</md-subheader>
             <md-list-item 
-                ng-repeat="comment in $ctrl.spec.comments"
+                ng-repeat="comment in $ctrl.groupedComments.false"
+                class="md-2-line md-long-text">
+                <img ng-src="{{comment.user.image}}" class="md-avatar"/>
+                <div class="md-list-item-text">
+                    <h3>{{ comment.user.name }}</h3>
+                    <p ng-bind="comment.text"></p>
+                    <md-icon 
+                        class="md-secondary material-icons" 
+                        ng-click="$ctrl.resolve(comment)" 
+                        aria-label="resolve">
+                        done
+                    </md-icon>
+                </div>
+            </md-list-item>
+            <md-subheader
+                ng-if="$ctrl.groupedComments.true">Resolved</md-subheader>
+            <md-list-item 
+                ng-repeat="comment in $ctrl.groupedComments.true"
                 class="md-2-line md-long-text">
                 <img ng-src="{{comment.user.image}}" class="md-avatar"/>
                 <div class="md-list-item-text">

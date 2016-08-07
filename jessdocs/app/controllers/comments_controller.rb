@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_comment, only: [:show, :update, :destroy, :resolve]
 
   # GET /comments
   # GET /comments.json
@@ -31,13 +31,15 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-    @comment = Comment.find(params[:id])
-
     if @comment.update(comment_params)
       head :no_content
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
+  end
+  
+  def resolve
+    @comment.update!(:resolved => true)
   end
 
   # DELETE /comments/1
@@ -61,4 +63,5 @@ class CommentsController < ApplicationController
     def add_params
       params.require(:comment).permit(:spec_id, :text)
     end
+    
 end

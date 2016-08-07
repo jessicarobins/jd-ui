@@ -9,6 +9,7 @@ module.component('commentsModal', {
         
         self.$onInit = function() {
             console.log(self.spec)
+            self.groupedComments = _.groupBy(self.spec.comments, 'resolved');
         };
         
         self.add = function(){
@@ -23,7 +24,18 @@ module.component('commentsModal', {
                 }
             }).then( function(response){
                self.spec.comments.push(response);
+               self.groupedComments.false.push(response);
                self.text = '';
+            });
+        };
+        
+        self.resolve = function(comment){
+            $api.request({
+                url: '/comments/' + comment.id + '/resolve',
+                method: 'PUT'
+            }).then(function(){
+                self.groupedComments.true.push(comment);
+                _.pull(self.groupedComments.false, comment);
             });
         };
         
