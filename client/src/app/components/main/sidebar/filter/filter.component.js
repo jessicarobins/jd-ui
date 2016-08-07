@@ -21,6 +21,11 @@ module.
       
       self.$onInit = function() {
         
+        self.ticketed = $stateParams.ticketed;
+        self.formData.ticketed = $stateParams.ticketed;
+        self.commented = $stateParams.commented;
+        self.formData.commented = $stateParams.commented;
+
         $projects.getProjects().then( function(response) {
             self.projects = response;
             self.formData.project = $projects.project();
@@ -37,6 +42,11 @@ module.
         
         $tagtypes.getTagTypes().then( function(response){
             self.tag_type_groups = response.byGroup;
+            
+            self.selected = $stateParams.tag_type || [];
+            self.selected.forEach( function(tagId){
+                self.formData.tag_types[tagId] = true;
+            });
         });
         
         $tagtypes.addCallback( function(){
