@@ -1,3 +1,4 @@
+var module = angular.module('jessdocs');
 module.component('loginPage', {
     templateUrl: 'app/components/login/login.template.html',
     controller: function($auth) {
