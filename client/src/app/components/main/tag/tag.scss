@@ -2,13 +2,7 @@ tag {
     color: white;
     
     .tag {
-        padding: 1px 5px;
-        margin: 0px 2px;
-        border-radius: 2px;
-        max-height: 20px;
-        line-height: 20px;
-        font-size: smaller;
-        text-transform: uppercase;
+        @extend .label;
         
         .name {
             overflow: hidden;

@@ -37,6 +37,10 @@ class Spec < ActiveRecord::Base
             .as_json(:include => {:user => {:only => [:image, :name]}})
     end
     
+    def open_comments_count
+        self.comments.open.count
+    end
+    
     def self.filter(filter_params)
         specs = Spec.for_project(filter_params[:project_id])
         

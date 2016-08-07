@@ -16,7 +16,9 @@ class SpecsController < ApplicationController
     json = @specs.includes(:comments).arrange_serializable(:order => 'spec_order ASC') do |parent, children|
     {
          data: parent.as_json(
-            :methods => :grouped_comments_json),
+            :methods => [
+              :grouped_comments_json, :open_comments_count
+            ]),
          children: children
     }
     end

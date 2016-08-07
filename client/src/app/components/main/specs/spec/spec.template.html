@@ -58,6 +58,11 @@
             </md-icon>
           </md-button>
         </div>
+        <div 
+          ng-if="$ctrl.spec.data.open_comments_count > 0"
+          md-colors="::{backgroundColor: 'default-accent'}"
+          class="label" 
+          ng-bind="$ctrl.spec.data.open_comments_count"></div>
         <tag
           layout="row"
           ng-repeat="tag in $ctrl.tags"

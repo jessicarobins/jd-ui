@@ -30,6 +30,7 @@ module.component('commentsModal', {
                 }
             }).then( function(response){
                self.spec.grouped_comments_json.false.push(response);
+               self.spec.open_comments_count += 1;
                self.text = '';
             });
         };
@@ -41,6 +42,7 @@ module.component('commentsModal', {
             }).then(function(){
                 self.spec.grouped_comments_json.true.push(comment);
                 _.pull(self.spec.grouped_comments_json.false, comment);
+                self.spec.open_comments_count -= 1;
             });
         };
         
