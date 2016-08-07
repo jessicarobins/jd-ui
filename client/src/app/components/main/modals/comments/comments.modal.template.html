@@ -9,7 +9,13 @@
             <md-list-item 
                 ng-repeat="comment in $ctrl.groupedComments.false"
                 class="md-2-line md-long-text">
-                <img ng-src="{{comment.user.image}}" class="md-avatar"/>
+                <md-icon 
+                    ng-if="!comment.user.image"
+                    class="no-image material icons md-avatar">
+                    account_circle</md-icon>
+                <img 
+                    ng-if="comment.user.image"
+                    ng-src="{{comment.user.image}}" class="md-avatar"/>
                 <div class="md-list-item-text">
                     <h3>{{ comment.user.name }}</h3>
                     <p ng-bind="comment.text"></p>
@@ -26,7 +32,13 @@
             <md-list-item 
                 ng-repeat="comment in $ctrl.groupedComments.true"
                 class="md-2-line md-long-text">
-                <img ng-src="{{comment.user.image}}" class="md-avatar"/>
+                <md-icon 
+                    ng-if="!comment.user.image"
+                    class="no-image material icons md-avatar">
+                    account_circle</md-icon>
+                <img 
+                    ng-if="comment.user.image"
+                    ng-src="{{comment.user.image}}" class="md-avatar"/>
                 <div class="md-list-item-text">
                     <h3>{{ comment.user.name }}</h3>
                     <p ng-bind="comment.text"></p>

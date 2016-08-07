@@ -30,6 +30,13 @@ class Spec < ActiveRecord::Base
         self.path.union(self.descendants).pluck(:id)
     end
     
+    def grouped_comments_json
+        self.comments
+            .includes(:user)
+            .group_by(&:resolved)
+            .as_json(:include => {:user => {:only => [:image, :name]}})
+    end
+    
     def self.filter(filter_params)
         specs = Spec.for_project(filter_params[:project_id])
         

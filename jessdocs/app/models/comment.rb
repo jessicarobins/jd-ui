@@ -9,4 +9,5 @@ class Comment < ActiveRecord::Base
     validates_presence_of :text
     
     default_scope { order(created_at: :asc) }
+    scope :by_resolved, -> { all.group_by(&:resolved) }
 end

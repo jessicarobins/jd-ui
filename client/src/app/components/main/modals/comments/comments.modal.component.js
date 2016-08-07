@@ -6,7 +6,10 @@ module.component('commentsModal', {
      controller: function($mdDialog, $api) {
              
         var self = this;
-        
+        self.groupedComments = {
+            true: [],
+            false: []
+        }
         self.$onInit = function() {
             console.log(self.spec)
             self.groupedComments = _.groupBy(self.spec.comments, 'resolved');
@@ -25,6 +28,7 @@ module.component('commentsModal', {
             }).then( function(response){
                self.spec.comments.push(response);
                self.groupedComments.false.push(response);
+               
                self.text = '';
             });
         };
