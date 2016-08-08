@@ -130,6 +130,8 @@ module.service('$projects', function(
             var projectId = projects[0].id;
             console.log('orgId projectId', orgId, projectId)
           return  { state: 'filter', params: {orgId: orgId, projectId: projectId}};
+        }).catch(function(resp) {
+            return {state: 'login'};
         });
     };
 });

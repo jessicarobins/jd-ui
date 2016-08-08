@@ -66,7 +66,8 @@ module.component('main', {
                project = $projects.projects[0];
                ParamService.updateURL({projectId: project.id});
            }
-           $projects.currentProject = project;
+        //   $projects.currentProject = project;
+            $projects.setCurrentProject(project);
            return project;
        }
        

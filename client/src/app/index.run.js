@@ -2,14 +2,8 @@ export function runBlock ($log, $rootScope, $user, $projects, $state) {
   'ngInject';
   
   $rootScope.$on('$destroy', 
-    $rootScope.$on('auth:login-success', function(ev, user) {
-        $user.setCurrentUser(user);
-        $state.go('home');
-  }));
-  $rootScope.$on('$destroy', 
     $rootScope.$on('auth:validation-success', function(ev, user) {
         $user.setCurrentUser(user);
-        
   }));  
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:oauth-registration', function(ev, user) {
@@ -35,6 +29,10 @@ export function runBlock ($log, $rootScope, $user, $projects, $state) {
   }));
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:logout-success', function() {
+        $state.go('login');
+  }));
+  $rootScope.$on('$destroy', 
+    $rootScope.$on('auth:session-expired', function() {
         $state.go('login');
   }));
   $log.debug('runBlock end');
