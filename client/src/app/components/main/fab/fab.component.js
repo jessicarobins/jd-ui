@@ -50,7 +50,7 @@ module.component('fab', {
         self.toggleExportModal = function(ev) {
             MenuService.exporting(false);
             $mdDialog.show({
-                template: '<export></export>',
+                template: '<export layout="column"></export>',
                 targetEvent: ev,
                 clickOutsideToClose:true
             });
