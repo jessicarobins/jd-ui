@@ -11,6 +11,7 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
     var adminRoles = ['admin'];
     var writeRoles = ['admin', 'write'];
     var currentRole;
+    var currentUser;
     
     self.addOrgCallback = function(callback) {
         orgCallbacks.push(callback);
@@ -89,11 +90,19 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
     self.logout = function() {
         $auth.signOut()
             .then(function(resp) {
+                
             })
             .catch(function(resp) {
               // handle error response
               console.log(resp);
             });
+    };
+    
+    self.clear = function(){
+        currentUser = null;
+        currentOrganization = null;
+        currentRole = null;
+        orgCallbacks = [];
     };
     
     function notifyWatchers() {

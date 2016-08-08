@@ -6,6 +6,11 @@ module.service('MenuService', function($api) {
     self.export = false;
     self.exportSpecs = [];
     
+    self.clear = function(){
+      callbacks = [];
+      exportCallbacks = [];
+    };
+    
     self.addCallback = function(callback) {
         callbacks.push(callback);
     };

@@ -7,7 +7,6 @@ module.service('ParamService', function(
     };
     
     self.parseParamsFromURL = function(projectId, typeIds){
-        console.log('valid types = ', typeIds)
         var params = {
             "tag_types[]": typeIds,
             ticketed: $stateParams.ticketed,

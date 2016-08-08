@@ -1,4 +1,4 @@
-export function runBlock ($log, $rootScope, $user, $projects, $state) {
+export function runBlock ($log, $rootScope, $user, $state, $window, LogoutService) {
   'ngInject';
   
   $rootScope.$on('$destroy', 
@@ -29,7 +29,11 @@ export function runBlock ($log, $rootScope, $user, $projects, $state) {
   }));
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:logout-success', function() {
-        $state.go('login');
+        LogoutService.clearAll();
+        $state.go('login').then(function(){
+          $window.location.reload();
+        });
+       
   }));
   $rootScope.$on('$destroy', 
     $rootScope.$on('auth:session-expired', function() {

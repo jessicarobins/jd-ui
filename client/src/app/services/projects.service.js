@@ -17,6 +17,13 @@ module.service('$projects', function(
     
     self.currentProject;
     
+    self.clear = function(){
+        currentProjectCallbacks = [];
+        callbacks = [];
+        self.projects = null;
+        self.currentProject = null;
+    };
+    
     self.getProjects = function() {
         if(self.projects && self.projects.length){
             return $q.when(self.projects);

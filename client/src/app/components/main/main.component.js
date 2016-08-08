@@ -81,9 +81,10 @@ module.component('main', {
        }
        
        function sanitizeTagTypes(validTypes, typeParams){
+           typeParams = typeParams || [];
            var validIds = _.map(validTypes, 'id') || [];
            var intersection = _.intersection(typeParams, validIds) || [];
-           if(intersection.length < validIds.length){
+           if(intersection.length < typeParams.length){
                ParamService.updateURL({tag_type: intersection});
            }
            return intersection;

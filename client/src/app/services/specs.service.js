@@ -8,6 +8,11 @@ module.service('$specs', function($mdToast, ParamService, $api, $q, $user, $proj
     self.addManyParent;
     self.filterParams = {};
     
+    self.clear = function(){
+      bookmarkCallbacks = [];
+      callbacks = [];
+    };
+    
     self.addCallback = function(callback) {
         callbacks.push(callback);
     };
