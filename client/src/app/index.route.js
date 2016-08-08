@@ -5,10 +5,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       url: '/login',
       component: 'loginPage'
     })
-    .state('signUp', {
-      url: '/sign_up',
-      component: 'signup'
-    })
     .state('home', {
       url: '/',
        redirectTo: function (trans) {

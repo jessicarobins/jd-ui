@@ -15,7 +15,6 @@ module.component('loginPage', {
             }).then( function(user){
                 return $projects.getProjects();
             }).then(function(projects){
-                console.log(projects, $user.organizations())
                 $state.go('filter', {
                     orgId: $user.organizations()[0].id,
                     projectId: projects[0].id
