@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :user_organizations, except: [:new, :edit]
     resources :organizations, except: [:new, :edit] do
       member do
-        get 'current_user_role'
+        put 'change_user_role'
         get 'users'
         put 'add_user'
       end

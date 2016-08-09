@@ -11,7 +11,7 @@
   <md-list-item 
     ng-mouseenter="user.userMouseover=true"
     ng-mouseleave="user.userMouseover=false"
-    ng-click="$ctrl.viewUserInfo()"
+    ng-click="$ctrl.viewUserInfo($event, user)"
     ng-repeat="user in $ctrl.users">
     <p 
       class="truncate"

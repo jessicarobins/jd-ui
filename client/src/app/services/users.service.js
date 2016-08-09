@@ -10,6 +10,7 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
     
     var adminRoles = ['admin'];
     var writeRoles = ['admin', 'write'];
+    self.allRoles = ['read', 'write', 'admin'];
     var currentRole;
     var currentUser;
     

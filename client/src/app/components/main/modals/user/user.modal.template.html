@@ -1,0 +1,38 @@
+<jd-modal layout="column" class="user-modal">
+    <jd-modal-title>user</jd-modal-title>
+    <jd-modal-body layout="column" layout-padding>
+        <md-list>
+            <md-list-item 
+                class="md-1-line">
+                <md-icon 
+                    ng-if="!$ctrl.user.image"
+                    class="no-image material icons md-avatar">
+                    account_circle</md-icon>
+                <img 
+                    ng-if="$ctrl.user.image"
+                    ng-src="{{$ctrl.user.image}}" class="md-avatar"/>
+                <div class="md-list-item-text">
+                    <h3>{{ $ctrl.user.name }}</h3>
+                    
+                </div>
+            </md-list-item>
+        </md-list>
+        <md-radio-group 
+            ng-if="$ctrl.allowEdit()"
+            ng-model="$ctrl.role">
+            <md-radio-button 
+                ng-repeat="role in $ctrl.allRoles"
+                ng-value="role">{{role}}</md-radio-button>
+        </md-radio-group>
+    </jd-modal-body>
+    <jd-modal-buttons ng-if="$ctrl.allowEdit()">
+        
+        <span flex></span>
+        <md-button
+            aria-label="modify user"
+            ng-click="$ctrl.modify()"
+            class="md-raised md-accent">
+            save
+        </md-button>
+    </jd-modal-buttons>
+</jd-modal>

@@ -18,8 +18,16 @@ module.component('users', {
            return self.parent.admin && (user.id != $user.user().id);
        };
        
-       self.viewUserInfo = function(){
-           
+       self.viewUserInfo = function(ev, user){
+           $mdDialog.show({
+                template: '<user-modal user="user" layout="column"></user-modal>',
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                locals: {user: user },
+                controller: function($scope, user) {
+                  $scope.user = user;
+                }
+            });
        };
        
        function getUsers(){

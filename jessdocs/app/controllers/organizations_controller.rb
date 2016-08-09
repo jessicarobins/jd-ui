@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :add_user, :current_user_role, :users, :update, :destroy]
+  before_action :set_organization, only: [:show, :add_user, :change_user_role, :users, :update, :destroy]
 
   # GET /organizations
   # GET /organizations.json
@@ -15,14 +15,18 @@ class OrganizationsController < ApplicationController
     render json: @organization
   end
   
-  def current_user_role
-    roles = current_user.roles.where(:resource_id => @organization.id).first
-    
-    render json: roles
+  def change_user_role
+    user = User.find change_user_role_params[:id]
+    user.roles.where(:resource_id => @organization.id).destroy_all
+    new_role = change_user_role_params[:role]
+    user.add_role new_role, @organization
+    render :json => user.roles
   end
   
   def users
-    users = @organization.users
+    users = @organization.users.as_json(
+      :only => [:id, :name, :image],
+      :methods => :roles)
     
     render json: users
   end
@@ -85,5 +89,9 @@ class OrganizationsController < ApplicationController
     
     def add_user_params
       params.require(:org).permit(:email)
+    end
+    
+    def change_user_role_params
+      params.require(:user).permit(:id, :role)
     end
 end
