@@ -10,22 +10,16 @@ module.component('sidebar', {
        
        self.$onInit = function(){
            
-           $user.write().then(function(response){
-               self.canWrite = response; 
-            });
+            self.canWrite = $user.write(); 
             
-            $user.admin().then(function(response){
-               self.admin = response; 
-            });
+            self.admin = $user.admin(); 
             
             $user.addOrgCallback( function(){
-                $user.write().then(function(response){
-                   self.canWrite = response; 
-                });
+                self.canWrite = $user.write(); 
                 
-                $user.admin().then(function(response){
-                   self.admin = response; 
-                });
+                self.admin = $user.admin(); 
+                
+                self.selectedTab = 0;
             });
        };
        

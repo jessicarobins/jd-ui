@@ -6,7 +6,7 @@ module Overrides
       # @resource will have been set by set_user_by_token concern
       if @resource
         render json: {
-          data: @resource.as_json(:include => :organizations)
+          data: @resource.as_json(:include => :organizations, :methods => :roles)
         }
       else
         render json: {

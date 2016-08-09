@@ -35,48 +35,28 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
     };
     
     self.write = function(){
-        return self.currentRole().then (function(response){
-            return _.contains(writeRoles, response.name); 
-        });
+        return _.contains(writeRoles, currentRole.name); 
     };
     
     self.admin = function(){
-        return self.currentRole().then (function(response){
-            return _.contains(adminRoles, response.name); 
-        });
+        return _.contains(adminRoles, currentRole.name); 
     };
     
     self.setCurrentOrg = function(org){
         org = org || self.organizations()[0];
         currentOrganization = org;
         
-        // $state.go('.', {orgId: currentOrganization.id})
-        currentRole = null;
-        self.currentRole().then( function(role){
-            notifyWatchers();
-        });
+        currentRole = _.find(currentUser.roles, {'resource_id': org.id});
+        notifyWatchers();
     };
     
     self.initOrg = function(org){
         currentOrganization = org;
-        self.currentRole();
+        currentRole = _.find(currentUser.roles, {'resource_id': org.id});
     };
     
     self.currentRole = function(){
-        if(currentRole){
-            return $q.when(currentRole);
-        }
-        else {
-            return $api.request({
-                url: '/organizations/' + self.currentOrg().id + '/current_user_role',
-                method: 'GET'
-            }).then(function(response){
-                console.log('role response', response)
-               self.setCurrentRole(response); 
-               return currentRole;
-            });
-        }
-       
+        return currentRole;
     };
     
     self.setCurrentRole = function(role){

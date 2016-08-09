@@ -22,14 +22,10 @@ module.component('fab', {
                 self.exporting = MenuService.export;
             });
             
-            $user.write().then(function(response){
-               self.canWrite = response; 
-            });
+            self.canWrite = $user.write(); 
             
             $user.addOrgCallback( function(){
-                $user.write().then(function(response){
-                   self.canWrite = response; 
-                });
+                self.canWrite = $user.write(); 
             });
         };
         

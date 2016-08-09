@@ -18,9 +18,7 @@ module.component('sidebarMenu', {
        var navName = 'left';
        
        self.$onInit = function(){
-           $user.admin().then( function(response){
-                self.admin = response;    
-           });
+            self.admin = $user.admin();    
        };
        
        self.setTab = function(index){

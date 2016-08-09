@@ -16,13 +16,9 @@ module.component('main', {
        self.canWrite = false;
        
        self.$onInit = function(){
-            
             sanitizeOrgParam($stateParams.orgId);
+            self.canWrite = $user.write();
             var project;
-            
-            $user.write().then(function(response){
-               self.canWrite = response; 
-            });
             
             var promises = {
                 tickets: $api.request({url: '/tickets'}),
@@ -43,9 +39,6 @@ module.component('main', {
             });
             
             $user.addOrgCallback( function(){
-                $user.write().then(function(response){
-                   self.canWrite = response; 
-                });
                 $tagtypes.updateGroups();
                 $tagtypes.updateTagTypes();
                $projects.updateProjects().then( function(response){
@@ -53,6 +46,7 @@ module.component('main', {
                    return response;
                }).then( function(projects){
                    ParamService.changeOrg($user.currentOrg().id, $projects.project().id);
+                   self.canWrite = $user.write(); 
                    $specs.setSpecList({project_id: $projects.project().id});
                });
                
@@ -78,6 +72,7 @@ module.component('main', {
                ParamService.updateURL({orgId: org.id});
            }
            $user.initOrg(org);
+           
        }
        
        function sanitizeTagTypes(validTypes, typeParams){
