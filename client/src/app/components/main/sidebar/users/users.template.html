@@ -12,7 +12,10 @@
     ng-mouseenter="user.userMouseover=true"
     ng-mouseleave="user.userMouseover=false"
     ng-click="$ctrl.viewUserInfo($event, user)"
-    ng-repeat="user in $ctrl.users">
+    ng-repeat="user in $ctrl.users track by user.id">
+    <img 
+      ng-if="user.image"
+      ng-src="{{user.image}}" class="md-avatar"/>
     <p 
       class="truncate"
       ng-bind="user.name"></p>
