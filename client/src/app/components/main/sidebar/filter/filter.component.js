@@ -121,7 +121,7 @@ module.
           "tag_types[]": self.selected,
           ticketed: self.ticketed,
           commented: self.commented,
-          spec_id: $specs.filterParams.id
+          id: $specs.filterParams.id
         };
         
         $specs.setSpecList(params);
