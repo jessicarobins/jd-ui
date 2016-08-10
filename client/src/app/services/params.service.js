@@ -11,7 +11,7 @@ module.service('ParamService', function(
             "tag_types[]": typeIds,
             ticketed: $stateParams.ticketed,
             commented: $stateParams.commented,
-            spec_id: $stateParams.spec_id,
+            id: $stateParams.spec_id,
             project_id: projectId
         };
         

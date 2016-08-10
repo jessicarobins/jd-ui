@@ -7,6 +7,8 @@ module.component('breadcrumbs', {
         self.breadcrumbs = null;
         
         self.$onInit = function(){
+            self.breadcrumbs = BreadcrumbsService.breadcrumbs;
+            
             BreadcrumbsService.addCallback( function(){
                 self.breadcrumbs = BreadcrumbsService.breadcrumbs;
             });

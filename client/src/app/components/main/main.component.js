@@ -5,6 +5,7 @@ module.component('main', {
         $q,
         $api,
         $projects,
+        BreadcrumbsService,
         ParamService,
         $specs,
         $user,
@@ -24,7 +25,8 @@ module.component('main', {
                 tickets: $api.request({url: '/tickets'}),
                 tags: $api.request({url: '/tags'}),
                 projects: $projects.getProjects(),
-                tagTypes: $tagtypes.getTagTypes()
+                tagTypes: $tagtypes.getTagTypes(),
+                breadcrumbs: BreadcrumbsService.initBreadcrumbs($stateParams.spec_id)
             };
             
             $q.all(promises).then( function(response) {
@@ -83,6 +85,10 @@ module.component('main', {
                ParamService.updateURL({tag_type: intersection});
            }
            return intersection;
+       }
+       
+       function sanitizeSpecId(specId){
+           
        }
     }
 });
