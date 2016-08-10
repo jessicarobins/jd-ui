@@ -33,7 +33,11 @@ Rails.application.routes.draw do
     end
     resources :tag_type_groups, except: [:new, :edit]
     resources :tickets, except: [:new, :edit]
-    resources :tags, except: [:new, :edit]
+    resources :tags, except: [:new, :edit] do
+      collection do
+        post 'delete'
+      end
+    end
     resources :tag_types, except: [:new, :edit] do
       member do
         post 'restore'

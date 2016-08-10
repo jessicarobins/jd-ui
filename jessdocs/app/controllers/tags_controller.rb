@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :update, :destroy]
+  before_action :set_tag, only: [:show, :update]
 
   # GET /tags
   # GET /tags.json
@@ -40,6 +40,19 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
+    @tag = Tag.where(
+      :tag_type_id => delete_params[:tag_type_id],
+      :spec_id => delete_params[:spec_id]).first
+    @tag.update!(:deleted_by_id => current_user.id)
+    @tag.destroy
+
+    head :no_content
+  end
+  
+  def delete
+    @tag = Tag.where(
+      :tag_type_id => delete_params[:tag_type_id],
+      :spec_id => delete_params[:spec_id]).first
     @tag.update!(:deleted_by_id => current_user.id)
     @tag.destroy
 
@@ -57,6 +70,10 @@ class TagsController < ApplicationController
     end
     
     def create_params
+      params.require(:tag).permit(:tag_type_id, :spec_id)
+    end
+    
+    def delete_params
       params.require(:tag).permit(:tag_type_id, :spec_id)
     end
 end

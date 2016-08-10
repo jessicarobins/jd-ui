@@ -3,8 +3,7 @@ module.component('tagMenu', {
         parent: '^^spec'
     },
     bindings: {
-        spec: '<',
-        tags: '<'
+        spec: '<'
     },
     templateUrl: 'app/components/main/specs/spec/tag-menu/tag-menu.template.html',
     controller: function(
@@ -35,7 +34,7 @@ module.component('tagMenu', {
         };
         
         self.hasTag = function(tagTypeId){
-            return self.parent.hasTag(tagTypeId);
+            return _.find(self.spec.tag_types, {id: tagTypeId});
         };
         
         self.showGroupName = function(group){
@@ -46,21 +45,19 @@ module.component('tagMenu', {
         
         function addTag(tagTypeId){
             $specs.addTag(self.spec, tagTypeId).then(function (tag){
-               self.tags.push(tag); 
+               self.spec.tag_types.push(tag.tag_type); 
                self.formData.tagTypes[tagTypeId] = true;
             });
         }
         
         function removeTag(tag){
             self.parent.removeTag(tag);
-            self.formData.tagTypes[tag.tag_type.id] = false;
+            self.formData.tagTypes[tag.id] = false;
         }
         
         function formatTagData(){
-            self.tags.forEach( function(tag){
-                if(tag.tag_type_id){
-                    self.formData.tagTypes[tag.tag_type_id] = true;
-                }
+            self.spec.tag_types.forEach( function(tag){
+                self.formData.tagTypes[tag.id] = true;
             });
         }   
        

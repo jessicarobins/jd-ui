@@ -61,15 +61,17 @@ module.component('spec', {
         
         self.removeTag = function(tag){
             //remove tag
-            if(tag.tag_type_id){
-                $specs.removeTag(tag);
+            if(tag.color){
+                $specs.removeTag(tag, self.spec.data);
+                _.pull(self.spec.data.tag_types, tag);
             }
             //remove ticket
             else {
                 $specs.removeTicket(tag);
+                _.pull(self.spec.data.tickets, tag);
             }
-            var idx = self.tags.indexOf(tag);
-            self.tags.splice(idx, 1);
+            // var idx = self.tags.indexOf(tag);
+            // self.tags.splice(idx, 1);
         };
         
         self.hasTag = function(tagTypeId){
@@ -81,15 +83,6 @@ module.component('spec', {
             }
             return null; 
         };
-        
-        self.getTagObject = function(tag){
-            if(tag.tag_type){
-                return tag.tag_type;
-            }
-            else {
-                return tag;
-            }
-        }
         
         function save(){
             self.spec.editing = false;

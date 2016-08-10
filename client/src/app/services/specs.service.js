@@ -84,10 +84,16 @@ module.service('$specs', function($mdToast, ParamService, $api, $q, $user, $proj
         return promise;
     };
     
-    self.removeTag = function(tag){
+    self.removeTag = function(tag, spec){
         var promise = $api.request({
-            url: '/tags/' + tag.id,
-            method: 'DELETE'
+            url: '/tags/delete',
+            method: 'POST',
+            data: {
+                tag: {
+                    spec_id: spec.id,
+                    tag_type_id: tag.id
+                }
+            }
         }).then(function (response){
             return response;
         });
