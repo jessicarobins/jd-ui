@@ -43,6 +43,7 @@ module.component('main', {
             $user.addOrgCallback( function(){
                 $tagtypes.updateGroups();
                 $tagtypes.updateTagTypes();
+                BreadcrumbsService.clearBreadcrumbs();
                $projects.updateProjects().then( function(response){
                    $projects.setCurrentProject(response[0]);
                    return response;
