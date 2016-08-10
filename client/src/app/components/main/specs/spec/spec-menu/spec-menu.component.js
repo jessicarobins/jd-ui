@@ -8,6 +8,7 @@ module.component('specMenu', {
     },
     templateUrl: 'app/components/main/specs/spec/spec-menu/spec-menu.template.html',
     controller: function(
+        $scope,
         $specs,
         $mdDialog,
         BreadcrumbsService) {
@@ -80,6 +81,18 @@ module.component('specMenu', {
                 locals: {spec: self.spec },
                 controller: function($scope, spec) {
                   $scope.spec = spec;
+                }
+            });
+        };
+        
+        self.addTags = function(ev){
+            $mdDialog.show({
+                template: '<tags-modal spec="spec" tags="tags" layout="column"></tags-modal>',
+                targetEvent: ev,
+                locals: {spec: self.spec, tags: self.parent.tag },
+                controller: function($scope, spec, tags) {
+                  $scope.spec = spec;
+                  $scope.tags = tags;
                 }
             });
         };

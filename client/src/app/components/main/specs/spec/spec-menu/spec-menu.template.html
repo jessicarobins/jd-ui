@@ -7,6 +7,12 @@
   </a>
   <md-menu-content>
     <md-menu-item ng-if="$ctrl.canWrite">
+      <md-button ng-click="$ctrl.addTags($event)">
+        <md-icon class='material-icons'>label</md-icon>
+        tags
+      </md-button>
+    </md-menu-item>
+    <md-menu-item ng-if="$ctrl.canWrite">
       <md-button ng-click="$ctrl.addChildren($event)">
         <md-icon class='material-icons'>add</md-icon>
         add children

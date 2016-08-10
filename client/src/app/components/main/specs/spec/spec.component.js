@@ -4,9 +4,7 @@ module.component('spec', {
     },
     bindings: {
         spec: '<',
-        uiTreeCallbacks: '=',
-        tag: '<',
-        ticket: '<'
+        uiTreeCallbacks: '='
     },
     templateUrl: 'app/components/main/specs/spec/spec.template.html',
     controller: function(

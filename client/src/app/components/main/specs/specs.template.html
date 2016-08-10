@@ -15,9 +15,7 @@
       <li ng-repeat="spec in $ctrl.spec track by spec.data.id" ui-tree-node>
         <spec 
             spec="spec" 
-            ui-tree-callbacks="::$callbacks"
-            tag="::$ctrl.getTags(spec.data)"
-            ticket="::$ctrl.getTickets(spec.data)"></spec>
+            ui-tree-callbacks="::$callbacks"></spec>
       </li>
     </ol>
     <a id="bottom"></a>

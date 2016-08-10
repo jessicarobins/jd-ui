@@ -66,9 +66,14 @@
           ng-bind="$ctrl.spec.data.open_comments_count"></div>
         <tag
           layout="row"
-          ng-repeat="tag in $ctrl.tags"
+          ng-repeat="ticket in $ctrl.spec.data.tickets"
           spec="$ctrl.spec"
-          tag="$ctrl.getTagObject(tag)"></tag>
+          tag="ticket"></tag>
+        <tag
+          layout="row"
+          ng-repeat="tag in $ctrl.spec.data.tag_types"
+          spec="$ctrl.spec"
+          tag="tag"></tag>
     </div>
   </div>
     
@@ -76,9 +81,7 @@
         <li ng-repeat="child in $ctrl.spec.children track by child.data.id" ui-tree-node>
             <spec 
                 spec='child' 
-                ui-tree-callbacks="::$callbacks"
-                tag="::$ctrl.parent.getTags(child.data)"
-                ticket="::$ctrl.parent.getTickets(child.data)"></spec>
+                ui-tree-callbacks="::$callbacks"></spec>
         </li>
     </ol>
 </div>
