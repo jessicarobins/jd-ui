@@ -1,34 +1,27 @@
 <jd-modal layout="column" class="tags-modal">
     <jd-modal-title>tags</jd-modal-title>
     <jd-modal-body layout="column">
-        <md-content 
-            layout="column"
-            layout-padding>
-            <section 
-                ng-repeat="group in $ctrl.tagTypesByGroup">
-                <md-list>
-                    <md-subheader
-                        class="tag-group"
-                        ng-if="$ctrl.showGroupName(group)"
-                        ng-bind="group.name">
-                    </md-subheader>
-                    <md-list-item
-                        ng-repeat-end
-                        ng-click="$ctrl.toggleTag(tagType.id)"
-                        aria-label="toggle tag"
-                        ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
-                        <tag tag="tagType"></tag>
-                        <md-checkbox 
-                          class="md-secondary"
-                          ng-model="$ctrl.formData.tagTypes[tagType.id]"
-                          aria-label="select tag"
-                          ng-true-value="true"
-                          ng-false-value="false">
-                        </md-checkbox>
-                    </md-list-item>
-                </md-list>
-            </section>
-        </md-content>
+        
+        <md-list
+            ng-repeat="group in $ctrl.tagTypesByGroup">
+            <md-subheader
+                ng-if="$ctrl.showGroupName(group)"
+                ng-bind="group.name">
+            </md-subheader>
+            <md-list-item
+                ng-click="$ctrl.toggleTag(tagType.id)"
+                aria-label="toggle tag"
+                ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
+                <tag tag="tagType"></tag>
+                <md-checkbox 
+                  class="md-secondary"
+                  ng-model="$ctrl.formData.tagTypes[tagType.id]"
+                  aria-label="select tag"
+                  ng-true-value="true"
+                  ng-false-value="false">
+                </md-checkbox>
+            </md-list-item>
+        </md-list>
     </jd-modal-body>
     <jd-modal-buttons>
     </jd-modal-buttons>
