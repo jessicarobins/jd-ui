@@ -26,24 +26,24 @@
                 ng-if="$ctrl.spec.grouped_comments_json.false.length">
                 Unresolved</md-subheader>
             <md-list-item 
-                md-prevent-menu-close="md-prevent-menu-close"
-                ng-click="$ctrl.resolve(comment)" 
-                aria-label="resolve"
                 ng-repeat="comment in $ctrl.spec.grouped_comments_json.false"
                 class="md-2-line md-long-text">
-                <md-menu-item>
-                <md-icon 
-                    ng-if="!comment.user.image"
-                    class="no-image material-icons md-avatar">
-                    account_circle</md-icon>
-                <img 
-                    ng-if="comment.user.image"
-                    ng-src="{{comment.user.image}}" 
-                    class="menu-avatar md-avatar"/>
-                <div class="md-list-item-text">
-                    <h3 ng-bind="comment.text"></h3>
-                    <p>{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</p>
-                </div>
+                <md-menu-item
+                    md-prevent-menu-close="md-prevent-menu-close"
+                    ng-click="$ctrl.resolve(comment)" 
+                    aria-label="resolve">
+                    <md-icon 
+                        ng-if="!comment.user.image"
+                        class="no-image material-icons md-avatar">
+                        account_circle</md-icon>
+                    <img 
+                        ng-if="comment.user.image"
+                        ng-src="{{comment.user.image}}" 
+                        class="menu-avatar md-avatar"/>
+                    <div class="md-list-item-text">
+                        <h3 ng-bind="comment.text"></h3>
+                        <p>{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</p>
+                    </div>
                 </md-menu-item>
             </md-list-item>
             <md-subheader
@@ -52,18 +52,18 @@
                 ng-repeat="comment in $ctrl.spec.grouped_comments_json.true"
                 class="md-2-line md-long-text">
                 <md-menu-item>
-                <md-icon 
-                    ng-if="!comment.user.image"
-                    class="no-image material icons md-avatar">
-                    account_circle</md-icon>
-                <img 
-                    ng-if="comment.user.image"
-                    ng-src="{{comment.user.image}}" 
-                    class="menu-avatar md-avatar"/>
-                <div class="md-list-item-text">
-                    <h3 ng-bind="comment.text"></h3>
-                    <p>{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</p>
-                </div>
+                    <md-icon 
+                        ng-if="!comment.user.image"
+                        class="no-image material icons md-avatar">
+                        account_circle</md-icon>
+                    <img 
+                        ng-if="comment.user.image"
+                        ng-src="{{comment.user.image}}" 
+                        class="menu-avatar md-avatar"/>
+                    <div class="md-list-item-text">
+                        <h3 ng-bind="comment.text"></h3>
+                        <p>{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</p>
+                    </div>
                 </md-menu-item>
             </md-list-item>
         </md-list>
