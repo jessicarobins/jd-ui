@@ -3,7 +3,7 @@ module.component('jdModal', {
      transclude: {
         'title': 'jdModalTitle',
         'body': 'jdModalBody',
-        'buttons': 'jdModalButtons'
+        'buttons': '?jdModalButtons'
       },
      controller: function($mdDialog) {
              

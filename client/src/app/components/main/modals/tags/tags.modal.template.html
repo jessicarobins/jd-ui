@@ -1,45 +1,35 @@
-<jd-modal layout="column">
+<jd-modal layout="column" class="tags-modal">
     <jd-modal-title>tags</jd-modal-title>
-    <jd-modal-body layout="column" layout-padding>
-        <md-list>
-           <div ng-repeat="group in $ctrl.tagTypesByGroup">
-              <md-subheader
-                class="tag-group"
-                ng-if="$ctrl.showGroupName(group)"
-                ng-bind="group.name">
-              </md-subheader>
-              <md-list-item
-                ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
-                <md-button
-                  layout="row"
-                  layout-align="start center"
-                  ng-click="$ctrl.toggleTag(tagType.id)"
-                  md-prevent-menu-close="md-prevent-menu-close">
-                    <tag tag="tagType"></tag>
-                    <span flex></span>
-                    <md-checkbox 
-                      md-prevent-menu-close="md-prevent-menu-close"
-                      ng-model="$ctrl.formData.tagTypes[tagType.id]"
-                      aria-label="select tag"
-                      ng-true-value="true"
-                      ng-false-value="false">
-                    </md-checkbox>
-                </md-button>
-              </md-list-item>
-            </div> 
-        </md-list>
+    <jd-modal-body layout="column">
+        <md-content 
+            layout="column"
+            layout-padding>
+            <section 
+                ng-repeat="group in $ctrl.tagTypesByGroup">
+                <md-subheader
+                    class="tag-group"
+                    ng-if="$ctrl.showGroupName(group)"
+                    ng-bind="group.name">
+                </md-subheader>
+                <md-list>
+                    <md-list-item
+                        ng-repeat-end
+                        ng-click="$ctrl.toggleTag(tagType.id)"
+                        aria-label="toggle tag"
+                        ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
+                        <tag tag="tagType"></tag>
+                        <md-checkbox 
+                          class="md-secondary"
+                          ng-model="$ctrl.formData.tagTypes[tagType.id]"
+                          aria-label="select tag"
+                          ng-true-value="true"
+                          ng-false-value="false">
+                        </md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </section>
+        </md-content>
     </jd-modal-body>
     <jd-modal-buttons>
-        
-        <span flex></span>
-        <md-button
-            ng-disabled="$ctrl.disableSave()"
-            aria-label="add tag type"
-            ng-click="$ctrl.add()"
-            class="md-raised md-accent">
-            <md-icon
-                class="material-icons">add</md-icon>
-            save
-        </md-button>
     </jd-modal-buttons>
 </jd-modal>

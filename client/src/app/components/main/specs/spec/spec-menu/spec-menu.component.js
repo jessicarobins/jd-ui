@@ -87,12 +87,12 @@ module.component('specMenu', {
         
         self.addTags = function(ev){
             $mdDialog.show({
-                template: '<tags-modal spec="spec" tags="tags" layout="column"></tags-modal>',
+                template: '<tags-modal spec="spec" layout="column"></tags-modal>',
                 targetEvent: ev,
-                locals: {spec: self.spec, tags: self.parent.tag },
-                controller: function($scope, spec, tags) {
+                clickOutsideToClose:true,
+                locals: {spec: self.spec },
+                controller: function($scope, spec) {
                   $scope.spec = spec;
-                  $scope.tags = tags;
                 }
             });
         };

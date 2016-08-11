@@ -1,7 +1,6 @@
 module.component('tagsModal', {
     bindings: {
         spec: '<',
-        tags: '<'
     },
     templateUrl: 'app/components/main/modals/tags/tags.modal.template.html',
     controller: function(
@@ -31,7 +30,7 @@ module.component('tagsModal', {
         };
         
         self.hasTag = function(tagTypeId){
-            return self.parent.hasTag(tagTypeId);
+            return _.find(self.spec.tag_types, {id: tagTypeId});
         };
         
         self.showGroupName = function(group){
@@ -42,21 +41,20 @@ module.component('tagsModal', {
         
         function addTag(tagTypeId){
             $specs.addTag(self.spec, tagTypeId).then(function (tag){
-               self.tags.push(tag); 
+               self.spec.tag_types.push(tag.tag_type); 
                self.formData.tagTypes[tagTypeId] = true;
             });
         }
         
         function removeTag(tag){
-            self.parent.removeTag(tag);
-            self.formData.tagTypes[tag.tag_type.id] = false;
+            $specs.removeTag(tag, self.spec);
+            _.pull(self.spec.tag_types, tag);
+            self.formData.tagTypes[tag.id] = false;
         }
         
         function formatTagData(){
-            self.tags.forEach( function(tag){
-                if(tag.tag_type_id){
-                    self.formData.tagTypes[tag.tag_type_id] = true;
-                }
+            self.spec.tag_types.forEach( function(tag){
+                self.formData.tagTypes[tag.id] = true;
             });
         }   
        
