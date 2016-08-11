@@ -17,6 +17,11 @@ module.component('commentsModal', {
                 self.spec.grouped_comments_json.true.length;
         };
         
+        self.formatTime = function(comment){
+            var time = moment(comment.created_at).format('M/D/YY h:mm a');
+            return time;
+        };
+        
         self.add = function(){
             $api.request({
                 url: '/comments',

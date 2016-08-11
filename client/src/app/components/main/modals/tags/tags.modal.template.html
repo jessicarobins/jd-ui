@@ -6,12 +6,12 @@
             layout-padding>
             <section 
                 ng-repeat="group in $ctrl.tagTypesByGroup">
-                <md-subheader
-                    class="tag-group"
-                    ng-if="$ctrl.showGroupName(group)"
-                    ng-bind="group.name">
-                </md-subheader>
                 <md-list>
+                    <md-subheader
+                        class="tag-group"
+                        ng-if="$ctrl.showGroupName(group)"
+                        ng-bind="group.name">
+                    </md-subheader>
                     <md-list-item
                         ng-repeat-end
                         ng-click="$ctrl.toggleTag(tagType.id)"
