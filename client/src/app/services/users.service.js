@@ -23,6 +23,33 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
        {name: 'bookmark', icon: 'bookmark'},
        {name: 'delete', icon: 'delete'}];
     
+    self.toggleMenuFavorite = function(name){
+        if(self.favorite(name)){
+            _.pull(self.favorites(), name);
+        }
+        else {
+            self.favorites().push(name);
+        }
+        
+        $api.request({
+            url: '/user_settings/toggle_menu_favorite',
+            method: 'PUT',
+            data: {
+                favorite: {
+                    name: name
+                }
+            }
+        });
+    };
+    
+    self.favorite = function(name){
+       return _.includes(self.favorites(), name);
+   };
+   
+   self.favorites = function(){
+       return currentUser.user_setting.menu_favorites;
+   };
+    
     self.addOrgCallback = function(callback) {
         orgCallbacks.push(callback);
     };

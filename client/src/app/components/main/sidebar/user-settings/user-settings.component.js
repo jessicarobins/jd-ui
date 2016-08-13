@@ -12,20 +12,12 @@ module.component('userSettings', {
        };
        
        self.favorite = function(item){
-           return _.includes(self.favorites, item.name);
+           return $user.favorite(item.name);
        };
        
        self.toggleFavorite = function(item){
-            if(self.favorite(item)){
-                _.pull(self.favorites, item.name);
-            }
-            else {
-                self.favorites.push(item.name);
-            }
+            $user.toggleMenuFavorite(item.name);
        };
        
-       self.save = function(){
-           
-       };
     }
 });

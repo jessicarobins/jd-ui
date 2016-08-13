@@ -1,4 +1,5 @@
 class UserSettingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user_setting, only: [:show, :update, :destroy]
 
   # GET /user_settings
@@ -25,6 +26,17 @@ class UserSettingsController < ApplicationController
     else
       render json: @user_setting.errors, status: :unprocessable_entity
     end
+  end
+  
+  def toggle_menu_favorite
+    favorite = menu_favorite_params[:name]
+    setting = current_user.user_setting
+    if setting.menu_favorites.include? favorite
+      setting.menu_favorites.delete(favorite)
+    else
+      setting.menu_favorites.push favorite
+    end
+    setting.save!
   end
 
   # PATCH/PUT /user_settings/1
@@ -55,5 +67,9 @@ class UserSettingsController < ApplicationController
 
     def user_setting_params
       params[:user_setting]
+    end
+    
+    def menu_favorite_params
+      params.require(:favorite).permit(:name)
     end
 end

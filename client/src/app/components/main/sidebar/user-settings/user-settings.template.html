@@ -1,7 +1,16 @@
 <h4 class="tab-title">user settings</h4>
 
 <md-subheader
-    ng-click="$ctrl.menuFavorites = !$ctrl.menuFavorites">menu favorites</md-subheader>
+    layout="row"
+    ng-click="$ctrl.menuFavorites = !$ctrl.menuFavorites">
+    <span>menu favorites</span>
+    <md-icon 
+        ng-if="!$ctrl.menuFavorites"
+        class="material-icons">expand_more</md-icon>
+    <md-icon 
+        ng-if="$ctrl.menuFavorites"
+        class="material-icons">expand_less</md-icon>
+</md-subheader>
 <md-list 
     ng-show="$ctrl.menuFavorites"
     class="md-dense">
