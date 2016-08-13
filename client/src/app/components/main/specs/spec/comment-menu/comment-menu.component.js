@@ -25,7 +25,7 @@ module.component('commentMenu', {
         };
         
         self.formatTime = function(comment){
-            var time = moment(comment.created_at).format('M/D/YY h:mm a');
+            var time = moment(comment.created_at).format('M/D');
             return time;
         };
         
