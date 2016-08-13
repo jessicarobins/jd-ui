@@ -4,17 +4,11 @@ module.component('userSettings', {
             
        var self = this;
        
-       self.menuOptions = [
-           {name: 'tags', icon: 'label'}, 
-           {name: 'add children', icon: 'add'},
-           {name: 'add link', icon: 'link'},
-           {name: 'comment', icon: 'comment'},
-           {name: 'expand', icon: 'fullscreen'},
-           {name: 'bookmark', icon: 'bookmark'},
-           {name: 'delete', icon: 'delete'}];
+       self.menuFavorites = true;
        
        self.$onInit = function(){
            self.favorites = $user.user().user_setting.menu_favorites;
+           self.menuOptions = $user.menuOptions;
        };
        
        self.favorite = function(item){

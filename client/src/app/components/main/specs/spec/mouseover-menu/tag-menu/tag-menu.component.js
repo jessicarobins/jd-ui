@@ -5,7 +5,7 @@ module.component('tagMenu', {
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/tag-menu/tag-menu.template.html',
+    templateUrl: 'app/components/main/specs/spec/mouseover-menu/tag-menu/tag-menu.template.html',
     controller: function(
         $filter,
         $specs, 

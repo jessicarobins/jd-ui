@@ -1,11 +1,13 @@
-<md-list>
-    <md-list-item>
-        <h4 class="tab-title">user settings</h4>
-    </md-list-item>
-    <md-subheader>menu favorites</md-subheader>
+<h4 class="tab-title">user settings</h4>
+
+<md-subheader
+    ng-click="$ctrl.menuFavorites = !$ctrl.menuFavorites">menu favorites</md-subheader>
+<md-list 
+    ng-show="$ctrl.menuFavorites"
+    class="md-dense">
     <md-list-item
         ng-click="$ctrl.toggleFavorite(item)"
-        ng-repeat="item in $ctrl.menuOptions track by item.name">
+        ng-repeat="item in $ctrl.menuOptions">
         <md-icon class="material-icons">{{::item.icon}}</md-icon>
         <p ng-bind="::item.name"></p>
         <md-icon 

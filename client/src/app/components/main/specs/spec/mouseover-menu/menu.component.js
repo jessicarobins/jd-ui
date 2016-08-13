@@ -1,26 +1,31 @@
-module.component('specMenu', {
-    require: {
-        parent: '^^spec',
-        main: '^^main'
-    },
+module.component('mouseoverMenu', {
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/spec-menu/spec-menu.template.html',
+    templateUrl: 'app/components/main/specs/spec/mouseover-menu/menu.template.html',
     controller: function(
-        $scope,
-        $specs,
         $mdDialog,
-        BreadcrumbsService) {
+        BreadcrumbsService, 
+        $specs, 
+        $user) {
+        
+        var self = this;
+         
+        self.$onInit = function(){
             
-       var self = this;
-       
-       self.$onInit = function(){
-           self.canWrite = self.main.canWrite;
+        };
+        
+        self.bookmark = function(){
+            self.spec.bookmarked = !self.spec.bookmarked;
+            $specs.bookmark(self.spec);
+        };
+        
+        self.favorite = function(name){
+           return _.includes($user.user().user_setting.menu_favorites, name);
        };
        
-       self.openSpecMenu = function($mdOpenMenu, ev) {
-            $mdOpenMenu(ev);
+       self.setBreadCrumbs = function() {
+            BreadcrumbsService.setBreadcrumbs(self.spec.id);
         };
         
         self.addChildren = function(ev) {
@@ -30,15 +35,6 @@ module.component('specMenu', {
               targetEvent: ev,
               clickOutsideToClose: false
             });
-        };
-        
-        self.setBreadCrumbs = function() {
-            BreadcrumbsService.setBreadcrumbs(self.spec.id);
-        };
-        
-        self.bookmark = function(){
-            self.spec.bookmarked = !self.spec.bookmarked;
-            $specs.bookmark(self.spec);
         };
         
         self.addTicket = function(ev){
@@ -70,30 +66,6 @@ module.component('specMenu', {
             $mdDialog.show(confirm).then(function() {
                 $specs.delete(self.spec)
             }, function() {
-            });
-        };
-        
-        self.comment = function(ev){
-            $mdDialog.show({
-                template: '<comments-modal spec="spec" layout="column"></comments-modal>',
-                targetEvent: ev,
-                clickOutsideToClose:true,
-                locals: {spec: self.spec },
-                controller: function($scope, spec) {
-                  $scope.spec = spec;
-                }
-            });
-        };
-        
-        self.addTags = function(ev){
-            $mdDialog.show({
-                template: '<tags-modal spec="spec" layout="column"></tags-modal>',
-                targetEvent: ev,
-                clickOutsideToClose:true,
-                locals: {spec: self.spec },
-                controller: function($scope, spec) {
-                  $scope.spec = spec;
-                }
             });
         };
     }

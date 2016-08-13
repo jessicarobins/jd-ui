@@ -14,6 +14,15 @@ module.service('$user', function($q, $state, $auth, $api, ParamService) {
     var currentRole;
     var currentUser;
     
+    self.menuOptions = [
+       {name: 'tags', icon: 'label'}, 
+       {name: 'add children', icon: 'add'},
+       {name: 'add link', icon: 'link'},
+       {name: 'comment', icon: 'comment'},
+       {name: 'expand', icon: 'fullscreen'},
+       {name: 'bookmark', icon: 'bookmark'},
+       {name: 'delete', icon: 'delete'}];
+    
     self.addOrgCallback = function(callback) {
         orgCallbacks.push(callback);
     };

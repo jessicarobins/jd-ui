@@ -5,7 +5,7 @@ module.component('commentMenu', {
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/comment-menu/comment-menu.template.html',
+    templateUrl: 'app/components/main/specs/spec/mouseover-menu/comment-menu/comment-menu.template.html',
     controller: function($api) {
         
         var self = this;
