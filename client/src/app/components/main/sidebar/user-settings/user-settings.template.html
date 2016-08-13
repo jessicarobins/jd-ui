@@ -1,0 +1,18 @@
+<md-list>
+    <md-list-item>
+        <h4 class="tab-title">user settings</h4>
+    </md-list-item>
+    <md-subheader>menu favorites</md-subheader>
+    <md-list-item
+        ng-click="$ctrl.toggleFavorite(item)"
+        ng-repeat="item in $ctrl.menuOptions track by item.name">
+        <md-icon class="material-icons">{{::item.icon}}</md-icon>
+        <p ng-bind="::item.name"></p>
+        <md-icon 
+            class="md-secondary material-icons"
+            ng-if="$ctrl.favorite(item)">star</md-icon>
+        <md-icon 
+            class="md-secondary material-icons"
+            ng-if="!$ctrl.favorite(item)">star_outline</md-icon>
+    </md-list-item>
+</md-list>

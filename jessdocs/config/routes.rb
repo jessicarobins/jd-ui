@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :user_settings, except: [:new, :edit]
   mount_devise_token_auth_for 'User', at: '/auth', controllers: {
     token_validations:  'overrides/token_validations',
     omniauth_callbacks: 'overrides/omniauth_callbacks'

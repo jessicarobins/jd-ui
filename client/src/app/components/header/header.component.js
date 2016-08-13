@@ -2,7 +2,7 @@ var module = angular.module('jessdocs');
 module.component('headerMenu', {
     
     templateUrl: 'app/components/header/header.template.html',
-    controller: function($state, $mdSidenav, $user) {
+    controller: function($state, $mdSidenav, $mdDialog, $user) {
        var self = this;
        
        self.user;
@@ -21,10 +21,6 @@ module.component('headerMenu', {
         
         self.logout = function() {
             $user.logout();
-        };
-        
-        self.home = function() {
-            $state.go('home');
         };
         
         self.showOrgMenu = function(){

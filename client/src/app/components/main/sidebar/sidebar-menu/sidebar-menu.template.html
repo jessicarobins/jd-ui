@@ -81,16 +81,30 @@
     
     <span flex></span>
         
+    <md-icon 
+        class="icon-header material-icons">
+        settings
     </md-icon>
+    <md-button
+        ng-click="$ctrl.setTab($ctrl.index.userSettings)"
+        class="md-icon-button"
+        ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.userSettings)}">
+        <md-icon class="big-icon material-icons">
+            account_circle
+        </md-icon>
+        <md-tooltip md-direction="right">
+            user settings
+        </md-tooltip>
+    </md-button>
     <md-button
         ng-click="$ctrl.setTab($ctrl.index.projects)"
         class="md-icon-button"
         ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.projects)}">
         <md-icon class="big-icon material-icons">
-            settings
+            business
         </md-icon>
         <md-tooltip md-direction="right">
-            settings
+            organization settings
         </md-tooltip>
     </md-button>
 </md-toolbar>

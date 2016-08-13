@@ -12,7 +12,8 @@ module.component('sidebarMenu', {
            tags: 2,
            groups: 3,
            projects: 4,
-           users: 5
+           users: 5,
+           userSettings: 6
        };
        
        var navName = 'left';

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   
+  has_one :user_setting
   has_many :user_organizations
   has_many :organizations, through: :user_organizations
   
@@ -29,6 +30,11 @@ class User < ActiveRecord::Base
     def add_user_defaults
       create_personal_org
       add_domain_org
+      create_setting
+    end
+    
+    def create_settings
+      UserSetting.create!(:user => self)
     end
     
     def create_personal_org
