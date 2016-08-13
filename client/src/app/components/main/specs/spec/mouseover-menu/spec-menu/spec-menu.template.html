@@ -1,10 +1,10 @@
 <md-menu md-position-mode="target-right target">
-  <a
+  <md-icon 
     aria-label="spec menu" 
-    class="md-icon-button" 
-    ng-click="$ctrl.openSpecMenu($mdOpenMenu, $event)">
-    <md-icon md-menu-origin class="material-icons">more_vert</md-icon>
-  </a>
+    ng-click="$ctrl.openSpecMenu($mdOpenMenu, $event)"
+    md-menu-origin 
+    class="material-icons">
+    more_vert</md-icon>
   <md-menu-content width='3'>
     <md-menu-item ng-if="$ctrl.canWrite">
       <md-button ng-click="$ctrl.addTags($event)">

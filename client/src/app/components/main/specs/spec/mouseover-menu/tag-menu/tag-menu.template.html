@@ -1,11 +1,10 @@
 <md-menu 
   md-position-mode="target-right target">
-  <a
+  <md-icon 
     aria-label="add tags" 
-    class="md-icon-button" 
-    ng-click="$ctrl.openTagMenu($mdOpenMenu, $event)">
-    <md-icon md-menu-origin class="material-icons">label</md-icon>
-  </a>
+    ng-click="$ctrl.openTagMenu($mdOpenMenu, $event)"
+    md-menu-origin 
+    class="material-icons">label</md-icon>
   <md-menu-content 
     class="tag-menu"
     width="2">
