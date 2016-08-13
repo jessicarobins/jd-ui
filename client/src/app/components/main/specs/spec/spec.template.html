@@ -13,18 +13,12 @@
         ng-model="$ctrl.spec.exported"
         ng-change="$ctrl.toggleExport()">
     </md-checkbox>
-    
-    <div
-      class="menu"
+    <mouseover-menu 
       flex='none'
       layout="row"
-      layout-align="center center"
       ng-if="!$ctrl.parent.export"
-      ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}">
-      
-      <mouseover-menu spec="::$ctrl.spec.data"></mouseover-menu>
-        
-    </div>
+      ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}"
+      spec="::$ctrl.spec.data"></mouseover-menu>
      <div
       layout-wrap
       id="edit_{{::$ctrl.spec.data.id}}"
