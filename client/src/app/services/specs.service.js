@@ -5,7 +5,6 @@ module.service('$specs', function($mdToast, ParamService, $api, $q, $user, $proj
     var callbacks = [];
     var bookmarkCallbacks = [];
     
-    self.addManyParent;
     self.filterParams = {};
     
     self.clear = function(){

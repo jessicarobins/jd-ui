@@ -29,11 +29,14 @@ module.component('mouseoverMenu', {
         };
         
         self.addChildren = function(ev) {
-            $specs.addManyParent = self.spec;
             $mdDialog.show({
-              template: '<add-specs-modal layout="column"></add-specs-modal>',
+              template: '<add-specs-modal spec="spec" layout="column"></add-specs-modal>',
               targetEvent: ev,
-              clickOutsideToClose: false
+              clickOutsideToClose: false,
+              locals: {spec: self.spec },
+              controller: function($scope, spec) {
+                  $scope.spec = spec;
+              }
             });
         };
         
