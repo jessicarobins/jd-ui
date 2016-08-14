@@ -98,5 +98,9 @@ module.component('spec', {
             self.parent.toggleExport(self.spec);
         };
         
+        self.checked = function(){
+            return self.parent.checked(self.spec);
+        };
+        
     }
 });

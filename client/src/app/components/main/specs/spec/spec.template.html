@@ -7,11 +7,11 @@
     class="spec">
     
     <md-checkbox
-        ng-if="$ctrl.parent.export"
-        class="export-checkbox menu"
-        aria-label="export spec"
-        ng-model="$ctrl.spec.exported"
-        ng-change="$ctrl.toggleExport()">
+      ng-checked="$ctrl.checked()"
+      ng-if="$ctrl.parent.export"
+      class="export-checkbox menu"
+      aria-label="export spec"
+      ng-click="$ctrl.toggleExport()">
     </md-checkbox>
     <mouseover-menu 
       flex='none'

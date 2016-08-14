@@ -58,9 +58,6 @@ module.component('specs', {
         }
         
         self.toggleExport = function(spec){
-            // var id = spec.data.id;
-            // var idx = self.exportSpecs.indexOf(id);
-            
             var idx = self.exportSpecs.indexOf(spec);
             if (idx > -1) {
                 recursiveCheck(spec, false);
@@ -71,9 +68,6 @@ module.component('specs', {
         };
         
         function recursiveCheck(spec, checked){
-            spec.exported = checked;
-            // var id = spec.data.id;
-            // var idx = self.exportSpecs.indexOf(id);
             var idx = self.exportSpecs.indexOf(spec);
             
             if (idx <= -1 && checked) {
@@ -112,6 +106,10 @@ module.component('specs', {
             });
             
        };
+        
+        self.checked = function(spec){
+            return _.includes(self.exportSpecs, spec);
+        }
        
      }
 });
