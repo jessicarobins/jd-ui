@@ -13,10 +13,18 @@ module.component('headerMenu', {
            self.organizations = $user.organizations();
            self.org = $user.currentOrg();
            self.manage = false;
+           
+           $user.addOrgCallback( function(){
+               self.org = $user.currentOrg();
+           });
        };
        
        self.openUserMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
+        };
+        
+        self.openOrgMenu = function($mdOpenMenu, ev) {
+            $mdOpenMenu(ev);  
         };
         
         self.logout = function() {
@@ -27,8 +35,8 @@ module.component('headerMenu', {
             return (self.organizations.length > 1);
         };
         
-        self.changeOrg = function(){
-            $user.setCurrentOrg(self.org);
+        self.changeOrg = function(org){
+            $user.setCurrentOrg(org);
         };
     }
 });

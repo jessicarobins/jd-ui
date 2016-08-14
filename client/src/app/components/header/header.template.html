@@ -8,22 +8,31 @@
             class="logo"
             src="assets/images/logo-light.png"/>
         <span flex></span>
-        <md-icon class="material-icons">business</md-icon>
-        <md-input-container>
-            <md-select
-                class="all-caps org-select"
-                ng-model-options="{trackBy: '$value.id'}"
-                ng-if="$ctrl.showOrgMenu()"
-                ng-change="$ctrl.changeOrg()" 
-                ng-model="$ctrl.org"
-                aria-label="orgs">
-                <md-option 
-                    ng-value="org"
+        
+        <md-menu
+            ng-if="$ctrl.showOrgMenu()"
+            md-position-mode="target-right target">
+            <md-button 
+                aria-label="org menu" 
+                ng-click="$ctrl.openOrgMenu($mdOpenMenu, $event)">
+                <md-icon class="material-icons">business</md-icon>
+                {{$ctrl.org.name}}
+                <md-icon class="material-icons">
+                    arrow_drop_down
+                </md-icon>
+            </md-button>
+            <md-menu-content class="org-menu" width="4">
+                <md-menu-item
                     ng-repeat="org in $ctrl.organizations">
-                    {{org.name}}
-                </md-option>
-            </md-select>
-        </md-input-container>
+                    <md-button 
+                        aria-label="change org"
+                        ng-class="{'md-primary selected-org': org === $ctrl.org }"
+                        ng-click="$ctrl.changeOrg(org)"
+                        ng-bind="org.name">
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
         <md-menu
             md-position-mode="target-right target">
             <md-button 
