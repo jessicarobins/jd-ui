@@ -45,11 +45,13 @@ module.component('fab', {
         
         self.toggleExportModal = function(ev) {
             MenuService.exporting(false);
-            $mdDialog.show({
-                template: '<export layout="column"></export>',
-                targetEvent: ev,
-                clickOutsideToClose:true
-            });
+            if (MenuService.exportSpecs.length){
+                $mdDialog.show({
+                    template: '<export layout="column"></export>',
+                    targetEvent: ev,
+                    clickOutsideToClose:true
+                });
+            }
         };
         
         self.showAddSpecsModal = function(ev) {

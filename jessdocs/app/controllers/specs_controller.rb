@@ -14,17 +14,14 @@ class SpecsController < ApplicationController
     @specs = Spec.filter(params)
     
     json = @specs.includes(:comments, :tags, :tag_types, :tickets).arrange_serializable(:order => 'spec_order ASC') do |parent, children|
-    {
-         data: parent.as_json(
-            :include => [
-              :tickets, 
-              :tag_types
-            ],
-            :methods => [
-              :grouped_comments_json, :open_comments_count
-            ]),
-         children: children
-    }
+      parent.as_json(
+        :include => [
+          :tickets, 
+          :tag_types
+        ],
+        :methods => [
+          :grouped_comments_json, :open_comments_count
+      ]).merge(children: children)
     end
     
     @bookmarks = @specs.where(:bookmarked => true)

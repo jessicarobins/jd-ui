@@ -62,13 +62,13 @@ module.component('spec', {
         self.removeTag = function(tag){
             //remove tag
             if(tag.color){
-                $specs.removeTag(tag, self.spec.data);
-                _.pull(self.spec.data.tag_types, tag);
+                $specs.removeTag(tag, self.spec);
+                _.pull(self.spec.tag_types, tag);
             }
             //remove ticket
             else {
                 $specs.removeTicket(tag);
-                _.pull(self.spec.data.tickets, tag);
+                _.pull(self.spec.tickets, tag);
             }
             // var idx = self.tags.indexOf(tag);
             // self.tags.splice(idx, 1);
@@ -87,9 +87,9 @@ module.component('spec', {
         function save(){
             self.spec.editing = false;
             self.spec.userMouseover = false;
-            if(!angular.equals(self.editingCopy.data.description, self.spec.data.description)){
-                self.spec.data.description = self.editingCopy.data.description;
-                $specs.editDescription(self.spec.data);
+            if(!angular.equals(self.editingCopy.description, self.spec.description)){
+                self.spec.description = self.editingCopy.description;
+                $specs.editDescription(self.spec);
             }
             self.editingCopy = null;
         };

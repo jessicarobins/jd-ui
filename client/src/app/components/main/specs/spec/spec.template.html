@@ -1,4 +1,4 @@
-<div id="{{$ctrl.spec.data.id}}" layout="column">
+<div id="{{$ctrl.spec.id}}" layout="column">
   <div 
     layout="row"
     layout-align="start center"
@@ -18,10 +18,10 @@
       layout="row"
       ng-if="!$ctrl.parent.export"
       ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}"
-      spec="::$ctrl.spec.data"></mouseover-menu>
+      spec="::$ctrl.spec"></mouseover-menu>
      <div
       layout-wrap
-      id="edit_{{::$ctrl.spec.data.id}}"
+      id="edit_{{::$ctrl.spec.id}}"
       click-outside="::$ctrl.clickOutside()"
       ng-dblClick="::$ctrl.edit()"
       layout="row"
@@ -30,7 +30,7 @@
         <div
           class="spec-description"
           ng-if="!$ctrl.spec.editing"
-          ng-bind="::$ctrl.spec.data.description"></div>
+          ng-bind="::$ctrl.spec.description"></div>
         <div 
           layout="row"
           ng-if="$ctrl.spec.editing">
@@ -40,7 +40,7 @@
             pu-elastic-input-maxwidth="1300px"
             focus-if="$ctrl.spec.editing"
             aria-label="edit spec description"
-            ng-model="$ctrl.editingCopy.data.description"
+            ng-model="$ctrl.editingCopy.description"
             ng-keypress="$ctrl.enter($event)"
             required />
           <md-button 
@@ -52,25 +52,25 @@
           </md-button>
         </div>
         <div 
-          ng-if="$ctrl.spec.data.open_comments_count > 0"
+          ng-if="$ctrl.spec.open_comments_count > 0"
           md-colors="::{backgroundColor: 'default-accent'}"
           class="label" 
-          ng-bind="$ctrl.spec.data.open_comments_count"></div>
+          ng-bind="$ctrl.spec.open_comments_count"></div>
         <tag
           layout="row"
-          ng-repeat="ticket in $ctrl.spec.data.tickets"
+          ng-repeat="ticket in $ctrl.spec.tickets"
           spec="$ctrl.spec"
           tag="ticket"></tag>
         <tag
           layout="row"
-          ng-repeat="tag in $ctrl.spec.data.tag_types"
+          ng-repeat="tag in $ctrl.spec.tag_types"
           spec="$ctrl.spec"
           tag="tag"></tag>
     </div>
   </div>
     
     <ol ui-tree-nodes ng-model="$ctrl.spec.children">
-        <li ng-repeat="child in $ctrl.spec.children track by child.data.id" ui-tree-node>
+        <li ng-repeat="child in $ctrl.spec.children track by child.id" ui-tree-node>
             <spec 
                 spec='child' 
                 ui-tree-callbacks="::$callbacks"></spec>

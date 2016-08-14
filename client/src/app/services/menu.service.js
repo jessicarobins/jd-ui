@@ -25,11 +25,12 @@ module.service('MenuService', function($api) {
     };
     
     self.getExportHtml = function(){
+        var exportIds = _.map(self.exportSpecs, 'data.id');
         var promise = $api.request({
             url: '/specs/export', 
             method: "GET",
             params: {
-                "spec_ids[]": self.exportSpecs
+                "spec_ids[]": self.exportIds
             }
         }).then (function (response){
             return response.export;

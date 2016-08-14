@@ -43,24 +43,25 @@ module.component('specs', {
         
         function parseMove(e){
             self.dragging = false;  
-            var specId = e.source.nodeScope.$modelValue.data.id;
+            var specId = e.source.nodeScope.$modelValue.id;
             var newIndex = e.dest.index;
             var siblingId;
             if(newIndex > 0){
-                siblingId = e.dest.nodesScope.$modelValue[newIndex-1].data.id;
+                siblingId = e.dest.nodesScope.$modelValue[newIndex-1].id;
             }
             var parentId = null;
-            if(e.dest.nodesScope.$parent.$ctrl.spec.data){
-                parentId = e.dest.nodesScope.$parent.$ctrl.spec.data.id;
+            if(e.dest.nodesScope.$parent.$ctrl.spec){
+                parentId = e.dest.nodesScope.$parent.$ctrl.spec.id;
             }
             
             $specs.move(specId, parentId, siblingId);
         }
         
         self.toggleExport = function(spec){
-            var id = spec.data.id;
-            var idx = self.exportSpecs.indexOf(id);
+            // var id = spec.data.id;
+            // var idx = self.exportSpecs.indexOf(id);
             
+            var idx = self.exportSpecs.indexOf(spec);
             if (idx > -1) {
                 recursiveCheck(spec, false);
             }
@@ -71,11 +72,13 @@ module.component('specs', {
         
         function recursiveCheck(spec, checked){
             spec.exported = checked;
-            var id = spec.data.id;
-            var idx = self.exportSpecs.indexOf(id);
+            // var id = spec.data.id;
+            // var idx = self.exportSpecs.indexOf(id);
+            var idx = self.exportSpecs.indexOf(spec);
+            
             if (idx <= -1 && checked) {
                 //if already in array, don't add twice
-                self.exportSpecs.push(id);
+                self.exportSpecs.push(spec);
             }
             else if (idx > -1 && !checked){
                 self.exportSpecs.splice(idx, 1);
