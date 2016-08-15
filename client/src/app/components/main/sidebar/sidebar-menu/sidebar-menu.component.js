@@ -6,36 +6,17 @@ module.component('sidebarMenu', {
     controller: function($mdSidenav, $user) {
        var self = this;
        
-       self.index = {
-           filter: 0,
-           bookmarks: 1,
-           tags: 2,
-           groups: 3,
-           projects: 4,
-           users: 5,
-           userSettings: 6
-       };
-       
-       var navName = 'left';
-       
        self.$onInit = function(){
-            self.admin = $user.admin();    
+            self.admin = $user.admin();
+            self.index = self.parent.index;
        };
        
        self.setTab = function(index){
-           if(self.currentTab(index)){
-               $mdSidenav(navName).close();
-           }
-           else {
-               self.parent.selectedTab = index;
-               $mdSidenav(navName).open();
-           }
+           self.parent.setTab(index);
        };
        
        self.currentTab = function(index){
-           var open = $mdSidenav('left').isOpen();
-           var selected = (index === self.parent.selectedTab);
-            return open && selected;  
+           return self.parent.currentTab(index);
        };
        
        self.showOrgMenus = function(){
