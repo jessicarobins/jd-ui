@@ -1,30 +1,30 @@
-<md-list layout-padding flex>
-  <md-list-item>
-      <h4 class="tab-title">Projects</h4>
-      <md-button 
-        ng-if="$ctrl.parent.canWrite"
-        aria-label="add project" 
-        class="md-secondary md-icon-button"
-        ng-click="$ctrl.addProject($event)">
-        <md-icon class="material-icons">add</md-icon>
-      </md-button>
-  </md-list-item>
-  <md-list-item 
-    ng-mouseenter="project.userMouseover=true"
-    ng-mouseleave="project.userMouseover=false"
-    ng-click="$ctrl.editProject(project, $event)"
-    ng-repeat="project in $ctrl.projects">
-    <p 
-      class="truncate"
-      ng-bind="project.name"></p>
-    
-    <md-icon 
-      ng-style="{'visibility': project.userMouseover?'visible':'hidden'}"
-      ng-if="$ctrl.projects.length > 1 && $ctrl.parent.canWrite"
-      aria-label="delete project"
-      class="material-icons md-secondary"
-      ng-click="$ctrl.deleteProject(project, $event)">
-      delete
-    </md-icon>
-  </md-list-item>
-</md-list>
+<div layout="column" class="sidebar-tab">
+  <md-list layout-padding flex>
+    <md-list-item 
+      ng-mouseenter="project.userMouseover=true"
+      ng-mouseleave="project.userMouseover=false"
+      ng-click="$ctrl.editProject(project, $event)"
+      ng-repeat="project in $ctrl.projects">
+      <p 
+        class="truncate"
+        ng-bind="project.name"></p>
+      
+      <md-icon 
+        ng-style="{'visibility': project.userMouseover?'visible':'hidden'}"
+        ng-if="$ctrl.projects.length > 1 && $ctrl.parent.canWrite"
+        aria-label="delete project"
+        class="material-icons md-secondary"
+        ng-click="$ctrl.deleteProject(project, $event)">
+        delete
+      </md-icon>
+    </md-list-item>
+  </md-list>
+  <md-button 
+    ng-if="$ctrl.parent.canWrite"
+    aria-label="add project" 
+    class="md-raised md-primary"
+    ng-click="$ctrl.addProject($event)">
+    add project
+    <md-icon class="material-icons md-secondary">add</md-icon>
+  </md-button>
+</div>

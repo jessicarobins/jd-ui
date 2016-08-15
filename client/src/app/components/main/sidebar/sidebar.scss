@@ -4,6 +4,10 @@ sidebar {
         font-size: small;
     }
     
+    .sidebar-tab {
+        margin-right: 20px;
+    }
+    
     md-tab-content {
         overflow: hidden;
         
@@ -65,12 +69,8 @@ sidebar {
         width: 70px;
     }
     
-    .tab-title {
-        padding-left: 16px;
-        font-weight: normal;
-    }
-    
     .no-items {
         padding-left: 16px;
     }
+    
 }
