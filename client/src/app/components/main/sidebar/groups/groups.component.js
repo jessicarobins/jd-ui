@@ -31,9 +31,13 @@ module.component('groups', {
             if(self.parent.canWrite){
                 $tagtypes.editingTagType = group;
                 $mdDialog.show({
-                    template: '<tag-groups-modal layout="column"></tag-groups-modal>',
+                    template: '<tag-groups-modal group="group" layout="column"></tag-groups-modal>',
                     targetEvent: ev,
                     clickOutsideToClose:true,
+                    locals: {group: group },
+                    controller: function($scope, group) {
+                      $scope.group = group;
+                    }
                 })
                 .then(function(editedGroup) {
                     $tagtypes.editingTagType = null;
@@ -44,10 +48,6 @@ module.component('groups', {
                 }, function() {
                 });
             }
-        };
-        
-        self.delete = function(group) {
-            $tagtypes.deleteGroup(group);
         };
     }
 });

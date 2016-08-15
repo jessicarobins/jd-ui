@@ -1,4 +1,12 @@
 <div layout="column" class="sidebar-tab">
+  <md-button 
+    class="md-primary md-raised"
+    ng-if="$ctrl.parent.canWrite"
+    aria-label="add tag type" 
+    ng-click="$ctrl.add($event)">
+    add tag type
+    <md-icon class="material-icons md-secondary">add</md-icon>
+  </md-button>
   <md-list 
     class="md-dense"
     layout-padding flex>
@@ -20,16 +28,15 @@
       <md-list-item 
         ng-repeat="tag_type in tag_type_group.tag_types"
         ng-mouseenter="tag_type.userMouseover=true"
-        ng-mouseleave="tag_type.userMouseover=false"
-        ng-click="$ctrl.edit(tag_type, $event)">
+        ng-mouseleave="tag_type.userMouseover=false">
         <tag tag="tag_type"></tag>
         <md-icon 
           ng-if="$ctrl.parent.canWrite"
           ng-style="{'visibility': tag_type.userMouseover?'visible':'hidden'}"
           aria-label="delete tag type"
           class="material-icons md-secondary"
-          ng-click="$ctrl.delete(tag_type)">
-          delete
+          ng-click="$ctrl.edit(tag_type, $event)">
+          edit
         </md-icon>
       </md-list-item>
     </section>
@@ -58,12 +65,4 @@
       <p class="no-items">You have no tag types.</p>
     </md-list-item>
   </md-list>
-  <md-button 
-    class="md-primary md-raised"
-    ng-if="$ctrl.parent.canWrite"
-    aria-label="add tag type" 
-    ng-click="$ctrl.add($event)">
-    add tag type
-    <md-icon class="material-icons md-secondary">add</md-icon>
-  </md-button>
 </div>

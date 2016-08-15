@@ -1,4 +1,11 @@
 <div layout="column" class="sidebar-tab">
+  <md-button 
+    aria-label="invite user" 
+    class="md-raised md-primary"
+    ng-click="$ctrl.inviteUser($event)">
+    invite user
+    <md-icon class="material-icons md-secondary">add</md-icon>
+  </md-button>
   <md-list layout-padding flex>
     <md-list-item 
       ng-mouseenter="user.userMouseover=true"
@@ -22,11 +29,4 @@
       </md-icon>
     </md-list-item>
   </md-list>
-  <md-button 
-    aria-label="invite user" 
-    class="md-raised md-primary"
-    ng-click="$ctrl.inviteUser($event)">
-    invite user
-    <md-icon class="material-icons md-secondary">add</md-icon>
-  </md-button>
 </div>

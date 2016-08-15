@@ -1,4 +1,12 @@
 <div layout="column" class="sidebar-tab">
+  <md-button 
+    ng-if="$ctrl.parent.canWrite"
+    aria-label="add project" 
+    class="md-raised md-primary"
+    ng-click="$ctrl.addProject($event)">
+    add project
+    <md-icon class="material-icons md-secondary">add</md-icon>
+  </md-button>
   <md-list layout-padding flex>
     <md-list-item 
       ng-mouseenter="project.userMouseover=true"
@@ -19,12 +27,4 @@
       </md-icon>
     </md-list-item>
   </md-list>
-  <md-button 
-    ng-if="$ctrl.parent.canWrite"
-    aria-label="add project" 
-    class="md-raised md-primary"
-    ng-click="$ctrl.addProject($event)">
-    add project
-    <md-icon class="material-icons md-secondary">add</md-icon>
-  </md-button>
 </div>
