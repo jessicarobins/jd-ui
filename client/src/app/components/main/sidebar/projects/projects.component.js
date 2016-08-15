@@ -16,55 +16,32 @@ module.component('projects', {
        };
        
         self.editProject = function(project, ev) {
-            if(self.parent.canWrite){
-                var confirm = $mdDialog.prompt()
-                    .title('Edit project')
-                    .placeholder('project name')
-                    .ariaLabel('project name')
-                    .initialValue(project.name)
-                    .targetEvent(ev)
-                    .ok('save')
-                    .cancel('cancel');
-                $mdDialog.show(confirm).then(function(name) {
-                    if(name && name.length){
-                        $projects.editProject(project, name);
-                    }
-                }, function() {
-                });
-            }
+            $mdDialog.show({
+                template: '<projects-modal project="project" layout="column"></projects-modal>',
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                locals: {project: project },
+                controller: function($scope, project) {
+                  $scope.project = project;
+                }
+            }).then(function(name){
+                if(name && name.length){
+                    $projects.editProject(project, name);
+                }
+            });
         };
         
         self.addProject = function(ev) {
-            var confirm = $mdDialog.prompt()
-                .title('Add project')
-                .placeholder('project name')
-                .ariaLabel('project name')
-                .targetEvent(ev)
-                .ok('save')
-                .cancel('cancel');
-            $mdDialog.show(confirm).then(function(name) {
+            $mdDialog.show({
+                template: '<projects-modal layout="column"></projects-modal>',
+                targetEvent: ev,
+                clickOutsideToClose:true
+            }).then(function(name){
                 if(name && name.length){
                     $projects.addProject(name);
                 }
-            }, function() {
             });
         };
         
-        self.deleteProject = function(project, ev) {
-            var confText = 'Are you sure you want to delete ' 
-                + project.name + 
-                '? All specs in the project will be deleted.';
-            var confirm = $mdDialog.confirm()
-                .title('delete project')
-                .textContent(confText)
-                .ariaLabel('delete project')
-                .targetEvent(ev)
-                .ok('delete')
-                .cancel('cancel');
-            $mdDialog.show(confirm).then(function() {
-                $projects.deleteProject(project);
-            }, function() {
-            });
-        };
     }
 });

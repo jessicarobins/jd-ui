@@ -11,7 +11,6 @@
     <md-list-item 
       ng-mouseenter="project.userMouseover=true"
       ng-mouseleave="project.userMouseover=false"
-      ng-click="$ctrl.editProject(project, $event)"
       ng-repeat="project in $ctrl.projects">
       <p 
         class="truncate"
@@ -22,8 +21,8 @@
         ng-if="$ctrl.projects.length > 1 && $ctrl.parent.canWrite"
         aria-label="delete project"
         class="material-icons md-secondary"
-        ng-click="$ctrl.deleteProject(project, $event)">
-        delete
+        ng-click="$ctrl.editProject(project, $event)">
+        edit
       </md-icon>
     </md-list-item>
   </md-list>
