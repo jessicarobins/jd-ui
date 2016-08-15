@@ -1,4 +1,7 @@
 sidebar {
+    .sidebar-container {
+        overflow: hidden;
+    }
     
     .sidebar-tabs {
         font-size: small;
@@ -9,7 +12,7 @@ sidebar {
         padding-top: 10px;
     }
     
-    md-tab-content {
+    .sidebar-content {
         overflow: hidden;
         
         &:hover {
@@ -72,6 +75,23 @@ sidebar {
     
     .no-items {
         padding-left: 16px;
+    }
+    
+    .md-subhead {
+        margin: 0px;
+        text-transform: uppercase;
+    }
+    
+    ._md-subheader-inner {
+        padding: 16px 0px 0px 0px !important;
+    }
+    
+    section {
+        padding: 0px !important;
+    }
+    
+    .tab-title {
+        margin-right: 15px;
     }
     
 }

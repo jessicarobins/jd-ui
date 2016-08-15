@@ -1,32 +1,39 @@
-<div layout="column" class="sidebar-tab">
-  <md-button 
-    aria-label="invite user" 
-    class="md-raised md-primary"
-    ng-click="$ctrl.inviteUser($event)">
-    invite user
-    <md-icon class="material-icons md-secondary">add</md-icon>
-  </md-button>
-  <md-list layout-padding flex>
-    <md-list-item 
-      ng-mouseenter="user.userMouseover=true"
-      ng-mouseleave="user.userMouseover=false"
-      ng-click="$ctrl.viewUserInfo($event, user)"
-      ng-repeat="user in $ctrl.users track by user.id">
-      <img 
-        ng-if="user.image"
-        ng-src="{{user.image}}" class="md-avatar"/>
-      <p 
-        class="truncate"
-        ng-bind="user.name"></p>
-      
-      <md-icon 
-        ng-if="$ctrl.showDeleteUser(user)"
-        ng-style="{'visibility': user.userMouseover?'visible':'hidden'}"
-        aria-label="delete user"
-        class="material-icons md-secondary"
-        ng-click="$ctrl.deleteUser(user, $event)">
-        delete
-      </md-icon>
-    </md-list-item>
-  </md-list>
+<div layout="column" class="sidebar-tab" flex layout-fill>
+  <div layout="column" flex class="sidebar-content" layout-fill> 
+    
+    <md-list layout-padding flex>
+      <md-list-item 
+        ng-mouseenter="user.userMouseover=true"
+        ng-mouseleave="user.userMouseover=false"
+        ng-click="$ctrl.viewUserInfo($event, user)"
+        ng-repeat="user in $ctrl.users track by user.id">
+        <img 
+          ng-if="user.image"
+          ng-src="{{user.image}}" class="md-avatar"/>
+        <p 
+          class="truncate"
+          ng-bind="user.name"></p>
+        
+        <md-icon 
+          ng-if="$ctrl.showDeleteUser(user)"
+          ng-style="{'visibility': user.userMouseover?'visible':'hidden'}"
+          aria-label="delete user"
+          class="material-icons md-secondary"
+          ng-click="$ctrl.deleteUser(user, $event)">
+          delete
+        </md-icon>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div 
+    ng-if="$ctrl.admin"
+    layout="column" flex='10' layout-align="center stretch">
+    <md-button 
+      aria-label="invite user" 
+      class="md-raised md-primary"
+      ng-click="$ctrl.inviteUser($event)">
+      invite user
+      <md-icon class="material-icons">add</md-icon>
+    </md-button>
+  </div>
 </div>

@@ -1,33 +1,45 @@
-<div layout="column" class="sidebar-tab">
-  <md-button 
-    class="md-raised md-primary"
-    ng-if="$ctrl.parent.canWrite"
-    aria-label="add tag group" 
-    ng-click="$ctrl.add($event)">
-    add tag group
-    <md-icon class="material-icons">add</md-icon>
-  </md-button>
-  <md-list layout-padding flex>
-    <md-list-item 
-      ng-mouseenter="group.userMouseover=true"
-      ng-mouseleave="group.userMouseover=false"
-      ng-repeat="group in $ctrl.groups">
-      <p 
-        class="truncate"
-        ng-bind="group.name"
-        style="color: {{group.color}}"></p>
-      <md-icon 
-          ng-if="$ctrl.parent.canWrite"
-          ng-style="{'visibility': group.userMouseover?'visible':'hidden'}"
-          aria-label="delete tag group"
-          class="material-icons md-secondary"
-          ng-click="$ctrl.edit(group, $event)">
-          edit
-      </md-icon>
-    </md-list-item>
-    <md-list-item
-      ng-if="!$ctrl.groups.length">
-      <p class="no-items">You have no tag groups.</p>
-    </md-list-item>
-  </md-list>
+<div layout="column" class="sidebar-tab" flex layout-fill>
+  <div layout="column" flex class="sidebar-content" layout-fill>
+    <md-subheader>
+      <p class="md-subhead">
+      <md-icon class="material-icons">
+            folder
+        </md-icon>
+        Tag groups
+      </p>
+    </md-subheader>
+    <md-list layout-padding flex>
+      <md-list-item 
+        ng-mouseenter="group.userMouseover=true"
+        ng-mouseleave="group.userMouseover=false"
+        ng-repeat="group in $ctrl.groups">
+        <p 
+          class="truncate"
+          ng-bind="group.name"
+          style="color: {{group.color}}"></p>
+        <md-icon 
+            ng-if="$ctrl.parent.canWrite"
+            ng-style="{'visibility': group.userMouseover?'visible':'hidden'}"
+            aria-label="delete tag group"
+            class="material-icons md-secondary"
+            ng-click="$ctrl.edit(group, $event)">
+            edit
+        </md-icon>
+      </md-list-item>
+      <md-list-item
+        ng-if="!$ctrl.groups.length">
+        <p class="no-items">You have no tag groups.</p>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div layout="column" flex='10' layout-align="center stretch">
+    <md-button 
+      class="md-raised md-primary add-button"
+      ng-if="$ctrl.parent.canWrite"
+      aria-label="add tag group" 
+      ng-click="$ctrl.add($event)">
+      add tag group
+      <md-icon class="material-icons">add</md-icon>
+    </md-button>
+  </div>
 </div>

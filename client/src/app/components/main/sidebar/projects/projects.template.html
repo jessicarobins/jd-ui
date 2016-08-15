@@ -1,29 +1,40 @@
-<div layout="column" class="sidebar-tab">
-  <md-button 
-    ng-if="$ctrl.parent.canWrite"
-    aria-label="add project" 
-    class="md-raised md-primary"
-    ng-click="$ctrl.addProject($event)">
-    add project
-    <md-icon class="material-icons md-secondary">add</md-icon>
-  </md-button>
-  <md-list layout-padding flex>
-    <md-list-item 
-      ng-mouseenter="project.userMouseover=true"
-      ng-mouseleave="project.userMouseover=false"
-      ng-repeat="project in $ctrl.projects">
-      <p 
-        class="truncate"
-        ng-bind="project.name"></p>
-      
-      <md-icon 
-        ng-style="{'visibility': project.userMouseover?'visible':'hidden'}"
-        ng-if="$ctrl.projects.length > 1 && $ctrl.parent.canWrite"
-        aria-label="delete project"
-        class="material-icons md-secondary"
+<div layout="column" class="sidebar-tab" flex layout-fill>
+  <div layout="column" flex class="sidebar-content" layout-fill> 
+    <md-subheader>
+      <p class="md-subhead">
+      <md-icon class="material-icons">
+            description
+        </md-icon>
+        Projects
+      </p>
+    </md-subheader>
+    <md-list layout-padding flex class="md-dense">
+      <md-list-item 
+        ng-mouseenter="project.userMouseover=true"
+        ng-mouseleave="project.userMouseover=false"
+        ng-repeat="project in $ctrl.projects"
+        aria-label="edit project"
         ng-click="$ctrl.editProject(project, $event)">
-        edit
-      </md-icon>
-    </md-list-item>
-  </md-list>
+        <p 
+          class="truncate"
+          ng-bind="project.name"></p>
+        
+        <md-icon 
+          ng-style="{'visibility': project.userMouseover?'visible':'hidden'}"
+          class="material-icons md-secondary">
+          edit
+        </md-icon>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div layout="column" flex='10' layout-align="center stretch">
+    <md-button 
+      ng-if="$ctrl.parent.canWrite"
+      aria-label="add project" 
+      class="md-raised md-primary add-button"
+      ng-click="$ctrl.addProject($event)">
+      add project
+      <md-icon class="material-icons md-secondary">add</md-icon>
+    </md-button>
+  </div>
 </div>

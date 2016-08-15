@@ -1,6 +1,7 @@
 <sidebar-menu
     layout="row"></sidebar-menu>
  <md-sidenav
+    ng-cloak
     layout="row"
     class="md-sidenav-left"
     md-component-id="left"
@@ -8,73 +9,34 @@
     md-colors="{background:'grey-50'}"
     md-disable-backdrop>
     
-    <md-content 
-        layout="row" 
+    <md-content
+        class="sidebar-container"
+        ng-cloak
+        md-colors="{background:'grey-50'}"
+        layout="column" 
         flex
         flex-offset='15'>
-        
-        <md-tabs 
-            md-colors="{background:'grey-50'}"
-            class="sidebar-tabs"
-            md-selected="$ctrl.selectedTab"
-            flex>
-            <md-tab>
-                <md-tab-label>
-                    filter
-                </md-tab-label>
-                <md-tab-body>
-                    <filter></filter>
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>
-                    bookmarks
-                </md-tab-label>
-                <md-tab-body>
-                    <bookmarks></bookmarks>
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>
-                    tags
-                </md-tab-label>
-                <md-tab-body>
-                    <tag-types layout="column" layout-fill></tag-types>
-                </md-tab-body>
-            </md-tab>
-            <md-tab layout="row">
-                <md-tab-label>
-                    groups
-                </md-tab-label>
-                <md-tab-body layout="row" layout-fill>
-                    <groups layout="column" layout-fill></groups>
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>
-                    projects
-                </md-tab-label>
-                <md-tab-body>
-                    <projects layout="column" layout-fill></projects>
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>
-                    users
-                </md-tab-label>
-                <md-tab-body>
-                    <users layout="column" layout-fill></users>
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>
-                    user settings
-                </md-tab-label>
-                <md-tab-body>
-                    <user-settings></user-settings>
-                </md-tab-body>
-            </md-tab>
-        </md-tabs>
+        <filter 
+            ng-show="$ctrl.currentTab($ctrl.index.filter)"
+            layout="column" layout-fill></filter>
+        <bookmarks 
+            ng-show="$ctrl.currentTab($ctrl.index.bookmarks)"
+            layout="column" layout-fill></bookmarks>
+        <tag-types 
+            ng-show="$ctrl.currentTab($ctrl.index.tags)"
+            layout="column" layout-fill></tag-types>
+        <groups 
+            ng-show="$ctrl.currentTab($ctrl.index.groups)"
+            layout="column" layout-fill></groups>
+        <projects 
+            ng-show="$ctrl.currentTab($ctrl.index.projects)"
+            layout="column" layout-fill></projects>
+        <users 
+            ng-show="$ctrl.currentTab($ctrl.index.users)"
+            layout="column" layout-fill></users>
+        <user-settings
+            ng-show="$ctrl.currentTab($ctrl.index.userSettings)"
+            layout="column" layout-fill></user-settings>
         
     </md-content>
     

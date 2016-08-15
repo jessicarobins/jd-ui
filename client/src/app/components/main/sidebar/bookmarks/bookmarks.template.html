@@ -1,14 +1,24 @@
-<md-list layout-padding flex class="md-dense">
-  <md-list-item 
-    ng-repeat="bookmark in $ctrl.bookmarks"
-    ng-click="$ctrl.setBreadcrumbs(bookmark)"
-    aria-label="set breadcrumbs">
-    <md-icon class="material-icons">bookmark</md-icon>
-    <p 
-        ng-bind="bookmark.description"></p>
-  </md-list-item>
-  <md-list-item
-    ng-if="!$ctrl.bookmarks.length">
-    <p class="no-items">You have no bookmarks.</p>
-  </md-list-item>
-</md-list>
+<div layout="column" class="sidebar-tab" flex layout-fill>
+  <div layout="column" flex class="sidebar-content" layout-fill>
+    <md-subheader>
+      <p class="md-subhead">
+      <md-icon class="material-icons">
+            bookmark
+        </md-icon>
+        bookmarks
+      </p>
+    </md-subheader>
+    <md-list layout-padding flex class="md-dense">
+      <md-list-item 
+        ng-repeat="bookmark in $ctrl.bookmarks"
+        ng-click="$ctrl.setBreadcrumbs(bookmark)"
+        aria-label="set breadcrumbs">
+        <p ng-bind="bookmark.description"></p>
+      </md-list-item>
+      <md-list-item
+        ng-if="!$ctrl.bookmarks.length">
+        <p class="no-items">You have no bookmarks.</p>
+      </md-list-item>
+    </md-list>
+  </div>
+</div>

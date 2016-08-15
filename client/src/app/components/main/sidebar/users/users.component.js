@@ -36,7 +36,9 @@ module.component('users', {
             }).then(function(response){
                 self.users = response;
             });
-       };
+            
+            self.admin = $user.admin();
+       }
        
         self.inviteUser = function(ev) {
             var confirm = $mdDialog.prompt()
