@@ -45,20 +45,25 @@
                 md-color-rgb="false"
             ></div>
         </div>
-        
-        
-        
     </jd-modal-body>
-    <jd-modal-buttons>
-        
+    <jd-modal-buttons
+        layout="row" 
+        flex 
+        layout-align="center center">
+        <md-button 
+            ng-if="$ctrl.tagType"
+            ng-click="$ctrl.delete()"
+            class="md-icon-button">
+            <md-icon class="material-icons">
+                delete
+            </md-icon>
+        </md-button>
         <span flex></span>
         <md-button
             ng-disabled="$ctrl.disableSave()"
             aria-label="add tag type"
             ng-click="$ctrl.add()"
             class="md-raised md-accent">
-            <md-icon
-                class="material-icons">add</md-icon>
             save
         </md-button>
     </jd-modal-buttons>

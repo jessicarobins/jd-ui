@@ -1,4 +1,7 @@
 module.component('tagTypesModal', {
+    bindings: {
+        tagType: '<?',
+    },
      templateUrl: 'app/components/main/modals/tag-types/tag-types.modal.template.html',
      controller: function($filter, $mdDialog, $tagtypes) {
              
@@ -8,8 +11,8 @@ module.component('tagTypesModal', {
         
         
         self.$onInit = function() {
-            if($tagtypes.editingTagType){
-                self.editingCopy = angular.copy($tagtypes.editingTagType);
+            if(self.tagType){
+                self.editingCopy = angular.copy(self.tagType);
                 if(self.editingCopy.tag_type_group_id){
                     self.disableColorPicker = true;
                 }
@@ -30,6 +33,11 @@ module.component('tagTypesModal', {
         
         self.add = function(ev) {
             $mdDialog.hide(self.editingCopy);
+        };
+        
+        self.delete = function() {
+            $tagtypes.destroy(self.tagType);
+            $mdDialog.cancel();  
         };
         
         self.changeGroup = function(){

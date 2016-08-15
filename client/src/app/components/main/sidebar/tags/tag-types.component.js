@@ -22,9 +22,13 @@ module.component('tagTypes', {
             if(self.parent.canWrite){
                 $tagtypes.editingTagType = tagType;
                 $mdDialog.show({
-                    template: '<tag-types-modal tag="tagType" layout="column"></tag-types-modal>',
+                    template: '<tag-types-modal tag-type="tagType" layout="column"></tag-types-modal>',
                     targetEvent: ev,
                     clickOutsideToClose:true,
+                    locals: {tagType: tagType },
+                    controller: function($scope, tagType) {
+                      $scope.tagType = tagType;
+                    }
                 })
                 .then(function(editedTag) {
                     $tagtypes.editingTagType = null;
@@ -49,10 +53,6 @@ module.component('tagTypes', {
                 $mdToast.showSimple('tag type added');
             }, function() {
             });
-        };
-        
-        self.delete = function(tagType) {
-            $tagtypes.destroy(tagType);
         };
         
         self.restore = function(tagType){

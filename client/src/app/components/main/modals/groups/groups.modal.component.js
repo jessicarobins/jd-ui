@@ -11,8 +11,8 @@ module.component('tagGroupsModal', {
         
         
         self.$onInit = function() {
-            if($tagtypes.editingTagType){
-                self.editingCopy = angular.copy($tagtypes.editingTagType);
+            if(self.group){
+                self.editingCopy = angular.copy(self.group);
             }
             else {
                 self.editingCopy.color = '#f00000';
