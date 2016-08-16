@@ -4,7 +4,7 @@ module.component('userSettings', {
             
        var self = this;
        
-       self.menuFavorites = true;
+       self.menuFavorites = false;
        
        self.$onInit = function(){
            self.favorites = $user.user().user_setting.menu_favorites;

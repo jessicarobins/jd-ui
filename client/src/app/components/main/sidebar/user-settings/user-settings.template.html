@@ -1,29 +1,44 @@
-<h4 class="tab-title">user settings</h4>
-
-<md-subheader
-    layout="row"
-    ng-click="$ctrl.menuFavorites = !$ctrl.menuFavorites">
-    <span>menu favorites</span>
-    <md-icon 
-        ng-if="!$ctrl.menuFavorites"
-        class="material-icons">expand_more</md-icon>
-    <md-icon 
-        ng-if="$ctrl.menuFavorites"
-        class="material-icons">expand_less</md-icon>
-</md-subheader>
-<md-list 
-    ng-show="$ctrl.menuFavorites"
-    class="md-dense">
-    <md-list-item
-        ng-click="$ctrl.toggleFavorite(item)"
-        ng-repeat="item in $ctrl.menuOptions">
-        <md-icon class="material-icons">{{::item.icon}}</md-icon>
-        <p ng-bind="::item.name"></p>
+<div layout="column" class="sidebar-tab" flex layout-fill>
+  <div layout="column" flex class="sidebar-content" layout-fill>
+    <md-subheader>
+      <p class="md-body-2">
+        <md-icon class="material-icons">
+          account_circle
+        </md-icon>
+        user settings
+      </p>
+    </md-subheader>
+    <md-list>
+      <md-list-item
+        ng-click="$ctrl.menuFavorites = !$ctrl.menuFavorites">
+        <p>menu favorites</p>
         <md-icon 
-            class="md-secondary material-icons"
-            ng-if="$ctrl.favorite(item)">star</md-icon>
+            ng-if="!$ctrl.menuFavorites"
+            class="material-icons md-secondary">expand_more</md-icon>
         <md-icon 
-            class="md-secondary material-icons"
-            ng-if="!$ctrl.favorite(item)">star_outline</md-icon>
-    </md-list-item>
-</md-list>
+            ng-if="$ctrl.menuFavorites"
+            class="material-icons md-secondary">expand_less</md-icon>
+      </md-list-item>
+     <md-list-item>
+      <md-list 
+        flex='85'
+        flex-offset='5'
+        ng-show="$ctrl.menuFavorites"
+        class="md-dense">
+          <md-list-item
+              ng-click="$ctrl.toggleFavorite(item)"
+              ng-repeat="item in $ctrl.menuOptions">
+              <md-icon class="material-icons">{{::item.icon}}</md-icon>
+              <p ng-bind="::item.name"></p>
+              <md-icon 
+                  class="material-icons"
+                  ng-if="$ctrl.favorite(item)">star</md-icon>
+              <md-icon 
+                  class="material-icons"
+                  ng-if="!$ctrl.favorite(item)">star_outline</md-icon>
+          </md-list-item>
+        </md-list>
+      </md-list-item>
+    </md-list>
+  </div>
+</div>
