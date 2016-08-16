@@ -77,13 +77,13 @@ sidebar {
         padding-left: 16px;
     }
     
-    .md-subhead {
+    .md-body-2 {
         margin: 0px;
         text-transform: uppercase;
     }
     
     ._md-subheader-inner {
-        padding: 16px 0px 0px 0px !important;
+        padding: 10px 0px 0px 0px !important;
     }
     
     section {
@@ -92,6 +92,10 @@ sidebar {
     
     .tab-title {
         margin-right: 15px;
+        
+        ._md-subheader-inner {
+            padding: 0px !important;
+        }
     }
     
 }

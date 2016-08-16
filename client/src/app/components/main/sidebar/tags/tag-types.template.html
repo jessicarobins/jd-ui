@@ -1,7 +1,7 @@
 <div layout="column" class="sidebar-tab" flex layout-fill>
   <div layout="column" flex class="sidebar-content" layout-fill>
     <md-subheader>
-      <p class="md-subhead">
+      <p class="md-body-2">
       <md-icon class="material-icons">
             label
         </md-icon>
@@ -29,14 +29,14 @@
         <md-list-item 
           ng-repeat="tag_type in tag_type_group.tag_types"
           ng-mouseenter="tag_type.userMouseover=true"
-          ng-mouseleave="tag_type.userMouseover=false">
+          ng-mouseleave="tag_type.userMouseover=false"
+          aria-label="edit tag type"
+          ng-click="$ctrl.edit(tag_type, $event)">
           <tag tag="tag_type"></tag>
           <md-icon 
             ng-if="$ctrl.parent.canWrite"
             ng-style="{'visibility': tag_type.userMouseover?'visible':'hidden'}"
-            aria-label="delete tag type"
-            class="material-icons md-secondary"
-            ng-click="$ctrl.edit(tag_type, $event)">
+            class="material-icons md-secondary">
             edit
           </md-icon>
         </md-list-item>
@@ -50,12 +50,15 @@
           deleted
         </md-subheader>
         <md-list-item 
+          ng-mouseenter="tag_type.userMouseover=true"
+          ng-mouseleave="tag_type.userMouseover=false"
+          aria-label="restore tag type"
+          ng-click="$ctrl.restore(tag_type)"
           ng-repeat="tag_type in $ctrl.deleted">
           <tag tag="tag_type"></tag>
           <md-icon 
-              aria-label="restore tag type"
-              class="material-icons md-secondary"
-              ng-click="$ctrl.restore(tag_type)">
+            ng-style="{'visibility': tag_type.userMouseover?'visible':'hidden'}"
+            class="material-icons md-secondary">
               restore
           </md-icon>
         </md-list-item>

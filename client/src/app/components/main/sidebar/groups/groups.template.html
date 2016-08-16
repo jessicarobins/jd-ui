@@ -1,18 +1,20 @@
 <div layout="column" class="sidebar-tab" flex layout-fill>
   <div layout="column" flex class="sidebar-content" layout-fill>
     <md-subheader>
-      <p class="md-subhead">
+      <p class="md-body-2">
       <md-icon class="material-icons">
             folder
         </md-icon>
         Tag groups
       </p>
     </md-subheader>
-    <md-list layout-padding flex>
+    <md-list layout-padding flex class="md-dense">
       <md-list-item 
         ng-mouseenter="group.userMouseover=true"
         ng-mouseleave="group.userMouseover=false"
-        ng-repeat="group in $ctrl.groups">
+        ng-repeat="group in $ctrl.groups"
+        aria-label="edit tag group"
+        ng-click="$ctrl.edit(group, $event)">
         <p 
           class="truncate"
           ng-bind="group.name"
@@ -20,9 +22,8 @@
         <md-icon 
             ng-if="$ctrl.parent.canWrite"
             ng-style="{'visibility': group.userMouseover?'visible':'hidden'}"
-            aria-label="delete tag group"
-            class="material-icons md-secondary"
-            ng-click="$ctrl.edit(group, $event)">
+            
+            class="material-icons md-secondary">
             edit
         </md-icon>
       </md-list-item>
