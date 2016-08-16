@@ -1,43 +1,33 @@
 <sidebar-menu
     layout="row"></sidebar-menu>
- <md-sidenav
+<md-content
+    class="sidebar-container"
     ng-cloak
-    layout="row"
-    class="md-sidenav-left"
-    md-component-id="left"
-    md-is-open="true"
     md-colors="{background:'grey-50'}"
-    md-disable-backdrop>
+    layout="column" 
+    flex
+    flex-offset='5'>
+    <filter 
+        ng-show="$ctrl.currentTab($ctrl.index.filter)"
+        layout="column" layout-fill></filter>
+    <bookmarks 
+        ng-show="$ctrl.currentTab($ctrl.index.bookmarks)"
+        layout="column" layout-fill></bookmarks>
+    <tag-types 
+        ng-show="$ctrl.currentTab($ctrl.index.tags)"
+        layout="column" layout-fill></tag-types>
+    <groups 
+        ng-show="$ctrl.currentTab($ctrl.index.groups)"
+        layout="column" layout-fill></groups>
+    <projects 
+        ng-show="$ctrl.currentTab($ctrl.index.projects)"
+        layout="column" layout-fill></projects>
+    <users 
+        ng-show="$ctrl.currentTab($ctrl.index.users)"
+        layout="column" layout-fill></users>
+    <user-settings
+        ng-show="$ctrl.currentTab($ctrl.index.userSettings)"
+        layout="column" layout-fill></user-settings>
     
-    <md-content
-        class="sidebar-container"
-        ng-cloak
-        md-colors="{background:'grey-50'}"
-        layout="column" 
-        flex
-        flex-offset='15'>
-        <filter 
-            ng-show="$ctrl.currentTab($ctrl.index.filter)"
-            layout="column" layout-fill></filter>
-        <bookmarks 
-            ng-show="$ctrl.currentTab($ctrl.index.bookmarks)"
-            layout="column" layout-fill></bookmarks>
-        <tag-types 
-            ng-show="$ctrl.currentTab($ctrl.index.tags)"
-            layout="column" layout-fill></tag-types>
-        <groups 
-            ng-show="$ctrl.currentTab($ctrl.index.groups)"
-            layout="column" layout-fill></groups>
-        <projects 
-            ng-show="$ctrl.currentTab($ctrl.index.projects)"
-            layout="column" layout-fill></projects>
-        <users 
-            ng-show="$ctrl.currentTab($ctrl.index.users)"
-            layout="column" layout-fill></users>
-        <user-settings
-            ng-show="$ctrl.currentTab($ctrl.index.userSettings)"
-            layout="column" layout-fill></user-settings>
-        
-    </md-content>
+</md-content>
     
-</md-sidenav>

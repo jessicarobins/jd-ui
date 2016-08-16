@@ -3,7 +3,7 @@ module.component('sidebarMenu', {
         parent: '^^sidebar'
     },
     templateUrl: 'app/components/main/sidebar/sidebar-menu/sidebar-menu.template.html',
-    controller: function($mdSidenav, $user) {
+    controller: function($user) {
        var self = this;
        
        self.$onInit = function(){

@@ -1,6 +1,7 @@
 sidebar {
     .sidebar-container {
         overflow: hidden;
+        width: 320px;
     }
     
     .sidebar-tabs {
@@ -8,7 +9,6 @@ sidebar {
     }
     
     .sidebar-tab {
-        margin-right: 20px;
         padding-top: 10px;
     }
     
@@ -62,11 +62,6 @@ sidebar {
         padding-right: 22px;
         max-width: 275px !important;
         text-align: right;
-    }
-    
-    .md-sidenav-left {
-        width: 320px;
-        margin-left: 40px;
     }
     
     sidebar-menu {
