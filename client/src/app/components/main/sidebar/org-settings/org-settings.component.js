@@ -13,16 +13,22 @@ module.component('orgSettings', {
 							template: '<tracker-modal layout="column"></tracker-modal>',
 							targetEvent: ev,
 							clickOutsideToClose:true
-					}).then(function(tracker_id){
+					}).then(function(formData){
 							var settingId = $user.currentOrg().org_setting.id;
+							var params = {
+								 org_setting: {
+									 tracker_id: formData.tracker.id
+								 }
+							};
+							
+							if(formData.domain){
+							  params.org_setting.tracker_domain = formData.domain;
+							}
+							
 							return $api.request({
 							 url: '/org_settings/' + settingId,
 							 method: 'PUT',
-							 data: {
-								 org_setting: {
-									 tracker_id: tracker_id
-								 }
-							 }
+							 data: params
 						 });
 					}).then( function(response){
 					  $user.currentOrg().org_setting = response;

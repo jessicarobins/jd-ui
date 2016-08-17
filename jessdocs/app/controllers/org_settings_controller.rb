@@ -56,6 +56,6 @@ class OrgSettingsController < ApplicationController
     end
     
     def update_params
-      params.require(:org_setting).permit(:tracker_id)
+      params.require(:org_setting).permit(:tracker_id, :tracker_domain)
     end
 end

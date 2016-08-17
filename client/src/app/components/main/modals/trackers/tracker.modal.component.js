@@ -5,9 +5,11 @@ module.component('trackerModal', {
        var self = this;
        
        self.trackers;
+       self.formData = {};
        
        self.$onInit = function(){
-           self.tracker = $user.currentOrg().org_setting.tracker;
+           self.formData.tracker = $user.currentOrg().org_setting.tracker;
+           self.formData.domain = $user.currentOrg().org_setting.tracker_domain || "";
            $api.request({
                url: '/trackers'
            }).then( function(response){
@@ -16,17 +18,20 @@ module.component('trackerModal', {
        };
        
        self.parseDomain = function(){
-           var domain = self.tracker.url.replace('#', '<domain>');
+           var domain = self.formData.tracker.url.replace('#', '<domain>');
            return domain;
        };
        
        self.save = function(){
-         $mdDialog.hide(self.tracker.id);
+         if(!self.formData.tracker.domain){
+           self.formData = _.omit(self.formData, ['domain']);
+         }
+         $mdDialog.hide(self.formData);
        };
        
        self.disableSave = function(){
-          if(self.tracker.domain){
-            return true;
+          if(self.formData.tracker.domain){
+            return !self.formData.domain.length;
           }
           else {
             return false;
