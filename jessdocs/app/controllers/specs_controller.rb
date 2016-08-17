@@ -16,7 +16,7 @@ class SpecsController < ApplicationController
     json = @specs.includes(:comments, :tags, :tag_types, :tickets).arrange_serializable(:order => 'spec_order ASC') do |parent, children|
       parent.as_json(
         :include => [
-          :tickets, 
+          {:tickets => {:methods => :url}}, 
           :tag_types
         ],
         :methods => [

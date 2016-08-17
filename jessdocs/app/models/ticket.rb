@@ -4,9 +4,10 @@ class Ticket < ActiveRecord::Base
     belongs_to :spec
     belongs_to :tracker
     
-    before_create :parse_string_id
+    before_create :add_ids
     
     validates_presence_of :spec_id
+    validates_presence_of :tracker_id
     validates_presence_of :name
     
     validates_as_paranoid
@@ -22,10 +23,21 @@ class Ticket < ActiveRecord::Base
     end
 
     private
+        def add_ids
+            add_tracker_id
+            parse_string_id
+        end
+        
+        def add_tracker_id
+            self.tracker_id = self.spec.project.organization.org_setting.tracker_id
+        end
+        
         def parse_string_id
             string_id = self.name.strip
-            if string_id.first === '#'
-                string_id.slice!(0)
+            
+            if self.tracker.leading_characters
+                regex = Regexp.new self.tracker.leading_characters
+                string_id = string_id.sub regex, ''
             end
             self.string_id = string_id
         end

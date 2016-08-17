@@ -1,6 +1,6 @@
 module.component('trackerModal', {
     templateUrl: 'app/components/main/modals/trackers/tracker.modal.template.html',
-    controller: function($api, $user) {
+    controller: function($mdDialog, $api, $user) {
             
        var self = this;
        
@@ -21,11 +21,16 @@ module.component('trackerModal', {
        };
        
        self.save = function(){
-           
+         $mdDialog.hide(self.tracker.id);
        };
        
        self.disableSave = function(){
-           return true;
+          if(self.tracker.domain){
+            return true;
+          }
+          else {
+            return false;
+          }
        };
        
        self.changeTracker = function(){
