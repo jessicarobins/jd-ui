@@ -33,9 +33,5 @@ module.component('trackerModal', {
           }
        };
        
-       self.changeTracker = function(){
-           
-       };
-       
     }
 });

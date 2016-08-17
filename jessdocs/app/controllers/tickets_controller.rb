@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(create_params)
 
     if @ticket.save
-      render json: @ticket, status: :created, location: @ticket
+      render json: @ticket.to_json(:methods => :url), status: :created, location: @ticket
     else
       render json: @ticket.errors, status: :unprocessable_entity
     end

@@ -41,9 +41,10 @@ module.component('mouseoverMenu', {
         };
         
         self.addTicket = function(ev){
+            var placeholder = $user.currentOrg().org_setting.tracker.link_format;
             var confirm = $mdDialog.prompt()
                 .title('associate link')
-                .placeholder('#00000000')
+                .placeholder(placeholder)
                 .clickOutsideToClose('true')
                 .ariaLabel('associate link')
                 .targetEvent(ev)
