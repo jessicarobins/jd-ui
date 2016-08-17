@@ -1,0 +1,32 @@
+<jd-modal layout="column">
+    <jd-modal-title>tracker</jd-modal-title>
+    <jd-modal-body layout="column" layout-padding>
+        <md-input-container
+            class="md-block">
+            <label>Tracker</label>
+            <md-select 
+              aria-label="trackers"
+              ng-model="$ctrl.tracker" 
+              ng-model-options="{trackBy: '$value.id'}">
+              <md-option ng-value="tracker" ng-repeat="tracker in $ctrl.trackers">{{ tracker.name }}</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container
+          ng-if="$ctrl.tracker.domain">
+            <label>Domain</label>
+            <input type="text" />
+            <div class="hint" ng-bind="$ctrl.parseDomain()"></div>
+        </md-input-container>
+        
+    </jd-modal-body>
+    <jd-modal-buttons>
+        
+        <span flex></span>
+        <md-button
+            ng-click="$ctrl.save()"
+            ng-disabled="!$ctrl.disableSave()"
+            class="md-raised md-accent">
+            save
+        </md-button>
+    </jd-modal-buttons>
+</jd-modal>

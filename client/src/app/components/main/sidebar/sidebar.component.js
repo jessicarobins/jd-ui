@@ -15,7 +15,8 @@ module.component('sidebar', {
            groups: 3,
            projects: 4,
            users: 5,
-           userSettings: 6
+           userSettings: 6,
+           orgSettings: 7
        };
        
        self.$onInit = function(){

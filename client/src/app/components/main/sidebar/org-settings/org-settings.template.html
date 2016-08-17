@@ -1,0 +1,22 @@
+<div layout="column" class="sidebar-tab org-settings" flex layout-fill>
+  <div layout="column" flex class="sidebar-content" layout-fill>
+    <md-subheader>
+      <p class="md-body-2">
+        <md-icon class="material-icons">
+          business
+        </md-icon>
+        organization settings
+      </p>
+    </md-subheader>
+    <md-list>
+      <md-list-item
+        ng-click="$ctrl.openTrackerModal($event)">
+        <strong>Tracker</strong>
+        <span 
+          flex
+          class="setting-value"
+          ng-bind="$ctrl.tracker.name"></span>
+      </md-list-item>
+    </md-list>
+  </div>
+</div>

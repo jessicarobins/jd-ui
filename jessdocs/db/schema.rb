@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813021749) do
+ActiveRecord::Schema.define(version: 20160816235412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20160813021749) do
   end
 
   add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
+
+  create_table "org_settings", force: :cascade do |t|
+    t.integer  "tracker_id",      default: 1
+    t.integer  "organization_id",                  null: false
+    t.string   "default_role",    default: "read"
+    t.boolean  "autoadd",         default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -101,13 +110,25 @@ ActiveRecord::Schema.define(version: 20160813021749) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "name",          null: false
-    t.integer  "spec_id",       null: false
-    t.string   "tracker_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "name",                      null: false
+    t.integer  "spec_id",                   null: false
+    t.string   "string_id"
     t.time     "deleted_at"
     t.integer  "deleted_by_id"
+    t.integer  "tracker_id",    default: 1, null: false
+  end
+
+  create_table "trackers", force: :cascade do |t|
+    t.string   "name",                               null: false
+    t.string   "url",                                null: false
+    t.string   "link_format"
+    t.string   "leading_characters"
+    t.boolean  "public",             default: false, null: false
+    t.boolean  "domain",             default: false, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "user_organizations", force: :cascade do |t|

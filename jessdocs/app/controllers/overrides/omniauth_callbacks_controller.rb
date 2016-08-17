@@ -18,7 +18,15 @@ module Overrides
   
       yield @resource if block_given?
   
-      render_data_or_redirect('deliverCredentials', @auth_params.as_json, @resource.as_json(:include => [:organizations, :user_setting], :methods => :roles))
+      render_data_or_redirect('deliverCredentials', 
+        @auth_params.as_json, 
+        @resource.as_json(
+          :include => [{
+            :organizations => {
+              :include => {
+                :org_setting => {
+                  :include => :tracker
+                }}}}, :user_setting], :methods => :roles))
     end
   end
 end
