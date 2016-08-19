@@ -15,6 +15,10 @@ class Ticket < ActiveRecord::Base
     
     def url
         tracker_url = self.tracker.url
+        if self.tracker.domain
+            domain = self.spec.project.organization.org_setting.tracker_domain
+            tracker_url.sub!('#', domain)
+        end
         tracker_url + self.string_id
     end
 
