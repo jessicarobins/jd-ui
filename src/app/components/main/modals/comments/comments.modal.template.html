@@ -17,8 +17,8 @@
                     ng-if="comment.user.image"
                     ng-src="{{comment.user.image}}" class="md-avatar"/>
                 <div class="md-list-item-text">
-                    <h3 ng-bind="comment.text"></h3>
-                    <p>{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</p>
+                    <p class="md-body-2" ng-bind="comment.text"></p>
+                    <span class="md-caption">{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</span>
                     
                     <md-icon 
                         class="md-secondary material-icons" 
@@ -41,8 +41,8 @@
                     ng-if="comment.user.image"
                     ng-src="{{comment.user.image}}" class="md-avatar"/>
                 <div class="md-list-item-text">
-                    <h3 ng-bind="comment.text"></h3>
-                    <p>{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</p>
+                    <p class="md-body-2" ng-bind="comment.text"></p>
+                    <span class="md-caption">{{comment.user.name}} at {{$ctrl.formatTime(comment)}}</span>
                 </div>
             </md-list-item>
         </md-list>
