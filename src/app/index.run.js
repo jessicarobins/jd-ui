@@ -1,4 +1,5 @@
 require('./services/users.service');
+require('./services/logout.service');
 
 export function runBlock ($log, $rootScope, $user, $state, $window, LogoutService) {
   'ngInject';

@@ -1,3 +1,21 @@
+require('@iamadamjowett/angular-click-outside');
+require('angular-animate');
+require('angular-aria');
+require('angular-cookie');
+require('angular-elastic-input');
+require('angular-material');
+require('angular-messages');
+require('angular-resource');
+require('angular-sanitize');
+require('angular-ui-router');
+require('angular-ui-tree');
+require('md-color-picker');
+require('ng-focus-if');
+require('ng-token-auth');
+require('ngclipboard');
+
+require('angular-material/angular-material.scss');
+
 var jessdocModule = angular.module('jessdocs', [
   'ngAnimate', 
   'ngSanitize', 

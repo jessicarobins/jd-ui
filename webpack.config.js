@@ -39,6 +39,7 @@ module.exports = {
       angular: "exports?window.angular!angular",
       _: "lodash",
       moment: "moment",
+      tinycolor: "tinycolor2"
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
