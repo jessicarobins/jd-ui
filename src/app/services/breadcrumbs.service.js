@@ -1,9 +1,8 @@
-var module = angular.module('jessdocs');
-
 require('./specs.service');
 require('./api.service');
 
-module.service('BreadcrumbsService', function($api, $specs) {
+var jessdocs = require('jessdocs');
+jessdocs.service('BreadcrumbsService', function($api, $specs) {
     var self = this;
     var callbacks = [];
     

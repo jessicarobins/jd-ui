@@ -1,12 +1,11 @@
-var module = angular.module('jessdocs');
-
 require('../../../../../../services/specs.service');
 require('../../../../../../services/breadcrumbs.service');
 
 require('../../../../modals/comments/comments.modal.component');
 require('../../../../modals/tags/tags.modal.component');
 
-module.component('specMenu', {
+var jessdocs = require('jessdocs');
+jessdocs.component('specMenu', {
     require: {
         parent: '^^mouseoverMenu',
         main: '^^main'
@@ -14,7 +13,7 @@ module.component('specMenu', {
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/mouseover-menu/spec-menu/spec-menu.template.html',
+    template: require('./spec-menu.template.html'),
     controller: function(
         $scope,
         $specs,

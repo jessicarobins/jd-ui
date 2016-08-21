@@ -1,12 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/users.service');
 
-module.component('sidebarMenu', {
+require('./sidebar-menu.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('sidebarMenu', {
     require: {
         parent: '^^sidebar'
     },
-    templateUrl: 'app/components/main/sidebar/sidebar-menu/sidebar-menu.template.html',
+    template: require('./sidebar-menu.template.html'),
     controller: function($user) {
        var self = this;
        

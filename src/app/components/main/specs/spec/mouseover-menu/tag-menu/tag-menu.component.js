@@ -1,16 +1,17 @@
-var module = angular.module('jessdocs');
-
 require('../../../../../../services/specs.service');
 require('../../../../../../services/tagtypes.service');
 
-module.component('tagMenu', {
+require('./tag-menu.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('tagMenu', {
     require: {
         parent: '^^spec'
     },
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/mouseover-menu/tag-menu/tag-menu.template.html',
+    template: require('./tag-menu.template.html'),
     controller: function(
         $filter,
         $specs, 

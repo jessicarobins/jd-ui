@@ -1,11 +1,12 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/breadcrumbs.service');
 require('../../../../services/specs.service');
 
-module.component('breadcrumbs', {
+require('./breadcrumbs.scss');
 
-     templateUrl: 'app/components/main/specs/breadcrumbs/breadcrumbs.template.html',
+var jessdocs = require('jessdocs');
+jessdocs.component('breadcrumbs', {
+
+     template: require('./breadcrumbs.template.html'),
      controller: function(BreadcrumbsService, $specs) {
              
         var self = this;

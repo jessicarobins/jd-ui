@@ -1,13 +1,14 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/users.service');
 require('../../../../services/api.service');
 
-module.component('userModal', {
+require('./user.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('userModal', {
     bindings: {
         user: '<'
     },
-     templateUrl: 'app/components/main/modals/user/user.modal.template.html',
+     template: require('./user.modal.template.html'),
      controller: function($mdDialog, $user, $api) {
              
         var self = this;

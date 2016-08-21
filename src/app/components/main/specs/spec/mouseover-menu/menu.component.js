@@ -1,5 +1,3 @@
-var module = angular.module('jessdocs');
-
 require('../../../../../services/breadcrumbs.service');
 require('../../../../../services/specs.service');
 require('../../../../../services/users.service');
@@ -10,11 +8,14 @@ require('./spec-menu/spec-menu.component');
 require('./tag-menu/tag-menu.component');
 require('./comment-menu/comment-menu.component');
 
-module.component('mouseoverMenu', {
+require('./menu.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('mouseoverMenu', {
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/mouseover-menu/menu.template.html',
+    template: require('./menu.template.html'),
     controller: function(
         $mdDialog,
         BreadcrumbsService, 

@@ -1,9 +1,8 @@
-var module = angular.module('jessdocs');
-
 require('./api.service');
 require('./users.service');
 
-module.service('$tagtypes', function($api, $q, $user) {
+var jessdocs = require('jessdocs');
+jessdocs.service('$tagtypes', function($api, $q, $user) {
     var self = this;
     var callbacks = [];
     

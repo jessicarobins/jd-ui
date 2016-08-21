@@ -1,10 +1,9 @@
-var module = angular.module('jessdocs');
-
 require('./params.service');
 require('./api.service');
 require('./users.service');
 
-module.service('$projects', function(
+var jessdocs = require('jessdocs');
+jessdocs.service('$projects', function(
     $auth,
     $filter,
     ParamService,

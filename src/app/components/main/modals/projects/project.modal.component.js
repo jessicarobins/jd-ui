@@ -1,8 +1,7 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/projects.service');
 
-module.component('projectsModal', {
+var jessdocs = require('jessdocs');
+jessdocs.component('projectsModal', {
     bindings: {
         project: '<?',
     },

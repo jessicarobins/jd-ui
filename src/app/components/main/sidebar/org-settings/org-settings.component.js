@@ -1,12 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/api.service');
 require('../../../../services/users.service');
 
 require('../../modals/trackers/tracker.modal.component');
 
-module.component('orgSettings', {
-		templateUrl: 'app/components/main/sidebar/org-settings/org-settings.template.html',
+require('./org-settings.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('orgSettings', {
+		template: require('./org-settings.template.html'),
 		controller: function($mdDialog, $api, $user) {
 						
 			 var self = this;

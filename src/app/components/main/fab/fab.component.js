@@ -1,12 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../services/specs.service');
 require('../../../services/tagtypes.service');
 require('../../../services/users.service');
 require('../../../services/menu.service');
 
-module.component('fab', {
-     templateUrl: 'app/components/main/fab/fab.template.html',
+require('./fab.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('fab', {
+     template: require('./fab.template.html'),
      controller: function(
          $anchorScroll, 
          $location, 

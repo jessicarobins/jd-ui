@@ -1,14 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/projects.service');
 
 require('../../modals/projects/project.modal.component');
 
-module.component('projects', {
+var jessdocs = require('jessdocs');
+jessdocs.component('projects', {
     require: {
         parent: '^^sidebar'
     },
-    templateUrl: 'app/components/main/sidebar/projects/projects.template.html',
+    template: require('./projects.template.html'),
     controller: function($mdDialog, $projects) {
        var self = this;
        self.$onInit = function(){

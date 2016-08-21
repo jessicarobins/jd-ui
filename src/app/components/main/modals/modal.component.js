@@ -1,7 +1,8 @@
-var module = angular.module('jessdocs');
+require('./modal.scss');
 
-module.component('jdModal', {
-     templateUrl: 'app/components/main/modals/modal.template.html',
+var jessdocs = require('jessdocs');
+jessdocs.component('jdModal', {
+     template: require('./modal.template.html'),
      transclude: {
         'title': 'jdModalTitle',
         'body': 'jdModalBody',

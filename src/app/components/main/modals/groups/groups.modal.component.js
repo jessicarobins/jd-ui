@@ -1,12 +1,11 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/tagtypes.service');
 
-module.component('tagGroupsModal', {
+var jessdocs = require('jessdocs');
+jessdocs.component('tagGroupsModal', {
     bindings: {
         group: '<?',
     },
-     templateUrl: 'app/components/main/modals/groups/groups.modal.template.html',
+     template: require('./groups.modal.template.html'),
      controller: function($mdDialog, $tagtypes) {
              
         var self = this;

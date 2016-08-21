@@ -1,12 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/api.service');
 
-module.component('commentsModal', {
+require('./comments.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('commentsModal', {
     bindings: {
         spec: '<'
     },
-     templateUrl: 'app/components/main/modals/comments/comments.modal.template.html',
+     template: require('./comments.modal.template.html'),
      controller: function($mdDialog, $api) {
              
         var self = this;

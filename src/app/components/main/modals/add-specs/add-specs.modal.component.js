@@ -1,15 +1,16 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/api.service');
 require('../../../../services/projects.service');
 require('../../../../services/specs.service');
 require('../../../../services/users.service');
 
-module.component('addSpecsModal', {
+require('./add-specs.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('addSpecsModal', {
     bindings: {
         spec: '<?',
     },
-     templateUrl: 'app/components/main/modals/add-specs/add-specs.template.html',
+     template: require('./add-specs.modal.template.html'),
      controller: function($scope, $mdDialog, $api, $projects, $specs, $user) {
              
         var self = this;

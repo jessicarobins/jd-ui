@@ -1,6 +1,5 @@
-var module = angular.module('jessdocs');
-
-module.service('$api', ['$http', function($http) {
+var jessdocs = require('jessdocs');
+jessdocs.service('$api', ['$http', function($http) {
     var self = this;
     
     var baseUrl = 'https://jessdocs-jrobins.c9users.io:8082/api';

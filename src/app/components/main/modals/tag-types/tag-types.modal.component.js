@@ -1,12 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/tagtypes.service');
 
-module.component('tagTypesModal', {
+require('./tag-types.modal.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('tagTypesModal', {
     bindings: {
         tagType: '<?',
     },
-     templateUrl: 'app/components/main/modals/tag-types/tag-types.modal.template.html',
+     template: require('./tag-types.modal.template.html'),
      controller: function($filter, $mdDialog, $tagtypes) {
              
         var self = this;

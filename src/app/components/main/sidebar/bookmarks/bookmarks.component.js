@@ -1,11 +1,10 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/breadcrumbs.service');
 require('../../../../services/specs.service');
 
-module.component('bookmarks', {
+var jessdocs = require('jessdocs');
+jessdocs.component('bookmarks', {
     
-    templateUrl: 'app/components/main/sidebar/bookmarks/bookmarks.template.html',
+    template: require('./bookmarks.template.html'),
     controller: function($specs, BreadcrumbsService) {
        var self = this;
        self.$onInit = function(){

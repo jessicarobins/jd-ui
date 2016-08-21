@@ -1,4 +1,6 @@
-module.service('MenuService', function($api) {
+require('./api.service');
+var jessdocs = require('jessdocs');
+jessdocs.service('MenuService', function($api) {
     var self = this;
     var callbacks = [];
     var exportCallbacks = [];

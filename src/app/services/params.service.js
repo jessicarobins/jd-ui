@@ -1,6 +1,5 @@
-var module = angular.module('jessdocs');
-
-module.service('ParamService', function(
+var jessdocs = require('jessdocs');
+jessdocs.service('ParamService', function(
     $state, $stateParams) {
     var self = this;
     

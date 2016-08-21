@@ -1,13 +1,14 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/specs.service');
 require('../../../../services/tagtypes.service');
 
-module.component('tagsModal', {
+require('./tags.modal.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('tagsModal', {
     bindings: {
         spec: '<',
     },
-    templateUrl: 'app/components/main/modals/tags/tags.modal.template.html',
+    template: require('./tags.modal.template.html'),
     controller: function(
         $filter,
         $specs, 

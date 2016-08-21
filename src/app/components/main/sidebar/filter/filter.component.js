@@ -1,5 +1,3 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/projects.service');
 require('../../../../services/specs.service');
 require('../../../../services/tagtypes.service');
@@ -7,9 +5,12 @@ require('../../../../services/users.service');
 require('../../../../services/params.service');
 require('../../../../services/breadcrumbs.service');
 
-module.
+require('./filter.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.
   component('filter', {
-    templateUrl: 'app/components/main/sidebar/filter/filter.template.html',
+    template: require('./filter.template.html'),
     controller: function (
       $filter,
       $projects, 

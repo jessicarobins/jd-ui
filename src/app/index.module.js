@@ -2,28 +2,13 @@
 /* global _:true */
 var _ = require('lodash');
 
+var jessdocs = require('jessdocs');
+
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 
-angular.module('jessdocs', [
-  'ngAnimate', 
-  'ngSanitize', 
-  'ngMessages', 
-  'ngAria', 
-  'ngResource', 
-  'angular-click-outside',
-  'focus-if',
-  'ngclipboard',
-  'puElasticInput',
-  'ui.router', 
-  'ui.tree',
-  'ngMaterial',
-  'mdColorPicker',
-  'ng-token-auth'], function($rootScopeProvider) {
-  $rootScopeProvider.digestTtl(100);
-})
-  .filter('getById', function() {
+jessdocs.filter('getById', function() {
     return function(input, id) {
       var i=0, len=input.length;
       for (; i<len; i++) {

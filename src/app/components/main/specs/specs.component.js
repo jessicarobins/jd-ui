@@ -1,5 +1,3 @@
-var module = angular.module('jessdocs');
-
 require('../../../services/api.service');
 require('../../../services/specs.service');
 require('../../../services/menu.service');
@@ -7,11 +5,14 @@ require('../../../services/menu.service');
 require('./breadcrumbs/breadcrumbs.component');
 require('./spec/spec.component');
 
-module.component('specs', {
+require('./specs.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('specs', {
     require: {
         parent: '^^main'
     },
-     templateUrl: 'app/components/main/specs/specs.template.html',
+     template: require('./specs.template.html'),
      controller: function(
         $anchorScroll,
         $location,

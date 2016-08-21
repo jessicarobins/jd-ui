@@ -1,9 +1,8 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/users.service');
 
-module.component('userSettings', {
-    templateUrl: 'app/components/main/sidebar/user-settings/user-settings.template.html',
+var jessdocs = require('jessdocs');
+jessdocs.component('userSettings', {
+    template: require('./user-settings.template.html'),
     controller: function($user) {
             
        var self = this;

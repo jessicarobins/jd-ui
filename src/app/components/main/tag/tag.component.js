@@ -1,8 +1,9 @@
-var module = angular.module('jessdocs');
-
 require('../../../services/specs.service');
 
-module.component('tag', {
+require('./tag.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('tag', {
     require: {
         parent: '?^^spec'
     },
@@ -10,7 +11,7 @@ module.component('tag', {
         tag: '<',
         spec: '<?'
     },
-    templateUrl: 'app/components/main/tag/tag.template.html',
+    template: require('./tag.template.html'),
     controller: function($specs) {
             
        var self = this;

@@ -1,10 +1,12 @@
-var module = angular.module('jessdocs');
+var jessdocs = require('jessdocs');
 
 require('../../services/users.service');
 require('../../services/projects.service');
 
-module.component('loginPage', {
-    templateUrl: 'app/components/login/login.template.html',
+require('./login.scss');
+
+jessdocs.component('loginPage', {
+    template: require('./login.template.html'),
     controller: function($auth, $user, $state, $projects) {
        var self = this;
        self.$onInit = function(){

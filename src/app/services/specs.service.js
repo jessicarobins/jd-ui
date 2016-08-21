@@ -1,11 +1,10 @@
-var module = angular.module('jessdocs');
-
 require('./params.service');
 require('./api.service');
 require('./users.service');
 require('./projects.service');
 
-module.service('$specs', function($mdToast, ParamService, $api, $q, $user, $projects) {
+var jessdocs = require('jessdocs');
+jessdocs.service('$specs', function($mdToast, ParamService, $api, $q, $user, $projects) {
     var self = this;
     var callbacks = [];
     var bookmarkCallbacks = [];

@@ -1,5 +1,3 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/api.service');
 require('../../../../services/specs.service');
 require('../../../../services/tagtypes.service');
@@ -7,7 +5,10 @@ require('../../../../services/tagtypes.service');
 require('../../tag/tag.component');
 require('./mouseover-menu/menu.component');
 
-module.component('spec', {
+require('./spec.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('spec', {
     require: {
         parent: '^^specs'
     },
@@ -15,7 +16,7 @@ module.component('spec', {
         spec: '<',
         uiTreeCallbacks: '='
     },
-    templateUrl: 'app/components/main/specs/spec/spec.template.html',
+    template: require('./spec.template.html'),
     controller: function(
         $scope, 
         $api,

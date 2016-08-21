@@ -1,5 +1,3 @@
-var module = angular.module('jessdocs');
-
 require('../../services/projects.service');
 require('../../services/breadcrumbs.service');
 require('../../services/params.service');
@@ -13,8 +11,11 @@ require('../header/header.component');
 require('./sidebar/sidebar.component');
 require('./fab/fab.component');
 
-module.component('main', {
-    templateUrl: 'app/components/main/main.template.html',
+require('./main.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('main', {
+    template: require('./main.template.html'),
     controller: function(
         $auth,
         $q,

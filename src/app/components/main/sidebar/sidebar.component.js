@@ -1,5 +1,3 @@
-var module = angular.module('jessdocs');
-
 require('../../../services/users.service');
 
 require('./sidebar-menu/sidebar-menu.component');
@@ -12,9 +10,12 @@ require('./users/users.component');
 require('./user-settings/user-settings.component');
 require('./org-settings/org-settings.component');
 
-module.component('sidebar', {
+require('./sidebar.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('sidebar', {
     
-    templateUrl: 'app/components/main/sidebar/sidebar.template.html',
+    template: require('./sidebar.template.html'),
     controller: function($user) {
        var self = this;
        

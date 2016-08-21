@@ -1,15 +1,16 @@
-var module = angular.module('jessdocs');
-
 require('../../../../../../services/api.service');
 
-module.component('commentMenu', {
+require('./comment-menu.scss');
+
+var jessdocs = require('jessdocs');
+jessdocs.component('commentMenu', {
     require: {
         parent: '^^spec'
     },
     bindings: {
         spec: '<'
     },
-    templateUrl: 'app/components/main/specs/spec/mouseover-menu/comment-menu/comment-menu.template.html',
+    template: require('./comment-menu.template.html'),
     controller: function($api) {
         
         var self = this;

@@ -1,14 +1,13 @@
-var module = angular.module('jessdocs');
-
 require('../../../../services/tagtypes.service');
 
 require('../../modals/tag-types/tag-types.modal.component');
 
-module.component('tagTypes', {
+var jessdocs = require('jessdocs');
+jessdocs.component('tagTypes', {
     require: {
         parent: '^^sidebar'
     },
-    templateUrl: 'app/components/main/sidebar/tags/tag-types.template.html',
+    template: require('./tag-types.template.html'),
     controller: function($mdDialog, $mdToast, $tagtypes) {
        var self = this;
        self.$onInit = function(){

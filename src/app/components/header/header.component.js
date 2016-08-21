@@ -1,10 +1,12 @@
-var module = angular.module('jessdocs');
+var jessdocs = require('jessdocs');
 
 require('../../services/users.service');
 
-module.component('headerMenu', {
+require('./header.scss');
+
+jessdocs.component('headerMenu', {
     
-    templateUrl: 'app/components/header/header.template.html',
+    template: require('./header.template.html'),
     controller: function($state, $mdSidenav, $mdDialog, $user) {
        var self = this;
        
