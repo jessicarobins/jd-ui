@@ -1,3 +1,5 @@
+var module = angular.module('jessdocs');
+
 module.service('ParamService', function(
     $state, $stateParams) {
     var self = this;

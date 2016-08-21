@@ -1,3 +1,7 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/api.service');
+
 module.component('commentsModal', {
     bindings: {
         spec: '<'

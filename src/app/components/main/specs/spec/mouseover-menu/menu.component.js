@@ -1,3 +1,15 @@
+var module = angular.module('jessdocs');
+
+require('../../../../../services/breadcrumbs.service');
+require('../../../../../services/specs.service');
+require('../../../../../services/users.service');
+
+require('../../../modals/add-specs/add-specs.modal.component');
+
+require('./spec-menu/spec-menu.component');
+require('./tag-menu/tag-menu.component');
+require('./comment-menu/comment-menu.component');
+
 module.component('mouseoverMenu', {
     bindings: {
         spec: '<'

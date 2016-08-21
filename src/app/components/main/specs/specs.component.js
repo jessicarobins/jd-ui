@@ -1,3 +1,12 @@
+var module = angular.module('jessdocs');
+
+require('../../../services/api.service');
+require('../../../services/specs.service');
+require('../../../services/menu.service');
+
+require('./breadcrumbs/breadcrumbs.component');
+require('./spec/spec.component');
+
 module.component('specs', {
     require: {
         parent: '^^main'

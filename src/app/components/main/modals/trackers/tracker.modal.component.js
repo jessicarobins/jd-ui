@@ -1,3 +1,8 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/api.service');
+require('../../../../services/users.service');
+
 module.component('trackerModal', {
     templateUrl: 'app/components/main/modals/trackers/tracker.modal.template.html',
     controller: function($mdDialog, $api, $user) {

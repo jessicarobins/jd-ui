@@ -1,3 +1,9 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/projects.service');
+
+require('../../modals/projects/project.modal.component');
+
 module.component('projects', {
     require: {
         parent: '^^sidebar'

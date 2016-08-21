@@ -1,3 +1,17 @@
+var module = angular.module('jessdocs');
+
+require('../../../services/users.service');
+
+require('./sidebar-menu/sidebar-menu.component');
+require('./filter/filter.component');
+require('./bookmarks/bookmarks.component');
+require('./tags/tag-types.component');
+require('./groups/groups.component');
+require('./projects/projects.component');
+require('./users/users.component');
+require('./user-settings/user-settings.component');
+require('./org-settings/org-settings.component');
+
 module.component('sidebar', {
     
     templateUrl: 'app/components/main/sidebar/sidebar.template.html',

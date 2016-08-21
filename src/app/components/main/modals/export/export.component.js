@@ -1,3 +1,7 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/menu.service');
+
 module.component('export', {
      templateUrl: 'app/components/main/modals/export/export.template.html',
      controller: function(

@@ -1,5 +1,9 @@
 var module = angular.module('jessdocs');
 
+require('./params.service');
+require('./api.service');
+require('./users.service');
+
 module.service('$projects', function(
     $auth,
     $filter,

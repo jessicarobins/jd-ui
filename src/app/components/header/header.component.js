@@ -1,4 +1,7 @@
 var module = angular.module('jessdocs');
+
+require('../../services/users.service');
+
 module.component('headerMenu', {
     
     templateUrl: 'app/components/header/header.template.html',

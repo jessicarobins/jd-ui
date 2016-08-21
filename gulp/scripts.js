@@ -41,7 +41,8 @@ function webpackWrapper(watch, test, callback) {
     }
   };
 
-  var sources = [ path.join(conf.paths.src, '/app/index.module.js') ];
+  var sources = [ path.join(conf.paths.src, '/app/index.module.js')];
+    
   if (test) {
     sources.push(path.join(conf.paths.src, '/app/**/*.spec.js'));
   }

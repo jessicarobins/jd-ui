@@ -1,3 +1,10 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/api.service');
+require('../../../../services/users.service');
+
+require('../../modals/trackers/tracker.modal.component');
+
 module.component('orgSettings', {
 		templateUrl: 'app/components/main/sidebar/org-settings/org-settings.template.html',
 		controller: function($mdDialog, $api, $user) {

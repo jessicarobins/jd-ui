@@ -1,3 +1,11 @@
+var module = angular.module('jessdocs');
+
+require('../../../../../../services/specs.service');
+require('../../../../../../services/breadcrumbs.service');
+
+require('../../../../modals/comments/comments.modal.component');
+require('../../../../modals/tags/tags.modal.component');
+
 module.component('specMenu', {
     require: {
         parent: '^^mouseoverMenu',

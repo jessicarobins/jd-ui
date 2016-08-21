@@ -1,3 +1,7 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/tagtypes.service');
+
 module.component('tagGroupsModal', {
     bindings: {
         group: '<?',

@@ -1,3 +1,7 @@
+require('./components/login/login.component');
+require('./components/main/main.component');
+require('./services/projects.service');
+
 export function routerConfig ($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider

@@ -1,3 +1,8 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/users.service');
+require('../../../../services/api.service');
+
 module.component('userModal', {
     bindings: {
         user: '<'

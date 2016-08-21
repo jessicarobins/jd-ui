@@ -1,3 +1,8 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/breadcrumbs.service');
+require('../../../../services/specs.service');
+
 module.component('bookmarks', {
     
     templateUrl: 'app/components/main/sidebar/bookmarks/bookmarks.template.html',

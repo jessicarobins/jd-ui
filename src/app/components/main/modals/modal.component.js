@@ -1,3 +1,5 @@
+var module = angular.module('jessdocs');
+
 module.component('jdModal', {
      templateUrl: 'app/components/main/modals/modal.template.html',
      transclude: {

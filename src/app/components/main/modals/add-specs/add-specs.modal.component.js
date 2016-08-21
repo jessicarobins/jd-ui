@@ -1,3 +1,10 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/api.service');
+require('../../../../services/projects.service');
+require('../../../../services/specs.service');
+require('../../../../services/users.service');
+
 module.component('addSpecsModal', {
     bindings: {
         spec: '<?',

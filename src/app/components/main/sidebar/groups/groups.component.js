@@ -1,3 +1,9 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/tagtypes.service');
+require('../../modals/tag-types/tag-types.modal.component');
+require('../../modals/groups/groups.modal.component');
+
 module.component('groups', {
     require: {
         parent: '^^sidebar'

@@ -1,3 +1,18 @@
+var module = angular.module('jessdocs');
+
+require('../../services/projects.service');
+require('../../services/breadcrumbs.service');
+require('../../services/params.service');
+require('../../services/specs.service');
+require('../../services/users.service');
+require('../../services/tagtypes.service');
+require('../../services/api.service');
+
+require('./specs/specs.component');
+require('../header/header.component');
+require('./sidebar/sidebar.component');
+require('./fab/fab.component');
+
 module.component('main', {
     templateUrl: 'app/components/main/main.template.html',
     controller: function(

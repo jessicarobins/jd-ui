@@ -1,3 +1,7 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/projects.service');
+
 module.component('projectsModal', {
     bindings: {
         project: '<?',

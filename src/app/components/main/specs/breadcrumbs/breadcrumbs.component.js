@@ -1,3 +1,8 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/breadcrumbs.service');
+require('../../../../services/specs.service');
+
 module.component('breadcrumbs', {
 
      templateUrl: 'app/components/main/specs/breadcrumbs/breadcrumbs.template.html',

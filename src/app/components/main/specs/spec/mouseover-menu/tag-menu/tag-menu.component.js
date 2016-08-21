@@ -1,3 +1,8 @@
+var module = angular.module('jessdocs');
+
+require('../../../../../../services/specs.service');
+require('../../../../../../services/tagtypes.service');
+
 module.component('tagMenu', {
     require: {
         parent: '^^spec'

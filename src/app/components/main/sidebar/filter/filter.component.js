@@ -1,3 +1,12 @@
+var module = angular.module('jessdocs');
+
+require('../../../../services/projects.service');
+require('../../../../services/specs.service');
+require('../../../../services/tagtypes.service');
+require('../../../../services/users.service');
+require('../../../../services/params.service');
+require('../../../../services/breadcrumbs.service');
+
 module.
   component('filter', {
     templateUrl: 'app/components/main/sidebar/filter/filter.template.html',

@@ -1,3 +1,10 @@
+var module = angular.module('jessdocs');
+
+require('../../../services/specs.service');
+require('../../../services/tagtypes.service');
+require('../../../services/users.service');
+require('../../../services/menu.service');
+
 module.component('fab', {
      templateUrl: 'app/components/main/fab/fab.template.html',
      controller: function(

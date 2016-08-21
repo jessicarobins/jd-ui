@@ -1,4 +1,8 @@
 var module = angular.module('jessdocs');
+
+require('../../services/users.service');
+require('../../services/projects.service');
+
 module.component('loginPage', {
     templateUrl: 'app/components/login/login.template.html',
     controller: function($auth, $user, $state, $projects) {
