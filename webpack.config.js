@@ -1,6 +1,11 @@
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var env = {
+  dev: 'https://jessdocs-jrobins.c9users.io:8082',
+  prod: 'https://jd-api.herokuapp.com'
+};
+
 module.exports = {
   entry: './src/app/index.module.js',
   module: {
@@ -30,6 +35,9 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'API_URL': JSON.stringify(env[process.env.NODE_ENV || 'dev'])
+    }),
     new HtmlWebpackPlugin({
       title: 'jessdocs',
       template: './src/index.html'

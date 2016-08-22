@@ -2,7 +2,7 @@ var jessdocs = require('jessdocs');
 jessdocs.service('$api', ['$http', function($http) {
     var self = this;
     
-    var baseUrl = 'https://jessdocs-jrobins.c9users.io:8082/api';
+    var baseUrl = API_URL + '/api';
     
     self.request = function(req) {
         var promise = $http({

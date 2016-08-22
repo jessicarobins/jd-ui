@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "gulp test",
-    "build": "webpack",
+    "build": "NODE_ENV=prod webpack",
     "debug": "webpack-dev-server --inline --hot -d --host 0.0.0.0"
   },
   "devDependencies": {
