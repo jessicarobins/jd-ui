@@ -25,7 +25,7 @@ jessdocs.filter('getById', function() {
   .config(routerConfig)
   .config(function($authProvider) {
       $authProvider.configure({
-          apiUrl: 'https://jessdocs-jrobins.c9users.io:8082',
+          apiUrl: API_URL,
           omniauthWindowType: 'newWindow',
           authProviderPaths: {
             google:   '/auth/google_oauth2'

@@ -27,7 +27,8 @@
   "scripts": {
     "test": "gulp test",
     "build": "NODE_ENV=prod webpack",
-    "debug": "webpack-dev-server --inline --hot -d --host 0.0.0.0"
+    "debug": "webpack-dev-server --inline --hot -d --host 0.0.0.0",
+    "deploy": "npm run build && cd dist && aws s3 sync . s3://jessdocs.io"
   },
   "devDependencies": {
     "babel-core": "~6.7.4",
