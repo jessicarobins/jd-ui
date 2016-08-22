@@ -1,5 +1,7 @@
 require('../../../../services/tagtypes.service');
 
+require('../modal.component');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('tagGroupsModal', {
     bindings: {

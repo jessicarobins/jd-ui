@@ -1,5 +1,7 @@
 require('../../../../services/menu.service');
 
+require('../modal.component');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('export', {
      template: require('./export.modal.template.html'),

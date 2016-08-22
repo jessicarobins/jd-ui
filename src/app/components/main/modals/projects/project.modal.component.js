@@ -1,5 +1,7 @@
 require('../../../../services/projects.service');
 
+require('../modal.component');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('projectsModal', {
     bindings: {

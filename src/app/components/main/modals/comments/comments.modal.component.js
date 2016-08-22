@@ -1,5 +1,7 @@
 require('../../../../services/api.service');
 
+require('../modal.component');
+
 require('./comments.scss');
 
 var jessdocs = require('jessdocs');

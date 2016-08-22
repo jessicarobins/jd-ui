@@ -1,6 +1,8 @@
 require('../../../../services/api.service');
 require('../../../../services/users.service');
 
+require('../modal.component');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('trackerModal', {
     template: require('./tracker.modal.template.html'),

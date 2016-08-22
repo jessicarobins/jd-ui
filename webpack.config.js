@@ -13,6 +13,8 @@ module.exports = {
         loaders: ['ng-annotate', 'babel-loader?presets[]=es2015']},
       { test: /\.scss$/,
         loaders: ["style", "css", "sass"]},
+      { test: /\.css$/,
+        loaders: ["style", "css"]},
       { test: /\.html$/,
         loader: "html" },
       { test: /\.svg/, 

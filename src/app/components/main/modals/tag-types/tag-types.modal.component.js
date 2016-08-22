@@ -1,5 +1,7 @@
 require('../../../../services/tagtypes.service');
 
+require('../modal.component');
+
 require('./tag-types.modal.scss');
 
 var jessdocs = require('jessdocs');

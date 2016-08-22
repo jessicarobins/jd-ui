@@ -15,6 +15,7 @@ require('ng-token-auth');
 require('ngclipboard');
 
 require('angular-material/angular-material.scss');
+require('md-color-picker/dist/mdColorPicker.css');
 
 var jessdocModule = angular.module('jessdocs', [
   'ngAnimate', 

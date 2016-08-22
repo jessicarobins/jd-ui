@@ -3,6 +3,8 @@ require('../../../../services/projects.service');
 require('../../../../services/specs.service');
 require('../../../../services/users.service');
 
+require('../modal.component');
+
 require('./add-specs.scss');
 
 var jessdocs = require('jessdocs');
