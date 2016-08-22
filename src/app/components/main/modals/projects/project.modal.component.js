@@ -2,12 +2,14 @@ require('../../../../services/projects.service');
 
 require('../modal.component');
 
+require('./project.modal.scss');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('projectsModal', {
     bindings: {
         project: '<?',
     },
-     templateUrl: 'app/components/main/modals/projects/project.modal.template.html',
+     template: require('./project.modal.template.html'),
      controller: function($mdDialog, $projects) {
              
         var self = this;

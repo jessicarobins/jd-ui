@@ -17,6 +17,8 @@ require('ngclipboard');
 require('angular-material/angular-material.scss');
 require('md-color-picker/dist/mdColorPicker.css');
 
+require('file?name=favicon.ico!../favicon.ico');
+
 var jessdocModule = angular.module('jessdocs', [
   'ngAnimate', 
   'ngSanitize', 
