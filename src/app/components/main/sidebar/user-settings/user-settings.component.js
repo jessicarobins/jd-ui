@@ -12,6 +12,16 @@ jessdocs.component('userSettings', {
        self.$onInit = function(){
            self.favorites = $user.user().user_setting.menu_favorites;
            self.menuOptions = $user.menuOptions;
+           
+           self.canWrite = $user.write(); 
+            
+            $user.addOrgCallback( function(){
+                self.canWrite = $user.write(); 
+            });
+       };
+       
+       self.userHasAction = function(actions){
+          return _.contains(actions, $user.currentRole().name);
        };
        
        self.favorite = function(item){

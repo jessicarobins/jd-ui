@@ -26,6 +26,7 @@
         ng-show="$ctrl.menuFavorites"
         class="md-dense">
           <md-list-item
+            ng-if="$ctrl.userHasAction(item.permissions)"
               ng-click="$ctrl.toggleFavorite(item)"
               ng-repeat="item in $ctrl.menuOptions">
               <md-icon class="material-icons">{{::item.icon}}</md-icon>

@@ -9,18 +9,19 @@ jessdocs.service('$user', function($q, $state, $auth, $api, ParamService) {
     
     var adminRoles = ['admin'];
     var writeRoles = ['admin', 'write'];
+    var readRoles = ['admin', 'write', 'read'];
     self.allRoles = ['read', 'write', 'admin'];
     var currentRole;
     var currentUser;
     
     self.menuOptions = [
-       {name: 'tags', icon: 'label'}, 
-       {name: 'add children', icon: 'add'},
-       {name: 'add link', icon: 'link'},
-       {name: 'comment', icon: 'comment'},
-       {name: 'expand', icon: 'fullscreen'},
-       {name: 'bookmark', icon: 'bookmark'},
-       {name: 'delete', icon: 'delete'}];
+       {name: 'tags', icon: 'label', permissions: writeRoles }, 
+       {name: 'add children', icon: 'add', permissions: writeRoles },
+       {name: 'add link', icon: 'link', permissions: writeRoles },
+       {name: 'comment', icon: 'comment', permissions: readRoles },
+       {name: 'expand', icon: 'fullscreen', permissions: readRoles },
+       {name: 'bookmark', icon: 'bookmark', permissions: writeRoles },
+       {name: 'delete', icon: 'delete', permissions: writeRoles }];
     
     self.toggleMenuFavorite = function(name){
         if(self.favorite(name)){
