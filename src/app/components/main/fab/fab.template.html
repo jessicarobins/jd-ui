@@ -7,21 +7,19 @@
     ng-cloak>
   <md-fab-trigger>
     <md-button 
-        ng-if="!$ctrl.exporting"
+        ng-show="!$ctrl.exporting"
         class="md-fab" 
         aria-label="menu"
         ng-click="$ctrl.scrollToTop()">
         
-        <md-icon class="material-icons" ng-if="!$ctrl.pageUp">
+        <md-icon class="material-icons">
             menu
         </md-icon>
-        <md-icon class="material-icons" ng-if="$ctrl.pageUp">
-            arrow_upward
-        </md-icon>
+       
     </md-button>
     
     <md-button 
-        ng-if="$ctrl.exporting"
+        ng-show="$ctrl.exporting"
         class="md-fab" 
         aria-label="done exporting"
         ng-click="$ctrl.toggleExportModal($event)">
@@ -35,7 +33,7 @@
   </md-fab-trigger>
   <md-fab-actions
     ng-cloak
-    ng-if="!$ctrl.exporting">
+    ng-show="!$ctrl.exporting">
     
     <md-button 
         class="md-fab md-raised md-mini md-accent"
@@ -50,7 +48,7 @@
     </md-button>
     
     <md-button 
-        ng-if="$ctrl.canWrite"
+        ng-show="$ctrl.canWrite"
         class="md-fab md-raised md-mini md-accent"
         aria-label="mass add specs"
         ng-click="$ctrl.showAddSpecsModal($event)">

@@ -30,6 +30,7 @@ jessdocs.component('fab', {
             self.isOpen = false;
             
             MenuService.addExportCallback( function(){
+                self.isOpen = false;
                 self.exporting = MenuService.export;
             });
             
