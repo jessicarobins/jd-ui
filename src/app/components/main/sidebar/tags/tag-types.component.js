@@ -2,6 +2,8 @@ require('../../../../services/tagtypes.service');
 
 require('../../modals/tag-types/tag-types.modal.component');
 
+require('../sidebar.scss');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('tagTypes', {
     require: {
