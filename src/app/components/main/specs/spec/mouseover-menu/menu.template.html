@@ -1,33 +1,40 @@
 <div
+  ng-mouseenter="$ctrl.userMouseover=true"
+  ng-mouseleave="$ctrl.userMouseover=false"
   class="menu"
   layout="row"
   layout-align="center center">
   <spec-menu
     spec="::$ctrl.spec"></spec-menu>
-  <tag-menu 
-    ng-if="$ctrl.favorite('tags')"
-    spec="::$ctrl.spec"></tag-menu>
-  <md-icon 
-    ng-click="$ctrl.addChildren($event)"
-    ng-if="$ctrl.favorite('add children')"
-    class='menu-button material-icons'>add</md-icon>
-  <md-icon
-    ng-click="$ctrl.addTicket($event)"
-    ng-if="$ctrl.favorite('add link')"
-    class='menu-button material-icons'>link</md-icon>
-  <comment-menu 
-    ng-if="$ctrl.favorite('comment')"
-    spec="::$ctrl.spec"></comment-menu>
-  <md-icon
-    ng-click="$ctrl.setBreadCrumbs()"
-    ng-if="$ctrl.favorite('expand')"
-    class='menu-button material-icons'>fullscreen</md-icon>
-  <md-icon
-    ng-click="$ctrl.bookmark()"
-    ng-if="$ctrl.favorite('bookmark')"
-    class='menu-button material-icons'>bookmark</md-icon>
-  <md-icon
-    ng-click="$ctrl.delete($event)"
-    ng-if="$ctrl.favorite('delete')"
-    class='menu-button material-icons'>delete</md-icon>
+  <div
+    ng-show="$ctrl.userMouseover"
+    layout="row"
+    layout-align="center center">
+    <tag-menu 
+      ng-if="$ctrl.favorite('tags')"
+      spec="::$ctrl.spec"></tag-menu>
+    <md-icon 
+      ng-click="$ctrl.addChildren($event)"
+      ng-if="$ctrl.favorite('add children')"
+      class='menu-button material-icons'>add</md-icon>
+    <md-icon
+      ng-click="$ctrl.addTicket($event)"
+      ng-if="$ctrl.favorite('add link')"
+      class='menu-button material-icons'>link</md-icon>
+    <comment-menu 
+      ng-if="$ctrl.favorite('comment')"
+      spec="::$ctrl.spec"></comment-menu>
+    <md-icon
+      ng-click="$ctrl.setBreadCrumbs()"
+      ng-if="$ctrl.favorite('expand')"
+      class='menu-button material-icons'>fullscreen</md-icon>
+    <md-icon
+      ng-click="$ctrl.bookmark()"
+      ng-if="$ctrl.favorite('bookmark')"
+      class='menu-button material-icons'>bookmark</md-icon>
+    <md-icon
+      ng-click="$ctrl.delete($event)"
+      ng-if="$ctrl.favorite('delete')"
+      class='menu-button material-icons'>delete</md-icon>
+  </div>
 </div>
