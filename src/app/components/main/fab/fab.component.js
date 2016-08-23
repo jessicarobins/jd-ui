@@ -3,6 +3,9 @@ require('../../../services/tagtypes.service');
 require('../../../services/users.service');
 require('../../../services/menu.service');
 
+require('../modals/add-specs/add-specs.modal.component');
+require('../modals/export/export.modal.component');
+
 require('./fab.scss');
 
 var jessdocs = require('jessdocs');
