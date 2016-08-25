@@ -1,5 +1,5 @@
 <md-fab-speed-dial 
-    md-direction="left" 
+    md-direction="up" 
     md-open="$ctrl.isOpen"
     ng-mouseenter="$ctrl.togglePageUp(true)"
     ng-mouseleave="$ctrl.togglePageUp(false)"
@@ -7,57 +7,64 @@
     ng-cloak>
   <md-fab-trigger>
     <md-button 
-        ng-show="!$ctrl.exporting"
+        ng-show="!$ctrl.exporting && $ctrl.canWrite"
         class="md-fab" 
         aria-label="menu"
-        ng-click="$ctrl.scrollToTop()">
-        
-        <md-icon class="material-icons">
-            menu
+        ng-click="$ctrl.showAddSpecsModal($event)">
+        <md-tooltip 
+            md-direction="left">
+              add specs
+        </md-tooltip>
+        <md-icon 
+            ng-show="!$ctrl.isOpen"
+            class="material-icons">
+            add
         </md-icon>
-       
+        <md-icon 
+            ng-show="$ctrl.isOpen"
+            class="material-icons">
+            create
+        </md-icon>
     </md-button>
-    
+    <md-button 
+        ng-show="!$ctrl.exporting && !$ctrl.canWrite"
+        class="md-fab" 
+        aria-label="menu"
+        ng-click="$ctrl.export()">
+        
+        <md-tooltip 
+            md-direction="left" >
+              export
+        </md-tooltip>
+        <md-icon class="material-icons">publish</md-icon>
+    </md-button>
     <md-button 
         ng-show="$ctrl.exporting"
         class="md-fab" 
         aria-label="done exporting"
         ng-click="$ctrl.toggleExportModal($event)">
         
-        <md-icon class="material-icons">
+        <md-icon 
+            class="material-icons">
             done
         </md-icon>
-        
     </md-button>
     
   </md-fab-trigger>
   <md-fab-actions
-    ng-cloak
-    ng-show="!$ctrl.exporting">
+    ng-cloak>
     
     <md-button 
+        ng-show="!$ctrl.exporting && $ctrl.canWrite"
         class="md-fab md-raised md-mini md-accent"
         aria-label="export"
         ng-click="$ctrl.export()">
         
         <md-tooltip 
-            md-direction="bottom" >
+            md-direction="left" >
               export
         </md-tooltip>
       <md-icon class="material-icons">publish</md-icon>
-    </md-button>
-    
-    <md-button 
-        ng-show="$ctrl.canWrite"
-        class="md-fab md-raised md-mini md-accent"
-        aria-label="mass add specs"
-        ng-click="$ctrl.showAddSpecsModal($event)">
-        
-        <md-tooltip 
-            md-direction="bottom">
-              add specs
-        </md-tooltip>
-      <md-icon class="material-icons">add</md-icon>
     </md-button>
     
   </md-fab-actions>
