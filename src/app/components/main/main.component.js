@@ -42,7 +42,7 @@ jessdocs.component('main', {
                 tags: $api.request({url: '/tags'}),
                 projects: $projects.getProjects(),
                 tagTypes: $tagtypes.getTagTypes(),
-                breadcrumbs: BreadcrumbsService.initBreadcrumbs($stateParams.spec_id)
+                breadcrumbs: BreadcrumbsService.initBreadcrumbsFromId($stateParams.spec_id)
             };
             
             $q.all(promises).then( function(response) {

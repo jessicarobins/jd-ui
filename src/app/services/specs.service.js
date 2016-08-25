@@ -182,6 +182,14 @@ jessdocs.service('$specs', function($mdToast, ParamService, $api, $q, $user, $pr
         });
     };
     
+    self.getSpec = function(id){
+        return $api.request({
+            url: '/specs/' + id
+        }).then(function(response){
+            return response;
+        });
+    };
+    
     self.move = function(specId, parent_id, sibling_id){
         return $api.request({
             url: '/specs/' + specId + '/move', 
