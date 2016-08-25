@@ -69,9 +69,13 @@ jessdocs.component('fab', {
         self.showAddSpecsModal = function(ev) {
             $specs.addManyParent = null;
             $mdDialog.show({
-              template: '<add-specs-modal layout="column"></add-specs-modal>',
+              template: '<add-specs-modal spec="spec" layout="column"></add-specs-modal>',
               targetEvent: ev,
-              clickOutsideToClose: false
+              clickOutsideToClose: false,
+              locals: {spec: $specs.spec },
+                controller: function($scope, spec) {
+                  $scope.spec = spec;
+              }
             });
         };
         

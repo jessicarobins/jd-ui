@@ -15,7 +15,7 @@ jessdocs.component('bookmarks', {
        };
        
        self.setBreadcrumbs = function(spec){
-            BreadcrumbsService.setBreadcrumbs(spec.id);       
+            BreadcrumbsService.setBreadcrumbs(spec);       
        };
         
     }

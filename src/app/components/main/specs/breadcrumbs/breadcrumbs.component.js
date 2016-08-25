@@ -21,7 +21,7 @@ jessdocs.component('breadcrumbs', {
         };
         
         self.setBreadcrumbs = function(spec){
-            BreadcrumbsService.setBreadcrumbs(spec.id);
+            BreadcrumbsService.setBreadcrumbs(spec);
         };
         
         self.clearBreadcrumbs = function() {

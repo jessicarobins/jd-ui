@@ -201,12 +201,14 @@ jessdocs.service('$specs', function($mdToast, ParamService, $api, $q, $user, $pr
         });
     };
     
-    self.setSpecId = function(id){
-        self.filterParams.id = id;
-        ParamService.updateURL({spec_id: id});
+    self.setSpecId = function(spec){
+        self.spec = spec;
+        self.filterParams.id = spec.id;
+        ParamService.updateURL({spec_id: spec.id});
     };
     
     self.clearSpecId = function(){
+        self.spec = null;
         self.filterParams.id = null;
         ParamService.updateURL({spec_id: null});
     };

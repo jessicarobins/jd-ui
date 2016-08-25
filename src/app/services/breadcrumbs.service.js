@@ -10,7 +10,7 @@ jessdocs.service('BreadcrumbsService', function($api, $specs) {
         callbacks.push(callback);
     };
     
-    self.setBreadcrumbs = function(id) {
+    self.setBreadcrumbs = function(spec) {
         // var promise = $api.request({
         //     url: '/specs/'+id+'/breadcrumbs', 
         //     method: "GET"
@@ -24,7 +24,7 @@ jessdocs.service('BreadcrumbsService', function($api, $specs) {
         //     return self.breadcrumbs;
         // });
         // return promise;
-        self.initBreadcrumbs(id).then(function(){
+        self.initBreadcrumbs(spec).then(function(){
             $specs.setSpecList();
         });
     };
@@ -35,15 +35,15 @@ jessdocs.service('BreadcrumbsService', function($api, $specs) {
         updateAll();
     };
     
-    self.initBreadcrumbs = function(id){
-        if(id){
+    self.initBreadcrumbs = function(spec){
+        if(spec){
             var promise = $api.request({
-                url: '/specs/'+id+'/breadcrumbs', 
+                url: '/specs/'+spec.id+'/breadcrumbs', 
                 method: "GET"
             }).
             then(function (response) {
                 self.breadcrumbs = response;
-                $specs.setSpecId(id);
+                $specs.setSpecId(spec);
                 updateAll();
                 return self.breadcrumbs;
             });

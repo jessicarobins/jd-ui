@@ -38,7 +38,7 @@ jessdocs.component('mouseoverMenu', {
        };
        
        self.setBreadCrumbs = function() {
-            BreadcrumbsService.setBreadcrumbs(self.spec.id);
+            BreadcrumbsService.setBreadcrumbs(self.spec);
         };
         
         self.addChildren = function(ev) {
