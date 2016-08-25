@@ -1,3 +1,12 @@
 breadcrumbs {
     min-height: 64px;
+    
+    a {
+        font-weight: bold;
+        color: #673AB7;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    
 }
