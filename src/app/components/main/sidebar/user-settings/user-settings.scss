@@ -1,0 +1,14 @@
+.user-settings-tab {
+    .menu-favorites-list {
+        
+        
+        &.ng-enter {
+            animation: slideInDown 2s;
+            overflow: hidden;
+        }
+        
+        &.ng-leave {
+            animation: slideOutUp 2s;
+        }
+    }
+}

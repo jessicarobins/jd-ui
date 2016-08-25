@@ -1,4 +1,4 @@
-<div layout="column" class="sidebar-tab" flex layout-fill>
+<div layout="column" class="sidebar-tab user-settings-tab" flex layout-fill>
   <div layout="column" flex class="sidebar-content" layout-fill>
     <md-subheader>
       <p class="md-body-2">
@@ -19,11 +19,12 @@
             ng-if="$ctrl.menuFavorites"
             class="material-icons md-secondary">expand_less</md-icon>
       </md-list-item>
-     <md-list-item>
+     <md-list-item
+      class="menu-favorites-list"
+      ng-if="$ctrl.menuFavorites">
       <md-list 
         flex='85'
         flex-offset='5'
-        ng-show="$ctrl.menuFavorites"
         class="md-dense">
           <md-list-item
             ng-if="$ctrl.userHasAction(item.permissions)"

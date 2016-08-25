@@ -1,5 +1,7 @@
 require('../../../../services/users.service');
 
+require('./user-settings.scss');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('userSettings', {
     template: require('./user-settings.template.html'),

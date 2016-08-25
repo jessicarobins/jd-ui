@@ -16,6 +16,7 @@ require('ngclipboard');
 
 require('angular-material/angular-material.scss');
 require('angular-ui-tree/dist/angular-ui-tree.css');
+require('animate.css/animate.css');
 require('md-color-picker/dist/mdColorPicker.css');
 
 require('file?name=favicon.ico!../favicon.ico');
