@@ -52,10 +52,12 @@ jessdocs.service('BreadcrumbsService', function($api, $specs) {
     };
     
     self.initBreadcrumbsFromId = function(id){
-      $specs.getSpec(id).then(function(response){
-        $specs.spec = response;
-        return self.initBreadcrumbs(response);
-      });
+      if(id){
+        $specs.getSpec(id).then(function(response){
+          $specs.spec = response;
+          return self.initBreadcrumbs(response);
+        });
+      }
     };
     
     function updateAll() {

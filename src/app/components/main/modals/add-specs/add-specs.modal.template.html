@@ -21,20 +21,14 @@
             <label>Parent</label>
             <input ng-model="$ctrl.spec.description" disabled>
         </md-input-container>
-        <md-button 
-          class="md-icon-button" 
-          aria-label="indent"
-          ng-click="$ctrl.indent()">
-          <md-icon class="material-icons">format_indent_increase</md-icon>
-        </md-button>
-        <md-input-container
-            class="edit-input md-block">
-            <textarea
-                md-autofocus
-                aria-label="mass add specs"
-                rows="5"
-                ng-model="$ctrl.text"></textarea>
-        </md-input-container>
+        <textarea
+          class="edit-input"
+          placeholder="{{$ctrl.textareaPlaceholder}}"
+          tab-override
+          md-autofocus
+          aria-label="mass add specs"
+          rows="5"
+          ng-model="$ctrl.text"></textarea>
     </jd-modal-body>
     <jd-modal-buttons>
         

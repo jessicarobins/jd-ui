@@ -22,6 +22,7 @@
     "ng-focus-if": "^1.0.7",
     "ng-token-auth": "^0.0.29",
     "ngclipboard": "^1.1.1",
+    "taboverride": "^4.0.3",
     "tinycolor": "bgrins/TinyColor#1.4.1"
   },
   "scripts": {
