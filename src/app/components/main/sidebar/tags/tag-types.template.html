@@ -31,7 +31,7 @@
           ng-mouseenter="tag_type.userMouseover=true"
           ng-mouseleave="tag_type.userMouseover=false"
           aria-label="edit tag type"
-          ng-click="$ctrl.edit(tag_type, $event)">
+          ng-click="$ctrl.parent.canWrite ? $ctrl.edit(tag_type, $event) : undefined">
           <tag tag="tag_type"></tag>
           <md-icon 
             ng-if="$ctrl.parent.canWrite"
@@ -53,10 +53,11 @@
           ng-mouseenter="tag_type.userMouseover=true"
           ng-mouseleave="tag_type.userMouseover=false"
           aria-label="restore tag type"
-          ng-click="$ctrl.restore(tag_type)"
+          ng-click="$ctrl.parent.canWrite ? $ctrl.restore(tag_type) : undefined"
           ng-repeat="tag_type in $ctrl.deleted">
           <tag tag="tag_type"></tag>
-          <md-icon 
+          <md-icon
+            ng-if="$ctrl.parent.canWrite"
             ng-style="{'visibility': tag_type.userMouseover?'visible':'hidden'}"
             class="material-icons md-secondary">
               restore

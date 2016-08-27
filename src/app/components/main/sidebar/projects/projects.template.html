@@ -14,12 +14,13 @@
         ng-mouseleave="project.userMouseover=false"
         ng-repeat="project in $ctrl.projects"
         aria-label="edit project"
-        ng-click="$ctrl.editProject(project, $event)">
+        ng-click="$ctrl.parent.canWrite ? $ctrl.editProject(project, $event) : undefined">
         <p 
           class="truncate"
           ng-bind="project.name"></p>
         
         <md-icon 
+          ng-if="$ctrl.parent.canWrite"
           ng-style="{'visibility': project.userMouseover?'visible':'hidden'}"
           class="material-icons md-secondary">
           edit
