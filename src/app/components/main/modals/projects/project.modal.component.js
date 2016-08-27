@@ -32,6 +32,10 @@ jessdocs.component('projectsModal', {
             $mdDialog.cancel();
         };
         
+        self.showDelete = function(){
+          return self.project && $projects.projects > 1;
+        };
+        
         self.disableSave = function(){
             return !self.editingCopy.name 
                 || (self.editingCopy.name.length < 1);
