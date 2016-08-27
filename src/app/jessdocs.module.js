@@ -3,18 +3,22 @@ require('angular-animate');
 require('angular-aria');
 require('angular-cookie');
 require('angular-elastic-input');
+require('angular-intro.js');
 require('angular-material');
 require('angular-messages');
 require('angular-resource');
 require('angular-sanitize');
 require('angular-spinners');
 require('angular-ui-router');
+require('intro.js');
+
 require('md-color-picker');
 require('ng-focus-if');
 require('ng-token-auth');
 require('ngclipboard');
 
 require('angular-material/angular-material.scss');
+require('intro.js/introjs.css');
 require('md-color-picker/dist/mdColorPicker.css');
 
 require('file?name=favicon.ico!../favicon.ico');
@@ -26,7 +30,11 @@ var jessdocModule = angular.module('jessdocs', [
   'ngAria', 
   'ngResource', 
   'angular-click-outside',
+<<<<<<< a36350c8addff472729f8476d48894eace985d70
   'angularSpinners',
+=======
+  'angular-intro',
+>>>>>>> this is way more trouble than it's worth
   'focus-if',
   'ngclipboard',
   'puElasticInput',

@@ -32,8 +32,37 @@ jessdocs.component('main', {
        var self = this;
        
        self.canWrite = false;
-       
+       self.introOptions = {
+          showStepNumbers: false,
+          showBullets: false,
+          showProgress: false,
+          steps:[
+            {
+              intro: 'welcome to jessdocs'
+            },
+            {
+              element: '#fab',
+              intro: "click the 'add specs' button to add your first specs",
+              position: 'auto'
+            },
+            {
+              element: '#sidebarMenu',
+              intro: "filter your specs, and add projects, tags, and tag groups via the sidebar menu",
+              position: 'auto'
+            },
+            {
+              element: '#specList',
+              intro: "view your specs in the main panel." + 
+                "double click a spec to edit it. mouseover a spec" +
+                "to see the menu button, which you can click to" +
+                "add children, tags, and comments",
+              position: 'auto'
+            }
+          ]
+        };
+        
        self.$onInit = function(){
+            
             sanitizeOrgParam($stateParams.orgId);
             self.canWrite = $user.write();
             var project;

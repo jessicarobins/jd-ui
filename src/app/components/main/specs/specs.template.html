@@ -7,6 +7,7 @@
     ng-if="$ctrl.spec.length">
     <a id="top"></a>
     
+<<<<<<< a36350c8addff472729f8476d48894eace985d70
     <div flex>
       <ol data-parent-id="" sortable="$ctrl.sortableOpts" class="sortable">
         <li 
@@ -17,6 +18,20 @@
         </li>
       </ol>
     </div>
+=======
+    
+    <div ui-tree="$ctrl.treeOpts"
+        data-drag-delay='300'
+       id="tree-root"
+       flex>
+    <ol ui-tree-nodes ng-model="$ctrl.spec" id="specList">
+      <li ng-repeat="spec in $ctrl.spec track by spec.id" ui-tree-node>
+        <spec 
+            spec="spec" 
+            ui-tree-callbacks="::$callbacks"></spec>
+      </li>
+    </ol>
+>>>>>>> this is way more trouble than it's worth
     <a id="bottom"></a>
 </section>
 <section
