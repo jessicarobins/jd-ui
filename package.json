@@ -8,7 +8,7 @@
     "angular-aria": "~1.5.5",
     "angular-cookie": "^4.1.0",
     "angular-elastic-input": "^2.4.0",
-    "angular-material": "1.1.0-rc.5",
+    "angular-material": "1.1.0",
     "angular-messages": "~1.5.5",
     "angular-resource": "~1.5.5",
     "angular-sanitize": "~1.5.5",

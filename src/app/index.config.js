@@ -1,4 +1,4 @@
-export function config ($logProvider, $mdThemingProvider) {
+export function config ($logProvider, $mdThemingProvider, $mdAriaProvider) {
   'ngInject';
   // Enable log
   $logProvider.debugEnabled(true);
@@ -8,4 +8,6 @@ export function config ($logProvider, $mdThemingProvider) {
     .accentPalette('cyan', {
       'default': '500'
     });
+  
+  $mdAriaProvider.disableWarnings();
 }
