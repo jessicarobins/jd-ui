@@ -20,4 +20,31 @@ specs {
     #top{
         display: none;
     }
+    
+    body.dragging, body.dragging * {
+      cursor: move !important;
+    }
+    
+    .dragged {
+      position: absolute;
+      opacity: 0.5;
+      z-index: 2000;
+    }
+    
+    ol.sortable li.placeholder {
+      position: relative;
+    }
+    ol.sortable li.placeholder:before {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      margin-top: -8px;
+      left: -8px;
+      top: -1px;
+      border: 8px solid transparent;
+      border-left-color: #512da8;
+      border-right: none;
+      z-index: 2000;
+    }
 }

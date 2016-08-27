@@ -7,18 +7,13 @@
     ng-if="$ctrl.spec.length">
     <a id="top"></a>
     
-    
-    <div ui-tree="$ctrl.treeOpts"
-        data-drag-delay='300'
-       id="tree-root"
-       flex>
-        <ol ui-tree-nodes ng-model="$ctrl.spec">
-          <li ng-repeat="spec in $ctrl.spec track by spec.id" ui-tree-node>
-            <spec 
-                spec="spec" 
-                ui-tree-callbacks="::$callbacks"></spec>
-          </li>
-        </ol>
+    <div flex>
+      <ol sortable="$ctrl.sortableOpts" class="sortable">
+        <li ng-repeat="spec in $ctrl.spec track by spec.id">
+          <spec 
+              spec="spec"></spec>
+        </li>
+      </ol>
     </div>
     <a id="bottom"></a>
 </section>
