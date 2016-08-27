@@ -32,7 +32,16 @@ jessdocs.component('specs', {
         
         self.sortableOpts = {
           handle: '.drag-handle',
-          containerPath: '> spec > div'
+          containerPath: '> spec > div',
+          onDragStart: function($item, container, _super) {
+            self.dragging = true;
+            console.log('item', $item);
+            _super($item, container);
+          },
+          onDrop: function($item, container, _super) {
+            self.dragging = false;
+            _super($item, container);
+          }
         };
         
         self.treeOpts = {

@@ -8,6 +8,11 @@ spec {
         }
     }
     
+    .dragged {
+        .mouseover-menu {
+            display: none;
+        }
+    }
     .edit-input {
         padding: 0px;
         margin: 0px;
