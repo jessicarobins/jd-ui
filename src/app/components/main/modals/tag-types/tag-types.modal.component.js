@@ -15,8 +15,7 @@ jessdocs.component('tagTypesModal', {
         var self = this;
         
         self.editingCopy = {};
-        
-        
+            
         self.$onInit = function() {
             if(self.tagType){
                 self.editingCopy = angular.copy(self.tagType);

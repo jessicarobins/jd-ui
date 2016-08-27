@@ -1,49 +1,58 @@
-<jd-modal layout="column">
-    <jd-modal-title>tag group</jd-modal-title>
-    <jd-modal-body layout="row" layout-padding>
-        <md-input-container>
-            <label>tag group name</label>
-            <input
+<form name="tagGroupForm" ng-submit="$ctrl.add()">
+  <jd-modal layout="column">
+      <jd-modal-title>tag group</jd-modal-title>
+      <jd-modal-body layout="row" layout-padding>
+          <md-input-container>
+              <label>tag group name</label>
+              <input
+                name="groupName"
                 required
                 ng-model="$ctrl.editingCopy.name"
                 aria-label="name"/>
-        </md-input-container>
+              <div ng-messages="tagGroupForm.groupName.$error">
+                <div ng-message="required">This field is required.</div>
+              </div>
+          </md-input-container>
+          
+          <div
+              md-color-picker
+              ng-model="$ctrl.editingCopy.color"
+              label="tag color"
+              default="#000000"
+              random="true"
+              md-color-generic-palette="true"
+              md-color-history="false"
+              md-color-clear-button="false"
+              open-on-input="true"
+              md-color-alpha-channel="false"
+              md-color-spectrum="false"
+              md-color-sliders="false"
+              md-color-hsl="false"
+              md-color-rgb="false"
+              md-color-default-tab="genericPalette"
+          ></div>
         
-        <div
-            md-color-picker
-            ng-model="$ctrl.editingCopy.color"
-            label="tag color"
-            default="#000000"
-            md-color-generic-palette="true"
-            md-color-history="false"
-            md-color-clear-button="false"
-            open-on-input="true"
-            md-color-alpha-channel="false"
-            md-color-sliders="false"
-            md-color-hsl="false"
-            md-color-rgb="false"
-        ></div>
-        
-    </jd-modal-body>
-    <jd-modal-buttons 
-        layout="row" 
-        flex 
-        layout-align="center center">
-        <md-button 
-            ng-if="$ctrl.group"
-            ng-click="$ctrl.delete()"
-            class="md-icon-button">
-            <md-icon class="material-icons">
-                delete
-            </md-icon>
-        </md-button>
-        <span flex></span>
-        <md-button
+      </jd-modal-body>
+      <jd-modal-buttons 
+          layout="row" 
+          flex 
+          layout-align="center center">
+          <md-button 
+              ng-if="$ctrl.group"
+              ng-click="$ctrl.delete()"
+              class="md-icon-button">
+              <md-icon class="material-icons">
+                  delete
+              </md-icon>
+          </md-button>
+          <span flex></span>
+          <md-button
+            type="submit"
             ng-disabled="$ctrl.disableSave()"
             aria-label="add tag group"
-            ng-click="$ctrl.add()"
             class="md-raised md-accent">
-            save
-        </md-button>
-    </jd-modal-buttons>
-</jd-modal>
+              save
+          </md-button>
+      </jd-modal-buttons>
+  </jd-modal>
+</form>

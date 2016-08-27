@@ -1,34 +1,40 @@
-<jd-modal layout="column" class="project-modal">
-    <jd-modal-title>project</jd-modal-title>
-    <jd-modal-body layout="column" layout-padding>
-        <md-input-container>
-            <label>project name</label>
-            <input
-                required
-                ng-model="$ctrl.editingCopy.name"
-                aria-label="name"/>
-        </md-input-container>
-        
-    </jd-modal-body>
-    <jd-modal-buttons 
-        layout="row" 
-        flex 
-        layout-align="center center">
-        <md-button 
-            ng-if="$ctrl.project"
-            ng-click="$ctrl.delete()"
-            class="md-icon-button">
-            <md-icon class="material-icons">
-                delete
-            </md-icon>
-        </md-button>
-        <span flex></span>
-        <md-button
-            ng-disabled="$ctrl.disableSave()"
-            aria-label="add project"
-            ng-click="$ctrl.add()"
-            class="md-raised md-accent">
-            save
-        </md-button>
-    </jd-modal-buttons>
-</jd-modal>
+<form name="projectForm" ng-submit="$ctrl.add()">
+    <jd-modal layout="column" class="project-modal">
+        <jd-modal-title>project</jd-modal-title>
+        <jd-modal-body layout="column" layout-padding>
+            <md-input-container>
+                <label>project name</label>
+                <input
+                    required
+                    name="projectName"
+                    ng-model="$ctrl.editingCopy.name"
+                    aria-label="name"/>
+                <div ng-messages="projectForm.projectName.$error">
+                    <div ng-message="required">This field is required.</div>
+                </div>
+            </md-input-container>
+            
+        </jd-modal-body>
+        <jd-modal-buttons 
+            layout="row" 
+            flex 
+            layout-align="center center">
+            <md-button 
+                ng-if="$ctrl.project"
+                ng-click="$ctrl.delete()"
+                class="md-icon-button">
+                <md-icon class="material-icons">
+                    delete
+                </md-icon>
+            </md-button>
+            <span flex></span>
+            <md-button
+                ng-disabled="$ctrl.disableSave()"
+                aria-label="add project"
+                ng-click="$ctrl.add()"
+                class="md-raised md-accent">
+                save
+            </md-button>
+        </jd-modal-buttons>
+    </jd-modal>
+</form>
