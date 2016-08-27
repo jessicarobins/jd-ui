@@ -55,7 +55,6 @@ jessdocs.service('$projects', function(
             data: {
                 project: {
                     name: projectName,
-                    created_by_id: $user.user().id,
                     organization_id: $user.currentOrg().id
                 }
             }
