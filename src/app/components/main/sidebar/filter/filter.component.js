@@ -58,10 +58,8 @@ jessdocs.
         
         $tagtypes.addDeleteCallback( function(){
           var santized = $tagtypes.sanitizeTagTypes(self.selected, true);
-            if (santized.length < self.selected.length){
-              self.selected = santized;
-              self.submit();
-            }
+          self.selected = santized;
+          self.submit();
         });
         
         $user.addOrgCallback(self.clearCheckboxes);
