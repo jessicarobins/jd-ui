@@ -20,6 +20,12 @@ jessdocs.component('tagMenu', {
         var self = this;
        self.formData = {};
        self.formData.tagTypes = [];
+       
+      self.$onInit = function(){
+        $tagtypes.getTagTypes().then( function(response){
+            self.tagTypesByGroup = response.byGroup;
+        });
+      };
   
        self.openTagMenu = function($mdOpenMenu, ev) {
             $tagtypes.getTagTypes().then( function(response){
