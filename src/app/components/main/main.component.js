@@ -49,7 +49,7 @@ jessdocs.component('main', {
                 self.tickets = response.tickets;
                 self.tags = response.tags;
                 project = sanitizeProjectParam($stateParams.projectId);
-                var tagTypes = sanitizeTagTypes(response.tagTypes.allTypes, $stateParams.tag_type);
+                var tagTypes = $tagtypes.sanitizeTagTypes($stateParams.tag_type, true);
                 return tagTypes;
             }).then( function(response){
                 var params = ParamService.parseParamsFromURL(project.id, response);
@@ -92,16 +92,6 @@ jessdocs.component('main', {
            }
            $user.initOrg(org);
            
-       }
-       
-       function sanitizeTagTypes(validTypes, typeParams){
-           typeParams = typeParams || [];
-           var validIds = _.map(validTypes, 'id') || [];
-           var intersection = _.intersection(typeParams, validIds) || [];
-           if(intersection.length < typeParams.length){
-               ParamService.updateURL({tag_type: intersection});
-           }
-           return intersection;
        }
        
        function sanitizeSpecId(specId){

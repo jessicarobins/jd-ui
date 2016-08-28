@@ -2,9 +2,15 @@ require('./api.service');
 require('./users.service');
 
 var jessdocs = require('jessdocs');
-jessdocs.service('$tagtypes', function($api, $q, $user) {
+jessdocs.service('$tagtypes', function(
+    $api, 
+    $q,
+    ParamService,
+    $user) {
+        
     var self = this;
     var callbacks = [];
+    var deleteCallbacks = [];
     
     self.tagGroups;
     
@@ -16,9 +22,19 @@ jessdocs.service('$tagtypes', function($api, $q, $user) {
         callbacks.push(callback);
     };
     
+    self.addDeleteCallback = function(callback) {
+      deleteCallbacks.push(callback);  
+    };
+    
     function notifyWatchers() {
         callbacks.forEach(function(callback) {
             callback();
+        });
+    }
+    
+    function notifyDeleted() {
+        deleteCallbacks.forEach( function(callback){
+           callback(); 
         });
     }
     
@@ -70,7 +86,7 @@ jessdocs.service('$tagtypes', function($api, $q, $user) {
         }).then( function(response){
             self.updateTagTypes().then( function(){
                 self.editingTagType = null;
-                // notifyWatchers();
+                notifyDeleted();
             });
         });
         
@@ -187,5 +203,15 @@ jessdocs.service('$tagtypes', function($api, $q, $user) {
             return self.tagGroups;
         });
         return promise;
+    };
+    
+    self.sanitizeTagTypes = function(typeParams, updateURL){
+       typeParams = typeParams || [];
+       var validIds = _.map(self.tagTypes.allTypes, 'id') || [];
+       var intersection = _.intersection(typeParams, validIds) || [];
+       if(intersection.length < typeParams.length && updateURL){
+           ParamService.updateURL({tag_type: intersection});
+       }
+       return intersection;
     };
 });

@@ -49,10 +49,19 @@ jessdocs.
         
         $tagtypes.getTagTypes().then( function(response){
             self.tag_type_groups = response.byGroup;
+            self.selected = $tagtypes.sanitizeTagTypes(self.selected, false);
         });
         
         $tagtypes.addCallback( function(){
             self.tag_type_groups = $tagtypes.tagTypes.byGroup;
+        });
+        
+        $tagtypes.addDeleteCallback( function(){
+          var santized = $tagtypes.sanitizeTagTypes(self.selected, true);
+            if (santized.length < self.selected.length){
+              self.selected = santized;
+              self.submit();
+            }
         });
         
         $user.addOrgCallback(self.clearCheckboxes);
