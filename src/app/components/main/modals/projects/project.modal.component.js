@@ -33,7 +33,8 @@ jessdocs.component('projectsModal', {
         };
         
         self.showDelete = function(){
-          return self.project && $projects.projects.length > 1;
+          // return self.project && $projects.projects.length > 1;
+          return false;
         };
         
         self.disableSave = function(){
