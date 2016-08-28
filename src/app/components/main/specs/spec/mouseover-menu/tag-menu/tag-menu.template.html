@@ -15,13 +15,14 @@
         placeholder="Search.."
         class="tag-search">
     </md-menu-item>
-    <div ng-repeat="group in $ctrl.tagTypesByGroup">
-      <md-subheader
+      <p
+        ng-repeat-start="group in $ctrl.tagTypesByGroup"
         class="tag-group"
         ng-if="$ctrl.showGroupName(group)"
         ng-bind="group.name">
-      </md-subheader>
+      </p>
       <md-menu-item
+        ng-repeat-end
         ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
         <md-button
           layout="row"
@@ -39,6 +40,5 @@
             </md-checkbox>
         </md-button>
       </md-menu-item>
-    </div>
   </md-menu-content>
 </md-menu>

@@ -8,9 +8,12 @@
     
     .tag-group {
         text-transform: uppercase;
-        background-color: inherit;
+        background-color: rgb(250,250,250);
+        margin: 0px;
+        color: rgba(0,0,0,0.54);
         text-align: right;
         padding: 10px 30px 10px 0px;
+        font-size: smaller;
     }
     
     md-checkbox {
