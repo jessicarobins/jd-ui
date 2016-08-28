@@ -79,11 +79,9 @@
                         <tag tag="tag_type"></tag>
                         <md-checkbox 
                             class="md-secondary"
-                            ng-change="$ctrl.toggle(tag_type.id)" 
-                            ng-model="$ctrl.formData.tag_types[tag_type.id]" 
-                            aria-label="select tag"
-                            ng-true-value="true"
-                            ng-false-value="false"></md-checkbox>
+                            ng-click="$ctrl.toggle(tag_type.id)" 
+                            ng-checked="$ctrl.checked(tag_type)"
+                            aria-label="select tag"></md-checkbox>
                     </md-list-item>
                 </div>
                 

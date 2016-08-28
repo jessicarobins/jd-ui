@@ -66,10 +66,6 @@ jessdocs.
         self.formData.commented = $stateParams.commented;
         
         self.selected = $stateParams.tag_type || [];
-        self.selected.forEach( function(tagId){
-            self.formData.tag_types[tagId] = true;
-        });
-        
       };
       
       self.clearCheckboxes = function(){
@@ -79,7 +75,6 @@ jessdocs.
         self.formData.commented = false;
         
         self.selected = [];
-        self.formData.tag_types = [];
       };
       
       
@@ -87,13 +82,15 @@ jessdocs.
         var idx = self.selected.indexOf(item);
         if (idx > -1) {
           self.selected.splice(idx, 1);
-          self.formData.tag_types[item] = false;
         }
         else {
           self.selected.push(item);
-          self.formData.tag_types[item] = true;
         }
         self.submit();
+      };
+      
+      self.checked = function(item) {
+        return _.includes(self.selected, item.id);
       };
       
       self.toggleTicketed = function(checkbox) {
