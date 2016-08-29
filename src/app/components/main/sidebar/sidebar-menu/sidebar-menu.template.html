@@ -97,6 +97,7 @@
         </md-tooltip>
     </md-button>
     <md-button
+        ng-if="$ctrl.showOrgSettings()"
         ng-click="$ctrl.setTab($ctrl.index.orgSettings)"
         class="md-icon-button"
         ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.orgSettings)}">

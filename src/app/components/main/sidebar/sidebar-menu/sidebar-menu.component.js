@@ -25,9 +25,16 @@ jessdocs.component('sidebarMenu', {
        };
        
        self.showOrgMenus = function(){
-           var personal = $user.currentOrg().name === 'Personal';
-           return !personal;  
+           return !personalOrg();  
        };
+       
+      self.showOrgSettings = function(){
+        return personalOrg() || self.admin;
+      };
+       
+      function personalOrg(){
+         return $user.currentOrg().name === 'Personal';
+      }
        
     }
 });
