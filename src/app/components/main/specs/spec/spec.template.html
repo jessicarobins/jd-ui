@@ -14,19 +14,20 @@
       ng-click="$ctrl.toggleExport()">
     </md-checkbox>
     <mouseover-menu 
+      class="mouseover-menu"
       flex='none'
       layout="row"
       ng-if="!$ctrl.parent.export"
       ng-style="{'visibility': $ctrl.spec.userMouseover?'visible':'hidden'}"
       spec="::$ctrl.spec"></mouseover-menu>
      <div
+      class="drag-handle"
       layout-wrap
       id="edit_{{::$ctrl.spec.id}}"
       click-outside="::$ctrl.clickOutside()"
       ng-dblClick="::$ctrl.edit()"
       layout="row"
-      layout-align="start center"
-      ui-tree-handle>
+      layout-align="start center">
         <div
           class="spec-description"
           ng-if="!$ctrl.spec.editing"
@@ -69,11 +70,12 @@
     </div>
   </div>
     
-    <ol ui-tree-nodes ng-model="$ctrl.spec.children">
-        <li ng-repeat="child in $ctrl.spec.children track by child.id" ui-tree-node>
+    <ol data-parent-id="{{$ctrl.spec.id}}">
+        <li
+          data-spec-id="{{child.id}}"
+          ng-repeat="child in $ctrl.spec.children track by child.id">
             <spec 
-                spec='child' 
-                ui-tree-callbacks="::$callbacks"></spec>
+                spec='child'></spec>
         </li>
     </ol>
 </div>

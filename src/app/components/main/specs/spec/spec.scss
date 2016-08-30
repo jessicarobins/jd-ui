@@ -1,13 +1,15 @@
 spec {
-    .angular-ui-tree-handle {
-        cursor: default;
-        font-weight: normal;
-        
-        &:focus {
-            outline: none;
-        }
+    cursor: default;
+    
+    &:focus {
+        outline: none;
     }
     
+    .dragged {
+        .mouseover-menu {
+            display: none;
+        }
+    }
     .edit-input {
         padding: 0px;
         margin: 0px;

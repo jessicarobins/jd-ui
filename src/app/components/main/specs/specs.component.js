@@ -7,6 +7,8 @@ require('./spec/spec.component');
 
 require('./specs.scss');
 
+require('../../../directives/sortable');
+
 var jessdocs = require('jessdocs');
 jessdocs.component('specs', {
     require: {
@@ -27,6 +29,28 @@ jessdocs.component('specs', {
         self.exportSpecs = [];
         
         self.dragging = false;
+        
+        self.sortableOpts = {
+          handle: '.drag-handle',
+          containerPath: '> spec > div',
+          delay: 500,
+          onDragStart: function($item, container, _super) {
+            self.dragging = true;
+            _super($item, container);
+          },
+          onDrop: function($item, container, _super) {
+            self.dragging = false;
+            var newIndex = $item.index();
+            var specId = $item.attr('data-spec-id');
+            var parentId = container.el.attr('data-parent-id');
+            var prevId;
+            if (newIndex > 0) {
+                prevId = $item.prev().attr('data-spec-id');
+            }
+            $specs.move(specId, parentId, prevId);
+            _super($item, container);
+          }
+        };
         
         self.treeOpts = {
             beforeDrop : function (e) {
