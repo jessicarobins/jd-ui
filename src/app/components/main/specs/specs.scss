@@ -21,10 +21,6 @@ specs {
         display: none;
     }
     
-    body.dragging, body.dragging * {
-      cursor: move !important;
-    }
-    
     .dragged {
       position: absolute;
       opacity: 0.5;
@@ -33,18 +29,15 @@ specs {
     
     ol.sortable li.placeholder {
       position: relative;
+      background: #EDE7F6;
+      border: 2px dashed #B39DDB;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 600px;
+      height: 30px;
+      padding-top: 5px;
+      margin-left: 30px;
     }
-    ol.sortable li.placeholder:before {
-      position: absolute;
-      content: "";
-      width: 0;
-      height: 0;
-      margin-top: -8px;
-      left: -8px;
-      top: -1px;
-      border: 8px solid transparent;
-      border-left-color: #512da8;
-      border-right: none;
-      z-index: 2000;
-    }
+    
 }

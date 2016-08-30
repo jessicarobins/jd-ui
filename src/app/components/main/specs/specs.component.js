@@ -40,6 +40,7 @@ jessdocs.component('specs', {
           },
           onDrop: function($item, container, _super) {
             self.dragging = false;
+            var newIndex = $item.index();
             var specId = $item.attr('data-spec-id');
             var parentId = container.el.attr('data-parent-id');
             var prevId;
