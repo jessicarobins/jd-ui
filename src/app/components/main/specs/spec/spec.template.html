@@ -70,8 +70,10 @@
     </div>
   </div>
     
-    <ol>
-        <li ng-repeat="child in $ctrl.spec.children track by child.id">
+    <ol data-parent-id="{{$ctrl.spec.id}}">
+        <li
+          data-spec-id="{{child.id}}"
+          ng-repeat="child in $ctrl.spec.children track by child.id">
             <spec 
                 spec='child'></spec>
         </li>

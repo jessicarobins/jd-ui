@@ -40,18 +40,13 @@ jessdocs.component('specs', {
           },
           onDrop: function($item, container, _super) {
             self.dragging = false;
-            var newIndex = $item.index();
-                
-            var parent_id = $item.closest('ul').attr('data-parent');
-            // var spec_id = $item.attr('data-spec-id');
-            
-            // var project_id = $item.attr('data-project-id');
-            var prev_id;
-            
+            var specId = $item.attr('data-spec-id');
+            var parentId = container.el.attr('data-parent-id');
+            var prevId;
             if (newIndex > 0) {
-                prev_id = $item.prev().attr('data-spec-id');
+                prevId = $item.prev().attr('data-spec-id');
             }
-            
+            $specs.move(specId, parentId, prevId);
             _super($item, container);
           }
         };
