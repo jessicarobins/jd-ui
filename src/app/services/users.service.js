@@ -1,5 +1,10 @@
 var jessdocs = require('jessdocs');
-jessdocs.service('$user', function($q, $state, $auth, $api, ParamService) {
+jessdocs.service('$user', function(
+    $q, 
+    $auth, 
+    $api, 
+    MenuService,
+    ParamService) {
     
     var self = this;
     
@@ -84,6 +89,7 @@ jessdocs.service('$user', function($q, $state, $auth, $api, ParamService) {
         currentOrganization = org;
         
         currentRole = _.find(currentUser.roles, {'resource_id': org.id});
+        MenuService.exporting(false);
         notifyWatchers();
     };
     
