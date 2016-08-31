@@ -5,12 +5,16 @@
       <md-icon class="material-icons">
             label
         </md-icon>
-        Tag types
+        Tags
       </p>
     </md-subheader>
     <md-list 
       class="md-dense"
       layout-padding>
+      <md-list-item
+        ng-if="!$ctrl.tagTypes.length">
+        <p class="no-items">You have no active tags.</p>
+      </md-list-item>
       <section ng-repeat="tag_type_group in $ctrl.tagTypes">
         <md-subheader 
           layout="row"
@@ -64,11 +68,6 @@
           </md-icon>
         </md-list-item>
       </section>
-      
-      <md-list-item
-        ng-if="!$ctrl.tagTypes.length">
-        <p class="no-items">You have no tag types.</p>
-      </md-list-item>
     </md-list>
   </div>
   <div layout="column" flex='10' layout-align="center stretch">
