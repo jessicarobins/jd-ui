@@ -4,22 +4,23 @@
         
         <md-list
             ng-repeat="group in $ctrl.tagTypesByGroup">
-            <md-subheader
+            <p class="tag-group"
                 ng-if="$ctrl.showGroupName(group)"
                 ng-bind="group.name">
-            </md-subheader>
+            </p>
             <md-list-item
+                ng-repeat="tagType in group.tag_types | filter:$ctrl.search"
                 ng-click="$ctrl.toggleTag(tagType.id)"
-                aria-label="toggle tag"
-                ng-repeat="tagType in group.tag_types | filter:$ctrl.search">
-                <tag tag="tagType"></tag>
-                <md-checkbox 
-                  class="md-secondary"
-                  ng-model="$ctrl.formData.tagTypes[tagType.id]"
-                  aria-label="select tag"
-                  ng-true-value="true"
-                  ng-false-value="false">
-                </md-checkbox>
+                aria-label="toggle tag">
+                    <tag tag="tagType"></tag>
+                    <md-checkbox 
+                      ng-click="$ctrl.toggleTag(tagType.id)"
+                      class="md-secondary"
+                      ng-model="$ctrl.formData.tagTypes[tagType.id]"
+                      aria-label="select tag"
+                      ng-true-value="true"
+                      ng-false-value="false">
+                    </md-checkbox>
             </md-list-item>
         </md-list>
     </jd-modal-body>
