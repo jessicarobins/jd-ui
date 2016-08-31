@@ -23,7 +23,11 @@ jessdocs.component('addSpecsModal', {
         self.projects;
         self.formData = {};
         
-        self.textareaPlaceholder = 'Add new specs here\n\tAdd children by hitting tab';
+        self.textareaPlaceholder = 
+          'Add new specs here\n' +
+          '\tAdd children by hitting tab\n' +
+          '\t\tYou can also add tags #tag name #another tag name\n' +
+          '\tAnd tickets too #ticket #tag name #ticket';
         
         self.$onInit = function() {
             $projects.getProjects().then( function(response) {
