@@ -8,7 +8,12 @@
   <md-menu-content 
     class="tag-menu"
     width="2">
-    <md-menu-item>
+    <md-menu-item
+      ng-show="!$ctrl.tagTypesByGroup.length">
+      <p>You have no tags.</p>
+    </md-menu-item>
+    <md-menu-item
+      ng-show="$ctrl.tagTypesByGroup.length">
       <input 
         ng-model="$ctrl.search"
         type="search"
