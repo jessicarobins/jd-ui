@@ -1,8 +1,12 @@
 <jd-modal layout="column" class="tags-modal">
     <jd-modal-title>tags</jd-modal-title>
     <jd-modal-body layout="column">
-        
+        <p class="no-tags"
+            ng-if="!$ctrl.tagTypesByGroup.length">
+            You have no tags.
+        </p>
         <md-list
+            ng-if="$ctrl.tagTypesByGroup.length"
             ng-repeat="group in $ctrl.tagTypesByGroup">
             <p class="tag-group"
                 ng-if="$ctrl.showGroupName(group)"
