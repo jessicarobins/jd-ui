@@ -18,6 +18,7 @@ jessdocs.
       $tagtypes,
       $user,
       ParamService,
+      spinnerService,
       $stateParams,
       BreadcrumbsService) {
         
@@ -124,6 +125,7 @@ jessdocs.
       };
         
       self.submit = function() {
+        spinnerService.show('spinner');
         ParamService.updateURL({
           projectId: self.formData.project.id,
           ticketed: self.ticketed,
@@ -138,7 +140,9 @@ jessdocs.
           id: $specs.filterParams.id
         };
         
-        $specs.setSpecList(params);
+        $specs.setSpecList(params).then(function(){
+          spinnerService.hide('spinner');
+        });
         
         
       };
