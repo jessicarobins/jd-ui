@@ -26,6 +26,7 @@ jessdocs.component('main', {
         $specs,
         $user,
         $tagtypes,
+        spinnerService,
         $state,
         $stateParams) {
        var self = this;
@@ -53,10 +54,13 @@ jessdocs.component('main', {
                 return tagTypes;
             }).then( function(response){
                 var params = ParamService.parseParamsFromURL(project.id, response);
-                $specs.setSpecList(params);
+                return $specs.setSpecList(params);
+            }).finally( function(){
+              spinnerService.hide('spinner');
             });
             
             $user.addOrgCallback( function(){
+              spinnerService.show('spinner');
                 $tagtypes.updateGroups();
                 $tagtypes.updateTagTypes();
                 BreadcrumbsService.clearBreadcrumbs();
@@ -66,7 +70,9 @@ jessdocs.component('main', {
                }).then( function(projects){
                    ParamService.changeOrg($user.currentOrg().id, $projects.project().id);
                    self.canWrite = $user.write(); 
-                   $specs.setSpecList({project_id: $projects.project().id});
+                   return $specs.setSpecList({project_id: $projects.project().id});
+               }).finally ( function(){
+                 spinnerService.hide('spinner');
                });
                
             });
