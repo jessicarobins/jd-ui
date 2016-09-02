@@ -160,7 +160,9 @@ jessdocs.service('$specs', function($mdToast, ParamService, $api, $q, $user, $pr
     };
     
     self.add = function(parentId, projectId, text) {
-        $api.request({
+        var addResponse;
+        
+        return $api.request({
             url: '/specs/create_many',
             method: 'POST',
             data: {
@@ -169,16 +171,18 @@ jessdocs.service('$specs', function($mdToast, ParamService, $api, $q, $user, $pr
                 project_id: projectId
             }
         }).then( function(response){
-            var message = response.specs_created + ' specs created, ' 
-                + response.errors + ' errors';
+            addResponse = response;
+            return self.setSpecList();
+        }).then(function(){
+            updateAll();
+            var message = addResponse.specs_created + ' specs created, ' 
+                + addResponse.errors + ' errors';
             $mdToast.show(
                 $mdToast.simple()
                 .textContent(message)
                 .position('top right')
             );
-            self.setSpecList().then( function(){
-               updateAll();
-            });
+            return;
         });
     };
     

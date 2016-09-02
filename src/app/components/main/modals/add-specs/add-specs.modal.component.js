@@ -15,7 +15,13 @@ jessdocs.component('addSpecsModal', {
         spec: '<?',
     },
      template: require('./add-specs.modal.template.html'),
-     controller: function($scope, $mdDialog, $api, $projects, $specs, $user) {
+     controller: function(
+       spinnerService,
+       $mdDialog, 
+       $api, 
+       $projects, 
+       $specs, 
+       $user) {
              
         var self = this;
         self.text = '';
@@ -37,9 +43,13 @@ jessdocs.component('addSpecsModal', {
         };
         
         self.add = function() {
-            var parentId = self.spec ? self.spec.id : null;
-            $specs.add(parentId, self.formData.project, self.text);
-            $mdDialog.hide();
+          spinnerService.show('spinner');
+          var parentId = self.spec ? self.spec.id : null;
+          $mdDialog.hide();
+          $specs.add(parentId, self.formData.project, self.text).then( function(){
+            spinnerService.hide('spinner');
+          });
+            
         };
         
     }
