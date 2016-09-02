@@ -7,6 +7,7 @@ require('angular-material');
 require('angular-messages');
 require('angular-resource');
 require('angular-sanitize');
+require('angular-spinners');
 require('angular-ui-router');
 require('md-color-picker');
 require('ng-focus-if');
@@ -25,6 +26,7 @@ var jessdocModule = angular.module('jessdocs', [
   'ngAria', 
   'ngResource', 
   'angular-click-outside',
+  'angularSpinners',
   'focus-if',
   'ngclipboard',
   'puElasticInput',

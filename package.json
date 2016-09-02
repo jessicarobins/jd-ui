@@ -12,6 +12,7 @@
     "angular-messages": "~1.5.5",
     "angular-resource": "~1.5.5",
     "angular-sanitize": "~1.5.5",
+    "angular-spinners": "^3.1.2",
     "angular-ui-router": "~1.0.0-beta.1",
     "animate.css": "~3.4.0",
     "jquery": "~2.1.4",
