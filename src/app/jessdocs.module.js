@@ -30,11 +30,8 @@ var jessdocModule = angular.module('jessdocs', [
   'ngAria', 
   'ngResource', 
   'angular-click-outside',
-<<<<<<< a36350c8addff472729f8476d48894eace985d70
   'angularSpinners',
-=======
   'angular-intro',
->>>>>>> this is way more trouble than it's worth
   'focus-if',
   'ngclipboard',
   'puElasticInput',

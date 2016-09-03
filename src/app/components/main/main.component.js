@@ -51,14 +51,34 @@ jessdocs.component('main', {
               position: 'auto'
             },
             {
-              element: '#specList',
-              intro: "view your specs in the main panel." + 
-                "double click a spec to edit it. mouseover a spec" +
-                "to see the menu button, which you can click to" +
+              element: '#spec-list',
+              intro: "view your specs in the main panel.",
+              position: 'auto'
+            },
+            {
+              element: '#spec',
+              intro: "double click a spec to edit it.\nmouseover a spec " +
+                "to see the menu button, which you can click to " +
                 "add children, tags, and comments",
               position: 'auto'
             }
           ]
+        };
+        
+        self.reloadIntroElems = function(){
+          
+          var intro = this;
+          
+          for (var i = intro._currentStep+1; i < this._options.steps.length; i++) {
+            var currentItem = intro._introItems[i];
+            var step = intro._options.steps[i];
+            if (step.element) {
+              currentItem.element = document.querySelector(step.element);
+              currentItem.position = step.position;
+            }
+          }
+          
+          
         };
         
        self.$onInit = function(){
@@ -84,8 +104,10 @@ jessdocs.component('main', {
             }).then( function(response){
                 var params = ParamService.parseParamsFromURL(project.id, response);
                 return $specs.setSpecList(params);
-            }).finally( function(){
+            }).finally( function(specs){
+              self.specs = specs;
               spinnerService.hide('spinner');
+              self.startTour();
             });
             
             $user.addOrgCallback( function(){

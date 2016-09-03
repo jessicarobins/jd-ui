@@ -13,8 +13,7 @@ jessdocs.component('spec', {
         parent: '^^specs'
     },
     bindings: {
-        spec: '<',
-        uiTreeCallbacks: '='
+        spec: '<'
     },
     template: require('./spec.template.html'),
     controller: function(
