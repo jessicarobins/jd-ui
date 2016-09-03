@@ -28,7 +28,6 @@ jessdocs.
       self.selected = [];
       self.ticketed = false;
       self.commented = false;
-      self.formData.tag_types = [];
       
       self.$onInit = function() {
         
@@ -69,19 +68,13 @@ jessdocs.
       
       self.initCheckboxes = function(){
         self.ticketed = $stateParams.ticketed;
-        self.formData.ticketed = $stateParams.ticketed;
         self.commented = $stateParams.commented;
-        self.formData.commented = $stateParams.commented;
-        
         self.selected = $stateParams.tag_type || [];
       };
       
       self.clearCheckboxes = function(){
         self.ticketed = false;
-        self.formData.ticketed = false;
         self.commented = false;
-        self.formData.commented = false;
-        
         self.selected = [];
       };
       
@@ -101,18 +94,12 @@ jessdocs.
         return _.includes(self.selected, item.id);
       };
       
-      self.toggleTicketed = function(checkbox) {
-        if(!checkbox){
-          self.formData.ticketed = !self.formData.ticketed;
-        }
+      self.toggleTicketed = function() {
         self.ticketed = !self.ticketed;
         self.submit();
       };
       
-      self.toggleCommented = function(checkbox) {
-        if(!checkbox){
-          self.formData.commented = !self.formData.commented;
-        }
+      self.toggleCommented = function() {
         self.commented = !self.commented;
         self.submit();
       };
