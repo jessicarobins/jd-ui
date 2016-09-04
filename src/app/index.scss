@@ -1,3 +1,5 @@
+@import '~angular-material/angular-material.scss';
+
 .truncate {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -45,4 +47,39 @@ body {
 
 md-tooltip {
     font-size: 16px !important;
+}
+
+.introjs-tooltip {
+    max-width: 500px;
+    
+    .usage {
+        width: 400px;
+    }
+    
+    .md-headline {
+        &.welcome {
+            text-align: center;
+            font-weight: bold;
+        }
+        color: #673AB7;
+    }
+    
+    md-content {
+        background-color: white;
+    }
+    
+    .introjs-skipbutton, .introjs-prevbutton, .introjs-hidden {
+        display: none;
+    }
+    
+    .introjs-button {
+        @extend .md-button;
+        @extend .md-raised;
+        
+        background-color: #673AB7;
+        color: white;
+        text-shadow: none;
+    }
+    
+    border-radius: 0px;
 }

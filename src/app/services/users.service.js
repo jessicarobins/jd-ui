@@ -47,6 +47,13 @@ jessdocs.service('$user', function(
         });
     };
     
+    self.toggleIntroOff = function(){
+      $api.request({
+        url: '/user_settings/toggle_intro_off',
+        method: 'PUT'
+      });
+    };
+    
     self.favorite = function(name){
        return _.includes(self.favorites(), name);
    };

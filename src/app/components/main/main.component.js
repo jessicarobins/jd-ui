@@ -36,31 +36,66 @@ jessdocs.component('main', {
           showStepNumbers: false,
           showBullets: false,
           showProgress: false,
+          nextLabel: 'next',
+          hideNext: true,
+          tooltipPosition: 'auto',
+          disableInteraction: true,
           steps:[
             {
-              intro: 'welcome to jessdocs'
+              intro: require('./introjs/welcome.html')
+            },
+            {
+              intro: require('./introjs/usage.html')
             },
             {
               element: '#fab',
-              intro: "click the 'add specs' button to add your first specs",
+              intro: "Click the + button to add your first specs.",
+              position: 'auto'
+            },
+            {
+              element: '#filterPanel',
+              intro: "Filtering is the default selected panel. Filtering by a tag " +
+                "will display all specs that have that tag, as well as all parents and children of that spec. " +
+                "You can also filter by specs that have tickets or comments associated with them.",
               position: 'auto'
             },
             {
               element: '#sidebarMenu',
-              intro: "filter your specs, and add projects, tags, and tag groups via the sidebar menu",
+              intro: "Change the panel content using the sidebar menu.",
               position: 'auto'
             },
             {
+              element: '#sidebarBookmarks',
+              intro: "Easily navigate back to a particular tree in the test suite using bookmarks.",
+            },
+            {
+              element: '#sidebarTags',
+              intro: "Add, remove, and update your tags using this panel.",
+            },
+            {
+              element: '#sidebarGroups',
+              intro: "Add groups to logically organize your tags (e.g., RC10 features)",
+            },
+            {
+              element: '#sidebarProjects',
+              intro: "Separate groups of self-contained test suites by creating projects.",
+            },
+            {
               element: '#spec-list',
-              intro: "view your specs in the main panel.",
+              intro: "View your specs in the main panel.",
               position: 'auto'
             },
             {
               element: '#spec',
-              intro: "double click a spec to edit it.\nmouseover a spec " +
+              intro: "Double click a spec to edit it.<br/>" + 
+                "Drag and drop to reorder. <br>" +
+                "Mouseover a spec " +
                 "to see the menu button, which you can click to " +
                 "add children, tags, and comments",
               position: 'auto'
+            },
+            {
+              intro: "<p class='md-headline welcome'>And much more!</p>",
             }
           ]
         };
@@ -77,8 +112,10 @@ jessdocs.component('main', {
               currentItem.position = step.position;
             }
           }
-          
-          
+        };
+        
+        self.toggleIntroOff = function(){
+          $user.toggleIntroOff();
         };
         
        self.$onInit = function(){
@@ -107,7 +144,9 @@ jessdocs.component('main', {
             }).finally( function(specs){
               self.specs = specs;
               spinnerService.hide('spinner');
-              self.startTour();
+              if($user.user().user_setting.show_intro){
+                self.startTour();
+              }
             });
             
             $user.addOrgCallback( function(){

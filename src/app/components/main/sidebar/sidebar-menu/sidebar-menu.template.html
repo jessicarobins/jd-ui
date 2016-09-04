@@ -14,6 +14,7 @@
         </md-tooltip>
     </md-button>
     <md-button
+        id="sidebarBookmarks"
         ng-click="$ctrl.setTab($ctrl.index.bookmarks)"
         class="md-icon-button"
         ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.bookmarks)}">
@@ -29,6 +30,7 @@
         build
     </md-icon>
     <md-button
+        id="sidebarTags"
         ng-click="$ctrl.setTab($ctrl.index.tags)"
         class="md-icon-button"
         ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.tags)}">
@@ -40,6 +42,7 @@
         </md-tooltip>
     </md-button>
     <md-button
+        id="sidebarGroups"
         ng-click="$ctrl.setTab($ctrl.index.groups)"
         class="md-icon-button"
         ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.groups)}">
@@ -51,6 +54,7 @@
         </md-tooltip>
     </md-button>
     <md-button
+        id="sidebarProjects"
         ng-click="$ctrl.setTab($ctrl.index.projects)"
         class="md-icon-button"
         ng-class="{'md-accent': $ctrl.currentTab($ctrl.index.projects)}">
