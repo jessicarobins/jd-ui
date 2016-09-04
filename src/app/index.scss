@@ -52,6 +52,11 @@ md-tooltip {
 .introjs-tooltip {
     max-width: 500px;
     
+    img {
+        height: 273px;
+        width: 273px;
+    }
+    
     .usage {
         width: 400px;
     }
