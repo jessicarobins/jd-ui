@@ -86,7 +86,7 @@ class Spec {
       this.parent.toggleExport(this.spec);
   };
   
-  checked = function(){
+  checked(){
       return this.parent.checked(this.spec);
   };
 }
