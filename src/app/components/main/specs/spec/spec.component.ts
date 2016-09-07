@@ -7,6 +7,90 @@ require('./mouseover-menu/menu.component');
 
 require('./spec.scss');
 
+class Spec {
+  constructor(
+    private $api,
+    private $specs,
+    private $tagtypes
+  ){}
+  
+  spec: any;
+  editingCopy: any;
+  parent: any;
+  tag: any[];
+  ticket: any[];
+       
+  $onInit(){
+    this.tag = this.tag || [];  
+    this.ticket = this.ticket || [];
+  };
+        
+  toggleMouseover(){
+    //if we aren't dragging
+    if(this.parent.dragging == false){
+        this.spec.userMouseover = true;
+    }
+  };
+        
+  edit(){
+    this.editingCopy = angular.copy(this.spec);
+    this.spec.editing = true;
+    this.spec.userMouseover = false;
+  };
+        
+  undoEdit(){
+    this.editingCopy = angular.copy(this.spec);
+    this.spec.editing = false; 
+  };
+        
+  clickOutside(){
+      if (this.editingCopy){
+          this.save();
+      }
+  };
+  
+  enter(ev){
+    if (ev.which === 13){
+      this.save();
+    }
+  };
+        
+  removeTag(tag){
+    //remove tag
+    if(tag.color){
+      this.$specs.removeTag(tag, this.spec);
+      _.pull(this.spec.tag_types, tag);
+    }
+    //remove ticket
+    else {
+      this.$specs.removeTicket(tag);
+      _.pull(this.spec.tickets, tag);
+    }
+  };
+        
+  hasTag(tagTypeId){
+    return _.find(this.tag, {id: tagTypeId});
+  };
+        
+  save(){
+      this.spec.editing = false;
+      this.spec.userMouseover = false;
+      if(!angular.equals(this.editingCopy.description, this.spec.description)){
+          this.spec.description = this.editingCopy.description;
+          this.$specs.editDescription(this.spec);
+      }
+      this.editingCopy = null;
+  };
+        
+  toggleExport() {
+      this.parent.toggleExport(this.spec);
+  };
+  
+  checked = function(){
+      return this.parent.checked(this.spec);
+  };
+}
+
 var jessdocs = require('jessdocs');
 jessdocs.component('spec', {
     require: {
@@ -16,100 +100,5 @@ jessdocs.component('spec', {
         spec: '<'
     },
     template: require('./spec.template.html'),
-    controller: function(
-        $scope, 
-        $api,
-        $location,
-        $tagtypes, 
-        $specs) {
-            
-       var self = this;
-       
-       //editing
-       self.editingCopy;
-       
-       self.tags;
-       
-       $scope.$callbacks = self.uiTreeCallbacks;
-       
-       self.$onInit = function(){
-            self.tag = self.tag || [];  
-            self.ticket = self.ticket || [];
-            self.tags = self.ticket.concat(self.tag);
-       };
-        
-        self.toggleMouseover = function(){
-            //if we aren't dragging
-            if(self.parent.dragging == false){
-                self.spec.userMouseover = true;
-            }
-        };
-        
-        self.edit = function(){
-            self.editingCopy = angular.copy(self.spec);
-            self.spec.editing = true;
-            self.spec.userMouseover = false;
-        };
-        
-        self.undoEdit = function(){
-            self.editingCopy = angular.copy(self.spec);
-            self.spec.editing = false; 
-        };
-        
-        self.clickOutside = function(){
-            if (self.editingCopy){
-                save();
-            }
-        };
-        
-        self.enter = function(ev){
-            if (ev.which === 13){
-                save();
-            }
-        };
-        
-        self.removeTag = function(tag){
-            //remove tag
-            if(tag.color){
-                $specs.removeTag(tag, self.spec);
-                _.pull(self.spec.tag_types, tag);
-            }
-            //remove ticket
-            else {
-                $specs.removeTicket(tag);
-                _.pull(self.spec.tickets, tag);
-            }
-            // var idx = self.tags.indexOf(tag);
-            // self.tags.splice(idx, 1);
-        };
-        
-        self.hasTag = function(tagTypeId){
-            var i=0, len=self.tags.length;
-            for (; i<len; i++) {
-                if (self.tags[i].tag_type && (+self.tags[i].tag_type.id == +tagTypeId)) {
-                  return self.tags[i];
-                }
-            }
-            return null; 
-        };
-        
-        function save(){
-            self.spec.editing = false;
-            self.spec.userMouseover = false;
-            if(!angular.equals(self.editingCopy.description, self.spec.description)){
-                self.spec.description = self.editingCopy.description;
-                $specs.editDescription(self.spec);
-            }
-            self.editingCopy = null;
-        };
-        
-        self.toggleExport = function() {
-            self.parent.toggleExport(self.spec);
-        };
-        
-        self.checked = function(){
-            return self.parent.checked(self.spec);
-        };
-        
-    }
+    controller: Spec
 });

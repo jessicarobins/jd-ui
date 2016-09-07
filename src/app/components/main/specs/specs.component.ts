@@ -13,8 +13,6 @@ var jessdocs = require('jessdocs');
 
 class Specs {
   constructor(
-    private $anchorScroll,
-    private $location,
     private $q,
     private $api,
     private $specs,
@@ -37,22 +35,8 @@ class Specs {
       handle: '.drag-handle',
       containerPath: '> spec > div',
       delay: 500,
-      onDragStart: function($item, container, _super) {
-        this.dragging = true;
-        _super($item, container);
-      },
-      onDrop: function($item, container, _super) {
-        this.dragging = false;
-        var newIndex = $item.index();
-        var specId = $item.attr('data-spec-id');
-        var parentId = container.el.attr('data-parent-id');
-        var prevId;
-        if (newIndex > 0) {
-            prevId = $item.prev().attr('data-spec-id');
-        }
-        this.$specs.move(specId, parentId, prevId);
-        _super($item, container);
-      }
+      onDragStart: this.onDragStart,
+      onDrop: this.onDrop
     };
     
      this.MenuService.addExportCallback(this.exportCallback);
@@ -60,6 +44,24 @@ class Specs {
      this.setSpecList()
      this.$specs.addCallback(this.setSpecList);
         
+  };
+  
+  onDragStart = ($item, container, _super) => {
+    this.dragging = true;
+    _super($item, container);
+  }
+  
+  onDrop = ($item, container, _super) => {
+    this.dragging = false;
+    let newIndex = $item.index();
+    let specId = $item.attr('data-spec-id');
+    let parentId = container.el.attr('data-parent-id');
+    let prevId;
+    if (newIndex > 0) {
+        prevId = $item.prev().attr('data-spec-id');
+    }
+    this.$specs.move(specId, parentId, prevId);
+    _super($item, container);
   };
   
   setSpecList = () => {
