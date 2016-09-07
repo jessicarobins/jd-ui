@@ -12,7 +12,9 @@ module.exports = {
     loaders: [
       { test: require.resolve('angular'),
         loader: 'exports?window.angular'
-      },
+      },{
+        test: /\.ts$/, 
+        loader: 'ts-loader' },
       { test: /\.js$/, 
         exclude: /node_modules/,
         loaders: ['ng-annotate', 'babel-loader?presets[]=es2015']},
@@ -32,7 +34,8 @@ module.exports = {
   resolve: {
     alias: {
       'jessdocs': __dirname + '/src/app/jessdocs.module'
-    }
+    },
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   plugins: [
     new webpack.DefinePlugin({

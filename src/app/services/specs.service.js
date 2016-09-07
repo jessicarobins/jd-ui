@@ -16,6 +16,10 @@ jessdocs.service('$specs', function($mdToast, ParamService, $api, $q, $user, $pr
       callbacks = [];
     };
     
+    self.specList = function(){
+        return self.specs;
+    };
+    
     self.addCallback = function(callback) {
         callbacks.push(callback);
     };
