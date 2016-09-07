@@ -24,7 +24,6 @@ class Specs {
   // var this = this;
   export: boolean;
   dragging: boolean;
-  addChildren: boolean;
   exportSpecs: number[];
   spec: any;
   sortableOpts:any;
@@ -56,8 +55,6 @@ class Specs {
       }
     };
     
-     this.MenuService.addCallback(this.menuServiceCallback);
-     
      this.MenuService.addExportCallback(this.exportCallback);
      
      this.setSpecList()
@@ -69,13 +66,7 @@ class Specs {
     this.spec = this.$specs.specList();
   }
   
-  menuServiceCallback(){
-    this.addChildren = this.MenuService.addChildren;
-    this.$location.hash('bottom');
-    this.$anchorScroll();
-  }
-  
-  exportCallback(){
+  exportCallback = () => {
     this.export = this.MenuService.export;
     if( this.export === false ){
       this.MenuService.exportSpecs = this.exportSpecs;
