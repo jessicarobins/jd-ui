@@ -3,33 +3,37 @@ require('../../../../services/specs.service');
 var React = require('react');
 var SpecComponent = React.createClass({
   getInitialState: function() {
-    return {editing: false};
+    return {description: this.props.spec.description};
   },
-  handleSubmit: function(e) {
+  handleDescriptionChange: function(e) {
+    this.setState({description: e.target.value});
+  },
+  submitEdit: function(e) {
     e.preventDefault();
-    
+    this.props.saveEditCallback(this.props.spec, this.state.description);
   },
   toggleEdit: function(e){
-    this.state.editing = !this.state.editing;
+    this.props.toggleEditCallback(this.props.spec);
   },
   render: function() {
     var jessdocs = angular.element('body').injector();
     var $specs = jessdocs.get('$specs');
     
     var spec;
-    if (this.state.editing){
+    if (this.props.spec.editing){
       spec = 
-        <form className="specEditForm">
+        <form className="specEditForm" onSubmit={this.submitEdit}>
           <input
             type="text"
-            value={this.props.spec.description}
+            value={this.state.description}
+            onChange={this.handleDescriptionChange}
             aria-label="edit spec description"
             required />
         </form>
     } else {
       spec = 
-        <p onClick={this.toggleEdit}>
-          {this.props.spec.description}</p> 
+        <span onDoubleClick={this.toggleEdit}>
+          {this.props.spec.description}</span> 
     }
     
     return spec;

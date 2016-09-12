@@ -28,7 +28,7 @@ jessdocs.component('specs', {
         
         self.export = false;
         self.exportSpecs = [];
-        
+        self.editingSpec;
         self.dragging = false;
         
         self.sortableOpts = {
@@ -145,6 +145,23 @@ jessdocs.component('specs', {
         self.checked = function(spec){
             return _.includes(self.exportSpecs, spec);
         }
+        
+      self.toggleEdit = (spec) => {
+        if(self.editingSpec){
+          self.editingSpec.editing = false;
+        }
+        self.editingSpec = spec;
+        spec.editing = true;
+        spec.userMouseover = false;
+      };
+      
+      self.saveEdit = (spec, description) => {
+        if(spec.description !== description){
+          spec.description = description;
+          $specs.editDescription(spec);
+        }
+        spec.editing = false;
+      }
        
      }
 });

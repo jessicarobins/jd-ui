@@ -2,8 +2,9 @@ specs {
     
     overflow-y: scroll;
     
-    ol {
+    ul {
         list-style-type: none;
+        margin: 0px;
     }
     
     .angular-ui-tree-placeholder {
