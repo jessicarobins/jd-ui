@@ -7,16 +7,9 @@
     ng-if="$ctrl.spec.length">
     <a id="top"></a>
     
-    <div flex id="spec-list">
-      <ol data-parent-id="" sortable="$ctrl.sortableOpts" class="sortable">
-        <li 
-          data-spec-id="{{spec.id}}"
-          ng-repeat="spec in $ctrl.spec track by spec.id">
-          <spec spec="spec"></spec>
-        </li>
-      </ol>
-    </div>
-    <a id="bottom"></a>
+    
+    <react-component name="SpecListComponent" props="{specs: $ctrl.spec}" watch-depth="collection"/>
+    
 </section>
 <section
     layout="row"

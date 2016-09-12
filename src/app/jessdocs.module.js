@@ -12,6 +12,10 @@ require('angular-spinners');
 require('angular-ui-router');
 require('intro.js');
 
+require('react');
+require('react-dom');
+require('ngreact');
+
 require('md-color-picker');
 require('ng-focus-if');
 require('ng-token-auth');
@@ -34,6 +38,7 @@ var jessdocModule = angular.module('jessdocs', [
   'angular-intro',
   'focus-if',
   'ngclipboard',
+  'react',
   'puElasticInput',
   'ui.router', 
   'ngMaterial',

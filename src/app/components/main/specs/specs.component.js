@@ -4,6 +4,7 @@ require('../../../services/menu.service');
 
 require('./breadcrumbs/breadcrumbs.component');
 require('./spec/spec.component');
+require('./specs2.component.jsx');
 
 require('./specs.scss');
 
