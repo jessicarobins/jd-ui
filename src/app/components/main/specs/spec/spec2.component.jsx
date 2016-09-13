@@ -1,6 +1,8 @@
 require('../../../../services/specs.service');
+var MenuComponent = require('./react-menu/menu.jsx');
 
-var React = require('react');
+import React from 'react';
+
 var SpecComponent = React.createClass({
   getInitialState: function() {
     return {description: this.props.spec.description};
@@ -32,8 +34,13 @@ var SpecComponent = React.createClass({
         </form>
     } else {
       spec = 
-        <span onDoubleClick={this.toggleEdit}>
-          {this.props.spec.description}</span> 
+        <div className="row">
+          <MenuComponent
+            menuOptions={this.props.menuOptions}
+            spec={this.props.spec}></MenuComponent>
+          <span onDoubleClick={this.toggleEdit}>
+            {this.props.spec.description}</span>
+        </div>
     }
     
     return spec;

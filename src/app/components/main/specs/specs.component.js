@@ -20,8 +20,10 @@ jessdocs.component('specs', {
         $anchorScroll,
         $location,
         $q, 
-        $scope, 
+        $mdDialog,
         $api,
+        BreadcrumbsService,
+        $user,
         $specs,
         MenuService) {
         var self = this;
@@ -52,45 +54,6 @@ jessdocs.component('specs', {
             _super($item, container);
           }
         };
-        
-        self.treeOpts = {
-            beforeDrop : function (e) {
-                return true;
-            },
-            beforeDrag: function(sourceNodeScope){
-                self.dragging = true;
-                return true;
-            },
-            dropped: function(e){
-                console.log('drag event', e)
-                parseMove(e);
-                //spec id: e.source.nodeScope.$modelValue.id
-                //need parent
-                //parent spec id: e.dest.nodeScope.$parent.$ctrl.spec.id)
-                //need prev sibling
-                //dropped index (relative to parent):
-                //e.dest.index
-                //value of previous sibling
-                //e.dest.nodeScope.$modelValue[index-1].id
-                return true;
-            }
-        };
-        
-        function parseMove(e){
-            self.dragging = false;  
-            var specId = e.source.nodeScope.$modelValue.id;
-            var newIndex = e.dest.index;
-            var siblingId;
-            if(newIndex > 0){
-                siblingId = e.dest.nodesScope.$modelValue[newIndex-1].id;
-            }
-            var parentId = null;
-            if(e.dest.nodesScope.$parent.$ctrl.spec){
-                parentId = e.dest.nodesScope.$parent.$ctrl.spec.id;
-            }
-            
-            $specs.move(specId, parentId, siblingId);
-        }
         
         self.toggleExport = function(spec){
             var idx = self.exportSpecs.indexOf(spec);
@@ -162,6 +125,110 @@ jessdocs.component('specs', {
         }
         spec.editing = false;
       }
+      
+      var bookmark = (spec) => {
+        spec.bookmarked = !spec.bookmarked;
+        $specs.bookmark(spec);
+      };
+        
+        self.favorite = function(name){
+           return _.includes($user.user().user_setting.menu_favorites, name);
+       };
+       
+      var setBreadCrumbs = (spec) => {
+        BreadcrumbsService.setBreadcrumbs(spec);
+      };
+        
+      var addChildren = (parent) => {
+        $mdDialog.show({
+          template: '<add-specs-modal spec="spec" layout="column"></add-specs-modal>',
+          clickOutsideToClose: false,
+          locals: {spec: parent },
+          controller: function($scope, spec) {
+              $scope.spec = spec;
+          }
+        });
+      };
+        
+      var addTicket = (spec) => {
+        var placeholder = $user.currentOrg().org_setting.tracker.link_format;
+        var confirm = $mdDialog.prompt()
+            .title('associate link')
+            .placeholder(placeholder)
+            .clickOutsideToClose('true')
+            .ariaLabel('associate link')
+            .ok('save')
+            .cancel('cancel');
+        $mdDialog.show(confirm).then(function(result) {
+            $specs.addTicket(spec, result).then(function(ticket){
+                spec.tickets.push(ticket);
+            });
+        }, function() {
+        });
+      };
+        
+      var deleteSpec = (spec) => {
+        var confirm = $mdDialog.confirm()
+          .title('Are you sure you want to delete this spec?')
+          .textContent('This will also delete all children and tags')
+          .ariaLabel('delete spec confirmation')
+          .clickOutsideToClose('true')
+          .ok('yes')
+          .cancel('cancel');
+        $mdDialog.show(confirm).then(function() {
+            $specs.delete(spec)
+        }, function() {
+        });
+      };
+      
+      var openTagModal = (spec) => {
+        $mdDialog.show({
+          template: '<tags-modal spec="spec" layout="column"></tags-modal>',
+          clickOutsideToClose:true,
+          locals: {spec: spec },
+          controller: function($scope, spec) {
+            $scope.spec = spec;
+          }
+        });
+      };
+      
+      var comment = (spec) => {
+        $mdDialog.show({
+          template: '<comments-modal spec="spec" layout="column"></comments-modal>',
+          clickOutsideToClose:true,
+          locals: {spec: spec },
+          controller: function($scope, spec) {
+            $scope.spec = spec;
+          }
+        });
+      };
+      
+      self.menu = [
+        { name: 'tags',
+          icon: 'label',
+          clickFunction: openTagModal },
+        { name: 'add children',
+          icon: 'add',
+          clickFunction: addChildren },
+        { name: 'add link',
+          icon: 'link',
+          clickFunction: addTicket },
+        { name: 'comments',
+          icon: 'comment',
+          clickFunction: comment },
+        { name: 'expand',
+          icon: 'fullscreen',
+          clickFunction: setBreadCrumbs },
+        { name: 'bookmark',
+          icon: 'bookmark_border',
+          clickFunction: bookmark },
+        { name: 'unbookmark',
+          icon: 'bookmark',
+          clickFunction: bookmark },
+        { name: 'delete',
+          icon: 'delete',
+          clickFunction: deleteSpec }
+      ]
        
      }
 });

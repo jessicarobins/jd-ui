@@ -19,6 +19,12 @@ body {
      &.dragging, &.dragging * {
       cursor: move !important;
     }
+    
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 }
 
 .label {

@@ -30,8 +30,6 @@ jessdocs.component('spec', {
        
        self.tags;
        
-       $scope.$callbacks = self.uiTreeCallbacks;
-       
        self.$onInit = function(){
             self.tag = self.tag || [];  
             self.ticket = self.ticket || [];

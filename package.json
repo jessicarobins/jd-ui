@@ -20,6 +20,7 @@
     "jquery": "~2.1.4",
     "jquery-sortable": "^0.9.13",
     "lodash": "^3.10.1",
+    "material-ui": "^0.15.4",
     "md-color-picker": "^0.2.6",
     "moment": "~2.10.6",
     "ng-focus-if": "^1.0.7",
@@ -28,6 +29,7 @@
     "ngreact": "^0.3.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-tap-event-plugin": "^1.0.0",
     "taboverride": "^4.0.3",
     "tinycolor": "bgrins/TinyColor#1.4.1"
   },
