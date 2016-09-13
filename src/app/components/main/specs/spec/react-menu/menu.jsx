@@ -6,13 +6,16 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 var MenuComponent = React.createClass ({
-  handleMenuClick: function(item) {
-    item.clickFunction(this.props.spec);
-  },
   
   getMenuItems: function() {
     const spec = this.props.spec;
-    return this.props.menuOptions.map(function(menuItem){
+    let opts;
+    if(spec.bookmarked){
+      opts = _.reject(this.props.menuOptions, {name: 'bookmark'});
+    } else {
+      opts = _.reject(this.props.menuOptions, {name: 'unbookmark'});
+    }
+    return opts.map(function(menuItem){
       return (
         <MenuItem 
           key={menuItem.name}
@@ -28,8 +31,9 @@ var MenuComponent = React.createClass ({
     return (
       <IconMenu
         iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        maxHeight={272}
       >
         {this.getMenuItems()}
       </IconMenu>
