@@ -5,7 +5,13 @@ injectTapEventPlugin();
 var React = require('react');
 var SpecComponent = require('./spec/spec2.component.jsx');
 
-const SpecListComponent = ({specs, menuOptions, toggleEditCallback, saveEditCallback}) => {
+const SpecListComponent = ({
+  specs, 
+  menuOptions, 
+  toggleEditCallback, 
+  saveEditCallback,
+  removeTagCallback,
+  removeTicketCallback }) => {
   var specNodes = specs.map(function(spec) {
     return (
       <ul key={spec.id}>
@@ -13,6 +19,8 @@ const SpecListComponent = ({specs, menuOptions, toggleEditCallback, saveEditCall
           menuOptions={menuOptions}
           toggleEditCallback={toggleEditCallback}
           saveEditCallback={saveEditCallback}
+          removeTagCallback={removeTagCallback}
+          removeTicketCallback={removeTicketCallback}
           spec={spec}>
         </SpecNodeComponent>
       </ul>
@@ -25,17 +33,27 @@ const SpecListComponent = ({specs, menuOptions, toggleEditCallback, saveEditCall
   );
 };
 
-const SpecNodeComponent = ({spec, toggleEditCallback, saveEditCallback, menuOptions}) => (
+const SpecNodeComponent = ({
+  spec, 
+  toggleEditCallback, 
+  saveEditCallback, 
+  removeTagCallback,
+  removeTicketCallback,
+  menuOptions}) => (
   <li>
     <SpecComponent 
       menuOptions={menuOptions}
       toggleEditCallback={toggleEditCallback}
       saveEditCallback={saveEditCallback}
+      removeTagCallback={removeTagCallback}
+      removeTicketCallback={removeTicketCallback}
       spec={spec}></SpecComponent>
     <SpecListComponent 
       menuOptions={menuOptions}
       specs={spec.children}
       saveEditCallback={saveEditCallback}
+      removeTagCallback={removeTagCallback}
+      removeTicketCallback={removeTicketCallback}
       toggleEditCallback={toggleEditCallback}></SpecListComponent>
   </li>
 );

@@ -1,11 +1,15 @@
 import React from 'react';
 import FontIcon from 'material-ui/FontIcon';
 
-const TagComponent = ({tag, deleteCallback, editing}) => {
+const TagComponent = ({tag, deleteCallback, editing, spec}) => {
   
   const renderDelete = () => {
     if(editing){
-      return <TagDeleteComponent></TagDeleteComponent>
+      return (
+        <TagDeleteComponent 
+          tag={tag}
+          deleteCallback={deleteCallback}
+          spec={spec}></TagDeleteComponent>)
     }
   };
   
@@ -23,9 +27,9 @@ const deleteStyles = {
   fontSize: 20 + 'px'
 };
 
-const TagDeleteComponent = ({deleteCallback}) => (
+const TagDeleteComponent = ({deleteCallback, spec, tag}) => (
   <FontIcon 
-    onTouchTap={() => deleteCallback()}
+    onTouchTap={() => deleteCallback(tag, spec)}
     className="material-icons"
     style={deleteStyles}>close</FontIcon>
 );

@@ -126,6 +126,16 @@ jessdocs.component('specs', {
         spec.editing = false;
       }
       
+      self.removeTag = (tag, spec) => {
+        $specs.removeTag(tag, spec);
+        _.pull(spec.tag_types, tag);
+      };
+      
+      self.removeTicket = (ticket, spec) => {
+        $specs.removeTicket(ticket);
+        _.pull(spec.tickets, ticket);
+      }
+      
       var bookmark = (spec) => {
         spec.bookmarked = !spec.bookmarked;
         $specs.bookmark(spec);
@@ -201,10 +211,6 @@ jessdocs.component('specs', {
             $scope.spec = spec;
           }
         });
-      };
-      
-      self.callbacks = {
-        
       };
       
       self.menu = [

@@ -11,7 +11,13 @@
     
     <react-component 
       name="SpecListComponent" 
-      props="{specs: $ctrl.spec, toggleEditCallback: $ctrl.toggleEdit, saveEditCallback: $ctrl.saveEdit, menuOptions: $ctrl.menu}" 
+      props="{
+        specs: $ctrl.spec, 
+        toggleEditCallback: $ctrl.toggleEdit, 
+        saveEditCallback: $ctrl.saveEdit,
+        removeTagCallback: $ctrl.removeTag,
+        removeTicketCallback: $ctrl.removeTicket,
+        menuOptions: $ctrl.menu}" 
       watch-depth="value"/>
     
 </section>

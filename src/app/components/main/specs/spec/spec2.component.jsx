@@ -19,9 +19,13 @@ var SpecComponent = React.createClass({
     this.props.toggleEditCallback(this.props.spec);
   },
   tags: function(editing){
-    return this.props.spec.tag_types.map(function(tag){
+    let spec = this.props.spec;
+    let removeCallback = this.props.removeTagCallback;
+    return spec.tag_types.map(function(tag){
       return (
         <TagComponent
+          spec={spec}
+          deleteCallback={removeCallback}
           editing={editing}
           key={tag.id}
           tag={tag}></TagComponent>
