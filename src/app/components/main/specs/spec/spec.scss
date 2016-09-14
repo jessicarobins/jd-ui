@@ -1,8 +1,8 @@
-spec {
-    cursor: default;
+.spec {
     
-    &:focus {
-        outline: none;
+    
+    .spec-info {
+        flex-wrap: wrap;
     }
     
     .dragged {

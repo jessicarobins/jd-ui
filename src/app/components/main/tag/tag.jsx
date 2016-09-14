@@ -13,25 +13,35 @@ const TagComponent = ({tag, deleteCallback, editing, spec}) => {
     }
   };
   
+  const renderName = () => {
+    if(tag.url){
+      return(
+        <a 
+          className="tag-url name"
+          href={tag.url}
+          target="_blank">
+          {tag.name}
+        </a>
+      )
+    } else {
+      return <div className="name">{tag.name}</div>
+    }
+  }
+  
   return (
     <div 
       className="tag row"
-      style={{backgroundColor: tag.color}}>
-      <span>{tag.name}</span>
+      style={{backgroundColor: tag.color || 'midnightblue'}}>
+      {renderName()}
       {renderDelete()}
     </div>
   )
 };
 
-const deleteStyles = {
-  fontSize: 20 + 'px'
-};
-
 const TagDeleteComponent = ({deleteCallback, spec, tag}) => (
   <FontIcon 
     onTouchTap={() => deleteCallback(tag, spec)}
-    className="material-icons"
-    style={deleteStyles}>close</FontIcon>
+    className="close-button material-icons">close</FontIcon>
 );
 
 var jessdocs = require('jessdocs');
