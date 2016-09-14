@@ -203,6 +203,10 @@ jessdocs.component('specs', {
         });
       };
       
+      self.callbacks = {
+        
+      };
+      
       self.menu = [
         { name: 'tags',
           icon: 'label',

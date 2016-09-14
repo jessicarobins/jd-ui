@@ -1,20 +1,18 @@
 @import '../../../index.scss';
 
-tag {
+.tag {
+    @extend .label;
+    
     color: white;
     
-    .tag {
-        @extend .label;
-        
-        .name {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 150px;
-        }
-        
-        .close-button {
-            font-size: 18px;
-            margin-left: 12px;
-        }
+    .name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+    
+    .close-button {
+        font-size: 18px;
+        margin-left: 12px;
     }
 }
