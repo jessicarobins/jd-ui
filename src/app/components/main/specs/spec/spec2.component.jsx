@@ -26,12 +26,15 @@ var SpecComponent = React.createClass({
     }
     if(this.props.exporting){
       return (
-        <Checkbox style={{width: 'auto'}}/>)
+        <Checkbox 
+          defaultChecked={this.props.spec.exporting}
+          onCheck={() =>this.props.exportCallback(this.props.spec)}
+          style={{width: 'auto'}}/>)
     }
     return (
       <MenuComponent
-            menuOptions={this.props.menuOptions}
-            spec={this.props.spec}></MenuComponent>);
+        menuOptions={this.props.menuOptions}
+        spec={this.props.spec}></MenuComponent>);
   },
   description: function(){
     if(this.props.spec.editing){

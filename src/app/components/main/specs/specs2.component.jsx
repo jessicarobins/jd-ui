@@ -9,6 +9,7 @@ const SpecListComponent = ({
   specs, 
   exporting,
   menuOptions, 
+  exportCallback,
   toggleEditCallback, 
   saveEditCallback,
   removeTagCallback,
@@ -19,6 +20,7 @@ const SpecListComponent = ({
         <SpecNodeComponent 
           menuOptions={menuOptions}
           exporting={exporting}
+          exportCallback={exportCallback}
           toggleEditCallback={toggleEditCallback}
           saveEditCallback={saveEditCallback}
           removeTagCallback={removeTagCallback}
@@ -38,6 +40,7 @@ const SpecListComponent = ({
 const SpecNodeComponent = ({
   spec, 
   exporting,
+  exportCallback,
   toggleEditCallback, 
   saveEditCallback, 
   removeTagCallback,
@@ -47,6 +50,7 @@ const SpecNodeComponent = ({
     <SpecComponent 
       menuOptions={menuOptions}
       exporting={exporting}
+      exportCallback={exportCallback}
       toggleEditCallback={toggleEditCallback}
       saveEditCallback={saveEditCallback}
       removeTagCallback={removeTagCallback}
@@ -56,6 +60,7 @@ const SpecNodeComponent = ({
       menuOptions={menuOptions}
       specs={spec.children}
       exporting={exporting}
+      exportCallback={exportCallback}
       saveEditCallback={saveEditCallback}
       removeTagCallback={removeTagCallback}
       removeTicketCallback={removeTicketCallback}

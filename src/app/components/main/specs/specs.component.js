@@ -55,7 +55,7 @@ jessdocs.component('specs', {
           }
         };
         
-        self.toggleExport = function(spec){
+        self.toggleExport = (spec) => {
             var idx = self.exportSpecs.indexOf(spec);
             if (idx > -1) {
                 recursiveCheck(spec, false);
@@ -71,9 +71,11 @@ jessdocs.component('specs', {
             if (idx <= -1 && checked) {
                 //if already in array, don't add twice
                 self.exportSpecs.push(spec);
+                spec.exporting = true;
             }
             else if (idx > -1 && !checked){
                 self.exportSpecs.splice(idx, 1);
+                spec.exporting = false;
             }
             
             spec.children.forEach( function(child){
