@@ -1,3 +1,5 @@
+require('./menu.scss');
+
 import React from 'react';
 import IconMenu from 'material-ui/IconMenu';
 import FontIcon from 'material-ui/FontIcon';
@@ -26,14 +28,17 @@ const MenuComponent = ({menuOptions, spec}) => {
   };
   
   return (
-    <IconMenu
-      iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-      anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-      targetOrigin={{horizontal: 'right', vertical: 'top'}}
-      maxHeight={272}
-    >
-      {getMenuItems()}
-    </IconMenu>
+    <div className="row spec-menu">
+      <IconMenu
+        className='menu'
+        iconButtonElement={<IconButton className='menu-button'><MoreVertIcon /></IconButton>}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        maxHeight={272}
+      >
+        {getMenuItems()}
+      </IconMenu>
+    </div>
   );
 };
 

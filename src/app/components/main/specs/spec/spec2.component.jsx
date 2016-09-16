@@ -1,6 +1,8 @@
 require('../../../../services/specs.service');
 var TagComponent = require('../../tag/tag.jsx');
 var MenuComponent = require('./react-menu/menu.jsx');
+import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
 
 import React from 'react';
 
@@ -17,6 +19,47 @@ var SpecComponent = React.createClass({
   },
   toggleEdit: function(e){
     this.props.toggleEditCallback(this.props.spec);
+  },
+  beforeDescription: function(){
+    if(this.props.spec.editing){
+      return;
+    }
+    if(this.props.exporting){
+      return (
+        <Checkbox style={{width: 'auto'}}/>)
+    }
+    return (
+      <MenuComponent
+            menuOptions={this.props.menuOptions}
+            spec={this.props.spec}></MenuComponent>);
+  },
+  description: function(){
+    if(this.props.spec.editing){
+      return (
+        <form className="specEditForm" onSubmit={this.submitEdit}>
+          <TextField
+            autoFocus
+            id={this.props.spec.id + 'textfield'}
+            value={this.state.description}
+            onChange={this.handleDescriptionChange}
+            aria-label="edit spec description"
+            required />
+        </form>)
+    }
+    return (
+      <span 
+        className="spec-description"
+        onDoubleClick={this.toggleEdit}>
+        {this.props.spec.description}</span>)
+  },
+  afterDescription: function(){
+    let editing = this.props.spec.editing;
+    return (
+      <div className="row tags">
+        {this.comments()}
+        {this.tickets(editing)}
+        {this.tags(editing)}
+      </div>)
   },
   tags: function(editing){
     let spec = this.props.spec;
@@ -62,43 +105,14 @@ var SpecComponent = React.createClass({
     var jessdocs = angular.element('body').injector();
     var $specs = jessdocs.get('$specs');
     
-    var spec;
-    if (this.props.spec.editing){
-      spec = 
-        <div className="row spec">
-          <div className="row spec-info">
-            <form className="specEditForm" onSubmit={this.submitEdit}>
-              <input
-                type="text"
-                value={this.state.description}
-                onChange={this.handleDescriptionChange}
-                aria-label="edit spec description"
-                required />
-            </form>
-            {this.comments()}
-            {this.tags(true)}
-            {this.tickets(true)}
-          </div>
+    return(    
+      <div className="row spec">
+        {this.beforeDescription()}
+        <div className="row spec-info">
+          {this.description()}
+          {this.afterDescription()}
         </div>
-    } else {
-      spec = 
-        <div className="row spec">
-          <MenuComponent
-            menuOptions={this.props.menuOptions}
-            spec={this.props.spec}></MenuComponent>
-            <div className="row spec-info">
-              <span 
-                className="spec-description"
-                onDoubleClick={this.toggleEdit}>
-                {this.props.spec.description}</span>
-              {this.comments()}
-              {this.tickets(false)}
-              {this.tags(false)}
-            </div>
-        </div>
-    }
-    
-    return spec;
+      </div>)
   }
 })
 

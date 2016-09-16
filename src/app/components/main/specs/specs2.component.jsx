@@ -7,6 +7,7 @@ var SpecComponent = require('./spec/spec2.component.jsx');
 
 const SpecListComponent = ({
   specs, 
+  exporting,
   menuOptions, 
   toggleEditCallback, 
   saveEditCallback,
@@ -17,6 +18,7 @@ const SpecListComponent = ({
       <ul key={spec.id}>
         <SpecNodeComponent 
           menuOptions={menuOptions}
+          exporting={exporting}
           toggleEditCallback={toggleEditCallback}
           saveEditCallback={saveEditCallback}
           removeTagCallback={removeTagCallback}
@@ -35,6 +37,7 @@ const SpecListComponent = ({
 
 const SpecNodeComponent = ({
   spec, 
+  exporting,
   toggleEditCallback, 
   saveEditCallback, 
   removeTagCallback,
@@ -43,6 +46,7 @@ const SpecNodeComponent = ({
   <li>
     <SpecComponent 
       menuOptions={menuOptions}
+      exporting={exporting}
       toggleEditCallback={toggleEditCallback}
       saveEditCallback={saveEditCallback}
       removeTagCallback={removeTagCallback}
@@ -51,6 +55,7 @@ const SpecNodeComponent = ({
     <SpecListComponent 
       menuOptions={menuOptions}
       specs={spec.children}
+      exporting={exporting}
       saveEditCallback={saveEditCallback}
       removeTagCallback={removeTagCallback}
       removeTicketCallback={removeTicketCallback}
