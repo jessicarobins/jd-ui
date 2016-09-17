@@ -5,7 +5,7 @@ injectTapEventPlugin();
 var React = require('react');
 var SpecComponent = require('./spec/spec2.component.jsx');
 
-const SpecListComponent = ({
+const SpecRootComponent = ({
   specs, 
   exporting,
   menuOptions, 
@@ -16,23 +16,26 @@ const SpecListComponent = ({
   removeTicketCallback }) => {
   var specNodes = specs.map(function(spec) {
     return (
-      <ul key={spec.id}>
-        <SpecNodeComponent 
-          menuOptions={menuOptions}
-          exporting={exporting}
-          exportCallback={exportCallback}
-          toggleEditCallback={toggleEditCallback}
-          saveEditCallback={saveEditCallback}
-          removeTagCallback={removeTagCallback}
-          removeTicketCallback={removeTicketCallback}
-          spec={spec}>
-        </SpecNodeComponent>
-      </ul>
+      <SpecNodeComponent 
+        key={spec.id}
+        menuOptions={menuOptions}
+        exporting={exporting}
+        exportCallback={exportCallback}
+        toggleEditCallback={toggleEditCallback}
+        saveEditCallback={saveEditCallback}
+        removeTagCallback={removeTagCallback}
+        removeTicketCallback={removeTicketCallback}
+        spec={spec}>
+      </SpecNodeComponent>
     );
   });
   return (
     <MuiThemeProvider>
-      <div className="spec-list">{specNodes}</div>
+      <div className="spec-list">
+        <ul>
+          {specNodes}
+        </ul>
+      </div>
     </MuiThemeProvider>
   );
 };
@@ -45,31 +48,42 @@ const SpecNodeComponent = ({
   saveEditCallback, 
   removeTagCallback,
   removeTicketCallback,
-  menuOptions}) => (
-  <li>
-    <SpecComponent 
-      menuOptions={menuOptions}
-      exporting={exporting}
-      exportCallback={exportCallback}
-      toggleEditCallback={toggleEditCallback}
-      saveEditCallback={saveEditCallback}
-      removeTagCallback={removeTagCallback}
-      removeTicketCallback={removeTicketCallback}
-      spec={spec}></SpecComponent>
-    <SpecListComponent 
-      menuOptions={menuOptions}
-      specs={spec.children}
-      exporting={exporting}
-      exportCallback={exportCallback}
-      saveEditCallback={saveEditCallback}
-      removeTagCallback={removeTagCallback}
-      removeTicketCallback={removeTicketCallback}
-      toggleEditCallback={toggleEditCallback}></SpecListComponent>
-  </li>
-);
+  menuOptions}) => {
+    
+  var childNodes = spec.children.map(function(child) {
+    return (
+      <SpecNodeComponent 
+        key={child.id}
+        menuOptions={menuOptions}
+        exporting={exporting}
+        exportCallback={exportCallback}
+        toggleEditCallback={toggleEditCallback}
+        saveEditCallback={saveEditCallback}
+        removeTagCallback={removeTagCallback}
+        removeTicketCallback={removeTicketCallback}
+        spec={child}>
+      </SpecNodeComponent>
+    );
+  });
+  return (
+    <li>
+      <SpecComponent 
+        menuOptions={menuOptions}
+        exporting={exporting}
+        exportCallback={exportCallback}
+        toggleEditCallback={toggleEditCallback}
+        saveEditCallback={saveEditCallback}
+        removeTagCallback={removeTagCallback}
+        removeTicketCallback={removeTicketCallback}
+        spec={spec}></SpecComponent>
+        <ul>
+          {childNodes}
+        </ul>
+    </li>)
+};
 
 var jessdocs = require('jessdocs');
-jessdocs.value('SpecListComponent', SpecListComponent);
+jessdocs.value('SpecRootComponent', SpecRootComponent);
 // jessdocs.directive('specList', function(reactDirective) {
 //   return reactDirective(
 //     SpecListComponent, [
@@ -78,4 +92,4 @@ jessdocs.value('SpecListComponent', SpecListComponent);
 //       'toggleEditCallback', 
 //       'saveEditCallback']);
 // });
-module.exports = SpecListComponent;
+module.exports = SpecRootComponent;

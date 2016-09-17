@@ -51,7 +51,7 @@ var SpecComponent = React.createClass({
     }
     return (
       <span 
-        className="spec-description"
+        className="spec-description drag-handle"
         onDoubleClick={this.toggleEdit}>
         {this.props.spec.description}</span>)
   },
