@@ -5,7 +5,7 @@ injectTapEventPlugin();
 var React = require('react');
 var DragDropContext = require('react-dnd').DragDropContext;
 var HTML5Backend = require('react-dnd-html5-backend');
-var SpecTree = require('./specTree.jsx');
+var SpecTree = require('./specTree.jsx').SpecTree;
 
 var SpecsComponent = React.createClass({
     

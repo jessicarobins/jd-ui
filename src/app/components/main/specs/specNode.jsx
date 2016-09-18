@@ -1,7 +1,8 @@
 var React = require('react');
 var DropTarget = require('react-dnd').DropTarget;
 var DragSource = require('react-dnd').DragSource;
-var SpecTree = require('./specTree.jsx');
+var tree = require('./specTree.jsx');
+var SpecTree = tree.SpecTree;
 var SpecComponent = require('./spec/spec2.component.jsx');
 
 const source = {
@@ -51,7 +52,36 @@ function collectTarget(connect) {
 }
 
 var SpecNode = React.createClass({
-
+  specNodes: function() {
+    const {
+      connectDropTarget, 
+      spec,
+      menuOptions, 
+      exporting,
+      exportCallback,
+      toggleEditCallback,
+      saveEditCallback,
+      removeTagCallback,
+      removeTicketCallback,
+      movePlaceholder
+    } = this.props
+    
+    return spec.children.map( function(spec){
+      return (
+         <SpecNode 
+          key={spec.id}
+          menuOptions={menuOptions}
+          exporting={exporting}
+          exportCallback={exportCallback}
+          toggleEditCallback={toggleEditCallback}
+          saveEditCallback={saveEditCallback}
+          removeTagCallback={removeTagCallback}
+          removeTicketCallback={removeTicketCallback}
+          movePlaceholder={movePlaceholder}
+          spec={spec}>
+        </SpecNode>)
+    });
+  },
   tree: function(){
     const {
       connectDropTarget, 
@@ -67,16 +97,19 @@ var SpecNode = React.createClass({
       removeTicketCallback
     } = this.props
     
-    return (
+    const tree =
       <SpecTree
           specs={spec.children}
+          parent={spec}
           exporting={exporting}
           menuOptions={menuOptions}
           exportCallback={exportCallback}
           toggleEditCallback={toggleEditCallback}
           saveEditCallback={saveEditCallback}
           removeTagCallback={removeTagCallback}
-          removeTicketCallback={removeTicketCallback}></SpecTree>)
+          removeTicketCallback={removeTicketCallback}></SpecTree>
+    console.log('tree', tree)
+    return tree
   },
   render: function() {
     const {
@@ -108,7 +141,7 @@ var SpecNode = React.createClass({
               spec={spec}></SpecComponent>
           </div>
         )}
-        
+        {this.tree()}
       </div>
     ))
   }
