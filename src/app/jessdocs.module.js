@@ -15,6 +15,8 @@ require('intro.js');
 require('react');
 require('react-dom');
 require('ngreact');
+require('react-dnd');
+require('react-dnd-html5-backend');
 
 require('md-color-picker');
 require('ng-focus-if');

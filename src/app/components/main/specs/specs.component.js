@@ -5,6 +5,7 @@ require('../../../services/menu.service');
 require('./breadcrumbs/breadcrumbs.component');
 require('./spec/spec.component');
 require('./specs2.component.jsx');
+require('./specs.jsx');
 
 require('./specs.scss');
 
@@ -35,6 +36,7 @@ jessdocs.component('specs', {
         
         self.sortableOpts = {
           handle: '.drag-handle',
+          group: '.spec-node',
           containerPath: '> spec > div',
           delay: 500,
           onDragStart: function($item, container, _super) {
@@ -110,6 +112,39 @@ jessdocs.component('specs', {
         self.checked = function(spec){
             return _.includes(self.exportSpecs, spec);
         }
+        
+      self.movePlaceholder = (spec, after, parent) => {
+        
+        if(spec.id == after.id) return
+        
+        const removeNode = (spec, specs) => {
+          for (const node of specs) {
+            if (node.id == spec.id) {
+              specs.splice(specs.indexOf(node), 1)
+              return
+            }
+    
+            if (node.children && node.children.length) {
+              removeNode(spec, node.children)
+            }
+          }
+        }
+    
+        if (!spec) {
+          return
+        }
+    
+        const dest = parent ? parent.children : self.spec
+    
+        if (!after) {
+          removeNode(spec, self.spec)
+          dest.push(spec)
+        } else {
+          const index = dest.indexOf(dest.filter(v => v.id == after.id).shift())
+          removeNode(spec, self.spec)
+          dest.splice(index, 0, spec)
+        }
+      }
         
       self.toggleEdit = (spec) => {
         if(self.editingSpec){

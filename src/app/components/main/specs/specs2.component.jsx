@@ -3,87 +3,45 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 var React = require('react');
-var SpecComponent = require('./spec/spec2.component.jsx');
+var DragDropContext = require('react-dnd').DragDropContext;
+var HTML5Backend = require('react-dnd-html5-backend');
+var SpecTree = require('./specTree.jsx');
 
-const SpecRootComponent = ({
-  specs, 
-  exporting,
-  menuOptions, 
-  exportCallback,
-  toggleEditCallback, 
-  saveEditCallback,
-  removeTagCallback,
-  removeTicketCallback }) => {
-  var specNodes = specs.map(function(spec) {
-    return (
-      <SpecNodeComponent 
-        key={spec.id}
-        menuOptions={menuOptions}
-        exporting={exporting}
-        exportCallback={exportCallback}
-        toggleEditCallback={toggleEditCallback}
-        saveEditCallback={saveEditCallback}
-        removeTagCallback={removeTagCallback}
-        removeTicketCallback={removeTicketCallback}
-        spec={spec}>
-      </SpecNodeComponent>
-    );
-  });
-  return (
-    <MuiThemeProvider>
-      <div className="spec-list">
-        <ul>
-          {specNodes}
-        </ul>
-      </div>
-    </MuiThemeProvider>
-  );
-};
-
-const SpecNodeComponent = ({
-  spec, 
-  exporting,
-  exportCallback,
-  toggleEditCallback, 
-  saveEditCallback, 
-  removeTagCallback,
-  removeTicketCallback,
-  menuOptions}) => {
+var SpecsComponent = React.createClass({
     
-  var childNodes = spec.children.map(function(child) {
+  render: function () {
+    const {
+      specs,
+      menuOptions, 
+      exporting,
+      exportCallback,
+      toggleEditCallback,
+      saveEditCallback,
+      removeTagCallback,
+      removeTicketCallback,
+      movePlaceholder
+    } = this.props
+    
     return (
-      <SpecNodeComponent 
-        key={child.id}
-        menuOptions={menuOptions}
-        exporting={exporting}
-        exportCallback={exportCallback}
-        toggleEditCallback={toggleEditCallback}
-        saveEditCallback={saveEditCallback}
-        removeTagCallback={removeTagCallback}
-        removeTicketCallback={removeTicketCallback}
-        spec={child}>
-      </SpecNodeComponent>
+      <MuiThemeProvider>
+        <div className="spec-list">
+          <SpecTree
+            specs={specs}
+            parent={null}
+            movePlaceholder={movePlaceholder}
+            exporting={exporting}
+            menuOptions={menuOptions}
+            exportCallback={exportCallback}
+            toggleEditCallback={toggleEditCallback}
+            saveEditCallback={saveEditCallback}
+            removeTagCallback={removeTagCallback}
+            removeTicketCallback={removeTicketCallback}></SpecTree>
+        </div>
+      </MuiThemeProvider>
     );
-  });
-  return (
-    <li>
-      <SpecComponent 
-        menuOptions={menuOptions}
-        exporting={exporting}
-        exportCallback={exportCallback}
-        toggleEditCallback={toggleEditCallback}
-        saveEditCallback={saveEditCallback}
-        removeTagCallback={removeTagCallback}
-        removeTicketCallback={removeTicketCallback}
-        spec={spec}></SpecComponent>
-        <ul>
-          {childNodes}
-        </ul>
-    </li>)
-};
+  }
+});
 
-var jessdocs = require('jessdocs');
-jessdocs.value('SpecRootComponent', SpecRootComponent);
 // jessdocs.directive('specList', function(reactDirective) {
 //   return reactDirective(
 //     SpecListComponent, [
@@ -92,4 +50,8 @@ jessdocs.value('SpecRootComponent', SpecRootComponent);
 //       'toggleEditCallback', 
 //       'saveEditCallback']);
 // });
-module.exports = SpecRootComponent;
+
+module.exports = DragDropContext(HTML5Backend)(SpecsComponent);
+
+// module.exports = SpecTree;
+

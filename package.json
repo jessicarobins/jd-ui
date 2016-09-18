@@ -28,6 +28,8 @@
     "ngclipboard": "^1.1.1",
     "ngreact": "^0.3.0",
     "react": "^15.3.1",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.3.1",
     "react-tap-event-plugin": "^1.0.0",
     "taboverride": "^4.0.3",
