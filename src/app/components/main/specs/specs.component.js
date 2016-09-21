@@ -134,7 +134,7 @@ jessdocs.component('specs', {
           return
         }
     
-        const dest = parent ? parent.children : self.spec
+        var dest = parent ? parent.children : self.spec
     
         if (!after) {
           removeNode(spec, self.spec)
