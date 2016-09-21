@@ -6,9 +6,40 @@ var React = require('react');
 var DragDropContext = require('react-dnd').DragDropContext;
 var HTML5Backend = require('react-dnd-html5-backend');
 var SpecTree = require('./specTree.jsx').SpecTree;
+var DraggableSpec = require('./spec/draggableSpec.jsx');
 
 var SpecsComponent = React.createClass({
+  
+  specs: function(){
+    const {
+      specs,
+      menuOptions, 
+      exporting,
+      exportCallback,
+      toggleEditCallback,
+      saveEditCallback,
+      removeTagCallback,
+      removeTicketCallback,
+      move
+    } = this.props
     
+    return specs.map((spec, i) => {
+      return (
+        <DraggableSpec 
+          key={spec.id}
+          menuOptions={menuOptions}
+          exporting={exporting}
+          exportCallback={exportCallback}
+          toggleEditCallback={toggleEditCallback}
+          saveEditCallback={saveEditCallback}
+          removeTagCallback={removeTagCallback}
+          removeTicketCallback={removeTicketCallback}
+          move={move}
+          index={i}
+          spec={spec}></DraggableSpec>)
+    })
+  },
+  
   render: function () {
     const {
       specs,
@@ -19,23 +50,13 @@ var SpecsComponent = React.createClass({
       saveEditCallback,
       removeTagCallback,
       removeTicketCallback,
-      movePlaceholder
+      move
     } = this.props
     
     return (
       <MuiThemeProvider>
         <div className="spec-list">
-          <SpecTree
-            specs={specs}
-            parent={null}
-            movePlaceholder={movePlaceholder}
-            exporting={exporting}
-            menuOptions={menuOptions}
-            exportCallback={exportCallback}
-            toggleEditCallback={toggleEditCallback}
-            saveEditCallback={saveEditCallback}
-            removeTagCallback={removeTagCallback}
-            removeTicketCallback={removeTicketCallback}></SpecTree>
+          {this.specs()}
         </div>
       </MuiThemeProvider>
     );

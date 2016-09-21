@@ -113,37 +113,29 @@ jessdocs.component('specs', {
             return _.includes(self.exportSpecs, spec);
         }
         
-      self.movePlaceholder = (spec, after, parent) => {
+      self.move = (dragIndex, hoverIndex) => {
+        const draggedSpec = this.spec[dragIndex];
+
+        //remove thing at dragindex
+        _.pullAt(self.spec, dragIndex);
+        if(dragIndex < hoverIndex){
+          hoverIndex = hoverIndex - 1;
+        }
+        //add dragged thing after hover index.. minus one?
+        // because now we've removed a thing. but it 
+        // might be over and it might be under...
+        self.spec.splice(hoverIndex, 0, draggedSpec)
+        // self.specs = 
+        //     $splice: [
+        //       //start at dragindex and remove 1
+        //       //so... remove the thing at dragindex
+        //       [dragIndex, 1],
+        //       //start at hoverindex, remove 0, and add
+        //       // the dragged thing... so... add dragged
+        //       // thing after hover index
+        //       [hoverIndex, 0, dragCard]
+        //     ]
         
-        if(spec.id == after.id) return
-        
-        const removeNode = (spec, specs) => {
-          for (const node of specs) {
-            if (node.id == spec.id) {
-              specs.splice(specs.indexOf(node), 1)
-              return
-            }
-    
-            if (node.children && node.children.length) {
-              removeNode(spec, node.children)
-            }
-          }
-        }
-    
-        if (!spec) {
-          return
-        }
-    
-        var dest = parent ? parent.children : self.spec
-    
-        if (!after) {
-          removeNode(spec, self.spec)
-          dest.push(spec)
-        } else {
-          const index = dest.indexOf(dest.filter(v => v.id == after.id).shift())
-          removeNode(spec, self.spec)
-          dest.splice(index, 0, spec)
-        }
       }
         
       self.toggleEdit = (spec) => {

@@ -10,7 +10,7 @@ const Specs = ({
   saveEditCallback,
   removeTagCallback,
   removeTicketCallback,
-  movePlaceholder}) => {
+  move}) => {
   return (
     <div>
       <SpecsComponent
@@ -21,7 +21,7 @@ const Specs = ({
         toggleEditCallback={toggleEditCallback}
         saveEditCallback={saveEditCallback}
         removeTagCallback={removeTagCallback}
-        movePlaceholder={movePlaceholder}
+        move={move}
         removeTicketCallback={removeTicketCallback}></SpecsComponent>
     </div>
   );

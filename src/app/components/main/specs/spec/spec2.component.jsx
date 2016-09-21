@@ -1,4 +1,3 @@
-require('../../../../services/specs.service');
 var TagComponent = require('../../tag/tag.jsx');
 var MenuComponent = require('./react-menu/menu.jsx');
 import Checkbox from 'material-ui/Checkbox';
@@ -103,13 +102,16 @@ var SpecComponent = React.createClass({
       )
     }
   },
+  indent: function(){
+    let spec = this.props.spec;
+    return spec.ancestry_depth*40 + 'px'
+  },
   
   render: function() {
-    var jessdocs = angular.element('body').injector();
-    var $specs = jessdocs.get('$specs');
-    
     return(    
-      <div className="row spec">
+      <div 
+        style={{paddingLeft: this.indent()}}
+        className="row spec">
         {this.beforeDescription()}
         <div className="row spec-info">
           {this.description()}
