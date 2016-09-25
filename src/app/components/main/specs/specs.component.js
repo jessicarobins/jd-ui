@@ -115,26 +115,24 @@ jessdocs.component('specs', {
         
       self.move = (dragIndex, hoverIndex) => {
         const draggedSpec = this.spec[dragIndex];
-
-        //remove thing at dragindex
-        _.pullAt(self.spec, dragIndex);
-        if(dragIndex < hoverIndex){
-          hoverIndex = hoverIndex - 1;
-        }
+        
+        //find the next spec at the same depth
+        const nextSpecs = _.drop(self.spec, dragIndex+1)
+        const nextSpec = _.find(nextSpecs, {'ancestry_depth': draggedSpec.ancestry_depth}) 
+        const nextIndex = _.indexOf(self.spec, nextSpec);
+        
+        //index of everything [dragIndex, nextIndex)
+        var indices = _.range(dragIndex, nextIndex);
+        
+        //remove everything [dragIndex, nextIndex)
+        var draggedSpecs = _.pullAt(self.spec, indices)
+        // //remove thing at dragindex
+        // _.pullAt(self.spec, dragIndex);
+        
         //add dragged thing after hover index.. minus one?
         // because now we've removed a thing. but it 
         // might be over and it might be under...
-        self.spec.splice(hoverIndex, 0, draggedSpec)
-        // self.specs = 
-        //     $splice: [
-        //       //start at dragindex and remove 1
-        //       //so... remove the thing at dragindex
-        //       [dragIndex, 1],
-        //       //start at hoverindex, remove 0, and add
-        //       // the dragged thing... so... add dragged
-        //       // thing after hover index
-        //       [hoverIndex, 0, dragCard]
-        //     ]
+        self.spec.splice.apply(self.spec, [hoverIndex, 0].concat(draggedSpecs))
         
       }
         
