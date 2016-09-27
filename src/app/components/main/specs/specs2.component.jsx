@@ -67,18 +67,22 @@ const SpecNodeComponent = ({
   });
   return (
     <li>
-      <SpecComponent 
-        menuOptions={menuOptions}
-        exporting={exporting}
-        exportCallback={exportCallback}
-        toggleEditCallback={toggleEditCallback}
-        saveEditCallback={saveEditCallback}
-        removeTagCallback={removeTagCallback}
-        removeTicketCallback={removeTicketCallback}
-        spec={spec}></SpecComponent>
-        <ul>
-          {childNodes}
-        </ul>
+      <div>
+        <div>
+          <SpecComponent 
+            menuOptions={menuOptions}
+            exporting={exporting}
+            exportCallback={exportCallback}
+            toggleEditCallback={toggleEditCallback}
+            saveEditCallback={saveEditCallback}
+            removeTagCallback={removeTagCallback}
+            removeTicketCallback={removeTicketCallback}
+            spec={spec}></SpecComponent>
+            <ul>
+              {childNodes}
+            </ul>
+          </div>
+        </div>
     </li>)
 };
 

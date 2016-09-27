@@ -8,19 +8,23 @@
     <a id="top"></a>
     
     
-    
-    <react-component 
-      name="SpecRootComponent" 
-      props="{
-        specs: $ctrl.spec, 
-        exporting: $ctrl.export,
-        exportCallback: $ctrl.toggleExport,
-        toggleEditCallback: $ctrl.toggleEdit, 
-        saveEditCallback: $ctrl.saveEdit,
-        removeTagCallback: $ctrl.removeTag,
-        removeTicketCallback: $ctrl.removeTicket,
-        menuOptions: $ctrl.menu}" 
-      watch-depth="value"/>
+    <ul data-parent-id="" sortable="$ctrl.sortableOpts" class="sortable">
+        
+      <li>
+        <react-component 
+          name="SpecRootComponent" 
+          props="{
+            specs: $ctrl.spec, 
+            exporting: $ctrl.export,
+            exportCallback: $ctrl.toggleExport,
+            toggleEditCallback: $ctrl.toggleEdit, 
+            saveEditCallback: $ctrl.saveEdit,
+            removeTagCallback: $ctrl.removeTag,
+            removeTicketCallback: $ctrl.removeTicket,
+            menuOptions: $ctrl.menu}" 
+          watch-depth="value"/>
+      </li>
+    </ul>
     
 </section>
 <section
