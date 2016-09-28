@@ -155,8 +155,10 @@ jessdocs.component('specs', {
         
         //find the next spec at the same depth
         const nextSpecs = _.drop(tempSpecArray, dragIndex+1)
-        const nextSpec = _.find(nextSpecs, {'ancestry_depth': draggedSpec.ancestry_depth}) 
-        const nextIndex = nextSpec ? _.indexOf(tempSpecArray, nextSpec) : dragIndex+1;
+        const nextSpec = _.find(nextSpecs, function(spec) {
+            return spec.ancestry_depth <= draggedSpec.ancestry_depth;
+        });
+        const nextIndex = nextSpec ? _.indexOf(tempSpecArray, nextSpec) : tempSpecArray.length;
         
         //index of everything [dragIndex, nextIndex)
         var indices = _.range(dragIndex, nextIndex);
