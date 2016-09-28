@@ -127,6 +127,12 @@ jessdocs.component('specs', {
         
         const prevSpec = tempSpecArray[newIndex-1]
         const afterSpec = tempSpecArray[newIndex]
+        
+        //can't move stuff with depth > 0 to the very top
+        if(!prevSpec && draggedSpec.ancestry_depth > 0){
+          return false;
+        }
+        
         //if previous depth - dragged spec depth > 1 return
         if(prevSpec && (draggedSpec.ancestry_depth-prevSpec.ancestry_depth > 1)){
           return false;
@@ -150,7 +156,7 @@ jessdocs.component('specs', {
         //find the next spec at the same depth
         const nextSpecs = _.drop(tempSpecArray, dragIndex+1)
         const nextSpec = _.find(nextSpecs, {'ancestry_depth': draggedSpec.ancestry_depth}) 
-        const nextIndex = _.indexOf(tempSpecArray, nextSpec);
+        const nextIndex = nextSpec ? _.indexOf(tempSpecArray, nextSpec) : dragIndex+1;
         
         //index of everything [dragIndex, nextIndex)
         var indices = _.range(dragIndex, nextIndex);
