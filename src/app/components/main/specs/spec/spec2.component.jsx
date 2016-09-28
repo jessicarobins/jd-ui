@@ -102,15 +102,10 @@ var SpecComponent = React.createClass({
       )
     }
   },
-  indent: function(){
-    let spec = this.props.spec;
-    return spec.ancestry_depth*40 + 'px'
-  },
   
   render: function() {
     return(    
-      <div 
-        style={{paddingLeft: this.indent()}}
+      <div
         className="row spec">
         {this.beforeDescription()}
         <div className="row spec-info">

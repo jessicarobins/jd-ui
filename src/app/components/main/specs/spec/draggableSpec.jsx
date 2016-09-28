@@ -76,6 +76,12 @@ function collectTarget(connect) {
 }
 
 var DraggableSpec = React.createClass({
+  
+  indent: function(){
+    let spec = this.props.spec;
+    return spec.ancestry_depth*40 + 'px'
+  },
+  
   render: function(){
     const {
       connectDropTarget,
@@ -91,10 +97,12 @@ var DraggableSpec = React.createClass({
       removeTicketCallback
     } = this.props
     
-    const opacity = isDragging ? 0 : 1;
+    const classes = isDragging ? 'drag-placeholder' : ''
     
     return connectDragSource(connectDropTarget(
-      <div style={{ opacity }}>
+      <div 
+        style={{marginLeft: this.indent()}}
+        className={classes}>
         <SpecComponent
           menuOptions={menuOptions}
           exporting={exporting}

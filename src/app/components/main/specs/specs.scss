@@ -18,6 +18,17 @@ specs {
         margin-left: 30px;
     }
     
+    .drag-placeholder {
+        background: #EDE7F6;
+        color: #EDE7F6;
+        border: 2px dashed #B39DDB;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 600px;
+        padding-top: 5px;
+    }
+    
     #top{
         display: none;
     }
