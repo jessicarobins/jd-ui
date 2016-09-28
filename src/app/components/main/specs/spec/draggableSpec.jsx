@@ -50,13 +50,15 @@ const target = {
     }
 
     // Time to actually perform the action
-    props.move(dragIndex, hoverIndex);
+    const moved = props.move(dragIndex, hoverIndex);
 
     // Note: we're mutating the monitor item here!
     // Generally it's better to avoid mutations,
     // but it's good here for the sake of performance
     // to avoid expensive index searches.
-    monitor.getItem().index = hoverIndex;
+    if(moved){
+      monitor.getItem().index = hoverIndex;
+    }
   }
 };
 

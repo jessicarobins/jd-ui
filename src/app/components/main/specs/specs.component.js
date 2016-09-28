@@ -114,26 +114,59 @@ jessdocs.component('specs', {
         }
         
       self.move = (dragIndex, hoverIndex) => {
-        const draggedSpec = this.spec[dragIndex];
+        
+        const tempSpecArray = self.spec;
+        
+        const draggedSpec = tempSpecArray[dragIndex];
+        
+        let newIndex = hoverIndex;
+        //if we are dragging down, subtract one
+        if(dragIndex < hoverIndex){
+          newIndex = newIndex + 1;
+        }
+        
+        const prevSpec = tempSpecArray[newIndex-1]
+        const afterSpec = tempSpecArray[newIndex]
+        //if previous depth - dragged spec depth > 1 return
+        if(prevSpec && (draggedSpec.ancestry_depth-prevSpec.ancestry_depth > 1)){
+          return false;
+        }
+        
+        //if top and dragged are equal depth, we need to
+        // make sure bottom is not less than dragged depth
+        if(prevSpec && (prevSpec.ancestry_depth === draggedSpec.ancestry_depth)){
+          if(afterSpec && (afterSpec.ancestry_depth > prevSpec.ancestry_depth)){
+            return false;
+          }
+        }
+        
+        //can't put spec between two specs that are deeper than it
+        if(prevSpec && (prevSpec.ancestry_depth > draggedSpec.ancestry_depth)){
+          if(afterSpec && (afterSpec.ancestry_depth > draggedSpec.ancestry_depth)){
+            return false;
+          }
+        }
         
         //find the next spec at the same depth
-        const nextSpecs = _.drop(self.spec, dragIndex+1)
+        const nextSpecs = _.drop(tempSpecArray, dragIndex+1)
         const nextSpec = _.find(nextSpecs, {'ancestry_depth': draggedSpec.ancestry_depth}) 
-        const nextIndex = _.indexOf(self.spec, nextSpec);
+        const nextIndex = _.indexOf(tempSpecArray, nextSpec);
         
         //index of everything [dragIndex, nextIndex)
         var indices = _.range(dragIndex, nextIndex);
         
         //remove everything [dragIndex, nextIndex)
-        var draggedSpecs = _.pullAt(self.spec, indices)
+        var draggedSpecs = _.pullAt(tempSpecArray, indices)
         // //remove thing at dragindex
         // _.pullAt(self.spec, dragIndex);
         
         //add dragged thing after hover index.. minus one?
         // because now we've removed a thing. but it 
         // might be over and it might be under...
-        self.spec.splice.apply(self.spec, [hoverIndex, 0].concat(draggedSpecs))
+        tempSpecArray.splice.apply(tempSpecArray, [hoverIndex, 0].concat(draggedSpecs))
         
+        self.spec = tempSpecArray;
+        return true;
       }
         
       self.toggleEdit = (spec) => {
