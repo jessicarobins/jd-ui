@@ -129,30 +129,43 @@ jessdocs.component('specs', {
         const afterSpec = tempSpecArray[newIndex]
         var indices = self.childIndices(dragIndex, tempSpecArray);
         
+        //this is the only choice:
         //can't move stuff with depth > 0 to the very top
         //change it to depth 0
         if(!prevSpec && draggedSpec.ancestry_depth > 0){
           self.changeDepth(dragIndex, 0);
-          // return false;
         }
         
+        //this is not the only choice:
+        // - we could be creating a sibling not a child
+        //    but we'd have to look at the thing underneath
+        //    but we could handle this in a different case...
         //if previous depth - dragged spec depth > 1 return
+        //if the dragged thing is more than 1 indent deeper than
+        //  the thing we are dragging under - change depth
+        //  to create child
         if(prevSpec && (draggedSpec.ancestry_depth-prevSpec.ancestry_depth > 1)){
-          return false;
+          self.changeDepth(dragIndex, prevSpec.ancestry_depth+1)
         }
         
+        //this is the only choice:
+        // (no indentation from here)
         //if top and dragged are equal depth, we need to
         // make sure bottom is not less than dragged depth
         if(prevSpec && (prevSpec.ancestry_depth === draggedSpec.ancestry_depth)){
           if(afterSpec && (afterSpec.ancestry_depth > prevSpec.ancestry_depth)){
-            return false;
+            //if the bottom is less, indent dragged to be child
+            //  of the one above
+            self.changeDepth(dragIndex, prevSpec.ancestry_depth+1)
           }
         }
         
-        //can't put spec between two specs that are deeper than it
+        //trying to put spec between two specs that are deeper than it:
+        //  match depth of afterspec
+        //  (can't do prev in case after is indented from prev)
         if(prevSpec && (prevSpec.ancestry_depth > draggedSpec.ancestry_depth)){
           if(afterSpec && (afterSpec.ancestry_depth > draggedSpec.ancestry_depth)){
-            return false;
+            self.changeDepth(dragIndex, afterSpec.ancestry_depth)
           }
         }
         
