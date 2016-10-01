@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 var SpecComponent = require('./spec2.component.jsx');
 
@@ -65,6 +66,7 @@ const target = {
 function collectSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }
@@ -77,6 +79,16 @@ function collectTarget(connect) {
 
 var DraggableSpec = React.createClass({
   
+  componentDidMount: function() {
+    // Use empty image as a drag preview so browsers don't draw it
+    // and we can draw whatever we want on the custom drag layer instead.
+    this.props.connectDragPreview(getEmptyImage(), {
+      // IE fallback: specify that we'd rather screenshot the node
+      // when it already knows it's being dragged so we can hide it with CSS.
+      captureDraggingState: true
+    });
+  },
+  
   indent: function(){
     let spec = this.props.spec;
     return spec.ancestry_depth*40 + 'px'
@@ -86,6 +98,7 @@ var DraggableSpec = React.createClass({
     const {
       connectDropTarget,
       connectDragSource,
+      connectDragPreview,
       isDragging,
       spec,
       menuOptions, 

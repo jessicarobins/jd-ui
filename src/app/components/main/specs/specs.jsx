@@ -3,6 +3,7 @@ var SpecsComponent = require('./specs2.component.jsx');
 
 const Specs = ({
   specs, 
+  children,
   exporting,
   menuOptions, 
   exportCallback,
@@ -15,6 +16,7 @@ const Specs = ({
     <div>
       <SpecsComponent
         specs={specs}
+        children={children}
         exporting={exporting}
         menuOptions={menuOptions}
         exportCallback={exportCallback}

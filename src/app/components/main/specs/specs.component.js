@@ -153,15 +153,17 @@ jessdocs.component('specs', {
           }
         }
         
-        //find the next spec at the same depth
-        const nextSpecs = _.drop(tempSpecArray, dragIndex+1)
-        const nextSpec = _.find(nextSpecs, function(spec) {
-            return spec.ancestry_depth <= draggedSpec.ancestry_depth;
-        });
-        const nextIndex = nextSpec ? _.indexOf(tempSpecArray, nextSpec) : tempSpecArray.length;
+        // //find the next spec at the same depth
+        // const nextSpecs = _.drop(tempSpecArray, dragIndex+1)
+        // const nextSpec = _.find(nextSpecs, function(spec) {
+        //     return spec.ancestry_depth <= draggedSpec.ancestry_depth;
+        // });
+        // const nextIndex = nextSpec ? _.indexOf(tempSpecArray, nextSpec) : tempSpecArray.length;
         
-        //index of everything [dragIndex, nextIndex)
-        var indices = _.range(dragIndex, nextIndex);
+        // //index of everything [dragIndex, nextIndex)
+        // var indices = _.range(dragIndex, nextIndex);
+        
+        var indices = self.childIndices(dragIndex, tempSpecArray);
         
         //remove everything [dragIndex, nextIndex)
         var draggedSpecs = _.pullAt(tempSpecArray, indices)
@@ -175,6 +177,28 @@ jessdocs.component('specs', {
         
         self.spec = tempSpecArray;
         return true;
+      }
+      
+      self.changeDepth = (parent, depth) => {
+        
+      };
+      
+      self.childIndices = (index, array) => {
+        //find the next spec at the same depth
+        var dragged = array[index];
+        const nextSpecs = _.drop(array, index+1)
+        const nextSpec = _.find(nextSpecs, function(spec) {
+            return spec.ancestry_depth <= dragged.ancestry_depth;
+        });
+        const nextIndex = nextSpec ? _.indexOf(array, nextSpec) : array.length;
+        
+        //index of everything [dragIndex, nextIndex)
+        return _.range(index, nextIndex);
+      };
+      
+      self.children = (index) => {
+        var indices = self.childIndices(index, self.spec);
+        return _.at(self.spec, indices);
       }
         
       self.toggleEdit = (spec) => {
