@@ -26,20 +26,37 @@ const target = {
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
-
-    // Don't replace items with themselves
+    
+    // if it's in the same place, that means we could be
+    //  trying to change the depth
+    //  look to see where the hover bounding rect is
+    //    if it's to the left of the item a certain amount,
+    //      (40px) try to unindent
+    //    if it's to the right a certain amount, try to
+    //      indent
     if (dragIndex === hoverIndex) {
+      //get difference
+      const difference = monitor.getDifferenceFromInitialOffset().x;
+      
+      //only perform move when we are 40px to right or left
+      // of item left
+      if(difference > 20){
+        props.tryChangeDepth(dragIndex, 1)
+      } else if(difference < -20) {
+        props.tryChangeDepth(dragIndex, -1)
+      }
+    
       return;
     }
-
+    
     // Determine rectangle on screen
     const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+    
+    // Determine mouse position
+    const clientOffset = monitor.getClientOffset();
 
     // Get vertical middle
     const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-    // Determine mouse position
-    const clientOffset = monitor.getClientOffset();
 
     // Get pixels to the top
     const hoverClientY = clientOffset.y - hoverBoundingRect.top;

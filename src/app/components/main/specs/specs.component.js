@@ -192,6 +192,44 @@ jessdocs.component('specs', {
         return children;
       };
       
+      self.tryChangeDepth = (dragIndex, depthDelta) => {
+        const spec = self.spec[dragIndex];
+        const currentDepth = spec.ancestry_depth;
+        const newDepth = _.max([0, spec.ancestry_depth+depthDelta])
+        
+        //get the specs before and after to check validity of position
+        const prevSpec = self.spec[dragIndex-1];
+        const childIndices = self.childIndices(dragIndex, self.spec);
+        const nextSpec = self.spec[_.last(childIndices)+1];
+        
+        //if there is no previous spec, return. 
+        // can't change depth if we are the topmost 
+        if(!prevSpec){
+          return;
+        }
+        
+        const prevSpecDepth = prevSpec.ancestry_depth;
+  
+        //if no change
+        if(newDepth === currentDepth){
+          return;
+        }
+        
+        //if we try to indent too far
+        if(newDepth - prevSpecDepth > 1){
+          return;
+        }
+        
+        //don't create children - don't allow us to dedent
+        //  far enough that our new depth is greater than
+        //  the depth of the next spec that isn't our child
+        if(nextSpec && newDepth < nextSpec.ancestry_depth){
+          return;
+        }
+        
+        self.changeDepth(dragIndex, newDepth)
+      }
+      
       self.childIndices = (index, array) => {
         //find the next spec at the same depth
         var dragged = array[index];
