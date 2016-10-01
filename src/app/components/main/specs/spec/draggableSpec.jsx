@@ -7,10 +7,18 @@ var SpecComponent = require('./spec2.component.jsx');
 
 const source = {
   beginDrag(props) {
+    var children = props.children(props.index)
     return {
       id: props.spec.id,
-      index: props.index
+      index: props.index,
+      childIds: _.map(children, 'id')
     };
+  },
+  
+  isDragging(props, monitor) {
+    var childIds = monitor.getItem().childIds
+    return props.spec.id === monitor.getItem().id ||
+      _.contains(childIds, props.spec.id)
   }
 };
 

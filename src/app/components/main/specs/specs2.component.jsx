@@ -14,6 +14,7 @@ var SpecsComponent = React.createClass({
   specs: function(){
     const {
       specs,
+      children,
       menuOptions, 
       exporting,
       exportCallback,
@@ -28,6 +29,7 @@ var SpecsComponent = React.createClass({
       return (
         <DraggableSpec 
           key={spec.id}
+          children={children}
           menuOptions={menuOptions}
           exporting={exporting}
           exportCallback={exportCallback}
