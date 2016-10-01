@@ -127,10 +127,13 @@ jessdocs.component('specs', {
         
         const prevSpec = tempSpecArray[newIndex-1]
         const afterSpec = tempSpecArray[newIndex]
+        var indices = self.childIndices(dragIndex, tempSpecArray);
         
         //can't move stuff with depth > 0 to the very top
+        //change it to depth 0
         if(!prevSpec && draggedSpec.ancestry_depth > 0){
-          return false;
+          self.changeDepth(dragIndex, 0);
+          // return false;
         }
         
         //if previous depth - dragged spec depth > 1 return
@@ -153,22 +156,8 @@ jessdocs.component('specs', {
           }
         }
         
-        // //find the next spec at the same depth
-        // const nextSpecs = _.drop(tempSpecArray, dragIndex+1)
-        // const nextSpec = _.find(nextSpecs, function(spec) {
-        //     return spec.ancestry_depth <= draggedSpec.ancestry_depth;
-        // });
-        // const nextIndex = nextSpec ? _.indexOf(tempSpecArray, nextSpec) : tempSpecArray.length;
-        
-        // //index of everything [dragIndex, nextIndex)
-        // var indices = _.range(dragIndex, nextIndex);
-        
-        var indices = self.childIndices(dragIndex, tempSpecArray);
-        
         //remove everything [dragIndex, nextIndex)
         var draggedSpecs = _.pullAt(tempSpecArray, indices)
-        // //remove thing at dragindex
-        // _.pullAt(self.spec, dragIndex);
         
         //add dragged thing after hover index.. minus one?
         // because now we've removed a thing. but it 
@@ -179,8 +168,15 @@ jessdocs.component('specs', {
         return true;
       }
       
-      self.changeDepth = (parent, depth) => {
+      self.changeDepth = (dragIndex, depth) => {
+        const spec = self.spec[dragIndex];
+        const difference = spec.ancestry_depth - depth;
+        let children = self.children(dragIndex);
+        _.map(children, function(child){
+          child.ancestry_depth -= difference;
+        });
         
+        return children;
       };
       
       self.childIndices = (index, array) => {

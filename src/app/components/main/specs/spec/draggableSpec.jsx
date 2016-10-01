@@ -119,10 +119,11 @@ var DraggableSpec = React.createClass({
     } = this.props
     
     const classes = isDragging ? 'drag-placeholder' : ''
+    const styles = {marginLeft: this.indent()}
     
     return connectDragSource(connectDropTarget(
       <div 
-        style={{marginLeft: this.indent()}}
+        style={styles}
         className={classes}>
         <SpecComponent
           menuOptions={menuOptions}
