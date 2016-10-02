@@ -11,7 +11,8 @@ const source = {
     return {
       id: props.spec.id,
       index: props.index,
-      childIds: _.map(children, 'id')
+      childIds: _.map(children, 'id'),
+      currentIndent: props.currentIndent
     };
   },
   
@@ -24,6 +25,7 @@ const source = {
 
 const target = {
   hover(props, monitor, component) {
+    const threshold = 50;
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
     
@@ -36,14 +38,26 @@ const target = {
     //      indent
     if (dragIndex === hoverIndex) {
       //get difference
-      const difference = monitor.getDifferenceFromInitialOffset().x;
-      
-      //only perform move when we are 40px to right or left
+      const difference = _.round(monitor.getDifferenceFromInitialOffset().x/threshold);
+      const currentIndent = monitor.getItem().currentIndent;
+      console.log(difference)
+      //only perform move when we are threshold to right or left
       // of item left
-      if(difference > 20){
+      
+      if(difference === currentIndent){
+        return;
+      }
+      
+      if(difference > currentIndent){
         props.tryChangeDepth(dragIndex, 1)
-      } else if(difference < -20) {
+        monitor.getItem().currentIndent+=1;
+        return;
+      } 
+      
+      if(difference < currentIndent) {
         props.tryChangeDepth(dragIndex, -1)
+        monitor.getItem().currentIndent-=1;
+        return;
       }
     
       return;

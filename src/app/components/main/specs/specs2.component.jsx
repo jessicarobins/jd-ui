@@ -32,6 +32,7 @@ var SpecsComponent = React.createClass({
           key={spec.id}
           children={children}
           tryChangeDepth={tryChangeDepth}
+          currentIndent={0}
           menuOptions={menuOptions}
           exporting={exporting}
           exportCallback={exportCallback}
