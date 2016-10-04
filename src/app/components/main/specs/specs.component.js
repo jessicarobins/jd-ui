@@ -195,7 +195,6 @@ jessdocs.component('specs', {
       self.tryChangeDepth = (dragIndex, depthDelta) => {
         const spec = self.spec[dragIndex];
         const currentDepth = spec.ancestry_depth;
-        console.log('ancestry_depth', currentDepth)
         const newDepth = _.max([0, spec.ancestry_depth+depthDelta])
         
         //get the specs before and after to check validity of position

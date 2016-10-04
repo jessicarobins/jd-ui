@@ -24,6 +24,14 @@ const source = {
 };
 
 const target = {
+  drop(props, monitor, component) {
+    console.log('this is when we save')
+    //need to send:
+    // id of spec
+    // id of parent
+    // id of upper sibling
+  },
+  
   hover(props, monitor, component) {
     const threshold = 50;
     const dragIndex = monitor.getItem().index;
@@ -40,7 +48,6 @@ const target = {
       //get difference
       const difference = _.round(monitor.getDifferenceFromInitialOffset().x/threshold);
       const currentIndent = monitor.getItem().currentIndent;
-      console.log(difference)
       //only perform move when we are threshold to right or left
       // of item left
       
@@ -106,7 +113,8 @@ function collectSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
+    dragItem: monitor.getItem()
   }
 }
 
@@ -133,13 +141,11 @@ var DraggableSpec = React.createClass({
     return spec.ancestry_depth*40 + 'px'
   },
   
-  render: function(){
+  dragContents: function(){
     const {
-      connectDropTarget,
-      connectDragSource,
-      connectDragPreview,
       isDragging,
       spec,
+      dragItem,
       menuOptions, 
       exporting,
       exportCallback,
@@ -149,13 +155,16 @@ var DraggableSpec = React.createClass({
       removeTicketCallback
     } = this.props
     
-    const classes = isDragging ? 'drag-placeholder' : ''
-    const styles = {marginLeft: this.indent()}
-    
-    return connectDragSource(connectDropTarget(
-      <div 
-        style={styles}
-        className={classes}>
+    if(isDragging){
+      if(spec.id === _.first(dragItem.childIds)){
+        return (
+          <div className="drag-placeholder"></div>)
+      } else {
+        return;
+      }
+    }
+    else {
+      return (
         <SpecComponent
           menuOptions={menuOptions}
           exporting={exporting}
@@ -165,6 +174,22 @@ var DraggableSpec = React.createClass({
           removeTagCallback={removeTagCallback}
           removeTicketCallback={removeTicketCallback}
           spec={spec}></SpecComponent>
+        )
+    }
+  },
+  
+  render: function(){
+    const {
+      connectDropTarget,
+      connectDragSource
+    } = this.props
+    
+    const styles = {marginLeft: this.indent()}
+    
+    return connectDragSource(connectDropTarget(
+      <div 
+        style={styles}>
+        {this.dragContents()}
       </div>
     ));
   }

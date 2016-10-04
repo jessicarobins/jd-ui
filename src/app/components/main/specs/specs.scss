@@ -18,17 +18,6 @@ specs {
         margin-left: 30px;
     }
     
-    .drag-placeholder {
-        background: #EDE7F6;
-        color: #EDE7F6;
-        border: 2px dashed #B39DDB;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        width: 600px;
-        padding-top: 5px;
-    }
-    
     #top{
         display: none;
     }
@@ -52,4 +41,19 @@ specs {
       margin-left: 30px;
     }
     
+}
+
+.spec-list {
+  
+  .drag-placeholder {
+    background: #EDE7F6;
+    color: #EDE7F6;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-top: 5px;
+    height: 30px;
+    width: 600px;
+    border: 1px dashed #B39DDB;
+  }
 }
