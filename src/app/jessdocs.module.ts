@@ -1,3 +1,6 @@
+require('reflect-metadata')
+require('zone.js')
+
 require('@iamadamjowett/angular-click-outside');
 require('angular-animate');
 require('angular-aria');
@@ -12,6 +15,10 @@ require('angular-sanitize');
 require('angular-spinners');
 require('intro.js');
 
+require('ui-router-ng2')
+require('ui-router-ng1-to-ng2')
+require('rxjs')
+
 require('md-color-picker');
 require('ng-focus-if');
 require('ng-token-auth');
@@ -23,7 +30,10 @@ require('md-color-picker/dist/mdColorPicker.css');
 
 require('file?name=favicon.ico!../favicon.ico');
 
+import uiRouter from "angular-ui-router";
+
 var jessdocModule = angular.module('jessdocs', [
+  uiRouter,
   'ngAnimate', 
   'ngSanitize', 
   'ngMessages', 
@@ -35,10 +45,12 @@ var jessdocModule = angular.module('jessdocs', [
   'focus-if',
   'ngclipboard',
   'puElasticInput',
-  'ui.router', 
+  'ui.router',
+  'ui.router.upgrade',
   'ngMaterial',
   'mdColorPicker',
   'ng-token-auth'], function($rootScopeProvider) {
   $rootScopeProvider.digestTtl(100);
 });
+
 export = jessdocModule;

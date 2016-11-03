@@ -10,6 +10,7 @@ jessdocs.component('loginPage', {
     controller: function($auth, $user, $state, $projects) {
        var self = this;
        self.$onInit = function(){
+           alert('hey')
        };
        
        self.googleLogin = function() {
