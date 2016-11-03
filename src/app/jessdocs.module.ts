@@ -7,7 +7,7 @@ require('angular-intro.js');
 require('angular-material');
 require('angular-messages');
 require('angular-resource');
-require('angular-route');
+require('angular-ui-router');
 require('angular-sanitize');
 require('angular-spinners');
 require('intro.js');
@@ -35,7 +35,7 @@ var jessdocModule = angular.module('jessdocs', [
   'focus-if',
   'ngclipboard',
   'puElasticInput',
-  'ngRoute', 
+  'ui.router', 
   'ngMaterial',
   'mdColorPicker',
   'ng-token-auth'], function($rootScopeProvider) {
