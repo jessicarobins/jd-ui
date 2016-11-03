@@ -14,7 +14,7 @@ require('./fab/fab.component');
 require('./main.scss');
 
 var jessdocs = require('jessdocs');
-jessdocs.component('main', {
+export const main = {
     template: require('./main.template.html'),
     controller: function(
         $auth,
@@ -190,8 +190,6 @@ jessdocs.component('main', {
            
        }
        
-       function sanitizeSpecId(specId){
-           
-       }
     }
-});
+}
+jessdocs.component('main', main);

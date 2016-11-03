@@ -4,8 +4,8 @@ var _ = require('lodash');
 
 var jessdocs = require('jessdocs');
 
+import './main';
 import { config } from './index.config';
-import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 
 jessdocs.filter('getById', function() {
@@ -22,7 +22,6 @@ jessdocs.filter('getById', function() {
   .constant('moment', moment)
   .constant('_', _)
   .config(config)
-  .config(routerConfig)
   .config(function($authProvider) {
       $authProvider.configure({
           apiUrl: API_URL,
