@@ -7,9 +7,9 @@ require('angular-intro.js');
 require('angular-material');
 require('angular-messages');
 require('angular-resource');
+require('angular-route');
 require('angular-sanitize');
 require('angular-spinners');
-require('angular-ui-router');
 require('intro.js');
 
 require('md-color-picker');
@@ -35,11 +35,10 @@ var jessdocModule = angular.module('jessdocs', [
   'focus-if',
   'ngclipboard',
   'puElasticInput',
-  'ui.router', 
+  'ngRoute', 
   'ngMaterial',
   'mdColorPicker',
   'ng-token-auth'], function($rootScopeProvider) {
   $rootScopeProvider.digestTtl(100);
 });
-
-module.exports = jessdocModule;
+export = jessdocModule;

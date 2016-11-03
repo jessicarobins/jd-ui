@@ -2,8 +2,10 @@
   "dependencies": {},
   "globalDependencies": {
     "angular": "registry:dt/angular#1.5.0+20160829152510",
+    "es6-collections": "registry:dt/es6-collections#0.5.1+20160316155526",
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
     "jquery": "registry:dt/jquery#1.10.0+20160704162008",
     "lodash": "registry:dt/lodash#4.14.0+20160830145422",
-    "require": "registry:dt/require#2.1.20+20160316155526"
+    "node": "registry:dt/node#6.0.0+20160907103612"
   }
 }
