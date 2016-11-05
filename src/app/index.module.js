@@ -8,13 +8,7 @@ import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 
-import { UpgradeAdapter } from '@angular/upgrade';
-import { AppModule } from './app.module'
-import {uiRouterNgUpgrade} from "ui-router-ng1-to-ng2";
-
-const upgradeAdapter = new UpgradeAdapter(AppModule);
-uiRouterNgUpgrade.setUpgradeAdapter(upgradeAdapter);
-
+import { upgradeAdapter } from './upgrade_adapter';
 
 jessdocs.filter('getById', function() {
     return function(input, id) {
