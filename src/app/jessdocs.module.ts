@@ -51,6 +51,6 @@ var jessdocModule = angular.module('jessdocs', [
   'mdColorPicker',
   'ng-token-auth'], function($rootScopeProvider) {
   $rootScopeProvider.digestTtl(100);
-});
+})
 
 export = jessdocModule;

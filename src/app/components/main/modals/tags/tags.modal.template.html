@@ -16,7 +16,7 @@
                 ng-repeat="tagType in group.tag_types | filter:$ctrl.search"
                 ng-click="$ctrl.toggleTag(tagType.id)"
                 aria-label="toggle tag">
-                    <tag tag="tagType"></tag>
+                    <tag [tag]="tagType"></tag>
                     <md-checkbox 
                       ng-click="$ctrl.toggleTag(tagType.id)"
                       class="md-secondary"

@@ -7,7 +7,7 @@ var env = {
 };
 
 module.exports = {
-  entry: './src/app/index.module.js',
+  entry: './src/app/index.module.ts',
   module: {
     loaders: [
       { test: require.resolve('angular'),

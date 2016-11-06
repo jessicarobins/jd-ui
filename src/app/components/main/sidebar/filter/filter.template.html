@@ -41,7 +41,7 @@
                     aria-label="select comments"
                     ng-click="::$ctrl.toggleCommented()"
                     class="very-dense">
-                    <tag tag="{name: 'open comments', color: 'rgb(0,184,212)'}"></tag>
+                    <tag [tag]="{name: 'open comments', color: 'rgb(0,184,212)'}"></tag>
                     <md-checkbox 
                         class="md-secondary"
                         ng-click="::$ctrl.toggleCommented()" 
@@ -54,7 +54,7 @@
                     aria-label="select ticketed"
                     ng-click="::$ctrl.toggleTicketed()"
                     class="very-dense ticket">
-                    <tag tag="{name: 'ticketed'}"></tag>
+                    <tag [tag]="{name: 'ticketed'}"></tag>
                     <md-checkbox 
                         class="md-secondary"
                         ng-click="::$ctrl.toggleTicketed()" 
@@ -77,7 +77,7 @@
                     ng-click="$ctrl.toggle(tag_type.id)"
                     ng-repeat="tag_type in tag_type_group.tag_types" 
                     style="color: {{tag_type.color}}">
-                    <tag tag="tag_type"></tag>
+                    <tag [tag]="tag_type"></tag>
                     <md-checkbox 
                         class="md-secondary"
                         ng-click="$ctrl.toggle(tag_type.id)" 

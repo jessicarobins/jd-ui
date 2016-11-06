@@ -9,20 +9,18 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 
 import { upgradeAdapter } from './upgrade_adapter';
+import { TagComponent } from './components/main/tag/tag.component'
 
-jessdocs.filter('getById', function() {
-    return function(input, id) {
-      var i=0, len=input.length;
-      for (; i<len; i++) {
-        if (+input[i].id == +id) {
-          return input[i];
-        }
-      }
-      return null;
-    };
-  })
-  .constant('moment', moment)
-  .constant('_', _)
+import {UIRouterModule} from "ui-router-ng2";
+import { uiRouterNgUpgrade } from "ui-router-ng1-to-ng2";
+uiRouterNgUpgrade.setUpgradeAdapter(upgradeAdapter);
+
+
+jessdocs
+  .directive(
+    'tag',
+    upgradeAdapter.downgradeNg2Component(TagComponent)
+  )
   .config(config)
   .config(routerConfig)
   .config(function($authProvider) {
@@ -34,6 +32,7 @@ jessdocs.filter('getById', function() {
           }
       });
   })
-  .run(runBlock);
+  .run(runBlock)
+
 
 upgradeAdapter.bootstrap(document.body, ['jessdocs']);

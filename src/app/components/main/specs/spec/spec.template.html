@@ -62,12 +62,12 @@
           layout="row"
           ng-repeat="ticket in $ctrl.spec.tickets"
           spec="$ctrl.spec"
-          tag="ticket"></tag>
+          [tag]="ticket"></tag>
         <tag
           layout="row"
           ng-repeat="tag in $ctrl.spec.tag_types"
           spec="$ctrl.spec"
-          tag="tag"></tag>
+          [tag]="tag"></tag>
     </div>
   </div>
     
