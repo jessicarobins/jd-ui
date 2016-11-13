@@ -7,6 +7,12 @@ import TextField from 'material-ui/TextField';
 import React from 'react';
 
 var SpecComponent = React.createClass({
+  onMouseEnterHandler: function() {
+    this.props.hoverCallback(this.props.spec, 'mouseEnter')  
+  },
+  onMouseLeaveHandler: function() {
+    this.props.hoverCallback(this.props.spec, 'mouseLeave')
+  },
   getInitialState: function() {
     return {description: this.props.spec.description};
   },
@@ -31,8 +37,10 @@ var SpecComponent = React.createClass({
           onCheck={() =>this.props.exportCallback(this.props.spec)}
           style={{width: 'auto'}}/>)
     }
+    let menuClass = this.props.spec.hovering ? 'visible-menu' : 'hidden-menu'
     return (
       <MenuComponent
+        classes={menuClass}
         menuOptions={this.props.menuOptions}
         spec={this.props.spec}></MenuComponent>);
   },
@@ -109,7 +117,10 @@ var SpecComponent = React.createClass({
     var $specs = jessdocs.get('$specs');
     
     return(    
-      <div className="row spec drag-handle">
+      <div 
+        onMouseEnter={this.onMouseEnterHandler}
+        onMouseLeave={this.onMouseLeaveHandler}
+        className="row spec drag-handle">
         {this.beforeDescription()}
         <div className="row spec-info">
           {this.description()}

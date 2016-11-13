@@ -16,7 +16,8 @@ const SpecRootComponent = React.createClass({
       toggleEditCallback, 
       saveEditCallback,
       removeTagCallback,
-      removeTicketCallback } = this.props
+      removeTicketCallback,
+      hoverCallback } = this.props
     return ( specs.map(function(spec) {
       return (
         <SpecNodeComponent 
@@ -28,7 +29,8 @@ const SpecRootComponent = React.createClass({
           saveEditCallback={saveEditCallback}
           removeTagCallback={removeTagCallback}
           removeTicketCallback={removeTicketCallback}
-          spec={spec}>
+          spec={spec}
+          hoverCallback={hoverCallback}>
         </SpecNodeComponent>)
     }))
   },
@@ -56,7 +58,9 @@ const SpecNodeComponent = ({
   saveEditCallback, 
   removeTagCallback,
   removeTicketCallback,
-  menuOptions}) => {
+  menuOptions,
+  hoverCallback
+}) => {
     
   var childNodes = spec.children.map(function(child) {
     return (
@@ -69,7 +73,8 @@ const SpecNodeComponent = ({
         saveEditCallback={saveEditCallback}
         removeTagCallback={removeTagCallback}
         removeTicketCallback={removeTicketCallback}
-        spec={child}>
+        spec={child}
+        hoverCallback={hoverCallback}>
       </SpecNodeComponent>
     );
   });
@@ -83,7 +88,8 @@ const SpecNodeComponent = ({
         saveEditCallback={saveEditCallback}
         removeTagCallback={removeTagCallback}
         removeTicketCallback={removeTicketCallback}
-        spec={spec}></SpecComponent>
+        spec={spec}
+        hoverCallback={hoverCallback}></SpecComponent>
         <ul data-parent-id={spec.id}>
           {childNodes}
         </ul>

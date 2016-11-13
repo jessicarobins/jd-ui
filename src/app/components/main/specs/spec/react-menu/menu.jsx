@@ -7,7 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-const MenuComponent = ({menuOptions, spec}) => {
+const MenuComponent = ({menuOptions, spec, classes}) => {
   
   const getMenuItems = () => {
     let opts;
@@ -27,8 +27,12 @@ const MenuComponent = ({menuOptions, spec}) => {
     });
   };
   
+  const menuClasses = () => {
+    return 'row spec-menu ' + classes
+  }
+  
   return (
-    <div className="row spec-menu">
+    <div className={menuClasses()}>
       <IconMenu
         className='menu'
         iconButtonElement={<IconButton className='menu-button'><MoreVertIcon /></IconButton>}

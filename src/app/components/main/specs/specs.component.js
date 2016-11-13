@@ -32,17 +32,18 @@ jessdocs.component('specs', {
         self.exportSpecs = [];
         self.editingSpec;
         self.dragging = false;
+        self.hoverSpec;
         
         self.sortableOpts = {
           handle: '.drag-handle',
           delay: 500,
           containerSelector: 'ul',
           onDragStart: function($item, container, _super) {
-            self.dragging = true;
+            self.toggleDrag()
             _super($item, container);
           },
           onDrop: function($item, container, _super) {
-            self.dragging = false;
+            self.toggleDrag()
             var newIndex = $item.index();
             var specId = $item.attr('data-spec-id');
             var parentId = container.el.attr('data-parent-id');
@@ -54,6 +55,30 @@ jessdocs.component('specs', {
             _super($item, container);
           }
         };
+        
+        self.toggleDrag = () => {
+          self.dragging = !self.dragging
+          if(self.dragging && self.hoverSpec){
+            self.hoverSpec.hovering = false
+          }
+        }
+        
+        self.hoverCallback = (spec, event) => {
+          if(!self.dragging) {
+            if (event === 'mouseEnter') {
+              if(self.hoverSpec){
+                self.hoverSpec.hovering = false
+              }
+              self.hoverSpec = spec
+              self.hoverSpec.hovering = true
+            }
+            else if(event === 'mouseLeave') {
+              if(self.hoverSpec){
+                self.hoverSpec.hovering = false
+              }
+            }
+          }
+        }
         
         self.toggleExport = (spec) => {
             var idx = self.exportSpecs.indexOf(spec);
