@@ -5,40 +5,48 @@ injectTapEventPlugin();
 var React = require('react');
 var SpecComponent = require('./spec/spec2.component.jsx');
 
-const SpecRootComponent = ({
-  specs, 
-  exporting,
-  menuOptions, 
-  exportCallback,
-  toggleEditCallback, 
-  saveEditCallback,
-  removeTagCallback,
-  removeTicketCallback }) => {
-  var specNodes = specs.map(function(spec) {
-    return (
-      <SpecNodeComponent 
-        key={spec.id}
-        menuOptions={menuOptions}
-        exporting={exporting}
-        exportCallback={exportCallback}
-        toggleEditCallback={toggleEditCallback}
-        saveEditCallback={saveEditCallback}
-        removeTagCallback={removeTagCallback}
-        removeTicketCallback={removeTicketCallback}
-        spec={spec}>
-      </SpecNodeComponent>
-    );
-  });
-  return (
-    <MuiThemeProvider>
+const SpecRootComponent = React.createClass({
+  
+  specNodes: function() {
+    let {
+      specs, 
+      exporting,
+      menuOptions, 
+      exportCallback,
+      toggleEditCallback, 
+      saveEditCallback,
+      removeTagCallback,
+      removeTicketCallback } = this.props
+    return ( specs.map(function(spec) {
+      return (
+        <SpecNodeComponent 
+          key={spec.id}
+          menuOptions={menuOptions}
+          exporting={exporting}
+          exportCallback={exportCallback}
+          toggleEditCallback={toggleEditCallback}
+          saveEditCallback={saveEditCallback}
+          removeTagCallback={removeTagCallback}
+          removeTicketCallback={removeTicketCallback}
+          spec={spec}>
+        </SpecNodeComponent>)
+    }))
+  },
+  
+  componentDidMount: function(){
+    $('.sortable').sortable(this.props.sortableOptions)
+  },
+  
+  render: function() {
+    return (<MuiThemeProvider>
       <div className="spec-list">
-        <ul>
-          {specNodes}
+        <ul className="sortable" data-parent-id="">
+          {this.specNodes()}
         </ul>
       </div>
-    </MuiThemeProvider>
-  );
-};
+    </MuiThemeProvider>)
+  }
+})
 
 const SpecNodeComponent = ({
   spec, 
@@ -66,7 +74,7 @@ const SpecNodeComponent = ({
     );
   });
   return (
-    <li>
+    <li data-spec-id={spec.id}>
       <SpecComponent 
         menuOptions={menuOptions}
         exporting={exporting}
@@ -76,7 +84,7 @@ const SpecNodeComponent = ({
         removeTagCallback={removeTagCallback}
         removeTicketCallback={removeTicketCallback}
         spec={spec}></SpecComponent>
-        <ul>
+        <ul data-parent-id={spec.id}>
           {childNodes}
         </ul>
     </li>)

@@ -109,7 +109,7 @@ var SpecComponent = React.createClass({
     var $specs = jessdocs.get('$specs');
     
     return(    
-      <div className="row spec">
+      <div className="row spec drag-handle">
         {this.beforeDescription()}
         <div className="row spec-info">
           {this.description()}
